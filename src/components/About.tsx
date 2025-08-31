@@ -1,18 +1,11 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import QuoteSection from './QuoteSection';
 
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], [20, -20]);
 
   return (
     <>

@@ -2,15 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
-import {
-  Calendar,
-  MapPin,
-  Ticket,
-  Camera,
-  Clock,
-  Users,
-  X,
-} from 'lucide-react';
+import { Calendar, MapPin, Ticket, Camera, X } from 'lucide-react';
 
 // Próximas fechas
 const upcomingShows = [
@@ -233,7 +225,7 @@ function PhotoModal({ photo, onClose }: PhotoModalProps) {
       >
         <div className='bg-gray-900 rounded-lg overflow-hidden shadow-2xl'>
           <div className='relative'>
-            <img
+            <img // @next/next/no-img-element
               src={photo.src}
               alt={`${photo.venue} - ${photo.location}`}
               className='w-full h-64 sm:h-80 md:h-96 object-cover'
@@ -362,6 +354,7 @@ export default function LiveShows() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
             className='flex items-center mb-6 md:mb-8'
+            id='gallery'
           >
             <Camera className='text-pink-400 mr-3' size={24} />
             <h3 className='text-xl md:text-2xl font-bold text-white'>

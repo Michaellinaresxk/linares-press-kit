@@ -9,7 +9,6 @@ import {
   ExternalLink,
   SkipBack,
   SkipForward,
-  Volume2,
 } from 'lucide-react';
 
 // Datos del nuevo single destacado
@@ -52,25 +51,12 @@ const tracks = [
     coverImage:
       'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=400&h=400&fit=crop',
   },
-  {
-    id: 3,
-    title: 'Digital Dreams',
-    duration: '5:18',
-    description: 'Ambient textures with driving rhythmic elements',
-    genre: 'Electronic',
-    year: '2023',
-    audioUrl: '/audio/track3.mp3',
-    waveformColor: '#10b981',
-    coverImage:
-      'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=400&h=400&fit=crop',
-  },
 ];
 
 // Hook personalizado para el reproductor
 function useAudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
 
   const togglePlay = () => setIsPlaying(!isPlaying);
 
@@ -309,7 +295,7 @@ function FeaturedSinglePlayer() {
             </div>
 
             {/* Botones de acción */}
-            <div className='flex flex-col sm:flex-row gap-4 justify-center mt-8'>
+            <div className='flex flex-col sm:flex-row gap-4 justify-center mt-8 mb-20'>
               <motion.a
                 href={featuredSingle.spotifyUrl}
                 className='px-6 py-3 bg-green-600 hover:bg-green-500 rounded-full text-white font-semibold flex items-center justify-center space-x-2 transition-colors'
@@ -335,13 +321,6 @@ function FeaturedSinglePlayer() {
       </motion.div>
     </section>
   );
-}
-
-// Función helper para formatear tiempo
-function formatTime(seconds: number): string {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
 // Componente del reproductor de tracks adicionales

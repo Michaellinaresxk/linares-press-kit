@@ -158,7 +158,7 @@ const officialLinks = [
 ];
 
 interface PlatformCardProps {
-  platform: any;
+  platform: any; //  @typescript-eslint/no-explicit-any
   type: 'streaming' | 'social';
   index: number;
 }

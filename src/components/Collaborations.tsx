@@ -42,18 +42,6 @@ const collaborations = [
     genre: 'Folk Electronic',
     duration: '5:23',
   },
-  {
-    id: 4,
-    title: 'Digital Horizons',
-    collaborator: 'Alex Kowalski',
-    role: 'Synth Artist',
-    year: '2023',
-    image:
-      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=600&fit=crop',
-    color: 'from-blue-400 to-purple-600',
-    genre: 'Synthwave',
-    duration: '4:58',
-  },
 ];
 
 // Hook para el reproductor de audio
@@ -366,7 +354,10 @@ export default function Collaborations() {
   const { playingId, isPlaying, togglePlay, stopAudio } = useAudioPlayer();
 
   return (
-    <section className='min-h-screen bg-white py-12 md:py-16 lg:py-20'>
+    <section
+      id='collaborations'
+      className='min-h-screen bg-white py-12 md:py-16 lg:py-20'
+    >
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Header */}
         <motion.div
@@ -407,64 +398,6 @@ export default function Collaborations() {
             />
           ))}
         </div>
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-          className='mt-16 md:mt-20 lg:mt-24'
-        >
-          <div className='bg-gradient-to-r from-gray-50 to-gray-100 rounded-3xl p-6 md:p-8 lg:p-12 border border-gray-200'>
-            <h3 className='text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 text-center mb-6 md:mb-8'>
-              Creative Partnerships
-            </h3>
-
-            <div className='grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8'>
-              {[
-                {
-                  number: '6',
-                  label: 'Active Collaborations',
-                  color: 'text-purple-600',
-                },
-                {
-                  number: '12',
-                  label: 'Artists Worked With',
-                  color: 'text-pink-600',
-                },
-                {
-                  number: '8',
-                  label: 'Different Genres',
-                  color: 'text-blue-600',
-                },
-                {
-                  number: '3',
-                  label: 'Years Creating',
-                  color: 'text-green-600',
-                },
-              ].map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className='text-center'
-                >
-                  <div
-                    className={`text-2xl md:text-3xl lg:text-4xl font-black ${stat.color} mb-2`}
-                  >
-                    {stat.number}
-                  </div>
-                  <div className='text-gray-600 text-xs md:text-sm lg:text-base font-medium leading-tight'>
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
 
         {/* Call to Action */}
         <motion.div

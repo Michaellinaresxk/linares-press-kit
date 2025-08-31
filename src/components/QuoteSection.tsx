@@ -11,13 +11,12 @@ interface QuoteSectionProps {
 }
 
 export default function QuoteSection({
-  quote = 'Music, once admitted to the soul, becomes a sort of spirit, and never dies.',
   className = '',
   textColor = 'text-white',
   lineColor = 'bg-white',
 }: QuoteSectionProps) {
   return (
-    <section className={`relative py-16 md:py-20 lg:py-28 ${className}`}>
+    <section className={`relative py-10 md:py-15 lg:py-20 ${className}`}>
       <div className='max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
         {/* Top Vertical Line */}
         <motion.div
@@ -25,7 +24,7 @@ export default function QuoteSection({
           whileInView={{ scaleY: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true, margin: '-100px' }}
-          className={`w-px h-16 ${lineColor} mx-auto mb-12 md:mb-16`}
+          className={`w-px h-10 ${lineColor} mx-auto mb-5 md:mb-8`}
         />
 
         {/* Quote Icon */}
@@ -34,7 +33,7 @@ export default function QuoteSection({
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
-          className='flex justify-center mb-8 md:mb-12'
+          className='flex justify-center mb-4 md:mb-5'
         >
           <div
             className={`p-3 rounded-full ${textColor.replace(
@@ -56,11 +55,9 @@ export default function QuoteSection({
           <blockquote
             className={`${textColor} font-light italic leading-relaxed tracking-wide text-center`}
           >
-            <span className='text-xl sm:text-1xl md:text-2xl lg:text-3xl xl:text-4xl'>
-              Music, once admitted to the soul, becomes a sort of
-            </span>
-            <span className='block mt-2 text-xl sm:text-1xl md:text-2xl lg:text-3xl xl:text-4xl'>
-              spirit, and never dies.
+            <span className='text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl'>
+              Music, once admitted to the soul, becomes a sort of spirit, and
+              never dies.
             </span>
           </blockquote>
         </motion.div>
@@ -71,7 +68,7 @@ export default function QuoteSection({
           whileInView={{ scaleY: 1 }}
           transition={{ duration: 0.8, delay: 0.8 }}
           viewport={{ once: true }}
-          className={`w-px h-16 ${lineColor} mx-auto mb-8 md:mb-12`}
+          className={`w-px h-10 ${lineColor} mt-10 mx-auto mb-8 md:mb-8`}
         />
 
         {/* Star Symbol */}

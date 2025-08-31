@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { Users, Camera, Mail, ArrowRight } from 'lucide-react';
+import { Users, Camera, Mail } from 'lucide-react';
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
