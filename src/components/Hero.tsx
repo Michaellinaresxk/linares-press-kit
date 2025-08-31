@@ -144,7 +144,7 @@ export default function Hero() {
         {/* Navigation Cards */}
         <motion.div
           style={{ y: cardsY }}
-          className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6'
+          className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-6 pt-10'
         >
           {navigationCards.map((card, index) => (
             <motion.a
@@ -153,7 +153,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.2 + index * 0.1 }}
-              className='group relative overflow-hidden rounded-2xl h-48 sm:h-56 lg:h-48 transition-all duration-300'
+              className='group relative overflow-hidden rounded-2xl h-50 sm:h-60 lg:h-55 transition-all duration-300'
               whileHover={{ y: -5, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -183,26 +183,6 @@ export default function Hero() {
               <motion.div className='absolute inset-0 border-2 border-white/0 rounded-2xl group-hover:border-white/30 transition-colors duration-300' />
             </motion.a>
           ))}
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          className='absolute bottom-8 left-1/2 transform -translate-x-1/2'
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 2 }}
-        >
-          <motion.div
-            className='w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center'
-            animate={{ opacity: [0.4, 1, 0.4] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <motion.div
-              className='w-1 h-3 bg-gray-400 rounded-full mt-2'
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </motion.div>
         </motion.div>
       </div>
     </section>

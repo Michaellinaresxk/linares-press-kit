@@ -52,15 +52,14 @@ export default function QuoteSection({
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           viewport={{ once: true, margin: '-100px' }}
-          className='mb-12 md:mb-16'
         >
           <blockquote
             className={`${textColor} font-light italic leading-relaxed tracking-wide text-center`}
           >
-            <span className='text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl'>
+            <span className='text-xl sm:text-1xl md:text-2xl lg:text-3xl xl:text-4xl'>
               Music, once admitted to the soul, becomes a sort of
             </span>
-            <span className='block mt-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl'>
+            <span className='block mt-2 text-xl sm:text-1xl md:text-2xl lg:text-3xl xl:text-4xl'>
               spirit, and never dies.
             </span>
           </blockquote>

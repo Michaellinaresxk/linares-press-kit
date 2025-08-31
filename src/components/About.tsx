@@ -33,9 +33,9 @@ export default function About() {
                   transition={{ duration: 0.8 }}
                   viewport={{ once: true, margin: '-100px' }}
                 >
-                  <h1 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light text-white leading-relaxed tracking-wide'>
+                  <h1 className='text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-light text-white leading-relaxed tracking-wide'>
                     Music is like a dream.{' '}
-                    <span className='block mt-2'>
+                    <span className='block mt-1'>
                       One that I{' '}
                       <motion.span
                         className='italic text-purple-400'

@@ -54,30 +54,6 @@ const collaborations = [
     genre: 'Synthwave',
     duration: '4:58',
   },
-  {
-    id: 5,
-    title: 'Tribal Echoes',
-    collaborator: 'Amara Johnson',
-    role: 'Percussionist',
-    year: '2022',
-    image:
-      'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=600&h=600&fit=crop',
-    color: 'from-green-400 to-blue-500',
-    genre: 'World Music',
-    duration: '6:12',
-  },
-  {
-    id: 6,
-    title: 'Jazz Metamorphosis',
-    collaborator: 'David Restrepo',
-    role: 'Saxophonist',
-    year: '2022',
-    image:
-      'https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=600&h=600&fit=crop',
-    color: 'from-yellow-400 to-orange-500',
-    genre: 'Jazz Fusion',
-    duration: '7:33',
-  },
 ];
 
 // Hook para el reproductor de audio

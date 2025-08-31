@@ -115,7 +115,7 @@ function FeaturedSinglePlayer() {
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <section className='relative min-h-screen flex items-center justify-center overflow-hidden'>
+    <section className='relative pt-10 min-h-screen flex items-center justify-center overflow-hidden'>
       {/* Background con imagen de concierto */}
       <div className='absolute inset-0 z-0'>
         <div
@@ -167,7 +167,7 @@ function FeaturedSinglePlayer() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className='inline-block mb-4'
         >
-          <span className='px-6 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white text-sm font-semibold tracking-widest'>
+          <span className='px-6 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white text-sm tracking-widest'>
             LISTEN
           </span>
         </motion.div>
