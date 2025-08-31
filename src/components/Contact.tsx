@@ -37,24 +37,6 @@ const contactInfo = {
     timezone: 'GMT-5 (EST)',
     specialties: ['Career Development', 'Brand Strategy', 'Media Relations'],
   },
-  press: {
-    name: 'Elena Vasquez',
-    role: 'Press & Media',
-    company: 'Media Relations Pro',
-    email: 'press@linarex-music.com',
-    phone: '+1 (555) 0345-678',
-    timezone: 'GMT-5 (EST)',
-    specialties: ['Press Releases', 'Interview Coordination', 'Media Kits'],
-  },
-  technical: {
-    name: 'Hans Mueller',
-    role: 'Technical Director',
-    company: 'Production Services',
-    email: 'tech@linarex-music.com',
-    phone: '+1 (555) 0567-890',
-    timezone: 'GMT+1 (CET)',
-    specialties: ['Live Sound', 'Production Management', 'Technical Riders'],
-  },
 };
 
 // Datos del technical rider (resumido)

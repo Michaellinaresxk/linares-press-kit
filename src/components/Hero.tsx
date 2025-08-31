@@ -1,239 +1,210 @@
 'use client';
 
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { Users, Camera, Mail, ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Hook de scroll para animaciones
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
   });
 
-  // Transformaciones para parallax
-  const photoY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const cardsY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
 
-  const springPhotoY = useSpring(photoY, { stiffness: 400, damping: 90 });
-  const springTextY = useSpring(textY, { stiffness: 400, damping: 90 });
+  // Navigation cards data
+  const navigationCards = [
+    {
+      id: 'collaborations',
+      title: 'Collaborations',
+      description: 'Musical partnerships',
+      icon: Users,
+      bgImage:
+        'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
+      href: '#collaborations',
+    },
+    {
+      id: 'gallery',
+      title: 'Gallery',
+      description: 'Live moments',
+      icon: Camera,
+      bgImage:
+        'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=400&fit=crop',
+      href: '#gallery',
+    },
+    {
+      id: 'contact',
+      title: 'Contact',
+      description: 'Get in touch',
+      icon: Mail,
+      bgImage:
+        'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=600&h=400&fit=crop',
+      href: '#contact',
+    },
+  ];
 
   return (
     <section
       ref={containerRef}
-      className='relative min-h-screen w-full overflow-hidden bg-black'
+      className='relative min-h-screen w-full overflow-hidden'
     >
-      <div className='flex min-h-screen'>
-        {/* Panel izquierdo - Texto */}
-        <motion.div
-          className='w-full lg:w-2/5 flex items-center justify-center relative z-20 bg-gradient-to-br from-black via-gray-900 to-purple-900/30'
+      {/* Background Image - Artist Photo */}
+      <motion.div
+        style={{ y: backgroundY }}
+        className='absolute inset-0 w-full h-full'
+      >
+        <div
+          className='w-full h-full bg-cover bg-center bg-no-repeat'
           style={{
-            y: springTextY,
-            opacity,
+            backgroundImage:
+              'url(https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1920&h=1080&fit=crop&crop=center)',
           }}
-        >
-          <div className='px-6 sm:px-8 lg:px-12 py-12 max-w-xl'>
-            {/* Subtítulo pequeño */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className='mb-6'
-            >
-              <span className='text-purple-400 text-sm sm:text-base font-medium tracking-wider uppercase'>
-                Press Kit
-              </span>
-            </motion.div>
+        />
+        {/* Dark overlay for text readability */}
+        <div className='absolute inset-0 bg-black/60' />
+        <div className='absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/60' />
+      </motion.div>
+      <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20'>
+        {/* Main Content - Just Text Content */}
+        <motion.div style={{ y: textY }} className='max-w-4xl mb-16 lg:mb-24'>
+          {/* Genre/Category Label */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className='inline-block mb-6'
+          >
+            <span className='px-4 py-2 bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 rounded-full text-purple-300 text-sm font-medium tracking-wide'>
+              PROGRESSIVE ELECTRONIC
+            </span>
+          </motion.div>
 
-            {/* Nombre principal */}
-            <motion.h1
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{
-                duration: 1.2,
-                delay: 0.5,
-                type: 'spring',
-                stiffness: 100,
-              }}
-              className='text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 leading-tight'
-            >
-              <motion.span
-                className='bg-gradient-to-r from-white via-purple-100 to-cyan-200 bg-clip-text text-transparent'
-                whileHover={{
-                  scale: 1.02,
-                  transition: { type: 'spring', stiffness: 400, damping: 10 },
-                }}
+          {/* Main Title */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className='mb-6'
+          >
+            <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-200 leading-tight tracking-tight'>
+              LINAREX
+            </h1>
+          </motion.div>
+
+          {/* Subtitle */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className='space-y-4 mb-8'
+          >
+            <h2 className='text-xl sm:text-2xl lg:text-3xl font-light text-white'>
+              Music Producer & Sound Designer
+            </h2>
+            <p className='text-gray-300 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl'>
+              Creating sonic landscapes that transcend boundaries. From
+              progressive metal foundations to international collaborations.
+            </p>
+          </motion.div>
+
+          {/* Quick Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className='flex flex-wrap gap-6 lg:gap-8 text-left'
+          >
+            {[
+              { number: '8+', label: 'Years' },
+              { number: '50+', label: 'Collaborations' },
+              { number: '15', label: 'Countries' },
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 1 + index * 0.1 }}
+                className='text-center'
               >
-                LINAREX
-              </motion.span>
-            </motion.h1>
-
-            {/* Descripción */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.8 }}
-              className='mb-6'
-            >
-              <h2 className='text-xl sm:text-2xl text-gray-300 font-light mb-4'>
-                Progressive Metal Producer
-              </h2>
-              <p className='text-gray-400 text-base sm:text-lg leading-relaxed'>
-                From prog metal foundations to international collaborations,
-                crafting sonic experiences that transcend cultural boundaries.
-              </p>
-            </motion.div>
-
-            {/* Stats o highlights */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className='grid grid-cols-2 gap-4 mb-8 text-center'
-            >
-              <div className='border border-gray-700 rounded-lg p-3'>
-                <div className='text-2xl font-bold text-white'>4</div>
-                <div className='text-xs text-gray-400 uppercase tracking-wider'>
-                  Singles Released
+                <div className='text-2xl sm:text-3xl font-bold text-white mb-1'>
+                  {stat.number}
                 </div>
-              </div>
-              <div className='border border-gray-700 rounded-lg p-3'>
-                <div className='text-2xl font-bold text-purple-400'>Global</div>
-                <div className='text-xs text-gray-400 uppercase tracking-wider'>
-                  Collaborations
+                <div className='text-gray-400 text-sm font-medium'>
+                  {stat.label}
                 </div>
-              </div>
-            </motion.div>
-
-            {/* Botones */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.5 }}
-              className='space-y-4'
-            >
-              <motion.button
-                className='w-full px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg text-white font-semibold shadow-xl'
-                whileHover={{
-                  scale: 1.02,
-                  boxShadow: '0 20px 40px rgba(168, 85, 247, 0.3)',
-                }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-              >
-                Listen to My Music
-              </motion.button>
-
-              <motion.button
-                className='w-full px-8 py-4 border border-gray-600 rounded-lg text-white font-semibold hover:bg-gray-800/50 transition-colors'
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-              >
-                Download Press Kit
-              </motion.button>
-            </motion.div>
-          </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
 
-        {/* Panel derecho - Tu foto (PROTAGONISTA) */}
+        {/* Navigation Cards */}
         <motion.div
-          className='hidden lg:flex w-3/5 relative'
-          style={{ y: springPhotoY }}
+          style={{ y: cardsY }}
+          className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6'
         >
-          {/* Tu foto principal */}
-          <div className='relative w-full h-screen'>
-            <motion.div
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.5, delay: 0.2 }}
-              className='absolute inset-0'
+          {navigationCards.map((card, index) => (
+            <motion.a
+              key={card.id}
+              href={card.href}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.2 + index * 0.1 }}
+              className='group relative overflow-hidden rounded-2xl h-48 sm:h-56 lg:h-48 transition-all duration-300'
+              whileHover={{ y: -5, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              {/* Reemplaza con tu foto */}
+              {/* Background Image */}
               <div
-                className='w-full h-full bg-cover bg-center bg-no-repeat'
-                style={{
-                  backgroundImage: `url('/api/placeholder/1200/1600')`, // TU FOTO AQUÍ
-                  backgroundPosition: 'center 20%', // Ajusta según tu foto
-                }}
+                className='absolute inset-0 bg-cover bg-center bg-no-repeat'
+                style={{ backgroundImage: `url('${card.bgImage}')` }}
               />
 
-              {/* Overlay sutil para integrar mejor */}
-              <div className='absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-black/20' />
-              <div className='absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent' />
-            </motion.div>
+              {/* Subtle dark overlay only for text readability */}
+              <div className='absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300' />
 
-            {/* Efectos decorativos sobre la foto */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.6 }}
-              transition={{ duration: 2, delay: 1 }}
-              className='absolute top-20 right-20 w-2 h-2 bg-purple-500 rounded-full'
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.6, 1, 0.6],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
+              {/* Content */}
+              <div className='relative z-10 h-full flex items-center justify-center text-center p-6'>
+                <div className='space-y-2'>
+                  <motion.h3
+                    className='text-2xl lg:text-3xl font-bold text-white tracking-wide drop-shadow-lg'
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {card.title}
+                  </motion.h3>
+                </div>
+              </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.4 }}
-              transition={{ duration: 2, delay: 1.5 }}
-              className='absolute bottom-32 right-12 w-1 h-1 bg-cyan-400 rounded-full'
-              animate={{
-                scale: [1, 2, 1],
-                opacity: [0.4, 0.8, 0.4],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: 1,
-              }}
-            />
-          </div>
+              {/* Hover Border Effect */}
+              <motion.div className='absolute inset-0 border-2 border-white/0 rounded-2xl group-hover:border-white/30 transition-colors duration-300' />
+            </motion.a>
+          ))}
         </motion.div>
 
-        {/* Versión móvil - Foto como background */}
-        <div className='absolute inset-0 lg:hidden'>
-          <div
-            className='w-full h-full bg-cover bg-center bg-no-repeat'
-            style={{
-              backgroundImage: `url('/api/placeholder/800/1200')`, // TU FOTO PARA MÓVIL
-              backgroundPosition: 'center 30%',
-            }}
-          />
-          <div className='absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/30' />
-        </div>
-      </div>
-
-      {/* Indicador de scroll */}
-      <motion.div
-        className='absolute bottom-8 left-8 lg:left-1/5 z-30'
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 2 }}
-        style={{ opacity }}
-      >
+        {/* Scroll Indicator */}
         <motion.div
-          className='w-6 h-10 border-2 border-white/60 rounded-full flex justify-center'
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          className='absolute bottom-8 left-1/2 transform -translate-x-1/2'
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 2 }}
         >
           <motion.div
-            className='w-1 h-3 bg-white rounded-full mt-2'
-            animate={{ y: [0, 12, 0] }}
+            className='w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center'
+            animate={{ opacity: [0.4, 1, 0.4] }}
             transition={{ duration: 2, repeat: Infinity }}
-          />
+          >
+            <motion.div
+              className='w-1 h-3 bg-gray-400 rounded-full mt-2'
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
