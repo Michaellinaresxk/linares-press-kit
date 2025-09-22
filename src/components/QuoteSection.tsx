@@ -56,8 +56,8 @@ export default function QuoteSection({
             className={`${textColor} font-light italic leading-relaxed tracking-wide text-center`}
           >
             <span className='text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl'>
-              Music, once admitted to the soul, becomes a sort of spirit, and
-              never dies.
+              Genre is just a box. I create universal emotions that connect
+              souls and search for the voice that can set them free.
             </span>
           </blockquote>
         </motion.div>

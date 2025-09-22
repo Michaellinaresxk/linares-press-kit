@@ -79,7 +79,7 @@ export default function Hero() {
             className='inline-block mb-6'
           >
             <span className='px-4 py-2 bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 rounded-full text-purple-300 text-sm font-medium tracking-wide'>
-              PROGRESSIVE ELECTRONIC
+              MUSIC WITHOUT BOUNDARIES
             </span>
           </motion.div>
 
@@ -90,7 +90,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className='mb-6'
           >
-            <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-200 leading-tight tracking-tight'>
+            <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-purple-400 to-purple-300 leading-tight tracking-tight'>
               LINAREX
             </h1>
           </motion.div>
@@ -103,11 +103,11 @@ export default function Hero() {
             className='space-y-4 mb-8'
           >
             <h2 className='text-xl sm:text-2xl lg:text-3xl font-light text-white'>
-              Music Producer & Sound Designer
+              Composer & Creative Producer
             </h2>
             <p className='text-gray-300 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl'>
-              Creating sonic landscapes that transcend boundaries. From
-              progressive metal foundations to international collaborations.
+              Creating musical concepts with international artists. Music that
+              expresses what we all feel but can't always say.
             </p>
           </motion.div>
 
@@ -119,9 +119,9 @@ export default function Hero() {
             className='flex flex-wrap gap-6 lg:gap-8 text-left'
           >
             {[
-              { number: '8+', label: 'Years' },
-              { number: '50+', label: 'Collaborations' },
-              { number: '15', label: 'Countries' },
+              { number: '20+', label: 'Years' },
+              { number: '5+', label: 'Collaborations' },
+              { number: '18', label: 'Countries' },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

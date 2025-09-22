@@ -1,0 +1,77 @@
+export const upcomingShows = [
+  {
+    id: 1,
+    date: '2024-02-15',
+    venue: 'Metal Underground',
+    city: 'Berlin',
+    country: 'Germany',
+    type: 'Headline Show',
+    status: 'confirmed',
+    ticketLink: '#',
+  },
+  {
+    id: 2,
+    date: '2024-03-08',
+    venue: 'Progressive Night',
+    city: 'Amsterdam',
+    country: 'Netherlands',
+    type: 'Festival',
+    status: 'confirmed',
+    ticketLink: '#',
+  },
+  {
+    id: 3,
+    date: '2024-03-22',
+    venue: 'Rock Palace',
+    city: 'Madrid',
+    country: 'Spain',
+    type: 'Support Act',
+    status: 'pending',
+    ticketLink: '#',
+  },
+];
+
+export const concertPhotos = [
+  {
+    id: 1,
+    src: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=800&fit=crop',
+    venue: 'Rock Festival 2023',
+    location: 'Barcelona, Spain',
+    photographer: 'Anna Rodriguez',
+  },
+  {
+    id: 2,
+    src: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=800&h=800&fit=crop',
+    venue: 'Metal Underground',
+    location: 'Berlin, Germany',
+    photographer: 'Hans Mueller',
+  },
+  {
+    id: 3,
+    src: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=800&fit=crop',
+    venue: 'Progressive Night',
+    location: 'London, UK',
+    photographer: 'James Wilson',
+  },
+  {
+    id: 4,
+    src: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&h=800&fit=crop',
+    venue: 'Hotel Atlantis',
+    location: 'Dubai, UAE',
+    photographer: 'Sarah Al-Zahra',
+  },
+  {
+    id: 5,
+    src: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&h=800&fit=crop',
+    venue: 'Jazz & Metal Fusion',
+    location: 'New York, USA',
+    photographer: 'Mike Johnson',
+  },
+  {
+    id: 6,
+    src: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800&h=800&fit=crop',
+    venue: 'Cultural Exchange',
+    location: 'Tokyo, Japan',
+    photographer: 'Yuki Tanaka',
+  },
+];

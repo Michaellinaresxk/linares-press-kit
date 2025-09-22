@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
+import Image from 'next/image';
 import QuoteSection from './QuoteSection';
 
 export default function About() {
@@ -16,9 +17,31 @@ export default function About() {
           className='relative min-h-screen bg-black flex items-center overflow-hidden'
         >
           <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20'>
-            <div className='grid lg:grid-cols-2 gap-12 lg:gap-20 xl:gap-28 items-center'>
+            <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-20 items-center'>
+              {/* Right Side - Image */}
+              <motion.div
+                className='order-2 lg:order-1'
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true, margin: '-100px' }}
+              >
+                <div className='w-full max-w-md mx-auto lg:max-w-full'>
+                  <Image
+                    src='/img/portrait.jpg'
+                    alt='Lynarex - Creative Producer and Composer'
+                    width={800}
+                    height={600}
+                    className='w-full h-auto'
+                    sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw'
+                    priority
+                    quality={95}
+                  />
+                </div>
+              </motion.div>
+
               {/* Left Side - Text Content */}
-              <motion.div className='space-y-8 lg:space-y-10 text-right order-1 lg:order-1'>
+              <motion.div className='space-y-8 lg:space-y-10 order-1 lg:order-2'>
                 {/* Main Quote */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -27,15 +50,15 @@ export default function About() {
                   viewport={{ once: true, margin: '-100px' }}
                 >
                   <h1 className='text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-light text-white leading-relaxed tracking-wide'>
-                    Music is like a dream.{' '}
+                    Music isn't just sound{' '}
                     <span className='block mt-1'>
-                      One that I{' '}
+                      it's a way to touch the heart{' '}
                       <motion.span
                         className='italic text-purple-400'
                         whileHover={{ color: '#ec4899' }}
                         transition={{ duration: 0.3 }}
                       >
-                        cannot hear
+                        without using your hands
                       </motion.span>
                       .
                     </span>
@@ -51,16 +74,14 @@ export default function About() {
                   className='space-y-6 text-gray-400 text-sm sm:text-base lg:text-lg leading-relaxed'
                 >
                   <p>
-                    From progressive metal complexities to international
-                    collaborations, my path has been guided by one principle:
-                    authentic expression transcends all boundaries.
+                    "I'm Lynarex, creative producer and composer. My music
+                    touches universal emotions that transcend cultures.
                   </p>
 
                   <p>
-                    Working with artists across cultures, I've discovered that
-                    the most powerful music emerges when we honor both tradition
-                    and innovation, creating bridges between worlds through
-                    sound.
+                    I create musical concepts collaborating with international
+                    artists where each song is an emotional journey about the
+                    human experience.
                   </p>
                 </motion.div>
 
@@ -70,12 +91,12 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                   viewport={{ once: true }}
-                  className='space-y-3 text-right'
+                  className='space-y-3'
                 >
                   {[
-                    '8+ years creating',
-                    '50+ international collaborations',
-                    '15 countries explored',
+                    '10+ years creating',
+                    '5+ international collaborations',
+                    '18 countries explored',
                   ].map((stat, index) => (
                     <motion.div
                       key={stat}
@@ -96,9 +117,9 @@ export default function About() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.8 }}
                   viewport={{ once: true }}
-                  className='flex justify-end pt-8'
+                  className='flex  pt-8'
                 >
-                  <div className='text-right space-y-2'>
+                  <div className='space-y-2'>
                     <motion.div
                       className='text-xl sm:text-2xl lg:text-3xl font-extralight text-white italic tracking-wider'
                       whileHover={{
@@ -125,7 +146,7 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 1.2 }}
                   viewport={{ once: true }}
-                  className='text-right pt-6'
+                  className='pt-6'
                 >
                   <motion.button
                     className='group text-gray-500 hover:text-purple-400 text-sm font-light tracking-wide transition-colors duration-300'
