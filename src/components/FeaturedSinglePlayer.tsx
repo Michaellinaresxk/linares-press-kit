@@ -63,8 +63,9 @@ function FeaturedSinglePlayer() {
         <div
           className='w-full h-full bg-cover bg-center bg-no-repeat'
           style={{
+            backgroundPosition: 'center top',
             backgroundImage:
-              'url(https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1920&h=1080&fit=crop)',
+              'url(https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1761004861/linarex/Generated_Image_October_14_2025_-_12_07AM-Photoroom_kyea0w.png)',
           }}
         />
         <div className='absolute inset-0 bg-black/70' />

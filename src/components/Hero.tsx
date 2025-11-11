@@ -41,8 +41,7 @@ export default function Hero() {
       title: 'Contact',
       description: 'Get in touch',
       icon: Mail,
-      bgImage:
-        'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=600&h=400&fit=crop',
+      bgImage: 'img/at-home.jpg',
       href: '#contact',
     },
   ];
@@ -60,8 +59,9 @@ export default function Hero() {
         <div
           className='w-full h-full bg-cover bg-center bg-no-repeat'
           style={{
+            backgroundPosition: 'center top',
             backgroundImage:
-              'url(https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1920&h=1080&fit=crop&crop=center)',
+              'url(https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1761004861/linarex/Generated_Image_October_14_2025_-_12_07AM-Photoroom_kyea0w.png)',
           }}
         />
         {/* Dark overlay for text readability */}
@@ -70,7 +70,7 @@ export default function Hero() {
       </motion.div>
       <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20'>
         {/* Main Content - Just Text Content */}
-        <motion.div style={{ y: textY }} className='max-w-4xl mb-16 lg:mb-24'>
+        <motion.div style={{ y: textY }} className=' max-w-4xl mb-16 lg:mb-24'>
           {/* Genre/Category Label */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
