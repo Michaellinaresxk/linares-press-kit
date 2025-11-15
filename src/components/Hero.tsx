@@ -60,8 +60,8 @@ export default function Hero() {
           className='w-full h-full bg-cover bg-center bg-no-repeat'
           style={{
             backgroundPosition: 'center top',
-            backgroundImage:
-              'url(https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1761004861/linarex/Generated_Image_October_14_2025_-_12_07AM-Photoroom_kyea0w.png)',
+            backgroundImage: 'url(img/piano.jpg)',
+            transform: 'scaleX(-1)',
           }}
         />
         {/* Dark overlay for text readability */}
@@ -78,7 +78,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className='inline-block mb-6'
           >
-            <span className='px-4 py-2 bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 rounded-full text-purple-300 text-sm font-medium tracking-wide'>
+            <span className='px-4 py-2 bg-gradient-to-r from-yellow-600/20 to-yellow-600/20 border border-yellow-500/30 rounded-full text-yellow-300 text-sm font-medium tracking-wide'>
               MUSIC WITHOUT BOUNDARIES
             </span>
           </motion.div>
@@ -90,7 +90,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className='mb-6'
           >
-            <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-purple-400 to-purple-300 leading-tight tracking-tight'>
+            <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-yellow-400 to-yellow-300 leading-tight tracking-tight'>
               LINAREX
             </h1>
           </motion.div>
@@ -106,8 +106,7 @@ export default function Hero() {
               Composer & Creative Producer
             </h2>
             <p className='text-gray-300 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl'>
-              Creating musical concepts with international artists. Music that
-              expresses what we all feel but can't always say.
+              Music that expresses what we all feel but can not always say.
             </p>
           </motion.div>
 

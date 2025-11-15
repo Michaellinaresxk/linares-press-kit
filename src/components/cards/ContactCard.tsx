@@ -10,8 +10,19 @@ import {
   Users,
 } from 'lucide-react';
 
+interface PersonBase {
+  id: string;
+  name: string;
+}
+
+interface PersonFull extends PersonBase {
+  email: string;
+  phone: string;
+  address?: string;
+}
+
 interface ContactCardProps {
-  person: any; //  @typescript-eslint/no-explicit-any
+  person: PersonBase | PersonFull;
   type: string;
   index: number;
 }
@@ -51,23 +62,23 @@ function ContactCard({ person, type, index }: ContactCardProps) {
         </div>
 
         <div className='flex-1'>
-          <h3 className='text-lg font-bold text-white mb-1'>{person.name}</h3>
+          {/* <h3 className='text-lg font-bold text-white mb-1'>{person.name}</h3>
           <p className={`text-${color}-400 font-medium mb-2`}>{person.role}</p>
-          <p className='text-gray-400 text-sm mb-4'>{person.company}</p>
+          <p className='text-gray-400 text-sm mb-4'>{person.company}</p> */}
 
           {/* Contact info */}
           <div className='space-y-2 mb-4'>
             <div className='flex items-center space-x-2 text-gray-300 text-sm'>
               <Mail size={14} />
-              <span>{person.email}</span>
+              {/* <span>{person.email}</span> */}
             </div>
             <div className='flex items-center space-x-2 text-gray-300 text-sm'>
               <Phone size={14} />
-              <span>{person.phone}</span>
+              {/* <span>{person.phone}</span> */}
             </div>
             <div className='flex items-center space-x-2 text-gray-300 text-sm'>
               <MapPin size={14} />
-              <span>{person.timezone}</span>
+              {/* <span>{person.timezone}</span> */}
             </div>
           </div>
 
@@ -75,14 +86,14 @@ function ContactCard({ person, type, index }: ContactCardProps) {
           <div>
             <p className='text-gray-400 text-xs mb-2'>Specialties:</p>
             <div className='flex flex-wrap gap-1'>
-              {person.specialties.map((specialty: string, i: number) => (
+              {/* {person.specialties.map((specialty: string, i: number) => (
                 <span
                   key={i}
                   className={`px-2 py-1 bg-${color}-600/20 text-${color}-300 text-xs rounded-full`}
                 >
                   {specialty}
                 </span>
-              ))}
+              ))} */}
             </div>
           </div>
 
@@ -93,7 +104,7 @@ function ContactCard({ person, type, index }: ContactCardProps) {
             whileTap={{ scale: 0.98 }}
           >
             <Send size={16} />
-            <span>Contact {person.role.split(' ')[0]}</span>
+            {/* <span>Contact {person.role.split(' ')[0]}</span> */}
           </motion.button>
         </div>
       </div>

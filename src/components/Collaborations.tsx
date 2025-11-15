@@ -83,7 +83,7 @@ export default function Collaborations() {
           </motion.h3>
           <p className='text-gray-600 mb-6 md:mb-8 max-w-2xl mx-auto text-sm md:text-base lg:text-lg'>
             Always looking for talented artists to create something unique
-            together. Let's explore new sonic territories.
+            together. Explore new sonic territories.
           </p>
 
           <div className='flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto'>

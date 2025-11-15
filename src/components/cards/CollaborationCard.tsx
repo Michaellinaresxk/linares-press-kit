@@ -90,8 +90,7 @@ const CollaborationCard = ({
         className='relative bg-white rounded-2xl overflow-hidden shadow-xl border border-gray-200 cursor-pointer'
         onClick={handleCardClick}
         animate={{
-          rotateX: isHovered && !isExpanded && !isTouchDevice ? rotateX : 0,
-          rotateY: isHovered && !isExpanded && !isTouchDevice ? rotateY : 0,
+          // Solo valores numéricos aquí
           z: isHovered && !isTouchDevice ? 30 : isExpanded ? 20 : 0,
           scale: isExpanded ? 1.01 : isHovered && !isTouchDevice ? 1.03 : 1,
           y: isExpanded ? -5 : isHovered && !isTouchDevice ? -8 : 0,
@@ -104,6 +103,9 @@ const CollaborationCard = ({
         }}
         style={{
           transformStyle: 'preserve-3d',
+          // Los MotionValues van AQUÍ en style
+          rotateX: isHovered && !isExpanded && !isTouchDevice ? rotateX : 0,
+          rotateY: isHovered && !isExpanded && !isTouchDevice ? rotateY : 0,
           boxShadow:
             (isHovered && !isTouchDevice) || isExpanded
               ? '0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1)'

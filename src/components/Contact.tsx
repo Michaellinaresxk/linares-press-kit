@@ -3,9 +3,9 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Send } from 'lucide-react';
-import contactInfo from '@/const/contactInfo';
+// import contactInfo from '@/const/contactInfo';
 import TechnicalRider from './TechnicalRider';
-import ContactCard from './cards/ContactCard';
+// import ContactCard from './cards/ContactCard';
 
 export default function Contact() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -53,12 +53,12 @@ export default function Contact() {
           </p>
         </motion.div>
 
-        {/* Contact Cards Grid */}
+        {/* Contact Cards Grid
         <div className='grid md:grid-cols-2 gap-6 mb-16'>
           {Object.entries(contactInfo).map(([type, person], index) => (
             <ContactCard key={type} person={person} type={type} index={index} />
           ))}
-        </div>
+        </div> */}
 
         {/* Technical Rider */}
         <motion.div
@@ -84,7 +84,7 @@ export default function Contact() {
               General Inquiry
             </h3>
             <p className='text-gray-400 text-center mb-8'>
-              Not sure who to contact? Send a general message and we'll direct
+              Not sure who to contact? Send a general message and we will direct
               it to the right person.
             </p>
 

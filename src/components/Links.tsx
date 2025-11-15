@@ -121,14 +121,14 @@ export default function Links() {
           </motion.div>
 
           <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
-            {streamingPlatforms.map((platform, index) => (
+            {/* {streamingPlatforms.map((platform, index) => (
               <PlatformCard
                 key={platform.id}
                 platform={platform}
                 type='streaming'
                 index={index}
               />
-            ))}
+            ))} */}
           </div>
         </div>
 

@@ -1,13 +1,7 @@
 import { featuredSingle } from '@/const/tracks';
 import { motion } from 'framer-motion';
-import {
-  Download,
-  ExternalLink,
-  Pause,
-  Play,
-  SkipBack,
-  SkipForward,
-} from 'lucide-react';
+import { ExternalLink, Pause, Play, SkipBack, SkipForward } from 'lucide-react';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 // Hook personalizado para el reproductor
@@ -139,7 +133,9 @@ function FeaturedSinglePlayer() {
               transition={{ duration: 0.3 }}
               className='relative'
             >
-              <img
+              <Image
+                width={320}
+                height={320}
                 src={featuredSingle.coverImage}
                 alt={`${featuredSingle.title} cover`}
                 className='w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 mx-auto rounded-2xl shadow-2xl object-cover'
@@ -254,7 +250,8 @@ function FeaturedSinglePlayer() {
             {/* Botones de acción */}
             <div className='flex flex-col sm:flex-row gap-4 justify-center mt-8 mb-20'>
               <motion.a
-                href={featuredSingle.spotifyUrl}
+                href='https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS?si=6-KHEpmPQ3mTHwnLdw2iDg'
+                target='_blank'
                 className='px-6 py-3 bg-green-600 hover:bg-green-500 rounded-full text-white font-semibold flex items-center justify-center space-x-2 transition-colors'
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

@@ -34,14 +34,14 @@ export const upcomingShows = [
 export const concertPhotos = [
   {
     id: 1,
-    src: 'img/callejon.png',
+    src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218282/callejon_ssosib.png',
     venue: 'Found joy in the simplest moments.',
     location: 'The streets know my smile.',
     photographer: 'Hans Mueller',
   },
   {
     id: 2,
-    src: 'img/perfil-2.jpg',
+    src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218282/callejon_ssosib.png',
     venue: 'Profile of a dreamer.',
     location: 'Lost in thought, found in the light.',
     photographer: 'Anna Rodriguez',
@@ -70,7 +70,7 @@ export const concertPhotos = [
   // },
   {
     id: 6,
-    src: 'img/Studio.jpg',
+    src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218282/callejon_ssosib.png',
     venue: 'Where magic happens.',
     location: 'Creating the soundtrack to my journey.',
     photographer: 'Yuki Tanaka',

@@ -1,7 +1,8 @@
 import { tracks } from '@/const/tracks';
 import { motion } from 'framer-motion';
 import { Download, ExternalLink, Pause, Play } from 'lucide-react';
-import { useState } from 'react';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 interface TrackPlayerProps {
   track: (typeof tracks)[0];
@@ -12,7 +13,15 @@ interface TrackPlayerProps {
 
 function TrackPlayer({ track, isActive, onPlay, index }: TrackPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0); // @typescript-eslint/no-unused-vars
+  // @typescript-eslint/no-unused-vars
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prev) => (prev < 90 ? prev + 10 : prev));
+    }, 500);
+
+    return () => clearInterval(timer);
+  }, []);
 
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);
@@ -47,11 +56,14 @@ function TrackPlayer({ track, isActive, onPlay, index }: TrackPlayerProps) {
       <div className='relative z-10 flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4'>
         {/* Cover art */}
         <div className='flex-shrink-0'>
-          <img
+          <Image
             src={track.coverImage}
             alt={`${track.title} cover`}
+            width={80}
+            height={80}
             className='w-16 h-16 md:w-20 md:h-20 rounded-lg object-cover shadow-lg'
             loading='lazy'
+            priority={false}
           />
         </div>
 

@@ -6,6 +6,7 @@ import { Calendar, Camera } from 'lucide-react';
 import { concertPhotos, upcomingShows } from '@/const/liveShows';
 import ShowCard from './cards/ShowCard';
 import PhotoModal from './modal/PhotoModal';
+import Image from 'next/image';
 
 export default function LiveShows() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -126,9 +127,11 @@ export default function LiveShows() {
                 onClick={() => setSelectedPhoto(photo)}
                 whileHover={{ scale: 1.05 }}
               >
-                <img
+                <Image
                   src={photo.src}
                   alt={`${photo.venue} - ${photo.location}`}
+                  width={600}
+                  height={400}
                   className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-110'
                   loading='lazy'
                 />

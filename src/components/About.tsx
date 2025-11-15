@@ -50,9 +50,9 @@ export default function About() {
                   viewport={{ once: true, margin: '-100px' }}
                 >
                   <h1 className='text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-light text-white leading-relaxed tracking-wide'>
-                    Music isn't just sound{' '}
+                    Music is not just sound{' '}
                     <span className='block mt-1'>
-                      it's a way to touch the heart{' '}
+                      it is a way to touch the heart{' '}
                       <motion.span
                         className='italic text-purple-400'
                         whileHover={{ color: '#ec4899' }}
@@ -74,7 +74,7 @@ export default function About() {
                   className='space-y-6 text-gray-400 text-sm sm:text-base lg:text-lg leading-relaxed'
                 >
                   <p>
-                    "I'm Lynarex, creative producer and composer. My music
+                    I am Linarex, creative producer and composer. My music
                     touches universal emotions that transcend cultures.
                   </p>
 
@@ -153,7 +153,7 @@ export default function About() {
                     whileHover={{ x: -3 }}
                     transition={{ duration: 0.2 }}
                   >
-                    Let's collaborate
+                    Get In Touch
                     <motion.span
                       className='inline-block ml-2 group-hover:ml-3 transition-all duration-300'
                       animate={{ x: [0, 3, 0] }}

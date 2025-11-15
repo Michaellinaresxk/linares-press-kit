@@ -92,13 +92,15 @@ export default function Music() {
                 files for professional use.
               </p>
               <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-                <motion.button
+                <motion.a
+                  href='https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS?si=6-KHEpmPQ3mTHwnLdw2iDg'
+                  target='_blank'
                   className='px-6 md:px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 rounded-lg text-white font-semibold transition-all duration-300'
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Stream on Spotify
-                </motion.button>
+                </motion.a>
                 <motion.button
                   className='px-6 md:px-8 py-3 border border-gray-600 hover:border-gray-500 rounded-lg text-white font-semibold hover:bg-gray-800/50 transition-all duration-300'
                   whileHover={{ scale: 1.05 }}

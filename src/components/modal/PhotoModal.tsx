@@ -1,6 +1,7 @@
 import { concertPhotos } from '@/const/liveShows';
 import { motion } from 'framer-motion';
 import { Camera, MapPin, X } from 'lucide-react';
+import Image from 'next/image';
 
 interface PhotoModalProps {
   photo: (typeof concertPhotos)[0] | null;
@@ -37,7 +38,7 @@ function PhotoModal({ photo, onClose }: PhotoModalProps) {
       >
         <div className='bg-gray-900 rounded-lg overflow-hidden shadow-2xl'>
           <div className='relative'>
-            <img //  @next/next/no-img-element
+            <Image //  @next/next/no-img-element
               src={photo.src}
               alt={`${photo.venue} - ${photo.location}`}
               className='w-full h-64 sm:h-80 md:h-96 object-cover'
