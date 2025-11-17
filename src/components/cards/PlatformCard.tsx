@@ -1,32 +1,25 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
-
-interface StreamingPlatform {
-  id: string;
-  name: string;
-  url: string;
-  icon?: string;
-  followers?: number;
-}
-
-interface SocialPlatform {
-  id: string;
-  name: string;
-  handle: string;
-  url: string;
-  icon?: string;
-  followers?: number;
-}
-
-type Platform = StreamingPlatform | SocialPlatform;
+import type { StreamingPlatform, SocialPlatform } from '@/const/links';
 
 interface PlatformCardProps {
-  platform: Platform;
+  platform: StreamingPlatform | SocialPlatform;
   type: 'streaming' | 'social';
   index: number;
 }
 
-function PlatformCard({ platform, type, index }: PlatformCardProps) {
+export default function PlatformCard({
+  platform,
+  type,
+  index,
+}: PlatformCardProps) {
+  const isStreaming = type === 'streaming';
+  const isStreampPlatform = (
+    p: StreamingPlatform | SocialPlatform
+  ): p is StreamingPlatform => isStreaming;
+
   return (
     <motion.a
       href={platform.url}
@@ -45,7 +38,7 @@ function PlatformCard({ platform, type, index }: PlatformCardProps) {
           <div className='flex items-center space-x-3'>
             <div
               className='w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold text-lg'
-              // style={{ backgroundColor: platform.color }}
+              style={{ backgroundColor: platform.color }}
             >
               {platform.name.charAt(0)}
             </div>
@@ -53,37 +46,39 @@ function PlatformCard({ platform, type, index }: PlatformCardProps) {
               <h3 className='font-bold text-white group-hover:text-purple-300 transition-colors'>
                 {platform.name}
               </h3>
-              {/* {platform.handle && (
+              {'handle' in platform && (
                 <p className='text-gray-400 text-sm'>{platform.handle}</p>
-              )} */}
+              )}
             </div>
           </div>
 
-          {/* {platform.verified && (
+          {isStreampPlatform(platform) && platform.verified && (
             <div className='bg-blue-600 rounded-full p-1'>
               <svg width='12' height='12' viewBox='0 0 24 24' fill='white'>
                 <path d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z' />
               </svg>
             </div>
-          )} */}
+          )}
         </div>
 
         {/* Stats */}
-        {type === 'streaming' ? (
-          <div className='grid grid-cols-2 gap-4 mb-4'>
-            <div>
-              <div className='text-lg font-bold text-white'>
-                {platform.followers}
+        {isStreaming ? (
+          isStreampPlatform(platform) && (
+            <div className='grid grid-cols-2 gap-4 mb-4'>
+              <div>
+                <div className='text-lg font-bold text-white'>
+                  {platform.followers}
+                </div>
+                <div className='text-gray-400 text-xs'>Followers</div>
               </div>
-              <div className='text-gray-400 text-xs'>Followers</div>
+              <div>
+                <div className='text-lg font-bold text-purple-400'>
+                  {platform.monthlyListeners}
+                </div>
+                <div className='text-gray-400 text-xs'>Monthly</div>
+              </div>
             </div>
-            <div>
-              {/* <div className='text-lg font-bold text-purple-400'>
-                {platform.monthlyListeners}
-              </div> */}
-              <div className='text-gray-400 text-xs'>Monthly</div>
-            </div>
-          </div>
+          )
         ) : (
           <div className='mb-4'>
             <div className='text-xl font-bold text-white'>
@@ -94,12 +89,16 @@ function PlatformCard({ platform, type, index }: PlatformCardProps) {
         )}
 
         {/* Description */}
-        {/* <p className='text-gray-300 text-sm mb-4'>{platform.description}</p> */}
+        <p className='text-gray-300 text-sm mb-4'>{platform.description}</p>
 
         {/* Action button */}
         <div className='flex items-center justify-between'>
           <span className='text-gray-500 text-xs capitalize'>
-            {/* {type === 'streaming' ? 'Stream' : platform.type || 'Follow'} */}
+            {isStreaming
+              ? 'Stream'
+              : 'type' in platform
+              ? platform.type
+              : 'Follow'}
           </span>
           <ExternalLink
             className='text-gray-400 group-hover:text-white transition-colors'
@@ -110,4 +109,3 @@ function PlatformCard({ platform, type, index }: PlatformCardProps) {
     </motion.a>
   );
 }
-export default PlatformCard;

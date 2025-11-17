@@ -148,7 +148,8 @@ export default function About() {
                   viewport={{ once: true }}
                   className='pt-6'
                 >
-                  <motion.button
+                  <motion.a
+                    href='#contact'
                     className='group text-gray-500 hover:text-purple-400 text-sm font-light tracking-wide transition-colors duration-300'
                     whileHover={{ x: -3 }}
                     transition={{ duration: 0.2 }}
@@ -165,7 +166,7 @@ export default function About() {
                     >
                       →
                     </motion.span>
-                  </motion.button>
+                  </motion.a>
                 </motion.div>
               </motion.div>
             </div>

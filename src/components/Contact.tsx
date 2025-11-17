@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Send } from 'lucide-react';
 // import contactInfo from '@/const/contactInfo';
-import TechnicalRider from './TechnicalRider';
+// import TechnicalRider from './TechnicalRider';
 // import ContactCard from './cards/ContactCard';
 
 export default function Contact() {
@@ -19,6 +19,7 @@ export default function Contact() {
 
   return (
     <section
+      id='contact'
       ref={containerRef}
       className='relative py-20 lg:py-32 bg-gradient-to-b from-gray-800 via-black to-gray-900 overflow-hidden'
     >
@@ -68,7 +69,7 @@ export default function Contact() {
           viewport={{ once: true }}
           className='mb-16'
         >
-          <TechnicalRider />
+          {/* <TechnicalRider /> */}
         </motion.div>
 
         {/* General Contact Form */}

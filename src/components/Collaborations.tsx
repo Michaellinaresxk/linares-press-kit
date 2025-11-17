@@ -87,14 +87,15 @@ export default function Collaborations() {
           </p>
 
           <div className='flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto'>
-            <motion.button
+            <motion.a
+              href='#contact'
               className='flex-1 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold rounded-2xl transition-all duration-500 shadow-lg hover:shadow-2xl text-sm md:text-base'
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.3 }}
             >
               Get in Touch
-            </motion.button>
+            </motion.a>
 
             {/* <motion.button
               className='flex-1 px-6 md:px-8 py-3 md:py-4 bg-gray-900 hover:bg-gray-800 text-white font-bold rounded-2xl transition-all duration-500 shadow-lg hover:shadow-2xl text-sm md:text-base'

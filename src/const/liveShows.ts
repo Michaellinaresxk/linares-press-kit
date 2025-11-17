@@ -41,7 +41,7 @@ export const concertPhotos = [
   },
   {
     id: 2,
-    src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218282/callejon_ssosib.png',
+    src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763300411/Generated_Image_November_16_2025_-_1_08PM_hjma5e.jpg',
     venue: 'Profile of a dreamer.',
     location: 'Lost in thought, found in the light.',
     photographer: 'Anna Rodriguez',

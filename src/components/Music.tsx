@@ -1,15 +1,15 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
-import TrackPlayer from './TrackPlayer';
-import { tracks } from '@/const/tracks';
+// import TrackPlayer from './TrackPlayer';
+// import { tracks } from '@/const/tracks';
 import FeaturedSinglePlayer from './FeaturedSinglePlayer';
 
 export default function Music() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [activeTrack, setActiveTrack] = useState<number | null>(null);
+  // const [activeTrack, setActiveTrack] = useState<number | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -18,9 +18,9 @@ export default function Music() {
 
   const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
-  const handleTrackPlay = (trackId: number) => {
-    setActiveTrack(activeTrack === trackId ? null : trackId);
-  };
+  // const handleTrackPlay = (trackId: number) => {
+  //   setActiveTrack(activeTrack === trackId ? null : trackId);
+  // };
 
   return (
     <>
@@ -46,7 +46,7 @@ export default function Music() {
 
         <div className='relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
           {/* Header */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -60,10 +60,10 @@ export default function Music() {
               Explore the complete catalog featuring diverse compositions that
               showcase the evolution of progressive electronic music.
             </p>
-          </motion.div>
+          </motion.div> */}
 
           {/* Track listing */}
-          <div className='space-y-4 md:space-y-6'>
+          {/* <div className='space-y-4 md:space-y-6'>
             {tracks.map((track, index) => (
               <TrackPlayer
                 key={track.id}
@@ -73,10 +73,10 @@ export default function Music() {
                 index={index}
               />
             ))}
-          </div>
+          </div> */}
 
           {/* Call to action */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -110,7 +110,7 @@ export default function Music() {
                 </motion.button>
               </div>
             </div>
-          </motion.div>
+          </motion.div> */}
         </div>
       </section>
     </>

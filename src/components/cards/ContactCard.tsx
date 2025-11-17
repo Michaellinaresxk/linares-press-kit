@@ -27,7 +27,7 @@ interface ContactCardProps {
   index: number;
 }
 
-function ContactCard({ person, type, index }: ContactCardProps) {
+function ContactCard({ type, index }: ContactCardProps) {
   const icons = {
     booking: Calendar,
     management: Users,

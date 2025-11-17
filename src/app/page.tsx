@@ -15,9 +15,9 @@ export default function Home() {
       <About />
       <Music />
       <Collaborations />
+      <Links />
       <LiveShows />
 
-      <Links />
       <Contact />
     </div>
   );

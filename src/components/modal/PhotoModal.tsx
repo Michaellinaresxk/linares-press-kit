@@ -40,8 +40,10 @@ function PhotoModal({ photo, onClose }: PhotoModalProps) {
           <div className='relative'>
             <Image //  @next/next/no-img-element
               src={photo.src}
+              width={64}
+              height={64}
               alt={`${photo.venue} - ${photo.location}`}
-              className='w-full h-64 sm:h-80 md:h-96 object-cover'
+              className='w-full sm:h-80 md:h-96 object-cover'
               loading='lazy'
             />
             <div className='absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent' />

@@ -2,9 +2,9 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Calendar, Camera } from 'lucide-react';
-import { concertPhotos, upcomingShows } from '@/const/liveShows';
-import ShowCard from './cards/ShowCard';
+import { Camera } from 'lucide-react';
+import { concertPhotos } from '@/const/liveShows';
+// import ShowCard from './cards/ShowCard';
 import PhotoModal from './modal/PhotoModal';
 import Image from 'next/image';
 
@@ -48,7 +48,7 @@ export default function LiveShows() {
           className='text-center mb-12 md:mb-16'
         >
           <h2 className='text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent mb-4 md:mb-6'>
-            Live Shows
+            Gallery
           </h2>
           <p className='text-gray-400 text-base md:text-lg max-w-3xl mx-auto px-4'>
             Experience Linarex live. From intimate hotel venues to major
@@ -59,7 +59,7 @@ export default function LiveShows() {
 
         {/* Upcoming Shows */}
         <div className='mb-16 md:mb-20'>
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -70,16 +70,16 @@ export default function LiveShows() {
             <h3 className='text-xl md:text-2xl font-bold text-white'>
               Upcoming Dates
             </h3>
-          </motion.div>
+          </motion.div> */}
 
-          <div className='space-y-4'>
+          {/* <div className='space-y-4'>
             {upcomingShows.map((show, index) => (
               <ShowCard key={show.id} show={show} index={index} />
             ))}
-          </div>
+          </div> */}
 
           {/* Contact for booking */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -96,7 +96,7 @@ export default function LiveShows() {
             >
               Contact for Booking
             </motion.button>
-          </motion.div>
+          </motion.div> */}
         </div>
 
         {/* Live Photos Gallery */}

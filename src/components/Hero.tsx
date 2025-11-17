@@ -24,7 +24,7 @@ export default function Hero() {
       description: 'Musical partnerships',
       icon: Users,
       bgImage:
-        'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
+        'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763309064/pexels-brett-sayles-4001264_lm2x3m.jpg',
       href: '#collaborations',
     },
     {
@@ -33,7 +33,7 @@ export default function Hero() {
       description: 'Live moments',
       icon: Camera,
       bgImage:
-        'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=400&fit=crop',
+        'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763308942/pexels-jeremy-bishop-1260133-20147091_t8vdzn.jpg',
       href: '#gallery',
     },
     {
@@ -41,7 +41,8 @@ export default function Hero() {
       title: 'Contact',
       description: 'Get in touch',
       icon: Mail,
-      bgImage: 'img/at-home.jpg',
+      bgImage:
+        'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218283/piano_rvnwvp.jpg',
       href: '#contact',
     },
   ];
@@ -60,7 +61,8 @@ export default function Hero() {
           className='w-full h-full bg-cover bg-center bg-no-repeat'
           style={{
             backgroundPosition: 'center top',
-            backgroundImage: 'url(img/piano.jpg)',
+            backgroundImage:
+              'url(https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218283/piano_rvnwvp.jpg)',
             transform: 'scaleX(-1)',
           }}
         />
