@@ -1,33 +1,21 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
 
 export const metadata: Metadata = {
   // Títulos y descripciones
-  title: 'Linarex - Composer & Music Producer | Debut Single "Vaivén"',
+  title:
+    'Linarex - Funk-Pop Composer & Music Producer | Debut Single "Renacer"',
   description:
-    'Discover Linarex, an innovative music production. Stream "Vaivén" on all major platforms.',
+    'Discover Linarex, an innovative funk-pop music producer. Stream "Renacer" on all major platforms. Daft Punk influences, international collaboration.',
 
   // Keywords para SEO
   keywords: [
     'Linarex',
     'music producer',
-    'Afrobeat Fusion',
+    'funk pop',
     'composer',
-    'Vaivén',
+    'Renacer',
     'streaming',
-    'Urban music',
-    'chill beats',
+    'electronic music',
   ],
 
   // Información del autor
@@ -51,9 +39,9 @@ export const metadata: Metadata = {
     alternateLocale: ['es_ES'],
     url: 'https://linarex-music.com',
     siteName: 'Linarex Music',
-    title: 'Linarex - Composer & Music Producer',
+    title: 'Linarex - Funk-Pop Composer & Music Producer',
     description:
-      'Discover innovative music by Linarex. Stream "Vaivén" now on Spotify, Apple Music, YouTube Music and more.',
+      'Discover innovative funk-pop music by Linarex. Stream "Renacer" now on Spotify, Apple Music, YouTube Music and more.',
     images: [
       {
         url: 'https://linarex-music.com/og-image.jpg',
@@ -75,9 +63,9 @@ export const metadata: Metadata = {
   // Twitter/X Card
   twitter: {
     card: 'summary_large_image',
-    title: 'Linarex - Music Producer',
+    title: 'Linarex - Funk-Pop Music Producer',
     description:
-      'Listen to "Vaivén" - An Afrobeat Fusion track with chill vibes',
+      'Listen to "Renacer" - A funk-pop track with Daft Punk influences',
     creator: '@linarex_music',
     images: ['https://linarex-music.com/twitter-image.jpg'],
   },
@@ -115,19 +103,3 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
 };
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang='en'>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  );
-}
