@@ -3,15 +3,15 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Camera } from 'lucide-react';
-import { concertPhotos } from '@/const/liveShows';
+import { photoGallery } from '@/const/photoGallery';
 // import ShowCard from './cards/ShowCard';
 import PhotoModal from './modal/PhotoModal';
 import Image from 'next/image';
 
-export default function LiveShows() {
+export default function PhotoGallery() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedPhoto, setSelectedPhoto] = useState<
-    (typeof concertPhotos)[0] | null
+    (typeof photoGallery)[0] | null
   >(null);
 
   const { scrollYProgress } = useScroll({
@@ -116,7 +116,7 @@ export default function LiveShows() {
           </motion.div>
 
           <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 md:gap-4'>
-            {concertPhotos.map((photo, index) => (
+            {photoGallery.map((photo, index) => (
               <motion.div
                 key={photo.id}
                 initial={{ opacity: 0, scale: 0.8 }}

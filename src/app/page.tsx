@@ -3,9 +3,9 @@ import Collaborations from '@/components/Collaborations';
 import Contact from '@/components/Contact';
 import Hero from '@/components/Hero';
 import Links from '@/components/Links';
-import LiveShows from '@/components/LiveShows';
 
 import Music from '@/components/Music';
+import PhotoGallery from '@/components/PhotoGallery';
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
       <Music />
       <Collaborations />
       <Links />
-      <LiveShows />
+      <PhotoGallery />
 
       <Contact />
     </div>

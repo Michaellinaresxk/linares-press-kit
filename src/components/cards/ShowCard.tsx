@@ -1,4 +1,4 @@
-import { upcomingShows } from '@/const/liveShows';
+import { upcomingShows } from '@/const/photoGallery';
 import { motion } from 'framer-motion';
 import { MapPin, Ticket } from 'lucide-react';
 

@@ -50,15 +50,14 @@ export default function About() {
                   viewport={{ once: true, margin: '-100px' }}
                 >
                   <h1 className='text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-light text-white leading-relaxed tracking-wide'>
-                    Music is not just sound{' '}
                     <span className='block mt-1'>
-                      it is a way to touch the heart{' '}
+                      I create musical concepts guided by one question:{' '}
                       <motion.span
                         className='italic text-purple-400'
                         whileHover={{ color: '#ec4899' }}
                         transition={{ duration: 0.3 }}
                       >
-                        without using your hands
+                        what does this emotion sound like?
                       </motion.span>
                       .
                     </span>
@@ -74,14 +73,16 @@ export default function About() {
                   className='space-y-6 text-gray-400 text-sm sm:text-base lg:text-lg leading-relaxed'
                 >
                   <p>
-                    I am Linarex, creative producer and composer. My music
-                    touches universal emotions that transcend cultures.
+                    I am Linarex, I'm a composer from the Dominican Republic.
+                    Each song is an emotional journey through the human
+                    experience.
                   </p>
 
                   <p>
-                    I create musical concepts collaborating with international
-                    artists where each song is an emotional journey about the
-                    human experience.
+                    I seek universal feelings and the perfect voice to express
+                    them. Working across genres like afrobeat, funk, rock, indie
+                    folk, and beyond—because the emotion matters more than the
+                    sound.
                   </p>
                 </motion.div>
 
