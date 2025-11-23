@@ -1,4 +1,4 @@
-import { Globe, Share2, Users } from 'lucide-react';
+import { Share2, Users } from 'lucide-react';
 
 // Tipos base
 interface BasePlatform {
@@ -44,10 +44,10 @@ export const streamingPlatforms: StreamingPlatform[] = [
   },
   {
     id: 3,
-    name: 'YouTube Music',
+    name: 'YouTube',
     followers: '15.7K',
     monthlyListeners: '78.4K',
-    url: 'https://music.youtube.com/watch?v=sGx7yOn5fN8&si=QrHm7pE5_rczX42-',
+    url: 'https://www.youtube.com/channel/UCZIaGK7NF4roKF039W_7O1Q',
     color: '#FF0000',
     description: 'Music videos and live sessions',
     verified: true,
@@ -70,7 +70,7 @@ export const socialPlatforms: SocialPlatform[] = [
     name: 'TikTok',
     handle: '@linarexmusic',
     followers: '25.1K',
-    url: 'https://tiktok.com/@linarexmusic',
+    url: 'https://www.tiktok.com/@linarex59?_r=1&_t=ZN-91cgVJr6dKY',
     color: '#000000',
     type: 'video',
     description: 'Short-form content, music clips',
@@ -78,22 +78,22 @@ export const socialPlatforms: SocialPlatform[] = [
 ];
 
 export const officialLinks = [
+  // {
+  //   id: 1,
+  //   name: 'Official Website',
+  //   url: 'https://linarex-music.com',
+  //   description: 'Main hub for all content and updates',
+  //   icon: Globe,
+  // },
   {
     id: 1,
-    name: 'Official Website',
-    url: 'https://linarex-music.com',
-    description: 'Main hub for all content and updates',
-    icon: Globe,
-  },
-  {
-    id: 2,
     name: 'Booking & Management',
-    url: 'mailto:booking@linarex-music.com',
+    url: 'mailto:linarexinfo@gmail.com',
     description: 'Professional inquiries and booking',
     icon: Users,
   },
   {
-    id: 3,
+    id: 2,
     name: 'Press Kit',
     url: '#media-kit',
     description: 'Media assets and press materials',

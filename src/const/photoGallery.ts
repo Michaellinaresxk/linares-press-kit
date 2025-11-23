@@ -31,7 +31,7 @@ export const upcomingShows = [
   },
 ];
 
-export const concertPhotos = [
+export const photoGallery = [
   {
     id: 1,
     src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218282/callejon_ssosib.png',
