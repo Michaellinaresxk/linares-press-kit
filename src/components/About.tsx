@@ -73,9 +73,9 @@ export default function About() {
                   className='space-y-6 text-gray-400 text-sm sm:text-base lg:text-lg leading-relaxed'
                 >
                   <p>
-                    I am Linarex, I'm a composer from the Dominican Republic.
-                    Each song is an emotional journey through the human
-                    experience.
+                    I am Linarex, I&apos;m a composer from the Dominican
+                    Republic. Each song is an emotional journey through the
+                    human experience.
                   </p>
 
                   <p>

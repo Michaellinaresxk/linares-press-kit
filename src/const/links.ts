@@ -1,4 +1,4 @@
-import { Globe, Share2, Users } from 'lucide-react';
+import { Share2, Users } from 'lucide-react';
 
 // Tipos base
 interface BasePlatform {
