@@ -1,107 +1,110 @@
 import { featuredSingle } from '@/const/tracks';
+
 import { motion } from 'framer-motion';
-import { ExternalLink, Pause, Play, SkipBack, SkipForward } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { memo } from 'react';
+import BackgroundEffects from './player/BackgroundEffects';
+import PlayerControls from './player/PlayerControls';
+import { ProgressBar } from './player/ProgressBar';
+import { useAudioPlayerFeatured } from '@/hooks/UseAudioPlayerReturn';
 
-// Hook personalizado para el reproductor
-function useAudioPlayer() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
+/**
+ * Configuración de animaciones
+ */
+const ANIMATION_CONFIG = {
+  container: {
+    initial: { opacity: 0, y: 50 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 1, delay: 0.2 },
+  },
+  badge: {
+    initial: { opacity: 0, scale: 0.8 },
+    animate: { opacity: 1, scale: 1 },
+    transition: { duration: 0.6, delay: 0.5 },
+  },
+  title: {
+    initial: { opacity: 0, y: 30 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.8, delay: 0.7 },
+  },
+  playerContainer: {
+    initial: { opacity: 0, scale: 0.9 },
+    animate: { opacity: 1, scale: 1 },
+    transition: { duration: 0.8, delay: 0.9 },
+  },
+  songInfo: {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 1.1 },
+  },
+  controls: {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 1.3 },
+  },
+} as const;
 
-  const togglePlay = () => setIsPlaying(!isPlaying);
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
-
-  // Simular progreso del audio
-  useEffect(() => {
-    if (!isPlaying) return;
-
-    const interval = setInterval(() => {
-      setCurrentTime((prev) => {
-        const newTime = prev + 1;
-        if (newTime >= featuredSingle.duration) {
-          setIsPlaying(false);
-          return 0;
-        }
-        return newTime;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [isPlaying]);
-
-  return {
+/**
+ * ✅ REPRODUCTOR PRINCIPAL DE LA CANCIÓN DESTACADA
+ *
+ * 🔧 IMPORTANTE: Este componente usa useAudioPlayerFeatured (no useAudioPlayer)
+ *    porque necesita reproducción de audio REAL.
+ *
+ * Responsabilidades:
+ * - Orquestar el hook useAudioPlayerFeatured
+ * - Renderizar componentes hijos (PlayerControls, ProgressBar)
+ * - Manejar el layout y animaciones
+ * - Mostrar información de la canción
+ * - Proporcionar estados a componentes hijos
+ *
+ * Características:
+ * - Completamente responsivo
+ * - Animaciones fluidas con Framer Motion
+ * - Manejo robusto de errores
+ * - Indicadores de carga
+ * - Integración con Spotify
+ *
+ * Props: Ninguno (usa dato global de featuredSingle)
+ *
+ * @returns JSX con reproductor de audio
+ */
+const FeaturedSinglePlayer = memo(function FeaturedSinglePlayer() {
+  // ✅ CORRECCIÓN: Usar hook con audio real
+  const {
     isPlaying,
     currentTime,
-    duration: featuredSingle.duration,
+    duration,
+    isLoading,
+    error,
     togglePlay,
+    seek,
     formatTime,
-    setCurrentTime,
-  };
-}
+  } = useAudioPlayerFeatured(featuredSingle.audioUrl);
 
-function FeaturedSinglePlayer() {
-  const { isPlaying, currentTime, duration, togglePlay, formatTime } =
-    useAudioPlayer();
+  // Calcular progreso (0-100%)
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <section className='relative pt-10 min-h-screen flex items-center justify-center overflow-hidden'>
-      {/* Background con imagen de concierto */}
-      <div className='absolute inset-0 z-0'>
-        <div
-          className='w-full h-full bg-cover bg-center bg-no-repeat'
-          style={{
-            backgroundPosition: 'center top',
-            backgroundImage:
-              'url(https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1761004861/linarex/Generated_Image_October_14_2025_-_12_07AM-Photoroom_kyea0w.png)',
-          }}
-        />
-        <div className='absolute inset-0 bg-black/70' />
-        <div className='absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50' />
-      </div>
+    <section
+      className='relative pt-10 min-h-screen flex items-center justify-center overflow-hidden'
+      aria-label='Featured single player'
+    >
+      {/* Capa 0: Efectos visuales de fondo */}
+      <BackgroundEffects />
 
-      {/* Efectos de fondo animados */}
-      <div className='absolute inset-0 z-10'>
-        {Array.from({ length: 6 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className='absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-xl'
-            animate={{
-              x: [0, 100, 0],
-              y: [0, -50, 0],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 8 + i * 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Contenido principal */}
+      {/* Capa 1: Contenido principal */}
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.2 }}
+        initial={ANIMATION_CONFIG.container.initial}
+        animate={ANIMATION_CONFIG.container.animate}
+        transition={ANIMATION_CONFIG.container.transition}
         className='relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto'
       >
         {/* Badge "LISTEN" */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          initial={ANIMATION_CONFIG.badge.initial}
+          animate={ANIMATION_CONFIG.badge.animate}
+          transition={ANIMATION_CONFIG.badge.transition}
           className='inline-block mb-4'
         >
           <span className='px-6 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white text-sm tracking-widest'>
@@ -111,22 +114,22 @@ function FeaturedSinglePlayer() {
 
         {/* Título principal */}
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
+          initial={ANIMATION_CONFIG.title.initial}
+          animate={ANIMATION_CONFIG.title.animate}
+          transition={ANIMATION_CONFIG.title.transition}
           className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 tracking-tight'
         >
           NEW SINGLE
         </motion.h1>
 
-        {/* Reproductor central */}
+        {/* Contenedor del reproductor */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
+          initial={ANIMATION_CONFIG.playerContainer.initial}
+          animate={ANIMATION_CONFIG.playerContainer.animate}
+          transition={ANIMATION_CONFIG.playerContainer.transition}
           className='relative mx-auto max-w-md sm:max-w-lg md:max-w-xl'
         >
-          {/* Cover art */}
+          {/* Cover art con efecto de reproducción */}
           <div className='relative mb-8'>
             <motion.div
               animate={isPlaying ? { scale: 1.05 } : { scale: 1 }}
@@ -137,8 +140,9 @@ function FeaturedSinglePlayer() {
                 width={320}
                 height={320}
                 src={featuredSingle.coverImage}
-                alt={`${featuredSingle.title} cover`}
+                alt={`${featuredSingle.title} cover art`}
                 className='w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 mx-auto rounded-2xl shadow-2xl object-cover'
+                priority
               />
 
               {/* Glow effect cuando está reproduciendo */}
@@ -147,6 +151,7 @@ function FeaturedSinglePlayer() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   className='absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500/30 to-pink-500/30 blur-xl -z-10'
+                  aria-hidden='true'
                 />
               )}
             </motion.div>
@@ -154,9 +159,9 @@ function FeaturedSinglePlayer() {
 
           {/* Info de la canción */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.1 }}
+            initial={ANIMATION_CONFIG.songInfo.initial}
+            animate={ANIMATION_CONFIG.songInfo.animate}
+            transition={ANIMATION_CONFIG.songInfo.transition}
             className='mb-8 text-center'
           >
             <h2 className='text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2'>
@@ -170,93 +175,66 @@ function FeaturedSinglePlayer() {
             </span>
           </motion.div>
 
-          {/* Controles del reproductor */}
+          {/* Sección de controles */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.3 }}
+            initial={ANIMATION_CONFIG.controls.initial}
+            animate={ANIMATION_CONFIG.controls.animate}
+            transition={ANIMATION_CONFIG.controls.transition}
             className='space-y-6'
           >
-            {/* Botones de control */}
-            <div className='flex items-center justify-center space-x-6'>
-              <motion.button
-                className='p-3 text-white/70 hover:text-white transition-colors'
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+            {/* Mensaje de error */}
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className='p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-300 text-sm'
+                role='alert'
               >
-                <SkipBack size={28} />
-              </motion.button>
+                <p className='font-semibold'>Error de reproducción</p>
+                <p>{error}</p>
+              </motion.div>
+            )}
 
-              <motion.button
-                onClick={togglePlay}
-                className='w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center text-white shadow-2xl'
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                animate={
-                  isPlaying
-                    ? {
-                        boxShadow: [
-                          '0 0 20px rgba(168, 85, 247, 0.5)',
-                          '0 0 40px rgba(168, 85, 247, 0.8)',
-                          '0 0 20px rgba(168, 85, 247, 0.5)',
-                        ],
-                      }
-                    : {}
-                }
-                transition={{ duration: 2, repeat: isPlaying ? Infinity : 0 }}
+            {/* Indicador de carga */}
+            {isLoading && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className='text-white/70 text-sm flex items-center justify-center space-x-2'
               >
-                {isPlaying ? (
-                  <Pause size={24} className='sm:w-7 sm:h-7' />
-                ) : (
-                  <Play size={24} className='sm:w-7 sm:h-7 ml-1' />
-                )}
-              </motion.button>
+                <div className='w-2 h-2 rounded-full bg-white/70 animate-pulse' />
+                <span>Cargando audio...</span>
+              </motion.div>
+            )}
 
-              <motion.button
-                className='p-3 text-white/70 hover:text-white transition-colors'
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <SkipForward size={28} />
-              </motion.button>
-            </div>
+            {/* ✅ Componente de controles - recibe función real togglePlay() */}
+            <PlayerControls
+              isPlaying={isPlaying}
+              onPlayToggle={togglePlay}
+              isLoading={isLoading}
+            />
 
-            {/* Barra de progreso */}
-            <div className='px-4'>
-              <div className='relative'>
-                <div className='w-full h-2 bg-white/20 rounded-full overflow-hidden'>
-                  <motion.div
-                    className='h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full'
-                    style={{ width: `${progress}%` }}
-                    initial={{ width: 0 }}
-                    animate={{ width: `${progress}%` }}
-                    transition={{ duration: 0.1 }}
-                  />
-                </div>
-                <motion.div
-                  className='absolute top-1/2 w-4 h-4 bg-white rounded-full shadow-lg -translate-y-1/2 cursor-pointer'
-                  style={{ left: `calc(${progress}% - 8px)` }}
-                  whileHover={{ scale: 1.2 }}
-                />
-              </div>
-
-              {/* Tiempos */}
-              <div className='flex justify-between text-white/70 text-sm mt-2 font-mono'>
-                <span>{formatTime(currentTime)}</span>
-                <span>{formatTime(duration)}</span>
-              </div>
-            </div>
+            {/* ✅ Componente de barra de progreso - recibe currentTime y seek reales */}
+            <ProgressBar
+              currentTime={currentTime}
+              duration={duration}
+              onSeek={seek}
+              formatTime={formatTime}
+              isLoading={isLoading}
+            />
 
             {/* Botones de acción */}
             <div className='flex flex-col sm:flex-row gap-4 justify-center mt-8 mb-20'>
               <motion.a
-                href='https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS?si=6-KHEpmPQ3mTHwnLdw2iDg'
+                href={featuredSingle.spotifyUrl}
                 target='_blank'
+                rel='noopener noreferrer'
                 className='px-6 py-3 bg-green-600 hover:bg-green-500 rounded-full text-white font-semibold flex items-center justify-center space-x-2 transition-colors'
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                aria-label={`Stream ${featuredSingle.title} on Spotify`}
               >
-                <ExternalLink size={18} />
+                <ExternalLink size={18} aria-hidden='true' />
                 <span>Stream on Spotify</span>
               </motion.a>
             </div>
@@ -265,6 +243,8 @@ function FeaturedSinglePlayer() {
       </motion.div>
     </section>
   );
-}
+});
+
+FeaturedSinglePlayer.displayName = 'FeaturedSinglePlayer';
 
 export default FeaturedSinglePlayer;

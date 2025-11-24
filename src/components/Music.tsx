@@ -2,10 +2,10 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import FeaturedSinglePlayer from './FeaturedSinglePlayer';
 
 // import TrackPlayer from './TrackPlayer';
 // import { tracks } from '@/const/tracks';
-import FeaturedSinglePlayer from './FeaturedSinglePlayer';
 
 export default function Music() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -44,9 +44,9 @@ export default function Music() {
           />
         </div>
 
-        <div className='relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
-          {/* Header */}
-          {/* <motion.div
+        {/* <div className='relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'> */}
+        {/* Header */}
+        {/* <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -62,8 +62,8 @@ export default function Music() {
             </p>
           </motion.div> */}
 
-          {/* Track listing */}
-          {/* <div className='space-y-4 md:space-y-6'>
+        {/* Track listing */}
+        {/* <div className='space-y-4 md:space-y-6'>
             {tracks.map((track, index) => (
               <TrackPlayer
                 key={track.id}
@@ -75,8 +75,8 @@ export default function Music() {
             ))}
           </div> */}
 
-          {/* Call to action */}
-          {/* <motion.div
+        {/* Call to action */}
+        {/* <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -111,7 +111,7 @@ export default function Music() {
               </div>
             </div>
           </motion.div> */}
-        </div>
+        {/* </div> */}
       </section>
     </>
   );

@@ -2,7 +2,7 @@ export const collaborations = [
   {
     id: 1,
     title: 'Renacer',
-    collaborator: 'Paweł Skiwa',
+    collaborator: 'PaweÅ‚ Skiwa',
     role: 'Vocalist',
     year: '2026',
     image:
@@ -11,10 +11,11 @@ export const collaborations = [
     genre: 'Funk Pop',
     duration: '3:16',
     producer: 'Pablo Cafici',
+    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
   },
   {
     id: 2,
-    title: 'Vaivén',
+    title: 'VaivÃ©n',
     collaborator: 'Daniel Rivero',
     role: 'Singer',
     year: '2025',
@@ -24,6 +25,7 @@ export const collaborations = [
     genre: 'Afrobeat Fusion',
     duration: '3:13',
     producer: 'Pablo Cafici',
+    audioUrl: 'audio/vaiven.mp3',
   },
   {
     id: 3,
@@ -37,6 +39,7 @@ export const collaborations = [
     genre: 'Pop Rock',
     duration: '5:23',
     producer: 'Pablo Cafici',
+    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
   },
   // {
   //   id: 4,

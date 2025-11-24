@@ -28,13 +28,14 @@ export default function Hero() {
           className='w-full h-full bg-cover bg-center bg-no-repeat'
           style={{
             backgroundPosition: 'center top',
-            backgroundImage: 'url(img/bg-hero.jpg)',
+            backgroundImage:
+              'url(https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg)',
             transform: 'scaleX(-1)',
           }}
         />
         {/* Dark overlay for text readability */}
-        <div className='absolute inset-0 bg-black/10' />
-        <div className='absolute inset-0 bg-gradient-to-r from-black/60 via-black/10 to-black/60' />
+        <div className='absolute inset-0' />
+        <div className='absolute inset-0 ' />
       </motion.div>
 
       <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
