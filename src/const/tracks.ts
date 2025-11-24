@@ -8,6 +8,8 @@ export interface Track {
   spotifyUrl?: string;
   description: string;
   year: string;
+  genre?: string;
+  waveformColor?: string;
 }
 
 export const featuredSingle: Track = {
