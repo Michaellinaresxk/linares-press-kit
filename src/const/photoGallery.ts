@@ -41,14 +41,14 @@ export const photoGallery = [
   },
   {
     id: 2,
-    src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763300411/Generated_Image_November_16_2025_-_1_08PM_hjma5e.jpg',
+    src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218283/piano_rvnwvp.jpg',
     venue: 'Profile of a dreamer.',
     location: 'Lost in thought, found in the light.',
     photographer: 'Anna Rodriguez',
   },
   {
     id: 3,
-    src: 'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1761004856/linarex/IMG_9754-Photoroom_xu9ra5.png',
+    src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg',
 
     venue: 'Six strings',
     location: 'Good vibes, and stories waiting to be told',
@@ -70,7 +70,7 @@ export const photoGallery = [
   // },
   {
     id: 6,
-    src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218282/callejon_ssosib.png',
+    src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218281/Studio_ip9car.jpg',
     venue: 'Where magic happens.',
     location: 'Creating the soundtrack to my journey.',
     photographer: 'Yuki Tanaka',

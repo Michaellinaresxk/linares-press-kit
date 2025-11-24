@@ -9,6 +9,7 @@ import {
 import { Calendar, ChevronDown, Headphones, Music, Users } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import AudioControls from '../AudioControls';
+import { useAudioPlayerCollaboration } from '@/hooks/UseAudioPlayerCollaborationReturn';
 
 const CollaborationCard = ({
   collaboration,
@@ -32,14 +33,31 @@ const CollaborationCard = ({
   const isActive = playingId === collaboration.id;
   const isTouchDevice = useIsTouchDevice();
 
-  // Motion values para efectos 3D suaves
+  // ✅ NUEVO: Hook con audio real para ESTA colaboración
+  const audioState = useAudioPlayerCollaboration(collaboration.audioUrl);
+
+  // ✅ NUEVO: Determinar si este item debe estar reproduciendo
+  const shouldPlay = isActive && isPlaying;
+
+  // ✅ NUEVO: Sincronizar reproducción de audio con estado global
+  useEffect(() => {
+    if (shouldPlay && !audioState.isPlaying) {
+      // Usuario presionó play en esta tarjeta → reproducir
+      audioState.play();
+    } else if (!shouldPlay && audioState.isPlaying) {
+      // Usuario presionó play en otra tarjeta → pausar esta
+      audioState.pause();
+    }
+  }, [shouldPlay, audioState]);
+
+  // Motion values para efectos 3D
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   const rotateX = useTransform(mouseY, [-300, 300], [8, -8]);
   const rotateY = useTransform(mouseX, [-300, 300], [-8, 8]);
 
-  // Mostrar hint automáticamente en dispositivos táctiles
+  // Mostrar hint automáticamente en móviles
   useEffect(() => {
     if (isTouchDevice && !isExpanded) {
       const timer = setTimeout(() => setShowHint(true), 1000 + index * 500);
@@ -90,7 +108,6 @@ const CollaborationCard = ({
         className='relative bg-white rounded-2xl overflow-hidden shadow-xl border border-gray-200 cursor-pointer'
         onClick={handleCardClick}
         animate={{
-          // Solo valores numéricos aquí
           z: isHovered && !isTouchDevice ? 30 : isExpanded ? 20 : 0,
           scale: isExpanded ? 1.01 : isHovered && !isTouchDevice ? 1.03 : 1,
           y: isExpanded ? -5 : isHovered && !isTouchDevice ? -8 : 0,
@@ -103,7 +120,6 @@ const CollaborationCard = ({
         }}
         style={{
           transformStyle: 'preserve-3d',
-          // Los MotionValues van AQUÍ en style
           rotateX: isHovered && !isExpanded && !isTouchDevice ? rotateX : 0,
           rotateY: isHovered && !isExpanded && !isTouchDevice ? rotateY : 0,
           boxShadow:
@@ -113,7 +129,7 @@ const CollaborationCard = ({
         }}
         layout
       >
-        {/* Imagen principal con transición suave */}
+        {/* Imagen principal */}
         <motion.div
           className='relative aspect-square overflow-hidden'
           animate={{
@@ -140,13 +156,13 @@ const CollaborationCard = ({
             }}
           />
 
-          {/* Cristal effect overlay */}
+          {/* Overlay decorativo */}
           <div className='absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/5 pointer-events-none' />
 
-          {/* Gradient overlay mejorado */}
+          {/* Gradient overlay */}
           <div className='absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/85 via-black/40 to-transparent' />
 
-          {/* Efecto de brillo muy suave */}
+          {/* Efecto de brillo */}
           {(isHovered || (isTouchDevice && showHint)) && (
             <motion.div
               className='absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none'
@@ -156,8 +172,8 @@ const CollaborationCard = ({
             />
           )}
 
-          {/* Playing indicator mejorado */}
-          {isActive && isPlaying && (
+          {/* ✅ NUEVO: Indicador de reproducción */}
+          {isActive && audioState.isPlaying && (
             <motion.div
               className='absolute top-4 right-4'
               initial={{ opacity: 0, scale: 0 }}
@@ -189,7 +205,7 @@ const CollaborationCard = ({
             </motion.div>
           )}
 
-          {/* Indicador de expansión para móviles */}
+          {/* Indicador para móviles */}
           {isTouchDevice && !isExpanded && (
             <motion.div
               className='absolute bottom-20 right-4'
@@ -212,7 +228,7 @@ const CollaborationCard = ({
             </motion.div>
           )}
 
-          {/* Content overlay con mejor jerarquía */}
+          {/* Content overlay */}
           <motion.div
             className='absolute bottom-0 left-0 right-0 p-5 text-white'
             animate={{
@@ -253,7 +269,7 @@ const CollaborationCard = ({
           </motion.div>
         </motion.div>
 
-        {/* Panel expandible con transición muy suave */}
+        {/* Panel expandible */}
         <AnimatePresence>
           {isExpanded && (
             <motion.div
@@ -298,7 +314,7 @@ const CollaborationCard = ({
                   ease: [0.25, 0.4, 0.25, 1],
                 }}
               >
-                {/* Información adicional mejorada */}
+                {/* Información */}
                 <div className='space-y-4'>
                   <div className='flex items-center justify-between'>
                     <div className='flex items-center space-x-3'>
@@ -309,10 +325,6 @@ const CollaborationCard = ({
                       <span className='text-sm text-gray-600 bg-gray-50 px-2 py-1 rounded-md'>
                         {collaboration.producer}
                       </span>
-
-                      {/* <span className='text-sm text-gray-600 bg-gray-50 px-2 py-1 rounded-md'>
-                        {collaboration.genre}
-                      </span> */}
                     </div>
                     <div className='flex items-center space-x-2 text-gray-500'>
                       <Calendar size={14} />
@@ -322,7 +334,7 @@ const CollaborationCard = ({
                     </div>
                   </div>
 
-                  {/* Color accent con efecto de carga suave */}
+                  {/* Progress bar decorativo */}
                   <motion.div
                     className='relative h-2 bg-gray-200 rounded-full overflow-hidden'
                     initial={{ opacity: 0 }}
@@ -342,7 +354,7 @@ const CollaborationCard = ({
                   </motion.div>
                 </div>
 
-                {/* Controles de audio con aparición suave */}
+                {/* ✅ ACTUALIZADO: AudioControls con audioState */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -356,17 +368,45 @@ const CollaborationCard = ({
                   <AudioControls
                     collaboration={collaboration}
                     isActive={isActive}
-                    isPlaying={isPlaying}
+                    isPlaying={audioState.isPlaying}
                     onTogglePlay={onTogglePlay}
                     onStop={onStop}
                   />
                 </motion.div>
+
+                {/* ✅ NUEVO: Progress bar de audio (opcional) */}
+                {isActive && audioState.duration > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1, duration: 0.5 }}
+                    className='space-y-2'
+                  >
+                    <div className='w-full h-1.5 bg-gray-200 rounded-full overflow-hidden'>
+                      <motion.div
+                        className='h-full bg-gradient-to-r from-purple-500 to-pink-500'
+                        animate={{
+                          width: `${
+                            (audioState.currentTime / audioState.duration) * 100
+                          }%`,
+                        }}
+                        transition={{ duration: 0.1 }}
+                      />
+                    </div>
+                    <div className='flex justify-between text-xs text-gray-500'>
+                      <span>
+                        {audioState.formatTime(audioState.currentTime)}
+                      </span>
+                      <span>{audioState.formatTime(audioState.duration)}</span>
+                    </div>
+                  </motion.div>
+                )}
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Indicador de interactividad para desktop */}
+        {/* Indicador desktop */}
         {!isTouchDevice && !isExpanded && isHovered && (
           <motion.div
             className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none'
