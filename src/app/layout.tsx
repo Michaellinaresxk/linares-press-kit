@@ -31,13 +31,13 @@ export const metadata: Metadata = {
   ],
 
   // Información del autor
-  authors: [{ name: 'Linarex', url: 'https://linarex-music.com' }],
+  authors: [{ name: 'Linarex', url: 'https://linares-press-kit.vercel.app/' }],
   creator: 'Linarex',
 
   // URLs canónicas
-  metadataBase: new URL('https://linarex-music.com'),
+  metadataBase: new URL('https://linares-press-kit.vercel.app/'),
   alternates: {
-    canonical: 'https://linarex-music.com',
+    canonical: 'https://linares-press-kit.vercel.app/',
     languages: {
       es: 'https://linarex-music.com/es',
       en: 'https://linarex-music.com/en',
@@ -49,21 +49,21 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     alternateLocale: ['es_ES'],
-    url: 'https://linarex-music.com',
+    url: 'https://linares-press-kit.vercel.app/',
     siteName: 'Linarex Music',
     title: 'Linarex - Composer & Music Producer',
     description:
       'Discover innovative music by Linarex. Stream "Vaivén" now on Spotify, Apple Music, YouTube Music and more.',
     images: [
       {
-        url: 'https://linarex-music.com/og-image.jpg',
+        url: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg',
         width: 1200,
         height: 630,
         alt: 'Linarex - Music Producer',
         type: 'image/jpeg',
       },
       {
-        url: 'https://linarex-music.com/og-image-square.jpg',
+        url: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg',
         width: 800,
         height: 800,
         alt: 'Linarex Profile',
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     description:
       'Listen to "Vaivén" - An Afrobeat Fusion track with chill vibes',
     creator: '@linarex_music',
-    images: ['https://linarex-music.com/twitter-image.jpg'],
+    images: ['https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg'],
   },
 
   // Apple specific
