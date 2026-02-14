@@ -2,11 +2,11 @@ export const collaborations = [
   {
     id: 1,
     title: 'Renacer',
-    collaborator: 'PaweÅ‚ Skiwa',
+    collaborator: 'Skiwa',
     role: 'Vocalist',
     year: '2026',
     image:
-      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&h=600&fit=crop',
+      'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1771094800/linarex/Screenshot_2026-02-14_at_7.46.34_PM_dgzh4z.png',
     color: 'from-purple-500 to-pink-500',
     genre: 'Funk Pop',
     duration: '3:16',

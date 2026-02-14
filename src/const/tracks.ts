@@ -13,17 +13,17 @@ export interface Track {
 }
 
 export const featuredSingle: Track = {
-  id: 'vaiven',
-  title: 'Vaivén',
-  artist: 'Linarex ft. Dani Rivero',
-  year: '2025',
+  id: 'renacer',
+  title: 'Renacer',
+  artist: 'Linarex ft. Skiba',
+  year: '2026',
   duration: 313,
   description:
-    'Urban poetry dances over infectious afrobeat grooves—where rhythm meets soul.',
+    'Is a funk-driven love story about transformation and finding home. Perfect for late-night drives and uplifting playlists .',
   coverImage:
-    'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218283/Vaive%CC%81n_dattqn.jpg',
+    'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1771093920/linarex/2026_ssgfrp.jpg',
 
-  audioUrl: '/audio/vaiven.mp3',
+  audioUrl: '/audio/renacer.mp3',
 
   spotifyUrl:
     'https://open.spotify.com/track/77R8ciAdBDoVzHsL3GAjDB?si=0TkNaeysRLqG8uOxKRIYBQ',
@@ -35,7 +35,8 @@ export const tracks: Track[] = [
     title: 'Renacer',
     artist: 'Linarex',
     duration: 196,
-    description: 'Groovy rhythms and catchy melodies that make you move.',
+    description:
+      'Is a funk-driven love story about transformation and finding home',
     genre: 'Funk Pop',
     year: '2026',
     audioUrl: '/audio/renacer.mp3',
@@ -50,7 +51,7 @@ export const tracks: Track[] = [
     description:
       'A tender acoustic journey where fingerpicked guitar meets introspective storytelling.',
     genre: 'Acoustic Indie Folk',
-    year: '2024',
+    year: '2026',
     audioUrl: '/audio/endless-sky.mp3',
     waveformColor: '#06b6d4',
     coverImage:

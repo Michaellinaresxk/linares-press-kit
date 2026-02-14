@@ -33,6 +33,13 @@ export const upcomingShows = [
 
 export const photoGallery = [
   {
+    id: 6,
+    src: 'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1771093990/linarex/black_un2msx.jpg',
+    venue: 'Where magic happens.',
+    location: 'Creating the soundtrack to my journey.',
+    photographer: 'Yuki Tanaka',
+  },
+  {
     id: 1,
     src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218282/callejon_ssosib.png',
     venue: 'Found joy in the simplest moments.',
@@ -68,11 +75,4 @@ export const photoGallery = [
   //   location: 'New York, USA',
   //   photographer: 'Mike Johnson',
   // },
-  {
-    id: 6,
-    src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218281/Studio_ip9car.jpg',
-    venue: 'Where magic happens.',
-    location: 'Creating the soundtrack to my journey.',
-    photographer: 'Yuki Tanaka',
-  },
 ];
