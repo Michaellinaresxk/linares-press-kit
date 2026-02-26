@@ -23,10 +23,10 @@ export const featuredSingle: Track = {
   coverImage:
     'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1771093920/linarex/2026_ssgfrp.jpg',
 
-  audioUrl: '/audio/renacer.mp3',
+  audioUrl: '/audio/Renacer.wav',
 
   spotifyUrl:
-    'https://open.spotify.com/track/77R8ciAdBDoVzHsL3GAjDB?si=0TkNaeysRLqG8uOxKRIYBQ',
+    'https://open.spotify.com/intl-es/album/5JVDDkvNP77b5yz235Qu0R?si=BHdZGV2wTmGklQUWrrJ-wg',
 };
 
 export const tracks: Track[] = [
@@ -39,7 +39,7 @@ export const tracks: Track[] = [
       'Is a funk-driven love story about transformation and finding home',
     genre: 'Funk Pop',
     year: '2026',
-    audioUrl: '/audio/renacer.mp3',
+    audioUrl: '/audio/Renacer.wav',
     waveformColor: '#a855f7',
     coverImage:
       'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=400&h=400&fit=crop',

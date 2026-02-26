@@ -88,8 +88,8 @@ export default function Hero() {
           >
             {[
               { number: '20+', label: 'Years' },
-              { number: '5+', label: 'Collaborations' },
-              { number: '18', label: 'Countries' },
+              { number: '3+', label: 'Collaborations' },
+              { number: '11', label: 'Countries' },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

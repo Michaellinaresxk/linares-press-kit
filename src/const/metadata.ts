@@ -10,10 +10,9 @@ export const metadata: Metadata = {
   // Keywords para SEO
   keywords: [
     'Linarex',
-    'music producer',
+    'lyricist',
     'funk pop',
     'composer',
-    'Renacer',
     'streaming',
     'electronic music',
   ],

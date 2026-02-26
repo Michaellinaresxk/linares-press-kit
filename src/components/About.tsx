@@ -95,9 +95,9 @@ export default function About() {
                   className='space-y-3'
                 >
                   {[
-                    '10+ years creating',
-                    '5+ international collaborations',
-                    '18 countries explored',
+                    '20+ years creating',
+                    '3+ international collaborations',
+                    '11 countries explored',
                   ].map((stat, index) => (
                     <motion.div
                       key={stat}
