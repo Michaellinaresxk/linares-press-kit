@@ -11,13 +11,13 @@ export const collaborations = [
     genre: 'Funk Pop',
     duration: '3:16',
     producer: 'Pablo Cafici',
-    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+    audioUrl: 'audio/Renacer.wav',
   },
   {
     id: 2,
     title: 'VaivÃ©n',
     collaborator: 'Daniel Rivero',
-    role: 'Singer',
+    role: 'Vocalist',
     year: '2025',
     image:
       'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763300435/504381421_17858001459453136_3713166365445180538_n_wdmog2.jpg',
@@ -31,7 +31,7 @@ export const collaborations = [
     id: 3,
     title: 'Parte 2',
     collaborator: 'Jacke Matthews',
-    role: 'Guitarist',
+    role: 'Vocalist',
     year: '2023',
     image:
       'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=600&h=600&fit=crop',
