@@ -74,14 +74,13 @@ export default function About() {
                 >
                   <p>
                     I am Linarex, I&apos;m a composer from the Dominican
-                    Republic. Each song is an emotional journey through the
-                    human experience.
+                    Republic. Based in Poland, each song is an emotional journey
+                    through the human experience.
                   </p>
 
                   <p>
-                    Each song is an emotional journey through the human
-                    experience. May it slow you down and may it also move you
-                    beyond the confines of yourself.
+                    May it slow you down and may it also move you beyond the
+                    confines of yourself.
                   </p>
                 </motion.div>
 
