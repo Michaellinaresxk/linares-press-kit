@@ -79,10 +79,9 @@ export default function About() {
                   </p>
 
                   <p>
-                    I seek universal feelings and the perfect voice to express
-                    them. Working across genres like afrobeat, funk, rock, indie
-                    folk, and beyond—because the emotion matters more than the
-                    sound.
+                    Each song is an emotional journey through the human
+                    experience. May it slow you down and may it also move you
+                    beyond the confines of yourself.
                   </p>
                 </motion.div>
 
