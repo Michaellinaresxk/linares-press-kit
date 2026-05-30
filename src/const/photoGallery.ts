@@ -48,14 +48,14 @@ export const photoGallery = [
   },
   {
     id: 2,
-    src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218283/piano_rvnwvp.jpg',
+    src: 'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170735/linarex/standing_wicdur.jpg',
     venue: 'Profile of a dreamer.',
     location: 'Lost in thought, found in the light.',
     photographer: 'Anna Rodriguez',
   },
   {
     id: 3,
-    src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg',
+    src: 'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170739/linarex/trenes_lj3rfh.jpg',
 
     venue: 'Six strings',
     location: 'Good vibes, and stories waiting to be told',
