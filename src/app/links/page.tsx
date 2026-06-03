@@ -294,22 +294,22 @@ function LinkRow({ link, index }: { link: LinkItem; index: number }) {
     transition: {
       duration: 0.4,
       delay: 0.1 + index * 0.06,
-      ease: [0.25, 0.4, 0.25, 1],
+      ease: 'easeOut',
     },
   };
 
   if (isInternal && !link.download) {
     return (
-      <motion.div {...motionProps}>
+      <div {...motionProps}>
         <Link href={link.href} className={rowClass} aria-label={link.label}>
           {inner}
         </Link>
-      </motion.div>
+      </div>
     );
   }
 
   return (
-    <motion.div {...motionProps}>
+    <div {...motionProps}>
       <a
         href={link.href}
         target={link.external ? '_blank' : '_self'}
@@ -320,7 +320,7 @@ function LinkRow({ link, index }: { link: LinkItem; index: number }) {
       >
         {inner}
       </a>
-    </motion.div>
+    </div>
   );
 }
 
