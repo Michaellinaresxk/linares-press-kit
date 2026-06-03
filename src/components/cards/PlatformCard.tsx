@@ -17,7 +17,7 @@ export default function PlatformCard({
 }: PlatformCardProps) {
   const isStreaming = type === 'streaming';
   const isStreampPlatform = (
-    p: StreamingPlatform | SocialPlatform
+    p: StreamingPlatform | SocialPlatform,
   ): p is StreamingPlatform => isStreaming;
 
   return (
@@ -62,7 +62,7 @@ export default function PlatformCard({
         </div>
 
         {/* Stats */}
-        {isStreaming ? (
+        {/* {isStreaming ? (
           isStreampPlatform(platform) && (
             <div className='grid grid-cols-2 gap-4 mb-4'>
               <div>
@@ -86,7 +86,7 @@ export default function PlatformCard({
             </div>
             <div className='text-gray-400 text-sm'>Followers</div>
           </div>
-        )}
+        )} */}
 
         {/* Description */}
         <p className='text-gray-300 text-sm mb-4'>{platform.description}</p>
@@ -97,8 +97,8 @@ export default function PlatformCard({
             {isStreaming
               ? 'Stream'
               : 'type' in platform
-              ? platform.type
-              : 'Follow'}
+                ? platform.type
+                : 'Follow'}
           </span>
           <ExternalLink
             className='text-gray-400 group-hover:text-white transition-colors'

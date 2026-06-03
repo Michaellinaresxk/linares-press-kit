@@ -58,9 +58,9 @@ export const socialPlatforms: SocialPlatform[] = [
   {
     id: 1,
     name: 'Instagram',
-    handle: '@linarex_official',
+    handle: '@_linarex',
     followers: '18.4K',
-    url: 'https://instagram.com/linarex_official',
+    url: 'https://www.instagram.com/_linarex',
     color: '#E4405F',
     type: 'photo',
     description: 'Behind the scenes, studio life',
@@ -68,9 +68,9 @@ export const socialPlatforms: SocialPlatform[] = [
   {
     id: 4,
     name: 'TikTok',
-    handle: '@linarexmusic',
+    handle: '@linarex59',
     followers: '25.1K',
-    url: 'https://www.tiktok.com/@linarex59?_r=1&_t=ZN-91cgVJr6dKY',
+    url: 'https://www.tiktok.com/@linarex59',
     color: '#000000',
     type: 'video',
     description: 'Short-form content, music clips',
