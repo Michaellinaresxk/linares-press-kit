@@ -55,8 +55,8 @@ interface StatCardProps {
 function StatCard({ label, value, color }: StatCardProps) {
   return (
     <div className='text-center'>
-      {/* <div className={`text-2xl font-bold ${color}`}>{value}</div>
-      <div className='text-gray-400 text-sm'>{label}</div> */}
+      <div className={`text-2xl font-bold ${color}`}>{value}</div>
+      <div className='text-gray-400 text-sm'>{label}</div>
     </div>
   );
 }
@@ -96,9 +96,9 @@ interface HeaderProps {
 }
 
 function LinksHeader({ stats }: HeaderProps) {
-  const formatFollowers = (count: number): string => {
-    return `${Math.round(count / 1000)}K+`;
-  };
+  // const formatFollowers = (count: number): string => {
+  //   return `${Math.round(count / 1000)}K+`;
+  // };
 
   return (
     <motion.div
@@ -116,24 +116,24 @@ function LinksHeader({ stats }: HeaderProps) {
         behind-the-scenes content, and direct interaction with the artist and
         community.
       </p>
-
+      {/* 
       <div className='flex justify-center space-x-8'>
         <StatCard
-          // label='Streaming Followers'
-          // value={formatFollowers(stats.streaming)}
+          label='Streaming Followers'
+          value={formatFollowers(stats.streaming)}
           color='text-cyan-400'
         />
         <StatCard
-          // label='Social Followers'
-          // value={formatFollowers(stats.social)}
+          label='Social Followers'
+          value={formatFollowers(stats.social)}
           color='text-purple-400'
         />
         <StatCard
-          // label='Total Reach'
-          // value={formatFollowers(stats.total)}
+          label='Total Reach'
+          value={formatFollowers(stats.total)}
           color='text-pink-400'
         />
-      </div>
+      </div> */}
     </motion.div>
   );
 }
