@@ -1,4 +1,19 @@
+'use client';
+
+/**
+ * TechnicalRider.tsx (updated)
+ *
+ * Changes from original:
+ * - Replaced the "Download Complete Technical Rider (PDF)" placeholder button
+ *   with two real download buttons:
+ *     1. DownloadEPKButton  → GET /api/epk  (branded one-pager)
+ *     2. A static PDF link  → /documents/technical-rider.pdf  (optional)
+ *
+ * No other logic was changed.
+ */
+
 import technicalSpecs from '@/const/technicalSpecs';
+import DownloadEPKButton from '@/components/DownloadEPKButton';
 import { motion } from 'framer-motion';
 import { FileText, MapPin, Settings } from 'lucide-react';
 import { useState } from 'react';
@@ -77,18 +92,32 @@ function TechnicalRider() {
         {renderContent()}
       </motion.div>
 
-      {/* Download full rider */}
-      <div className='mt-6 pt-6 border-t border-gray-700'>
-        <motion.button
-          className='w-full px-4 py-3 bg-gradient-to-r from-green-600 to-blue-600 rounded-lg text-white font-semibold flex items-center justify-center space-x-2'
+      {/* ── Download section ──────────────────────────────────────────── */}
+      <div className='mt-6 pt-6 border-t border-gray-700 space-y-3'>
+        {/* EPK PDF — generated dynamically */}
+        <DownloadEPKButton
+          variant='secondary'
+          size='md'
+          label='Download Press Kit (EPK)'
+          className='w-full justify-center'
+        />
+
+        {/* Technical rider PDF — static file (add /public/documents/technical-rider.pdf) */}
+        <motion.a
+          href='/documents/technical-rider.pdf'
+          download
+          target='_blank'
+          rel='noopener noreferrer'
+          className='w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-600/50 border border-gray-600 hover:border-gray-500 rounded-xl text-white font-semibold flex items-center justify-center space-x-2 transition-all duration-300'
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
           <FileText size={18} />
-          <span>Download Complete Technical Rider (PDF)</span>
-        </motion.button>
+          <span>Download Technical Rider (PDF)</span>
+        </motion.a>
       </div>
     </div>
   );
 }
+
 export default TechnicalRider;

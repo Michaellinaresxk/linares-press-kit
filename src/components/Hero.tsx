@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import DownloadEPKButton from '@/components/DownloadEPKButton';
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -33,13 +34,11 @@ export default function Hero() {
             transform: 'scaleX(-1)',
           }}
         />
-        {/* Dark overlay for text readability */}
         <div className='absolute inset-0' />
         <div className='absolute inset-0 ' />
       </motion.div>
 
       <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        {/* Main Content - Responsive positioning */}
         <motion.div
           style={{ y: textY }}
           className='max-w-4xl h-screen flex flex-col justify-end lg:justify-center'
@@ -84,7 +83,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className='flex flex-wrap gap-6 lg:gap-8 text-left pb-20'
+            className='flex flex-wrap gap-6 lg:gap-8 text-left mb-8'
           >
             {[
               { number: '20+', label: 'Years' },
@@ -106,6 +105,31 @@ export default function Hero() {
                 </div>
               </motion.div>
             ))}
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.3 }}
+            className='flex flex-wrap items-center gap-4 pb-20'
+          >
+            {/* Primary CTA — scroll to music */}
+            <motion.a
+              href='#collaborations'
+              className='px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 rounded-xl text-white font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-purple-500/25'
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Listen Now
+            </motion.a>
+
+            {/* EPK download — key asset for press & curators */}
+            <DownloadEPKButton
+              variant='ghost'
+              size='md'
+              label='Press Kit (EPK)'
+            />
           </motion.div>
         </motion.div>
       </div>
