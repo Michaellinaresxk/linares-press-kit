@@ -2,29 +2,21 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useMemo } from 'react';
-import { Play, Heart } from 'lucide-react';
+import { Play, Heart, FileDown } from 'lucide-react';
 import { streamingPlatforms, socialPlatforms } from '@/const/links';
 import PlatformCard from './cards/PlatformCard';
+import DownloadEPKButton from '@/components/DownloadEPKButton';
 
-/**
- * Type for platform stats
- */
 interface PlatformStats {
   streaming: number;
   social: number;
   total: number;
 }
 
-/**
- * Helper to parse follower counts
- */
 const parseFollowers = (followersString: string): number => {
   return parseFloat(followersString.replace('K', '')) * 1000;
 };
 
-/**
- * Custom hook to calculate platform statistics
- */
 function usePlatformStats(): PlatformStats {
   return useMemo(() => {
     const streaming = streamingPlatforms.reduce((acc, platform) => {
@@ -35,35 +27,10 @@ function usePlatformStats(): PlatformStats {
       return acc + parseFollowers(platform.followers);
     }, 0);
 
-    return {
-      streaming,
-      social,
-      total: streaming + social,
-    };
+    return { streaming, social, total: streaming + social };
   }, []);
 }
 
-/**
- * Component for displaying statistics
- */
-interface StatCardProps {
-  label: string;
-  value: string;
-  color: string;
-}
-
-function StatCard({ label, value, color }: StatCardProps) {
-  return (
-    <div className='text-center'>
-      <div className={`text-2xl font-bold ${color}`}>{value}</div>
-      <div className='text-gray-400 text-sm'>{label}</div>
-    </div>
-  );
-}
-
-/**
- * Animated background gradient
- */
 function AnimatedBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -88,18 +55,7 @@ function AnimatedBackground() {
   );
 }
 
-/**
- * Header section with title and stats
- */
-interface HeaderProps {
-  stats: PlatformStats;
-}
-
-function LinksHeader({ stats }: HeaderProps) {
-  // const formatFollowers = (count: number): string => {
-  //   return `${Math.round(count / 1000)}K+`;
-  // };
-
+function LinksHeader({ stats }: { stats: PlatformStats }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -116,38 +72,19 @@ function LinksHeader({ stats }: HeaderProps) {
         behind-the-scenes content, and direct interaction with the artist and
         community.
       </p>
-      {/* 
-      <div className='flex justify-center space-x-8'>
-        <StatCard
-          label='Streaming Followers'
-          value={formatFollowers(stats.streaming)}
-          color='text-cyan-400'
-        />
-        <StatCard
-          label='Social Followers'
-          value={formatFollowers(stats.social)}
-          color='text-purple-400'
-        />
-        <StatCard
-          label='Total Reach'
-          value={formatFollowers(stats.total)}
-          color='text-pink-400'
-        />
-      </div> */}
     </motion.div>
   );
 }
 
-/**
- * Section title with icon
- */
-interface SectionTitleProps {
+function SectionTitle({
+  icon,
+  title,
+  iconColor,
+}: {
   icon: React.ReactNode;
   title: string;
   iconColor: string;
-}
-
-function SectionTitle({ icon, title, iconColor }: SectionTitleProps) {
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, x: -30 }}
@@ -162,9 +99,6 @@ function SectionTitle({ icon, title, iconColor }: SectionTitleProps) {
   );
 }
 
-/**
- * Platform section component using discriminated unions
- */
 interface StreamingPlatformSectionProps {
   title: string;
   icon: React.ReactNode;
@@ -191,7 +125,6 @@ function PlatformSection(props: PlatformSectionProps) {
   return (
     <div className='mb-16'>
       <SectionTitle icon={icon} title={title} iconColor={iconColor} />
-
       <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
         {platforms.map((platform, index) => (
           <PlatformCard
@@ -207,8 +140,45 @@ function PlatformSection(props: PlatformSectionProps) {
 }
 
 /**
- * Main Links component
+ * EPK download strip — shown at the bottom of the Links section.
+ * Targets press, curators, and festival bookers landing here.
  */
+function EPKStrip() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className='mt-4 border-t border-gray-800 pt-12'
+    >
+      <div className='flex flex-col sm:flex-row items-center justify-between gap-6 bg-gradient-to-r from-gray-900/80 to-gray-800/50 border border-gray-700/50 rounded-2xl px-8 py-6 backdrop-blur-sm'>
+        {/* Left: label */}
+        <div className='flex items-center gap-4'>
+          <div className='w-10 h-10 rounded-lg bg-purple-600/20 border border-purple-500/30 flex items-center justify-center flex-shrink-0'>
+            <FileDown size={20} className='text-purple-400' />
+          </div>
+          <div>
+            <p className='text-white font-semibold text-sm'>
+              Press &amp; Booking
+            </p>
+            <p className='text-gray-400 text-xs mt-0.5'>
+              One-page EPK with bio, releases, and contact info
+            </p>
+          </div>
+        </div>
+
+        {/* Right: button */}
+        <DownloadEPKButton
+          variant='primary'
+          size='md'
+          label='Download EPK (PDF)'
+        />
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Links() {
   const containerRef = useRef<HTMLDivElement>(null);
   const stats = usePlatformStats();
@@ -238,6 +208,9 @@ export default function Links() {
           platforms={socialPlatforms}
           type='social'
         />
+
+        {/* EPK download — for press, curators, and festival bookers */}
+        <EPKStrip />
       </div>
     </section>
   );
