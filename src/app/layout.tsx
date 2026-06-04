@@ -1,7 +1,18 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+});
+
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+});
+
+// ── Structured Data ───────────────────────────────────────────
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -13,16 +24,9 @@ const structuredData = {
       description:
         'Dominican-born composer and producer based in Warsaw, Poland. Creating Afrobeat Funk and indie folk that blends Caribbean soul with global sound.',
       genre: ['Afrobeat', 'Funk', 'Indie Folk', 'Urban'],
-      birthPlace: {
-        '@type': 'Place',
-        name: 'Dominican Republic',
-      },
-      homeLocation: {
-        '@type': 'Place',
-        name: 'Warsaw, Poland',
-      },
-      image:
-        'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg',
+      birthPlace: { '@type': 'Place', name: 'Dominican Republic' },
+      homeLocation: { '@type': 'Place', name: 'Warsaw, Poland' },
+      image: 'https://linares-press-kit.vercel.app/og-image.jpg',
       sameAs: [
         'https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS',
         'https://music.apple.com/artist/linarex',
@@ -62,49 +66,33 @@ const structuredData = {
   ],
 };
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
+// ── Viewport ──────────────────────────────────────────────────
+export const viewport: Viewport = {
+  themeColor: '#000000',
+};
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
-
+// ── Metadata ──────────────────────────────────────────────────
 export const metadata: Metadata = {
-  // Títulos y descripciones
   title: 'Linarex - Composer & Music Producer | Debut Single "Vaivén"',
   description:
-    'Discover Linarex, an innovative music production. Stream "Vaivén" on all major platforms.',
-
-  // Keywords para SEO
+    'Dominican-born composer and producer based in Warsaw. Stream Renacer and Vaivén — Afrobeat Funk blending Caribbean soul with global sound.',
   keywords: [
     'Linarex',
     'music producer',
     'Afrobeat Fusion',
     'composer',
     'Vaivén',
+    'Renacer',
     'streaming',
     'Urban music',
     'chill beats',
   ],
-
-  // Información del autor
   authors: [{ name: 'Linarex', url: 'https://linares-press-kit.vercel.app/' }],
   creator: 'Linarex',
-
-  // URLs canónicas
   metadataBase: new URL('https://linares-press-kit.vercel.app/'),
   alternates: {
     canonical: 'https://linares-press-kit.vercel.app/',
-    languages: {
-      es: 'https://linarex-music.com/es',
-      en: 'https://linarex-music.com/en',
-    },
   },
-
-  // Open Graph (Facebook, LinkedIn, etc)
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -116,7 +104,7 @@ export const metadata: Metadata = {
       'Discover innovative music by Linarex. Stream "Vaivén" now on Spotify, Apple Music, YouTube Music and more.',
     images: [
       {
-        url: 'https://linares-press-kit.vercel.app/og-image.jpg',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Linarex - Composer & Music Producer',
@@ -124,30 +112,20 @@ export const metadata: Metadata = {
       },
     ],
   },
-
-  // Twitter/X Card
   twitter: {
     card: 'summary_large_image',
     title: 'Linarex - Music Producer',
     description:
       'Listen to "Vaivén" - An Afrobeat Fusion track with chill vibes',
     creator: '@linarex_music',
-
-    images: ['https://linares-press-kit.vercel.app/og-image.jpg'],
+    images: ['/og-image.jpg'],
   },
-
-  // Apple specific
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
     title: 'Linarex Music',
   },
-
-  // Categoría y clasificación
   category: 'music',
-  classification: 'Music Producer | Composer',
-
-  // Robots y indexing
   robots: {
     index: true,
     follow: true,
@@ -159,17 +137,13 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-
-  // Información de color y tema
-  themeColor: '#000000',
-
-  // Icons
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
   },
 };
 
+// ── Layout ────────────────────────────────────────────────────
 export default function RootLayout({
   children,
 }: Readonly<{
