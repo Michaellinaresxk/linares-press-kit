@@ -1,13 +1,3 @@
-/**
- * /app/links/page.tsx
- *
- * Hub centralizado — mismo sistema visual de 4 capas que FeaturedSinglePlayer:
- *   1. Foto de artista a pantalla completa
- *   2. Overlay negro (opacity 0.65) para legibilidad
- *   3. Gradient from-black (funde con el resto del site)
- *   4. Orbs animados púrpura/pink (mismo blur-xl del press kit)
- */
-
 'use client';
 
 import Image from 'next/image';
@@ -48,13 +38,7 @@ interface LinkSection {
   links: LinkItem[];
 }
 
-// BackgroundEffects is imported directly from the existing component.
-// Props used:
-//   baseImage   → same artist photo as FeaturedSinglePlayer
-//   darkOverlay → 0.65 (slightly lighter than the 0.7 default, photo more visible on a short page)
-//   effectCount → 6 (default, same purple/pink orbs)
-
-// ─── Platform SVG icons ───────────────────────────────────────────────────────
+// ─── SVG Icons ────────────────────────────────────────────────────────────────
 
 const ICONS: Record<IconKey, React.ReactNode> = {
   spotify: (
@@ -116,7 +100,6 @@ const ICONS: Record<IconKey, React.ReactNode> = {
 };
 
 // ─── Link data ────────────────────────────────────────────────────────────────
-// ✏️  Para actualizar: solo editar aquí.
 
 const LINK_SECTIONS: LinkSection[] = [
   {
@@ -202,7 +185,7 @@ const LINK_SECTIONS: LinkSection[] = [
         label: 'Press Kit (EPK)',
         sublabel: 'One-page PDF · bio, releases, contact',
         href: '/api/epk',
-        iconBg: '#7c3aed',
+        iconBg: '#185fa5',
         icon: 'epk',
         variant: 'epk',
         download: true,
@@ -212,7 +195,7 @@ const LINK_SECTIONS: LinkSection[] = [
         label: 'Booking & Management',
         sublabel: 'Send a message via the contact form',
         href: '/#contact',
-        iconBg: '#a855f7',
+        iconBg: '#1d4a72',
         icon: 'contact',
         variant: 'contact',
       },
@@ -220,25 +203,57 @@ const LINK_SECTIONS: LinkSection[] = [
   },
 ];
 
+// ─── Row styles ───────────────────────────────────────────────────────────────
+
+const ROW_STYLES: Record<
+  'default' | 'featured' | 'epk' | 'contact',
+  { row: string; label: string; sublabel: string; icon: string; bg: string }
+> = {
+  featured: {
+    row: 'bg-white/10 border-green-400/40 hover:border-green-400/70 hover:bg-white/15',
+    label: 'text-white',
+    sublabel: 'text-white/40',
+    icon: 'text-white/30 group-hover:text-white/60',
+    bg: '',
+  },
+  epk: {
+    row: 'border-[rgba(55,138,221,0.25)] hover:border-[rgba(55,138,221,0.55)] hover:bg-[rgba(24,95,165,0.2)]',
+    label: 'text-[#c8dcea]',
+    sublabel: 'text-[#5a7a8e]',
+    icon: 'text-[#85b7eb]',
+    bg: 'bg-[rgba(13,17,23,0.35)]',
+  },
+  contact: {
+    row: 'border-[rgba(55,138,221,0.15)] hover:border-[rgba(55,138,221,0.4)] hover:bg-[rgba(13,17,23,0.3)]',
+    label: 'text-[#c8dcea]',
+    sublabel: 'text-[#5a7a8e]',
+    icon: 'text-[#5a7a8e] group-hover:text-[#85b7eb]',
+    bg: 'bg-[rgba(13,17,23,0.25)]',
+  },
+  default: {
+    row: 'bg-white/[0.08] border-white/10 hover:border-white/25 hover:bg-white/[0.12]',
+    label: 'text-white',
+    sublabel: 'text-white/40',
+    icon: 'text-white/30 group-hover:text-white/60',
+    bg: '',
+  },
+};
+
 // ─── LinkRow ──────────────────────────────────────────────────────────────────
 
 function LinkRow({ link, index }: { link: LinkItem; index: number }) {
-  const isFeatured = link.variant === 'featured';
-  const isEpk = link.variant === 'epk';
+  const variant = link.variant ?? 'default';
+  const styles = ROW_STYLES[variant];
+  const isInternal = link.href.startsWith('/') || link.href.startsWith('#');
 
   const rowClass = [
     'group relative flex items-center gap-3.5 w-full',
-    'px-4 py-3.5 rounded-2xl border transition-all duration-200',
-    // Glass effect — backdrop-blur over the photo background
-    'backdrop-blur-sm',
-    isFeatured
-      ? 'bg-white/10 border-green-400/40 hover:border-green-400/70 hover:bg-white/15'
-      : isEpk
-        ? 'bg-purple-900/30 border-purple-400/30 hover:border-purple-400/60 hover:bg-purple-900/50'
-        : 'bg-white/8 border-white/10 hover:border-white/25 hover:bg-white/12',
-  ].join(' ');
-
-  const isInternal = link.href.startsWith('/') || link.href.startsWith('#');
+    'px-4 py-3.5 rounded-2xl border transition-all duration-200 backdrop-blur-sm',
+    styles.row,
+    styles.bg,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const inner = (
     <>
@@ -252,30 +267,31 @@ function LinkRow({ link, index }: { link: LinkItem; index: number }) {
 
       <span className='flex-1 min-w-0 text-left'>
         <span className='flex items-center gap-2 flex-wrap'>
-          <span
-            className={`text-sm font-semibold truncate ${isEpk ? 'text-purple-100' : 'text-white'}`}
-          >
+          <span className={`text-sm font-semibold truncate ${styles.label}`}>
             {link.label}
           </span>
           {link.badge && (
-            <span className='text-[10px] font-semibold tracking-wide bg-purple-500/25 text-purple-300 border border-purple-400/30 rounded-full px-2 py-0.5 flex-shrink-0'>
+            <span
+              className='text-[10px] font-semibold tracking-wide rounded-full px-2 py-0.5 flex-shrink-0'
+              style={{
+                background: 'rgba(55,138,221,0.2)',
+                border: '1px solid rgba(55,138,221,0.3)',
+                color: '#85b7eb',
+              }}
+            >
               {link.badge}
             </span>
           )}
         </span>
         {link.sublabel && (
-          <span
-            className={`text-xs truncate block mt-0.5 ${isEpk ? 'text-purple-300/70' : 'text-white/40'}`}
-          >
+          <span className={`text-xs truncate block mt-0.5 ${styles.sublabel}`}>
             {link.sublabel}
           </span>
         )}
       </span>
 
       <span
-        className={`flex-shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 ${
-          isEpk ? 'text-purple-400' : 'text-white/30 group-hover:text-white/60'
-        }`}
+        className={`flex-shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 ${styles.icon}`}
       >
         {link.download ? (
           <Download size={15} aria-hidden />
@@ -291,25 +307,21 @@ function LinkRow({ link, index }: { link: LinkItem; index: number }) {
   const motionProps = {
     initial: { opacity: 0, y: 16 },
     animate: { opacity: 1, y: 0 },
-    transition: {
-      duration: 0.4,
-      delay: 0.1 + index * 0.06,
-      ease: 'easeOut',
-    },
-  };
+    transition: { duration: 0.4, delay: 0.1 + index * 0.06, ease: 'easeOut' },
+  } as const;
 
   if (isInternal && !link.download) {
     return (
-      <div {...motionProps}>
+      <motion.div {...motionProps}>
         <Link href={link.href} className={rowClass} aria-label={link.label}>
           {inner}
         </Link>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <div {...motionProps}>
+    <motion.div {...motionProps}>
       <a
         href={link.href}
         target={link.external ? '_blank' : '_self'}
@@ -320,7 +332,7 @@ function LinkRow({ link, index }: { link: LinkItem; index: number }) {
       >
         {inner}
       </a>
-    </div>
+    </motion.div>
   );
 }
 
@@ -329,7 +341,6 @@ function LinkRow({ link, index }: { link: LinkItem; index: number }) {
 export default function LinksPage() {
   return (
     <main className='relative min-h-screen flex justify-center overflow-x-hidden'>
-      {/* Exact same background system as FeaturedSinglePlayer — reused directly */}
       <div className='fixed inset-0 z-0'>
         <BackgroundEffects
           baseImage='url(https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg)'
@@ -338,9 +349,8 @@ export default function LinksPage() {
         />
       </div>
 
-      {/* Scrollable content — z-10 sits above all background layers */}
       <div className='relative z-10 w-full max-w-sm px-4 pt-14 pb-20 flex flex-col items-center'>
-        {/* Identity header */}
+        {/* Header */}
         <motion.div
           className='flex flex-col items-center mb-8'
           initial={{ opacity: 0, y: 24 }}
@@ -353,37 +363,51 @@ export default function LinksPage() {
               alt='Linarex'
               width={88}
               height={88}
-              className='rounded-2xl object-cover ring-1 ring-white/15'
+              className='rounded-2xl object-cover'
+              style={{ boxShadow: '0 0 0 1px rgba(133,183,235,0.2)' }}
               priority
             />
-            {/* Glow ring under avatar — echoes the orbs */}
             <div
-              className='absolute inset-0 rounded-2xl -z-10 blur-xl opacity-60 scale-110'
+              className='absolute inset-0 rounded-2xl -z-10 blur-xl opacity-50 scale-110'
               style={{
                 background:
-                  'radial-gradient(circle, #a855f7 0%, transparent 70%)',
+                  'radial-gradient(circle, #185fa5 0%, transparent 70%)',
               }}
               aria-hidden='true'
             />
           </div>
 
-          <h1 className='text-2xl font-black tracking-tight text-white mb-1'>
+          <h1
+            className='text-2xl font-black tracking-tight mb-1'
+            style={{ color: '#e8eef5' }}
+          >
             LINAREX
           </h1>
-          <p className='text-sm text-white/50 mb-3 text-center'>
+          <p
+            className='text-sm mb-3 text-center'
+            style={{ color: 'rgba(255,255,255,0.4)' }}
+          >
             Composer &amp; Creative Producer
           </p>
-          <span className='text-xs text-purple-300 bg-purple-500/15 border border-purple-400/20 rounded-full px-3 py-1 tracking-wide'>
+          <span
+            className='text-xs rounded-full px-3 py-1 tracking-wide'
+            style={{
+              color: '#85b7eb',
+              background: 'rgba(24,95,165,0.15)',
+              border: '1px solid rgba(55,138,221,0.25)',
+            }}
+          >
             Funk Pop · Afrobeat Fusion
           </span>
         </motion.div>
 
-        {/* Link sections */}
+        {/* Sections */}
         <div className='w-full space-y-6'>
           {LINK_SECTIONS.map((section) => (
             <div key={section.id}>
               <motion.p
-                className='text-[10px] font-semibold tracking-[0.15em] uppercase text-white/25 mb-2.5 px-1'
+                className='text-[10px] font-semibold tracking-[0.15em] uppercase mb-2.5 px-1'
+                style={{ color: 'rgba(133,183,235,0.35)' }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -408,11 +432,21 @@ export default function LinksPage() {
         >
           <Link
             href='/'
-            className='text-xs text-white/20 hover:text-white/50 transition-colors tracking-wide'
+            className='text-xs tracking-wide transition-colors'
+            style={{ color: 'rgba(255,255,255,0.2)' }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.color = 'rgba(133,183,235,0.6)')
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = 'rgba(255,255,255,0.2)')
+            }
           >
             linares-press-kit.vercel.app
           </Link>
-          <span className='text-[10px] text-white/10 tracking-widest uppercase'>
+          <span
+            className='text-[10px] tracking-widest uppercase'
+            style={{ color: 'rgba(255,255,255,0.1)' }}
+          >
             Press Kit 2026
           </span>
         </motion.div>

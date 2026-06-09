@@ -1,49 +1,44 @@
 'use client';
 
-/**
- * DownloadEPKButton.tsx
- *
- * Reusable button that triggers a download of the generated EPK PDF.
- *
- * Usage:
- *   <DownloadEPKButton />
- *   <DownloadEPKButton variant="ghost" size="sm" className="mt-4" />
- *
- * How it works:
- *   - Calls GET /api/epk
- *   - Creates a temporary blob URL and auto-clicks it
- *   - Shows loading spinner during generation (~1-2s)
- *   - Shows error toast if generation fails
- */
-
 import { motion, AnimatePresence } from 'framer-motion';
 import { Download, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { useState, useCallback } from 'react';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
-
 type Variant = 'primary' | 'secondary' | 'ghost';
 type Size = 'sm' | 'md' | 'lg';
 
 interface DownloadEPKButtonProps {
-  /** Visual style variant */
   variant?: Variant;
-  /** Button size */
   size?: Size;
-  /** Additional CSS classes */
   className?: string;
-  /** Custom label (defaults to "Download EPK") */
   label?: string;
 }
 
-// ── Variant styles ────────────────────────────────────────────────────────────
-const variantClasses: Record<Variant, string> = {
-  primary:
-    'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white shadow-lg hover:shadow-purple-500/25',
-  secondary:
-    'bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-500 hover:to-blue-500 text-white shadow-lg',
-  ghost:
-    'border border-gray-600 hover:border-purple-500 text-white hover:bg-purple-600/10',
+// Inline styles en lugar de clases para mantener la paleta fría centralizada
+const variantStyles: Record<Variant, React.CSSProperties> = {
+  primary: {
+    background: '#1d4a72',
+    border: '1px solid #378add',
+    color: '#c8dcea',
+    boxShadow: '0 4px 14px rgba(24,95,165,0.25)',
+  },
+  secondary: {
+    background: 'rgba(24,95,165,0.15)',
+    border: '1px solid rgba(55,138,221,0.35)',
+    color: '#85b7eb',
+  },
+  ghost: {
+    background: 'transparent',
+    border: '1px solid rgba(55,138,221,0.25)',
+    color: '#5a7a8e',
+  },
+};
+
+const errorStyle: React.CSSProperties = {
+  background: 'rgba(162,45,45,0.1)',
+  border: '1px solid rgba(162,45,45,0.35)',
+  color: '#f09595',
 };
 
 const sizeClasses: Record<Size, string> = {
@@ -52,7 +47,6 @@ const sizeClasses: Record<Size, string> = {
   lg: 'px-8 py-4 text-base gap-2',
 };
 
-// ── Component ─────────────────────────────────────────────────────────────────
 export default function DownloadEPKButton({
   variant = 'secondary',
   size = 'md',
@@ -76,7 +70,6 @@ export default function DownloadEPKButton({
         throw new Error(data.details || `Server error ${response.status}`);
       }
 
-      // Create blob URL and trigger browser download
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
 
@@ -87,20 +80,15 @@ export default function DownloadEPKButton({
       anchor.click();
       document.body.removeChild(anchor);
 
-      // Clean up blob URL after short delay
       setTimeout(() => URL.revokeObjectURL(url), 1000);
 
       setStatus('success');
-
-      // Reset to idle after 2.5s
       setTimeout(() => setStatus('idle'), 2500);
     } catch (err) {
       const msg =
         err instanceof Error ? err.message : 'Download failed. Try again.';
       setErrorMsg(msg);
       setStatus('error');
-
-      // Reset to idle after 4s
       setTimeout(() => setStatus('idle'), 4000);
     }
   }, [status]);
@@ -109,7 +97,7 @@ export default function DownloadEPKButton({
   const isSuccess = status === 'success';
   const isError = status === 'error';
 
-  const currentVariant = isError ? 'ghost' : variant;
+  const buttonStyle = isError ? errorStyle : variantStyles[variant];
 
   return (
     <div className='relative inline-flex flex-col items-center gap-2'>
@@ -121,15 +109,13 @@ export default function DownloadEPKButton({
           font-semibold rounded-xl
           transition-all duration-300
           disabled:opacity-60 disabled:cursor-not-allowed
-          ${variantClasses[currentVariant]}
           ${sizeClasses[size]}
-          ${isError ? 'border-red-500/50 text-red-400' : ''}
           ${className}
         `}
+        style={buttonStyle}
         whileHover={{ scale: isLoading ? 1 : 1.03, y: isLoading ? 0 : -1 }}
         whileTap={{ scale: isLoading ? 1 : 0.97 }}
       >
-        {/* Icon */}
         <AnimatePresence mode='wait'>
           {isLoading && (
             <motion.span
@@ -148,7 +134,7 @@ export default function DownloadEPKButton({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
             >
-              <CheckCircle2 size={16} className='text-green-300' />
+              <CheckCircle2 size={16} style={{ color: '#5dcaa5' }} />
             </motion.span>
           )}
           {isError && (
@@ -173,7 +159,6 @@ export default function DownloadEPKButton({
           )}
         </AnimatePresence>
 
-        {/* Label */}
         <span>
           {isLoading
             ? 'Generating PDF...'
@@ -185,14 +170,14 @@ export default function DownloadEPKButton({
         </span>
       </motion.button>
 
-      {/* Error message */}
       <AnimatePresence>
         {isError && errorMsg && (
           <motion.p
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
-            className='text-xs text-red-400 text-center max-w-[200px]'
+            className='text-xs text-center max-w-[200px]'
+            style={{ color: '#f09595' }}
           >
             {errorMsg}
           </motion.p>

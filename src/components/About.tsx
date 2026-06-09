@@ -5,6 +5,12 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import QuoteSection from './QuoteSection';
 
+const ABOUT_STATS = [
+  '20+ years creating',
+  '3+ international collaborations',
+  '11 countries explored',
+] as const;
+
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -18,7 +24,7 @@ export default function About() {
         >
           <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20'>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-20 items-center'>
-              {/* Right Side - Image */}
+              {/* Image */}
               <motion.div
                 className='order-2 lg:order-1'
                 initial={{ opacity: 0, x: 30 }}
@@ -29,7 +35,7 @@ export default function About() {
                 <div className='w-full max-w-md mx-auto lg:max-w-full'>
                   <Image
                     src='/img/portrait.jpg'
-                    alt='Lynarex - Creative Producer and Composer'
+                    alt='Linarex - Creative Producer and Composer'
                     width={800}
                     height={600}
                     className='w-full h-auto'
@@ -40,51 +46,52 @@ export default function About() {
                 </div>
               </motion.div>
 
-              {/* Left Side - Text Content */}
+              {/* Text */}
               <motion.div className='space-y-8 lg:space-y-10 order-1 lg:order-2'>
-                {/* Main Quote */}
+                {/* Main quote */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
                   viewport={{ once: true, margin: '-100px' }}
                 >
-                  <h1 className='text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-light text-white leading-relaxed tracking-wide'>
-                    <span className='block mt-1'>
-                      I create musical concepts guided by one question:{' '}
-                      <motion.span
-                        className='italic text-purple-400'
-                        whileHover={{ color: '#ec4899' }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        what does this emotion sound like?
-                      </motion.span>
-                      .
-                    </span>
-                  </h1>
+                  <h2
+                    className='text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-light leading-relaxed tracking-wide'
+                    style={{ color: '#c8dcea' }}
+                  >
+                    I create musical concepts guided by one question:{' '}
+                    <motion.span
+                      style={{ color: '#85b7eb', fontStyle: 'italic' }}
+                      whileHover={{ color: '#b5d4f4' }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      what does this emotion sound like?
+                    </motion.span>
+                    .
+                  </h2>
                 </motion.div>
 
-                {/* Clean Description */}
+                {/* Description */}
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className='space-y-6 text-gray-400 text-sm sm:text-base lg:text-lg leading-relaxed'
+                  className='space-y-6 text-sm sm:text-base lg:text-lg leading-relaxed'
+                  style={{ color: '#5a7a8e' }}
                 >
                   <p>
                     I am Linarex, I&apos;m a composer from the Dominican
                     Republic. Based in Poland, each song is an emotional journey
                     through the human experience.
                   </p>
-
                   <p>
                     May it slow you down and may it also move you beyond the
                     confines of yourself.
                   </p>
                 </motion.div>
 
-                {/* Minimal Stats */}
+                {/* Stats */}
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -92,18 +99,15 @@ export default function About() {
                   viewport={{ once: true }}
                   className='space-y-3'
                 >
-                  {[
-                    '20+ years creating',
-                    '3+ international collaborations',
-                    '11 countries explored',
-                  ].map((stat, index) => (
+                  {ABOUT_STATS.map((stat, index) => (
                     <motion.div
                       key={stat}
                       initial={{ opacity: 0, x: 10 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
                       viewport={{ once: true }}
-                      className='text-gray-500 text-xs sm:text-sm lg:text-base font-light'
+                      className='text-xs sm:text-sm lg:text-base font-light'
+                      style={{ color: '#3d5a6e' }}
                     >
                       {stat}
                     </motion.div>
@@ -116,21 +120,23 @@ export default function About() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.8 }}
                   viewport={{ once: true }}
-                  className='flex  pt-8'
+                  className='flex pt-8'
                 >
                   <div className='space-y-2'>
                     <motion.div
-                      className='text-xl sm:text-2xl lg:text-3xl font-extralight text-white italic tracking-wider'
-                      whileHover={{
-                        color: '#a855f7',
-                        letterSpacing: '0.2em',
-                      }}
+                      className='text-xl sm:text-2xl lg:text-3xl font-extralight italic tracking-wider'
+                      style={{ color: '#e8eef5' }}
+                      whileHover={{ color: '#85b7eb', letterSpacing: '0.2em' }}
                       transition={{ duration: 0.4 }}
                     >
                       Linarex
                     </motion.div>
                     <motion.div
-                      className='w-20 h-px bg-gradient-to-l from-purple-500 via-purple-500/50 to-transparent ml-auto'
+                      className='w-20 h-px ml-auto'
+                      style={{
+                        background:
+                          'linear-gradient(to left, #378add, rgba(55,138,221,0.4), transparent)',
+                      }}
                       initial={{ scaleX: 0 }}
                       whileInView={{ scaleX: 1 }}
                       transition={{ duration: 0.8, delay: 1 }}
@@ -139,7 +145,7 @@ export default function About() {
                   </div>
                 </motion.div>
 
-                {/* Contact Link - Subtle */}
+                {/* Contact link */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -149,7 +155,14 @@ export default function About() {
                 >
                   <motion.a
                     href='#contact'
-                    className='group text-gray-500 hover:text-purple-400 text-sm font-light tracking-wide transition-colors duration-300'
+                    className='group text-sm font-light tracking-wide transition-colors duration-300'
+                    style={{ color: '#3d5a6e' }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.color = '#85b7eb')
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = '#3d5a6e')
+                    }
                     whileHover={{ x: -3 }}
                     transition={{ duration: 0.2 }}
                   >
