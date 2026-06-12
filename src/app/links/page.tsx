@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import { ExternalLink, Download, ArrowRight } from 'lucide-react';
 import { featuredSingle } from '@/const/tracks';
 import { streamingPlatforms, socialPlatforms } from '@/const/links';
-import BackgroundEffects from '@/components/player/BackgroundEffects';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -210,31 +209,31 @@ const ROW_STYLES: Record<
   { row: string; label: string; sublabel: string; icon: string; bg: string }
 > = {
   featured: {
-    row: 'bg-white/10 border-green-400/40 hover:border-green-400/70 hover:bg-white/15',
-    label: 'text-white',
-    sublabel: 'text-white/40',
-    icon: 'text-white/30 group-hover:text-white/60',
+    row: 'bg-[rgba(55,138,221,0.12)] border-[rgba(55,138,221,0.4)] hover:border-[rgba(55,138,221,0.7)] hover:bg-[rgba(55,138,221,0.18)]',
+    label: 'text-[#e6f1fb]',
+    sublabel: 'text-[#85b7eb]/60',
+    icon: 'text-[#378add]/50 group-hover:text-[#378add]',
     bg: '',
   },
   epk: {
-    row: 'border-[rgba(55,138,221,0.25)] hover:border-[rgba(55,138,221,0.55)] hover:bg-[rgba(24,95,165,0.2)]',
+    row: 'bg-[rgba(13,24,34,0.6)] border-[rgba(55,138,221,0.25)] hover:border-[rgba(55,138,221,0.55)] hover:bg-[rgba(24,95,165,0.2)]',
     label: 'text-[#c8dcea]',
     sublabel: 'text-[#5a7a8e]',
     icon: 'text-[#85b7eb]',
-    bg: 'bg-[rgba(13,17,23,0.35)]',
+    bg: '',
   },
   contact: {
-    row: 'border-[rgba(55,138,221,0.15)] hover:border-[rgba(55,138,221,0.4)] hover:bg-[rgba(13,17,23,0.3)]',
+    row: 'bg-[rgba(13,24,34,0.4)] border-[rgba(55,138,221,0.15)] hover:border-[rgba(55,138,221,0.4)] hover:bg-[rgba(13,24,34,0.6)]',
     label: 'text-[#c8dcea]',
     sublabel: 'text-[#5a7a8e]',
     icon: 'text-[#5a7a8e] group-hover:text-[#85b7eb]',
-    bg: 'bg-[rgba(13,17,23,0.25)]',
+    bg: '',
   },
   default: {
-    row: 'bg-white/[0.08] border-white/10 hover:border-white/25 hover:bg-white/[0.12]',
-    label: 'text-white',
-    sublabel: 'text-white/40',
-    icon: 'text-white/30 group-hover:text-white/60',
+    row: 'bg-[rgba(13,24,34,0.5)] border-[rgba(55,138,221,0.15)] hover:border-[rgba(55,138,221,0.4)] hover:bg-[rgba(13,24,34,0.7)]',
+    label: 'text-[#e6f1fb]',
+    sublabel: 'text-[#85b7eb]/50',
+    icon: 'text-[#378add]/40 group-hover:text-[#378add]/80',
     bg: '',
   },
 };
@@ -250,7 +249,6 @@ function LinkRow({ link, index }: { link: LinkItem; index: number }) {
     'group relative flex items-center gap-3.5 w-full',
     'px-4 py-3.5 rounded-2xl border transition-all duration-200 backdrop-blur-sm',
     styles.row,
-    styles.bg,
   ]
     .filter(Boolean)
     .join(' ');
@@ -274,7 +272,7 @@ function LinkRow({ link, index }: { link: LinkItem; index: number }) {
             <span
               className='text-[10px] font-semibold tracking-wide rounded-full px-2 py-0.5 flex-shrink-0'
               style={{
-                background: 'rgba(55,138,221,0.2)',
+                background: 'rgba(55,138,221,0.15)',
                 border: '1px solid rgba(55,138,221,0.3)',
                 color: '#85b7eb',
               }}
@@ -341,12 +339,16 @@ function LinkRow({ link, index }: { link: LinkItem; index: number }) {
 export default function LinksPage() {
   return (
     <main className='relative min-h-screen flex justify-center overflow-x-hidden'>
-      <div className='fixed inset-0 z-0'>
-        <BackgroundEffects
-          baseImage='url(https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg)'
-          darkOverlay={0.65}
-          effectCount={6}
+      <div className='fixed inset-0 z-0' aria-hidden='true'>
+        <div
+          className='absolute inset-0 bg-cover bg-center bg-no-repeat'
+          style={{
+            backgroundImage:
+              'url(https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170735/linarex/standing_wicdur.jpg)',
+          }}
         />
+        <div className='absolute inset-0 bg-black/65' />
+        <div className='absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50' />
       </div>
 
       <div className='relative z-10 w-full max-w-sm px-4 pt-14 pb-20 flex flex-col items-center'>
@@ -364,28 +366,20 @@ export default function LinksPage() {
               width={88}
               height={88}
               className='rounded-2xl object-cover'
-              style={{ boxShadow: '0 0 0 1px rgba(133,183,235,0.2)' }}
+              style={{ boxShadow: '0 0 0 1px rgba(55,138,221,0.3)' }}
               priority
-            />
-            <div
-              className='absolute inset-0 rounded-2xl -z-10 blur-xl opacity-50 scale-110'
-              style={{
-                background:
-                  'radial-gradient(circle, #185fa5 0%, transparent 70%)',
-              }}
-              aria-hidden='true'
             />
           </div>
 
           <h1
             className='text-2xl font-black tracking-tight mb-1'
-            style={{ color: '#e8eef5' }}
+            style={{ color: '#e6f1fb' }}
           >
             LINAREX
           </h1>
           <p
             className='text-sm mb-3 text-center'
-            style={{ color: 'rgba(255,255,255,0.4)' }}
+            style={{ color: '#85b7eb', opacity: 0.5 }}
           >
             Composer &amp; Creative Producer
           </p>
@@ -393,8 +387,8 @@ export default function LinksPage() {
             className='text-xs rounded-full px-3 py-1 tracking-wide'
             style={{
               color: '#85b7eb',
-              background: 'rgba(24,95,165,0.15)',
-              border: '1px solid rgba(55,138,221,0.25)',
+              background: 'rgba(13,24,34,0.6)',
+              border: '1px solid rgba(55,138,221,0.3)',
             }}
           >
             Funk Pop · Afrobeat Fusion
@@ -407,7 +401,7 @@ export default function LinksPage() {
             <div key={section.id}>
               <motion.p
                 className='text-[10px] font-semibold tracking-[0.15em] uppercase mb-2.5 px-1'
-                style={{ color: 'rgba(133,183,235,0.35)' }}
+                style={{ color: 'rgba(133,183,235,0.45)' }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -433,19 +427,19 @@ export default function LinksPage() {
           <Link
             href='/'
             className='text-xs tracking-wide transition-colors'
-            style={{ color: 'rgba(255,255,255,0.2)' }}
+            style={{ color: 'rgba(133,183,235,0.25)' }}
             onMouseEnter={(e) =>
-              (e.currentTarget.style.color = 'rgba(133,183,235,0.6)')
+              (e.currentTarget.style.color = 'rgba(133,183,235,0.7)')
             }
             onMouseLeave={(e) =>
-              (e.currentTarget.style.color = 'rgba(255,255,255,0.2)')
+              (e.currentTarget.style.color = 'rgba(133,183,235,0.25)')
             }
           >
             linares-press-kit.vercel.app
           </Link>
           <span
             className='text-[10px] tracking-widest uppercase'
-            style={{ color: 'rgba(255,255,255,0.1)' }}
+            style={{ color: 'rgba(133,183,235,0.12)' }}
           >
             Press Kit 2026
           </span>

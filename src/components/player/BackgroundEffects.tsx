@@ -48,7 +48,7 @@ const DEFAULTS = {
   DARK_OVERLAY: 0.7,
   BASE_ANIMATION_DURATION: 8,
   DEFAULT_IMAGE:
-    'url(https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1761004861/linarex/Generated_Image_October_14_2025_-_12_07AM-Photoroom_kyea0w.png)',
+    'url(https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170735/linarex/standing_wicdur.jpg)',
   MAX_EFFECT_COUNT: 20,
   MIN_ANIMATION_DURATION: 4,
 } as const;
@@ -91,7 +91,7 @@ interface EffectPosition {
  */
 function generateEffectPositions(
   count: number,
-  baseDuration: number
+  baseDuration: number,
 ): EffectPosition[] {
   return Array.from({ length: count }).map((_, i) => ({
     id: i,
@@ -143,19 +143,19 @@ const BackgroundEffects = memo(function BackgroundEffects({
   // Validar y sanitizar valores de entrada
   const safeEffectCount = Math.max(
     0,
-    Math.min(effectCount, DEFAULTS.MAX_EFFECT_COUNT)
+    Math.min(effectCount, DEFAULTS.MAX_EFFECT_COUNT),
   );
   const safeDarkOverlay = Math.max(0, Math.min(darkOverlay, 1));
   const safeDuration = Math.max(
     DEFAULTS.MIN_ANIMATION_DURATION,
-    baseAnimationDuration
+    baseAnimationDuration,
   );
 
   // Precalcular posiciones de efectos
   // Se regenera solo cuando cambia el número de efectos o la duración
   const effectPositions = useMemo(
     () => generateEffectPositions(safeEffectCount, safeDuration),
-    [safeEffectCount, safeDuration]
+    [safeEffectCount, safeDuration],
   );
 
   // Propiedades del overlay oscuro
@@ -164,7 +164,7 @@ const BackgroundEffects = memo(function BackgroundEffects({
     () => ({
       backgroundColor: `rgba(0, 0, 0, ${safeDarkOverlay})`,
     }),
-    [safeDarkOverlay]
+    [safeDarkOverlay],
   );
 
   return (
@@ -175,7 +175,7 @@ const BackgroundEffects = memo(function BackgroundEffects({
         <div
           className='w-full h-full bg-cover bg-center bg-no-repeat'
           style={{
-            backgroundPosition: 'center top',
+            backgroundPosition: 'center center',
             backgroundImage: baseImage,
           }}
           aria-hidden='true'
