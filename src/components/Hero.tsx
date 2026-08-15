@@ -11,7 +11,7 @@ import DownloadEPKButton from '@/components/DownloadEPKButton';
 const HERO_STATS = [
   { number: '20+', label: 'Years' },
   { number: '3+', label: 'Collaborations' },
-  { number: '11', label: 'Countries' },
+  // { number: '11', label: 'Countries' },
 ] as const;
 
 export default function Hero() {

@@ -15,7 +15,7 @@ export const collaborations = [
   },
   {
     id: 2,
-    title: 'VaivÃ©n',
+    title: 'Vaivén',
     collaborator: 'Daniel Rivero',
     role: 'Vocalist',
     year: '2025',
@@ -29,17 +29,16 @@ export const collaborations = [
   },
   {
     id: 3,
-    title: 'Parte 2',
+    title: 'Memories',
     collaborator: 'Jacke Matthews',
     role: 'Vocalist',
-    year: '2023',
-    image:
-      'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=600&h=600&fit=crop',
+    year: '2026',
+    image: '/img/jacke.png',
     color: 'from-gray-600 to-gray-800',
-    genre: 'Pop Rock',
-    duration: '5:23',
-    producer: 'Pablo Cafici',
-    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
+    genre: 'Rock',
+    duration: '4:03',
+    producer: 'Okirius',
+    audioUrl: 'audio/Memories.wav',
   },
   // {
   //   id: 4,

@@ -1,450 +1,642 @@
-'use client';
+/**
+ * EPKDocument.tsx
+ *
+ * Electronic Press Kit (EPK) PDF document for Linarex.
+ * Generated server-side via /api/epk route using @react-pdf/renderer.
+ *
+ * Usage:
+ *   import { EPKDocument } from '@/components/pdf/EPKDocument';
+ *   const stream = await renderToStream(<EPKDocument />);
+ *
+ * react-pdf gotchas respected here:
+ *   - <Link> only ever wraps <Text> (never <View>/<Image>).
+ *   - No array styles (style={[a, b]}) — one flattened style object per node.
+ *   - Images use absolute URLs only (relative paths break in server rendering).
+ */
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ExternalLink, Download, ArrowRight } from 'lucide-react';
-import { featuredSingle } from '@/const/tracks';
-import { streamingPlatforms, socialPlatforms } from '@/const/links';
+import {
+  Document,
+  Image,
+  Link,
+  Page,
+  StyleSheet,
+  Text,
+  View,
+} from '@react-pdf/renderer';
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-
-type IconKey =
-  | 'spotify'
-  | 'youtube'
-  | 'applemusic'
-  | 'instagram'
-  | 'tiktok'
-  | 'contact'
-  | 'epk';
-
-interface LinkItem {
-  id: string;
-  label: string;
-  sublabel?: string;
-  href: string;
-  iconBg: string;
-  icon: IconKey;
-  variant?: 'default' | 'featured' | 'epk' | 'contact';
-  badge?: string;
-  external?: boolean;
-  download?: boolean;
-}
-
-interface LinkSection {
-  id: string;
-  label: string;
-  links: LinkItem[];
-}
-
-// ─── SVG Icons ────────────────────────────────────────────────────────────────
-
-const ICONS: Record<IconKey, React.ReactNode> = {
-  spotify: (
-    <svg viewBox='0 0 24 24' fill='currentColor' width={17} height={17}>
-      <path d='M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z' />
-    </svg>
-  ),
-  youtube: (
-    <svg viewBox='0 0 24 24' fill='currentColor' width={17} height={17}>
-      <path d='M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z' />
-    </svg>
-  ),
-  applemusic: (
-    <svg viewBox='0 0 24 24' fill='currentColor' width={17} height={17}>
-      <path d='M23.994 6.124a9.23 9.23 0 0 0-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a6.303 6.303 0 0 0-1.776-.67c-.706-.149-1.412-.201-2.129-.2l-8.115.002a14.8 14.8 0 0 0-1.316.057 6.55 6.55 0 0 0-2.586.868C4.255 1.88 3.31 3.02 2.96 4.43a9.31 9.31 0 0 0-.196 1.897L2.76 18.091a9.23 9.23 0 0 0 .24 2.19c.317 1.31 1.062 2.31 2.18 3.043.527.344 1.11.586 1.776.67.706.149 1.412.201 2.129.2l8.115-.002a14.8 14.8 0 0 0 1.316-.057 6.55 6.55 0 0 0 2.586-.868c1.396-.932 2.341-2.072 2.691-3.482a9.31 9.31 0 0 0 .196-1.897l.005-11.764zm-7.006 3.564v5.22a2.666 2.666 0 0 1-2.33 2.63 2.666 2.666 0 0 1-2.33-2.63 2.666 2.666 0 0 1 2.33-2.63c.433 0 .84.116 1.19.318V7.614l-5.332 1.537v6.636a2.666 2.666 0 0 1-2.33 2.63 2.666 2.666 0 0 1-2.33-2.63 2.666 2.666 0 0 1 2.33-2.63c.433 0 .84.116 1.19.318V8.077l7.612-2.195v3.806z' />
-    </svg>
-  ),
-  instagram: (
-    <svg viewBox='0 0 24 24' fill='currentColor' width={17} height={17}>
-      <path d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z' />
-    </svg>
-  ),
-  tiktok: (
-    <svg viewBox='0 0 24 24' fill='currentColor' width={17} height={17}>
-      <path d='M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z' />
-    </svg>
-  ),
-  contact: (
-    <svg
-      viewBox='0 0 24 24'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth={2}
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      width={17}
-      height={17}
-    >
-      <path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' />
-    </svg>
-  ),
-  epk: (
-    <svg
-      viewBox='0 0 24 24'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth={2}
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      width={17}
-      height={17}
-    >
-      <path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' />
-      <polyline points='14 2 14 8 20 8' />
-      <line x1='12' y1='18' x2='12' y2='12' />
-      <line x1='9' y1='15' x2='15' y2='15' />
-    </svg>
-  ),
+// ─── Design tokens ────────────────────────────────────────────────────────────
+// Brand palette mirrors the web (LinksPage / About): deep navy surfaces, a
+// #378add primary blue and #85b7eb light accent. Bold via fontFamily only.
+const COLORS = {
+  bg: '#080e14',
+  surface: '#0d1822',
+  surfaceAlt: '#101d29',
+  border: '#1b3244',
+  borderStrong: '#24435c',
+  blue: '#378add',
+  blueDark: '#185fa5',
+  accent: '#85b7eb',
+  textHi: '#e6f1fb',
+  text: '#c8dcea',
+  textMute: '#7c98ab',
+  textFaint: '#4d6675',
+  white: '#ffffff',
 };
 
-// ─── Link data ────────────────────────────────────────────────────────────────
+// ─── Styles ───────────────────────────────────────────────────────────────────
+const styles = StyleSheet.create({
+  page: {
+    fontFamily: 'Helvetica',
+    backgroundColor: COLORS.bg,
+    color: COLORS.white,
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+  },
 
-const LINK_SECTIONS: LinkSection[] = [
-  {
-    id: 'release',
-    label: 'Latest release',
-    links: [
-      {
-        id: 'renacer',
-        label: featuredSingle.title,
-        sublabel: featuredSingle.artist ?? 'Linarex',
-        href: featuredSingle.spotifyUrl ?? streamingPlatforms[0].url,
-        iconBg: '#1DB954',
-        icon: 'spotify',
-        variant: 'featured',
-        badge: featuredSingle.year,
-        external: true,
-      },
-    ],
-  },
-  {
-    id: 'stream',
-    label: 'Stream',
-    links: [
-      {
-        id: 'spotify',
-        label: 'Spotify',
-        sublabel: 'Full catalog',
-        href: streamingPlatforms[0].url,
-        iconBg: '#1DB954',
-        icon: 'spotify',
-        external: true,
-      },
-      {
-        id: 'youtube',
-        label: 'YouTube',
-        sublabel: 'Music videos & live sessions',
-        href: streamingPlatforms[2].url,
-        iconBg: '#FF0000',
-        icon: 'youtube',
-        external: true,
-      },
-      {
-        id: 'applemusic',
-        label: 'Apple Music',
-        sublabel: 'High-quality streaming',
-        href: streamingPlatforms[1].url,
-        iconBg: '#FC3C44',
-        icon: 'applemusic',
-        external: true,
-      },
-    ],
-  },
-  {
-    id: 'social',
-    label: 'Follow',
-    links: [
-      {
-        id: 'instagram',
-        label: 'Instagram',
-        sublabel: '@_linarex',
-        href: socialPlatforms[0].url,
-        iconBg: '#E4405F',
-        icon: 'instagram',
-        external: true,
-      },
-      {
-        id: 'tiktok',
-        label: 'TikTok',
-        sublabel: '@linarex59',
-        href: socialPlatforms[1].url,
-        iconBg: '#010101',
-        icon: 'tiktok',
-        external: true,
-      },
-    ],
-  },
-  {
-    id: 'press',
-    label: 'Press & booking',
-    links: [
-      {
-        id: 'epk',
-        label: 'Press Kit (EPK)',
-        sublabel: 'One-page PDF · bio, releases, contact',
-        href: '/api/epk',
-        iconBg: '#185fa5',
-        icon: 'epk',
-        variant: 'epk',
-        download: true,
-      },
-      {
-        id: 'contact',
-        label: 'Booking & Management',
-        sublabel: 'Send a message via the contact form',
-        href: '/#contact',
-        iconBg: '#1d4a72',
-        icon: 'contact',
-        variant: 'contact',
-      },
-    ],
-  },
-];
+  row: { flexDirection: 'row' },
+  flex1: { flex: 1 },
+  linkReset: { textDecoration: 'none' },
 
-// ─── Row styles ───────────────────────────────────────────────────────────────
+  // ── HERO ──
+  hero: {
+    position: 'relative',
+    height: 200,
+    backgroundColor: COLORS.surface,
+    overflow: 'hidden',
+  },
+  heroBg: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    objectFit: 'cover',
+    opacity: 0.4,
+  },
+  heroOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(6,12,20,0.6)',
+  },
+  heroContent: {
+    position: 'absolute',
+    bottom: 28,
+    left: 40,
+    right: 40,
+  },
+  heroEyebrow: {
+    fontSize: 8,
+    fontFamily: 'Helvetica-Bold',
+    letterSpacing: 4,
+    color: COLORS.accent,
+    marginBottom: 6,
+  },
+  heroName: {
+    fontSize: 40,
+    fontFamily: 'Helvetica-Bold',
+    color: COLORS.textHi,
+    letterSpacing: -1,
+    lineHeight: 1.05,
+  },
+  heroSubtitle: {
+    fontSize: 11,
+    color: COLORS.text,
+    marginTop: 6,
+    letterSpacing: 1.5,
+  },
+  heroBadge: {
+    position: 'absolute',
+    top: 24,
+    right: 40,
+    backgroundColor: 'rgba(55,138,221,0.15)',
+    borderWidth: 1,
+    borderColor: COLORS.blue,
+    borderStyle: 'solid',
+    borderRadius: 20,
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+  },
+  heroBadgeText: {
+    fontSize: 7,
+    fontFamily: 'Helvetica-Bold',
+    color: COLORS.accent,
+    letterSpacing: 2,
+  },
 
-const ROW_STYLES: Record<
-  'default' | 'featured' | 'epk' | 'contact',
-  { row: string; label: string; sublabel: string; icon: string; bg: string }
-> = {
-  featured: {
-    row: 'bg-[rgba(55,138,221,0.12)] border-[rgba(55,138,221,0.4)] hover:border-[rgba(55,138,221,0.7)] hover:bg-[rgba(55,138,221,0.18)]',
-    label: 'text-[#e6f1fb]',
-    sublabel: 'text-[#85b7eb]/60',
-    icon: 'text-[#378add]/50 group-hover:text-[#378add]',
-    bg: '',
+  // ── Body ──
+  body: {
+    paddingHorizontal: 40,
+    paddingTop: 26,
+    paddingBottom: 30,
+    flex: 1,
   },
-  epk: {
-    row: 'bg-[rgba(13,24,34,0.6)] border-[rgba(55,138,221,0.25)] hover:border-[rgba(55,138,221,0.55)] hover:bg-[rgba(24,95,165,0.2)]',
-    label: 'text-[#c8dcea]',
-    sublabel: 'text-[#5a7a8e]',
-    icon: 'text-[#85b7eb]',
-    bg: '',
+
+  // ── Section ──
+  section: { marginBottom: 18 },
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
   },
+  sectionDot: {
+    width: 4,
+    height: 16,
+    backgroundColor: COLORS.blue,
+    borderRadius: 2,
+    marginRight: 8,
+  },
+  sectionTitle: {
+    fontSize: 8,
+    fontFamily: 'Helvetica-Bold',
+    letterSpacing: 3,
+    color: COLORS.textMute,
+    textTransform: 'uppercase',
+  },
+
+  // ── Photos ──
+  portrait: {
+    width: '100%',
+    height: 140,
+    borderRadius: 8,
+    marginBottom: 16,
+    objectFit: 'cover',
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderStyle: 'solid',
+  },
+  secondaryPhoto: {
+    width: '100%',
+    height: 100,
+    borderRadius: 8,
+    marginBottom: 16,
+    objectFit: 'cover',
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderStyle: 'solid',
+  },
+
+  // ── Bio ──
+  bioText: {
+    fontSize: 10,
+    color: COLORS.text,
+    lineHeight: 1.75,
+  },
+
+  // ── Stats strip ──
+  statsRow: {
+    flexDirection: 'row',
+    backgroundColor: COLORS.surface,
+    borderRadius: 8,
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    marginBottom: 18,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderStyle: 'solid',
+  },
+  statItem: { flex: 1, alignItems: 'center' },
+  statDivider: {
+    position: 'absolute',
+    right: 0,
+    top: 4,
+    bottom: 4,
+    width: 1,
+    backgroundColor: COLORS.borderStrong,
+  },
+  statNumber: {
+    fontSize: 19,
+    fontFamily: 'Helvetica-Bold',
+    color: COLORS.textHi,
+    lineHeight: 1.1,
+  },
+  statLabel: {
+    fontSize: 7,
+    color: COLORS.textMute,
+    letterSpacing: 1.5,
+    marginTop: 3,
+    textTransform: 'uppercase',
+  },
+
+  // ── Two-column ──
+  twoCol: {
+    flexDirection: 'row',
+    gap: 20,
+    marginBottom: 18,
+  },
+  colLeft: { flex: 1.15 },
+  colRight: { flex: 0.85 },
+
+  // ── Quote ──
+  quoteBlock: {
+    borderLeftWidth: 2,
+    borderLeftColor: COLORS.blue,
+    borderStyle: 'solid',
+    paddingLeft: 14,
+    marginBottom: 18,
+  },
+  quoteText: {
+    fontSize: 10,
+    fontFamily: 'Times-Roman',
+    color: COLORS.text,
+    lineHeight: 1.7,
+  },
+
+  // ── Discography card ──
+  trackCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.surface,
+    borderRadius: 8,
+    padding: 9,
+    marginBottom: 7,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderStyle: 'solid',
+  },
+  trackCover: {
+    width: 42,
+    height: 42,
+    borderRadius: 6,
+    marginRight: 10,
+    backgroundColor: COLORS.surfaceAlt,
+    objectFit: 'cover',
+  },
+  trackInfo: { flex: 1 },
+  trackTitle: {
+    fontSize: 9.5,
+    fontFamily: 'Helvetica-Bold',
+    color: COLORS.textHi,
+    marginBottom: 2,
+    textDecoration: 'none',
+  },
+  trackMeta: {
+    fontSize: 7,
+    color: COLORS.textMute,
+    lineHeight: 1.45,
+  },
+  trackRight: { alignItems: 'flex-end', marginLeft: 6 },
+  trackYear: {
+    fontSize: 8,
+    fontFamily: 'Helvetica-Bold',
+    color: COLORS.blue,
+  },
+  trackDuration: {
+    fontSize: 7,
+    color: COLORS.textFaint,
+    marginTop: 2,
+  },
+
+  // ── Platforms ──
+  platformsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 6,
+  },
+  platformBadge: {
+    backgroundColor: COLORS.surfaceAlt,
+    borderRadius: 4,
+    paddingVertical: 5,
+    paddingHorizontal: 9,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderStyle: 'solid',
+    textDecoration: 'none',
+  },
+  platformText: {
+    fontSize: 7.5,
+    fontFamily: 'Helvetica-Bold',
+    color: COLORS.text,
+    letterSpacing: 0.5,
+  },
+
+  // ── Contact ──
+  contactGrid: { flexDirection: 'row', gap: 10 },
+  contactItem: {
+    flex: 1,
+    backgroundColor: COLORS.surface,
+    borderRadius: 8,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderStyle: 'solid',
+  },
+  contactRole: {
+    fontSize: 7,
+    fontFamily: 'Helvetica-Bold',
+    letterSpacing: 2,
+    color: COLORS.textMute,
+    textTransform: 'uppercase',
+    marginBottom: 5,
+  },
+  contactEmail: {
+    fontSize: 8,
+    color: COLORS.accent,
+    lineHeight: 1.5,
+    textDecoration: 'none',
+  },
+
+  // ── Footer ──
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 40,
+    paddingVertical: 14,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.border,
+    borderStyle: 'solid',
+    backgroundColor: COLORS.surface,
+  },
+  footerBrandRow: { flexDirection: 'row', alignItems: 'center' },
+  footerAccent: {
+    fontSize: 7,
+    fontFamily: 'Helvetica-Bold',
+    color: COLORS.blue,
+  },
+  footerLink: {
+    fontSize: 7,
+    color: COLORS.textFaint,
+    letterSpacing: 0.5,
+    textDecoration: 'none',
+  },
+
+  // ── Divider ──
+  divider: {
+    height: 1,
+    backgroundColor: COLORS.border,
+    marginBottom: 22,
+  },
+});
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+const EPK_DATA = {
+  artist: 'LINAREX',
+  tagline: 'Composer & Creative Producer',
+  genre: 'Rock / Funk / Fusion',
+  year: '2026',
+
+  bio: 'Linarex is a composer and creative producer from the Dominican Republic, now based in Warsaw, Poland. With over 20 years of musical experience, he crafts songs guided by one question: what does this emotion sound like? For him, each release is an emotional journey through the human experience — global in reach, yet deeply personal. His work is rooted in rhythm and driven by feeling.',
+
+  quote:
+    'Each song is an emotional journey through the human experience. May it slow you down — and may it also move you beyond the confines of yourself.',
+
+  stats: [
+    { number: '20+', label: 'Years creating' },
+    { number: '3', label: 'Singles released' },
+    { number: '2026', label: 'Active' },
+  ],
+
+  // ── Photos ──
+  // Absolute Cloudinary URLs only. Relative /img/... paths break in server render.
+  portraitImage:
+    'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170735/linarex/standing_wicdur.jpg',
+  // TODO(Linarex): swap for a real live/studio press photo. This is interim —
+  // it's the only other absolute image URL available in your shared files.
+  secondaryImage:
+    'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1771094800/linarex/Screenshot_2026-02-14_at_7.46.34_PM_dgzh4z.png',
+  heroImage:
+    'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg',
+
+  // ── Discography (single source of truth — no more duplicate Collaborations) ──
+  releases: [
+    {
+      title: 'Renacer',
+      artist: 'Linarex ft. Skiwa',
+      genre: 'Funk Pop',
+      producer: 'Pablo Cafici',
+      duration: '3:16',
+      year: '2026',
+      cover:
+        'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1771093920/linarex/2026_ssgfrp.jpg',
+      spotify:
+        'https://open.spotify.com/intl-es/album/5JVDDkvNP77b5yz235Qu0R?si=BHdZGV2wTmGklQUWrrJ-wg',
+    },
+    {
+      title: 'Memories',
+      artist: 'Linarex ft. Jacke Matthews',
+      genre: 'Rock / Indie',
+      producer: 'Okirius',
+      duration: '4:03',
+      year: '2026',
+      cover:
+        'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763300435/504381421_17858001459453136_3713166365445180538_n_wdmog2.jpg',
+      spotify:
+        'https://open.spotify.com/intl-es/album/57gkaRLcx11qK4Ok1PYdyW?si=dU3cwdgkS-2Rf2u8SHihPw',
+    },
+    {
+      title: 'Vaivén',
+      artist: 'Linarex ft. Daniel Rivero',
+      genre: 'Afrobeat Fusion',
+      producer: 'Pablo Cafici',
+      duration: '3:13',
+      year: '2025',
+      cover:
+        'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763300435/504381421_17858001459453136_3713166365445180538_n_wdmog2.jpg',
+      spotify: 'https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS',
+    },
+  ],
+
+  // Name + url only. Clickable <Link> over <Text>. No follower counts.
+  platforms: [
+    {
+      name: 'Spotify',
+      url: 'https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS?si=6-KHEpmPQ3mTHwnLdw2iDg',
+    },
+    {
+      name: 'YouTube',
+      url: 'https://www.youtube.com/channel/UCZIaGK7NF4roKF039W_7O1Q',
+    },
+    { name: 'Instagram', url: 'https://www.instagram.com/_linarex' },
+    { name: 'TikTok', url: 'https://www.tiktok.com/@linarex59' },
+    // Re-add with the REAL Apple Music URL when you have it (the links.ts one
+    // is malformed and would 404).
+    // { name: 'Apple Music', url: '' },
+  ],
+
   contact: {
-    row: 'bg-[rgba(13,24,34,0.4)] border-[rgba(55,138,221,0.15)] hover:border-[rgba(55,138,221,0.4)] hover:bg-[rgba(13,24,34,0.6)]',
-    label: 'text-[#c8dcea]',
-    sublabel: 'text-[#5a7a8e]',
-    icon: 'text-[#5a7a8e] group-hover:text-[#85b7eb]',
-    bg: '',
+    general: { role: 'General Inquiries', email: 'linarexinfo@gmail.com' },
+    booking: { role: 'Booking & Management', email: 'linarexinfo@gmail.com' },
+    press: { role: 'Press & Media', email: 'linarexinfo@gmail.com' },
   },
-  default: {
-    row: 'bg-[rgba(13,24,34,0.5)] border-[rgba(55,138,221,0.15)] hover:border-[rgba(55,138,221,0.4)] hover:bg-[rgba(13,24,34,0.7)]',
-    label: 'text-[#e6f1fb]',
-    sublabel: 'text-[#85b7eb]/50',
-    icon: 'text-[#378add]/40 group-hover:text-[#378add]/80',
-    bg: '',
-  },
+
+  website: 'linares-press-kit.vercel.app',
+  websiteUrl: 'https://linares-press-kit.vercel.app',
+  spotify: 'open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS',
+  spotifyUrl:
+    'https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS?si=6-KHEpmPQ3mTHwnLdw2iDg',
+  instagram: 'instagram.com/_linarex',
+  instagramUrl: 'https://www.instagram.com/_linarex',
 };
 
-// ─── LinkRow ──────────────────────────────────────────────────────────────────
+// ─── Sub-components ───────────────────────────────────────────────────────────
 
-function LinkRow({ link, index }: { link: LinkItem; index: number }) {
-  const variant = link.variant ?? 'default';
-  const styles = ROW_STYLES[variant];
-  const isInternal = link.href.startsWith('/') || link.href.startsWith('#');
-
-  const rowClass = [
-    'group relative flex items-center gap-3.5 w-full',
-    'px-4 py-3.5 rounded-2xl border transition-all duration-200 backdrop-blur-sm',
-    styles.row,
-  ]
-    .filter(Boolean)
-    .join(' ');
-
-  const inner = (
-    <>
-      <span
-        className='w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 text-white'
-        style={{ background: link.iconBg }}
-        aria-hidden='true'
-      >
-        {ICONS[link.icon]}
-      </span>
-
-      <span className='flex-1 min-w-0 text-left'>
-        <span className='flex items-center gap-2 flex-wrap'>
-          <span className={`text-sm font-semibold truncate ${styles.label}`}>
-            {link.label}
-          </span>
-          {link.badge && (
-            <span
-              className='text-[10px] font-semibold tracking-wide rounded-full px-2 py-0.5 flex-shrink-0'
-              style={{
-                background: 'rgba(55,138,221,0.15)',
-                border: '1px solid rgba(55,138,221,0.3)',
-                color: '#85b7eb',
-              }}
-            >
-              {link.badge}
-            </span>
-          )}
-        </span>
-        {link.sublabel && (
-          <span className={`text-xs truncate block mt-0.5 ${styles.sublabel}`}>
-            {link.sublabel}
-          </span>
-        )}
-      </span>
-
-      <span
-        className={`flex-shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 ${styles.icon}`}
-      >
-        {link.download ? (
-          <Download size={15} aria-hidden />
-        ) : isInternal ? (
-          <ArrowRight size={15} aria-hidden />
-        ) : (
-          <ExternalLink size={14} aria-hidden />
-        )}
-      </span>
-    </>
+function SectionHeader({ title }: { title: string }) {
+  return (
+    <View style={styles.sectionHeader}>
+      <View style={styles.sectionDot} />
+      <Text style={styles.sectionTitle}>{title}</Text>
+    </View>
   );
+}
 
-  const motionProps = {
-    initial: { opacity: 0, y: 16 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.4, delay: 0.1 + index * 0.06, ease: 'easeOut' },
-  } as const;
+function StatStrip() {
+  const last = EPK_DATA.stats.length - 1;
+  return (
+    <View style={styles.statsRow}>
+      {EPK_DATA.stats.map((s, i) => (
+        <View key={s.label} style={styles.statItem}>
+          <Text style={styles.statNumber}>{s.number}</Text>
+          <Text style={styles.statLabel}>{s.label}</Text>
+          {i < last && <View style={styles.statDivider} />}
+        </View>
+      ))}
+    </View>
+  );
+}
 
-  if (isInternal && !link.download) {
-    return (
-      <motion.div {...motionProps}>
-        <Link href={link.href} className={rowClass} aria-label={link.label}>
-          {inner}
+// One card per release — cover, title (clickable), credits, year + duration.
+function TrackCard({ track }: { track: (typeof EPK_DATA.releases)[0] }) {
+  return (
+    <View style={styles.trackCard}>
+      <Image style={styles.trackCover} src={track.cover} />
+      <View style={styles.trackInfo}>
+        <Link src={track.spotify} style={styles.linkReset}>
+          <Text style={styles.trackTitle}>{track.title}</Text>
         </Link>
-      </motion.div>
-    );
-  }
-
-  return (
-    <motion.div {...motionProps}>
-      <a
-        href={link.href}
-        target={link.external ? '_blank' : '_self'}
-        rel={link.external ? 'noopener noreferrer' : undefined}
-        download={link.download ? 'Linarex-EPK-2026.pdf' : undefined}
-        className={rowClass}
-        aria-label={link.label}
-      >
-        {inner}
-      </a>
-    </motion.div>
+        <Text style={styles.trackMeta}>{track.artist}</Text>
+        <Text style={styles.trackMeta}>
+          {track.genre} · prod. {track.producer}
+        </Text>
+      </View>
+      <View style={styles.trackRight}>
+        <Text style={styles.trackYear}>{track.year}</Text>
+        <Text style={styles.trackDuration}>{track.duration}</Text>
+      </View>
+    </View>
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+// ─── Main document ────────────────────────────────────────────────────────────
 
-export default function LinksPage() {
+export function EPKDocument() {
   return (
-    <main className='relative min-h-screen flex justify-center overflow-x-hidden'>
-      <div className='fixed inset-0 z-0' aria-hidden='true'>
-        <div
-          className='absolute inset-0 bg-cover bg-center bg-no-repeat'
-          style={{
-            backgroundImage:
-              'url(https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170735/linarex/standing_wicdur.jpg)',
-          }}
-        />
-        <div className='absolute inset-0 bg-black/65' />
-        <div className='absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50' />
-      </div>
+    <Document
+      title={`Linarex — Electronic Press Kit ${EPK_DATA.year}`}
+      author='Linarex'
+      subject='Electronic Press Kit'
+      keywords='linarex, rock, funk, fusion, composer, music producer'
+      creator='Linarex Press Kit'
+    >
+      <Page size='A4' style={styles.page}>
+        {/* HERO */}
+        <View style={styles.hero}>
+          <Image style={styles.heroBg} src={EPK_DATA.heroImage} />
+          <View style={styles.heroOverlay} />
 
-      <div className='relative z-10 w-full max-w-sm px-4 pt-14 pb-20 flex flex-col items-center'>
-        {/* Header */}
-        <motion.div
-          className='flex flex-col items-center mb-8'
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
-        >
-          <div className='relative mb-4'>
-            <Image
-              src={featuredSingle.coverImage}
-              alt='Linarex'
-              width={88}
-              height={88}
-              className='rounded-2xl object-cover'
-              style={{ boxShadow: '0 0 0 1px rgba(55,138,221,0.3)' }}
-              priority
-            />
-          </div>
+          <View style={styles.heroBadge}>
+            <Text style={styles.heroBadgeText}>PRESS KIT {EPK_DATA.year}</Text>
+          </View>
 
-          <h1
-            className='text-2xl font-black tracking-tight mb-1'
-            style={{ color: '#e6f1fb' }}
-          >
-            LINAREX
-          </h1>
-          <p
-            className='text-sm mb-3 text-center'
-            style={{ color: '#85b7eb', opacity: 0.5 }}
-          >
-            Composer &amp; Creative Producer
-          </p>
-          <span
-            className='text-xs rounded-full px-3 py-1 tracking-wide'
-            style={{
-              color: '#85b7eb',
-              background: 'rgba(13,24,34,0.6)',
-              border: '1px solid rgba(55,138,221,0.3)',
-            }}
-          >
-            Funk Pop · Afrobeat Fusion
-          </span>
-        </motion.div>
+          <View style={styles.heroContent}>
+            <Text style={styles.heroEyebrow}>ELECTRONIC PRESS KIT</Text>
+            <Text style={styles.heroName}>{EPK_DATA.artist}</Text>
+            <Text style={styles.heroSubtitle}>
+              {EPK_DATA.tagline.toUpperCase()} · {EPK_DATA.genre.toUpperCase()}
+            </Text>
+          </View>
+        </View>
 
-        {/* Sections */}
-        <div className='w-full space-y-6'>
-          {LINK_SECTIONS.map((section) => (
-            <div key={section.id}>
-              <motion.p
-                className='text-[10px] font-semibold tracking-[0.15em] uppercase mb-2.5 px-1'
-                style={{ color: 'rgba(133,183,235,0.45)' }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                {section.label}
-              </motion.p>
-              <div className='space-y-2'>
-                {section.links.map((link, i) => (
-                  <LinkRow key={link.id} link={link} index={i} />
+        {/* BODY */}
+        <View style={styles.body}>
+          <StatStrip />
+
+          <View style={styles.twoCol}>
+            {/* Left: Portrait + Bio + Quote + Platforms */}
+            <View style={styles.colLeft}>
+              <Image style={styles.portrait} src={EPK_DATA.portraitImage} />
+
+              <View style={styles.section}>
+                <SectionHeader title='Artist Biography' />
+                <Text style={styles.bioText}>{EPK_DATA.bio}</Text>
+              </View>
+
+              <View style={styles.quoteBlock}>
+                <Text style={styles.quoteText}>
+                  &ldquo;{EPK_DATA.quote}&rdquo;
+                </Text>
+              </View>
+
+              <View style={styles.section}>
+                <SectionHeader title='Listen On' />
+                <View style={styles.platformsGrid}>
+                  {EPK_DATA.platforms.map((p) => (
+                    <Link key={p.name} src={p.url} style={styles.platformBadge}>
+                      <Text style={styles.platformText}>
+                        {p.name.toUpperCase()}
+                      </Text>
+                    </Link>
+                  ))}
+                </View>
+              </View>
+            </View>
+
+            {/* Right: Second photo + Discography */}
+            <View style={styles.colRight}>
+              <Image
+                style={styles.secondaryPhoto}
+                src={EPK_DATA.secondaryImage}
+              />
+
+              <View style={styles.section}>
+                <SectionHeader title='Discography' />
+                {EPK_DATA.releases.map((t) => (
+                  <TrackCard key={t.title} track={t} />
                 ))}
-              </div>
-            </div>
-          ))}
-        </div>
+              </View>
+            </View>
+          </View>
 
-        {/* Footer */}
-        <motion.div
-          className='mt-10 flex flex-col items-center gap-1.5'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.6 }}
-        >
-          <Link
-            href='/'
-            className='text-xs tracking-wide transition-colors'
-            style={{ color: 'rgba(133,183,235,0.25)' }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.color = 'rgba(133,183,235,0.7)')
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.color = 'rgba(133,183,235,0.25)')
-            }
-          >
-            linares-press-kit.vercel.app
+          <View style={styles.divider} />
+
+          {/* Contact — emails are clickable mailto links */}
+          <View style={styles.section}>
+            <SectionHeader title='Contact' />
+            <View style={styles.contactGrid}>
+              {Object.values(EPK_DATA.contact).map((c) => (
+                <View key={c.role} style={styles.contactItem}>
+                  <Text style={styles.contactRole}>{c.role}</Text>
+                  <Link src={`mailto:${c.email}`} style={styles.contactEmail}>
+                    {c.email}
+                  </Link>
+                </View>
+              ))}
+            </View>
+          </View>
+        </View>
+
+        {/* FOOTER — Links are siblings, not nested inside <Text> */}
+        <View style={styles.footer}>
+          <View style={styles.footerBrandRow}>
+            <Text style={styles.footerAccent}>linarex</Text>
+            <Text style={styles.footerLink}>{'  ·  '}</Text>
+            <Link src={EPK_DATA.websiteUrl} style={styles.footerLink}>
+              {EPK_DATA.website}
+            </Link>
+          </View>
+          <Link src={EPK_DATA.spotifyUrl} style={styles.footerLink}>
+            {EPK_DATA.spotify}
           </Link>
-          <span
-            className='text-[10px] tracking-widest uppercase'
-            style={{ color: 'rgba(133,183,235,0.12)' }}
-          >
-            Press Kit 2026
-          </span>
-        </motion.div>
-      </div>
-    </main>
+          <Link src={EPK_DATA.instagramUrl} style={styles.footerLink}>
+            {EPK_DATA.instagram}
+          </Link>
+        </View>
+      </Page>
+    </Document>
   );
 }
+export default EPKDocument;
