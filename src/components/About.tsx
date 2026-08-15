@@ -8,7 +8,7 @@ import QuoteSection from './QuoteSection';
 const ABOUT_STATS = [
   '20+ years creating',
   '3+ international collaborations',
-  '11 countries explored',
+  // '11 countries explored',
 ] as const;
 
 export default function About() {

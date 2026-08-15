@@ -7,49 +7,49 @@
  * Usage:
  *   import { EPKDocument } from '@/components/pdf/EPKDocument';
  *   const stream = await renderToStream(<EPKDocument />);
+ *
+ * react-pdf gotchas respected here:
+ *   - <Link> only ever wraps <Text> (never <View>/<Image>).
+ *   - No array styles (style={[a, b]}) — one flattened style object per node.
+ *   - Absolute image URLs only (relative /img/... paths break in server render).
+ *   - NO `flex: 1` on <body> — it reserves the whole page height and shoves the
+ *     column block to page 2, leaving page 1 blank. Content just flows instead.
  */
 
 import {
   Document,
   Image,
+  Link,
   Page,
   StyleSheet,
   Text,
   View,
 } from '@react-pdf/renderer';
 
-// ─── Fonts ───────────────────────────────────────────────────────────────────
-// Using PDF standard fonts (no external fetch required):
-//   Helvetica        → sans-serif, normal + bold
-//   Helvetica-Bold   → used via fontFamily directly
-//   Times-Roman      → serif italic for quotes
-// These 14 fonts are built into every PDF viewer, zero network dependency.
-
 // ─── Design tokens ────────────────────────────────────────────────────────────
+// Brand palette mirrors the web (LinksPage / About): deep navy surfaces, a
+// #378add primary blue and #85b7eb light accent. Bold via fontFamily only.
 const COLORS = {
-  black: '#0a0a0a',
+  bg: '#080e14',
+  surface: '#0d1822',
+  surfaceAlt: '#101d29',
+  border: '#1b3244',
+  borderStrong: '#24435c',
+  blue: '#378add',
+  blueDark: '#185fa5',
+  accent: '#85b7eb',
+  textHi: '#e6f1fb',
+  text: '#c8dcea',
+  textMute: '#7c98ab',
+  textFaint: '#4d6675',
   white: '#ffffff',
-  offWhite: '#f5f5f3',
-  purple: '#a855f7',
-  purpleDark: '#7c3aed',
-  pink: '#ec4899',
-  gray100: '#f3f4f6',
-  gray300: '#d1d5db',
-  gray400: '#9ca3af',
-  gray500: '#6b7280',
-  gray600: '#4b5563',
-  gray700: '#374151',
-  gray800: '#1f2937',
-  gray900: '#111827',
-  accent: '#c084fc', // lighter purple for accents on dark bg
 };
 
 // ─── Styles ───────────────────────────────────────────────────────────────────
 const styles = StyleSheet.create({
-  // ── Page ──
   page: {
     fontFamily: 'Helvetica',
-    backgroundColor: COLORS.black,
+    backgroundColor: COLORS.bg,
     color: COLORS.white,
     paddingTop: 0,
     paddingBottom: 0,
@@ -57,16 +57,13 @@ const styles = StyleSheet.create({
     paddingRight: 0,
   },
 
-  // ── Layout helpers ──
-  row: { flexDirection: 'row' },
-  col: { flexDirection: 'column' },
-  flex1: { flex: 1 },
+  linkReset: { textDecoration: 'none' },
 
-  // ── HERO section ──
+  // ── HERO ──
   hero: {
     position: 'relative',
-    height: 260,
-    backgroundColor: COLORS.gray900,
+    height: 185,
+    backgroundColor: COLORS.surface,
     overflow: 'hidden',
   },
   heroBg: {
@@ -84,11 +81,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.55)',
+    backgroundColor: 'rgba(6,12,20,0.6)',
   },
   heroContent: {
     position: 'absolute',
-    bottom: 32,
+    bottom: 26,
     left: 40,
     right: 40,
   },
@@ -97,29 +94,28 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica-Bold',
     letterSpacing: 4,
     color: COLORS.accent,
-    marginBottom: 6,
+    marginBottom: 5,
   },
   heroName: {
-    fontSize: 42,
+    fontSize: 38,
     fontFamily: 'Helvetica-Bold',
-    color: COLORS.white,
+    color: COLORS.textHi,
     letterSpacing: -1,
     lineHeight: 1.05,
   },
   heroSubtitle: {
-    fontSize: 11,
-    fontWeight: 400,
-    color: COLORS.gray300,
+    fontSize: 10.5,
+    color: COLORS.text,
     marginTop: 6,
     letterSpacing: 1.5,
   },
   heroBadge: {
     position: 'absolute',
-    top: 24,
+    top: 22,
     right: 40,
-    backgroundColor: 'rgba(168,85,247,0.2)',
+    backgroundColor: 'rgba(55,138,221,0.15)',
     borderWidth: 1,
-    borderColor: COLORS.purple,
+    borderColor: COLORS.blue,
     borderStyle: 'solid',
     borderRadius: 20,
     paddingVertical: 4,
@@ -127,32 +123,29 @@ const styles = StyleSheet.create({
   },
   heroBadgeText: {
     fontSize: 7,
+    fontFamily: 'Helvetica-Bold',
     color: COLORS.accent,
     letterSpacing: 2,
-    fontWeight: 700,
   },
 
-  // ── Body wrapper ──
+  // ── Body (no flex:1 — see header note) ──
   body: {
     paddingHorizontal: 40,
-    paddingTop: 32,
-    paddingBottom: 40,
-    flex: 1,
+    paddingTop: 24,
+    paddingBottom: 24,
   },
 
   // ── Section ──
-  section: {
-    marginBottom: 28,
-  },
+  section: { marginBottom: 16 },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 10,
   },
   sectionDot: {
     width: 4,
-    height: 16,
-    backgroundColor: COLORS.purple,
+    height: 15,
+    backgroundColor: COLORS.blue,
     borderRadius: 2,
     marginRight: 8,
   },
@@ -160,133 +153,142 @@ const styles = StyleSheet.create({
     fontSize: 8,
     fontFamily: 'Helvetica-Bold',
     letterSpacing: 3,
-    color: COLORS.gray400,
+    color: COLORS.textMute,
     textTransform: 'uppercase',
   },
 
+  // ── Photos ──
+  portrait: {
+    width: '100%',
+    height: 130,
+    borderRadius: 8,
+    marginBottom: 14,
+    objectFit: 'cover',
+    objectPosition: 'center top', // ← controla qué zona se conserva
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderStyle: 'solid',
+  },
+  secondaryPhoto: {
+    width: '100%',
+    height: 90,
+    borderRadius: 8,
+    marginBottom: 14,
+    objectFit: 'contain', // ← antes 'cover'
+    backgroundColor: COLORS.surface, // ← el letterbox se lee como marco
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderStyle: 'solid',
+  },
   // ── Bio ──
   bioText: {
-    fontSize: 10.5,
-    fontWeight: 400,
-    color: COLORS.gray300,
-    lineHeight: 1.8,
-  },
-  bioHighlight: {
-    color: COLORS.accent,
-    fontStyle: 'italic',
+    fontSize: 10,
+    color: COLORS.text,
+    lineHeight: 1.7,
   },
 
   // ── Stats strip ──
   statsRow: {
     flexDirection: 'row',
-    backgroundColor: COLORS.gray900,
+    backgroundColor: COLORS.surface,
     borderRadius: 8,
-    paddingVertical: 16,
+    paddingVertical: 13,
     paddingHorizontal: 20,
-    marginBottom: 28,
+    marginBottom: 16,
     borderWidth: 1,
-    borderColor: COLORS.gray800,
+    borderColor: COLORS.border,
     borderStyle: 'solid',
   },
-  statItem: {
-    flex: 1,
-    alignItems: 'center',
-  },
+  statItem: { flex: 1, alignItems: 'center', paddingHorizontal: 4 },
   statDivider: {
+    position: 'absolute',
+    right: 0,
+    top: 4,
+    bottom: 4,
     width: 1,
-    backgroundColor: COLORS.gray700,
-    marginVertical: 4,
+    backgroundColor: COLORS.borderStrong,
   },
   statNumber: {
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'Helvetica-Bold',
-    color: COLORS.white,
+    color: COLORS.textHi,
     lineHeight: 1.1,
   },
   statLabel: {
-    fontSize: 7,
-    fontWeight: 400,
-    color: COLORS.gray500,
-    letterSpacing: 1.5,
+    fontSize: 6.5,
+    color: COLORS.textMute,
+    letterSpacing: 1,
     marginTop: 3,
     textTransform: 'uppercase',
+    textAlign: 'center',
   },
 
-  // ── Two-column layout ──
+  // ── Two-column ──
   twoCol: {
     flexDirection: 'row',
     gap: 20,
-    marginBottom: 28,
+    marginBottom: 16,
   },
-  colLeft: { flex: 1.1 },
-  colRight: { flex: 0.9 },
+  colLeft: { flex: 1.15 },
+  colRight: { flex: 0.85 },
+
+  // ── Quote ──
+  quoteBlock: {
+    borderLeftWidth: 2,
+    borderLeftColor: COLORS.blue,
+    borderStyle: 'solid',
+    paddingLeft: 14,
+  },
+  quoteText: {
+    fontSize: 9.5,
+    fontFamily: 'Times-Roman',
+    color: COLORS.text,
+    lineHeight: 1.65,
+  },
 
   // ── Discography card ──
   trackCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.gray900,
+    backgroundColor: COLORS.surface,
     borderRadius: 8,
-    padding: 10,
-    marginBottom: 8,
+    padding: 8,
+    marginBottom: 6,
     borderWidth: 1,
-    borderColor: COLORS.gray800,
+    borderColor: COLORS.border,
     borderStyle: 'solid',
   },
   trackCover: {
-    width: 44,
-    height: 44,
+    width: 40,
+    height: 40,
     borderRadius: 6,
-    marginRight: 10,
-    backgroundColor: COLORS.gray800,
+    marginRight: 9,
+    backgroundColor: COLORS.surfaceAlt,
+    objectFit: 'cover',
   },
   trackInfo: { flex: 1 },
   trackTitle: {
     fontSize: 9.5,
     fontFamily: 'Helvetica-Bold',
-    color: COLORS.white,
+    color: COLORS.textHi,
     marginBottom: 2,
+    textDecoration: 'none',
   },
   trackMeta: {
-    fontSize: 7.5,
-    color: COLORS.gray500,
-    lineHeight: 1.5,
+    fontSize: 6.5,
+    color: COLORS.textMute,
+    lineHeight: 1.4,
   },
+  trackRight: { alignItems: 'flex-end', marginLeft: 6 },
   trackYear: {
     fontSize: 8,
-    fontWeight: 700,
-    color: COLORS.purple,
-    marginLeft: 6,
-  },
-
-  // ── Collaboration card ──
-  collabCard: {
-    backgroundColor: COLORS.gray900,
-    borderRadius: 8,
-    padding: 10,
-    marginBottom: 8,
-    borderWidth: 1,
-    borderColor: COLORS.gray800,
-    borderStyle: 'solid',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  collabDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: COLORS.purple,
-    marginRight: 10,
-  },
-  collabTitle: {
-    fontSize: 9,
     fontFamily: 'Helvetica-Bold',
-    color: COLORS.white,
+    color: COLORS.blue,
   },
-  collabArtist: {
-    fontSize: 7.5,
-    color: COLORS.gray500,
-    marginTop: 1,
+  trackDuration: {
+    fontSize: 6.5,
+    color: COLORS.textFaint,
+    marginTop: 2,
   },
 
   // ── Platforms ──
@@ -296,68 +298,53 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   platformBadge: {
-    backgroundColor: COLORS.gray800,
+    backgroundColor: COLORS.surfaceAlt,
     borderRadius: 4,
     paddingVertical: 5,
     paddingHorizontal: 9,
     borderWidth: 1,
-    borderColor: COLORS.gray700,
+    borderColor: COLORS.border,
     borderStyle: 'solid',
+    textDecoration: 'none',
   },
   platformText: {
     fontSize: 7.5,
     fontFamily: 'Helvetica-Bold',
-    color: COLORS.gray300,
+    color: COLORS.text,
     letterSpacing: 0.5,
   },
 
-  // ── Contact block ──
-  contactGrid: {
-    flexDirection: 'row',
-    gap: 10,
-  },
+  // ── Contact ──
+  contactGrid: { flexDirection: 'row', gap: 10 },
   contactItem: {
     flex: 1,
-    backgroundColor: COLORS.gray900,
+    backgroundColor: COLORS.surface,
     borderRadius: 8,
-    padding: 12,
+    padding: 11,
     borderWidth: 1,
-    borderColor: COLORS.gray800,
+    borderColor: COLORS.border,
     borderStyle: 'solid',
   },
   contactRole: {
     fontSize: 7,
-    fontWeight: 700,
+    fontFamily: 'Helvetica-Bold',
     letterSpacing: 2,
-    color: COLORS.gray500,
+    color: COLORS.textMute,
     textTransform: 'uppercase',
     marginBottom: 5,
-  },
-  contactName: {
-    fontSize: 9.5,
-    fontFamily: 'Helvetica-Bold',
-    color: COLORS.white,
-    marginBottom: 3,
   },
   contactEmail: {
     fontSize: 8,
     color: COLORS.accent,
     lineHeight: 1.5,
+    textDecoration: 'none',
   },
 
-  // ── Quote ──
-  quoteBlock: {
-    borderLeftWidth: 2,
-    borderLeftColor: COLORS.purple,
-    borderStyle: 'solid',
-    paddingLeft: 14,
-    marginBottom: 28,
-  },
-  quoteText: {
-    fontSize: 10,
-    fontFamily: 'Times-Roman',
-    color: COLORS.gray300,
-    lineHeight: 1.7,
+  // ── Divider ──
+  divider: {
+    height: 1,
+    backgroundColor: COLORS.border,
+    marginBottom: 18,
   },
 
   // ── Footer ──
@@ -366,103 +353,123 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 40,
-    paddingVertical: 14,
+    paddingVertical: 13,
     borderTopWidth: 1,
-    borderTopColor: COLORS.gray800,
+    borderTopColor: COLORS.border,
     borderStyle: 'solid',
-    backgroundColor: COLORS.gray900,
+    backgroundColor: COLORS.surface,
   },
-  footerText: {
-    fontSize: 7,
-    color: COLORS.gray600,
-    letterSpacing: 0.5,
-  },
+  footerBrandRow: { flexDirection: 'row', alignItems: 'center' },
   footerAccent: {
     fontSize: 7,
     fontFamily: 'Helvetica-Bold',
-    color: COLORS.purple,
+    color: COLORS.blue,
   },
-
-  // ── Divider ──
-  divider: {
-    height: 1,
-    backgroundColor: COLORS.gray800,
-    marginBottom: 24,
+  footerLink: {
+    fontSize: 7,
+    color: COLORS.textFaint,
+    letterSpacing: 0.5,
+    textDecoration: 'none',
   },
 });
 
-// ─── Data (mirrors your existing consts) ─────────────────────────────────────
+// ─── Data ─────────────────────────────────────────────────────────────────────
 const EPK_DATA = {
   artist: 'LINAREX',
-  fullName: 'Linarex',
-  tagline: 'Composer & Creative Producer',
-  genre: 'Funk Pop / Afrobeat Fusion',
-  origin: 'Dominican Republic, based in Warsaw, Poland',
+  tagline: 'Drummer · Composer · Producer',
+  genre: 'Rock / Funk / Fusion',
   year: '2026',
 
-  bio: 'Linarex is a composer and creative producer from the Dominican Republic, now based in Warsaw, Poland. With over 20 years of musical experience and work across 11 countries, he crafts songs guided by one question: what does this emotion sound like? His debut single "Vaivén" (Afrobeat Fusion, 2025) and latest release "Renacer" (Funk Pop, 2026, ft. Skiwa) showcase a sound that is simultaneously global and deeply personal — rooted in rhythm, driven by feeling.',
+  bio: 'Linarex is a Dominican drummer, composer and producer based in Warsaw, Poland. With more than 20 years behind the drum kit and writing songs — much of it composing for other voices — his work is built on collaboration: he writes and produces each track, and guest vocalists bring the songs to life. Since his 2025 debut, Linarex has moved across rock, funk, afrobeat and folk, guided by one question: what does this emotion sound like? Always driven by true feeling..',
 
   quote:
-    'I create universal emotions that connect souls and search for the voice that can set them free.',
+    'Each song is an emotional journey through the human experience. May it slow you down — and may it also move you beyond the confines of yourself.',
 
+  // Honest, defensible numbers only.
   stats: [
-    { number: '20+', label: 'Years creating' },
-    { number: '3+', label: 'Collaborations' },
-    { number: '11', label: 'Countries' },
-    { number: '2026', label: 'Active' },
+    { number: '20+', label: 'Years drumming & composing' },
+    { number: '3', label: 'Singles as Linarex' },
+    { number: '2025', label: 'Debut single' },
   ],
 
+  // ── Photos ──
+  // Absolute Cloudinary URLs only. All three currently point to your one good
+  // photo as a placeholder — swap portraitImage / secondaryImage for real
+  // live/studio shots whenever you have the URLs. heroImage is your atmospheric bg.
+  heroImage:
+    'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg',
+  portraitImage:
+    'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170739/linarex/trenes_lj3rfh.jpg',
+  // TODO(Linarex): replace with a DIFFERENT real photo (live or studio).
+  secondaryImage:
+    'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170735/linarex/standing_wicdur.jpg',
+
+  // ── Discography (single source of truth — no duplicate Collaborations) ──
   releases: [
     {
       title: 'Renacer',
       artist: 'Linarex ft. Skiwa',
-      year: '2026',
       genre: 'Funk Pop',
+      producer: 'Pablo Cafici',
+      duration: '3:16',
+      year: '2026',
       cover:
         'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1771093920/linarex/2026_ssgfrp.jpg',
       spotify:
         'https://open.spotify.com/intl-es/album/5JVDDkvNP77b5yz235Qu0R?si=BHdZGV2wTmGklQUWrrJ-wg',
     },
     {
+      title: 'Memories',
+      artist: 'Linarex ft. Jacke Matthews',
+      genre: 'Rock / Indie',
+      producer: 'Okirius',
+      duration: '4:03',
+      year: '2026',
+      cover:
+        'https://res.cloudinary.com/dwgzffsgl/image/upload/v1786661039/bg_qvvlw9.jpg',
+      spotify:
+        'https://open.spotify.com/intl-es/album/57gkaRLcx11qK4Ok1PYdyW?si=dU3cwdgkS-2Rf2u8SHihPw',
+    },
+    {
       title: 'Vaivén',
       artist: 'Linarex ft. Daniel Rivero',
-      year: '2025',
       genre: 'Afrobeat Fusion',
+      producer: 'Pablo Cafici',
+      duration: '3:13',
+      year: '2025',
       cover:
         'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763300435/504381421_17858001459453136_3713166365445180538_n_wdmog2.jpg',
       spotify: 'https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS',
     },
   ],
 
-  collaborations: [
-    { title: 'Renacer', artist: 'feat. Skiwa', year: '2026' },
-    { title: 'Vaivén', artist: 'feat. Daniel Rivero', year: '2025' },
-    { title: 'Parte 2', artist: 'feat. Jacke Matthews', year: '2023' },
+  platforms: [
+    {
+      name: 'Spotify',
+      url: 'https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS?si=6-KHEpmPQ3mTHwnLdw2iDg',
+    },
+    {
+      name: 'YouTube',
+      url: 'https://www.youtube.com/channel/UCZIaGK7NF4roKF039W_7O1Q',
+    },
+    { name: 'Instagram', url: 'https://www.instagram.com/_linarex' },
+    { name: 'TikTok', url: 'https://www.tiktok.com/@linarex59' },
+    // { name: 'Apple Music', url: '' }, // re-add with the real (non-404) URL
   ],
 
-  platforms: ['Spotify', 'Apple Music', 'YouTube', 'Instagram', 'TikTok'],
-
   contact: {
-    general: {
-      role: 'General Inquiries',
-      email: 'linarexinfo@gmail.com',
-    },
-    booking: {
-      role: 'Booking & Management',
-      email: 'linarexinfo@gmail.com',
-    },
-    press: {
-      role: 'Press & Media',
-      email: 'linarexinfo@gmail.com',
-    },
+    // general: { role: 'General Inquiries', email: 'linarexinfo@gmail.com' },
+    booking: { role: 'Booking & Management', email: 'linarexinfo@gmail.com' },
+    // press: { role: 'Press & Media', email: 'linarexinfo@gmail.com' },
   },
 
   website: 'linares-press-kit.vercel.app',
+  websiteUrl: 'https://linares-press-kit.vercel.app',
   spotify: 'open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS',
+  spotifyUrl:
+    'https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS?si=6-KHEpmPQ3mTHwnLdw2iDg',
   instagram: 'instagram.com/_linarex',
-
-  heroImage:
-    'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg',
+  instagramUrl: 'https://www.instagram.com/_linarex',
 };
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -477,20 +484,14 @@ function SectionHeader({ title }: { title: string }) {
 }
 
 function StatStrip() {
+  const last = EPK_DATA.stats.length - 1;
   return (
     <View style={styles.statsRow}>
       {EPK_DATA.stats.map((s, i) => (
-        <View key={i} style={styles.statItem}>
+        <View key={s.label} style={styles.statItem}>
           <Text style={styles.statNumber}>{s.number}</Text>
           <Text style={styles.statLabel}>{s.label}</Text>
-          {i < EPK_DATA.stats.length - 1 && (
-            <View
-              style={[
-                styles.statDivider,
-                { position: 'absolute', right: 0, top: 0, bottom: 0 },
-              ]}
-            />
-          )}
+          {i < last && <View style={styles.statDivider} />}
         </View>
       ))}
     </View>
@@ -502,28 +503,17 @@ function TrackCard({ track }: { track: (typeof EPK_DATA.releases)[0] }) {
     <View style={styles.trackCard}>
       <Image style={styles.trackCover} src={track.cover} />
       <View style={styles.trackInfo}>
-        <Text style={styles.trackTitle}>{track.title}</Text>
+        <Link src={track.spotify} style={styles.linkReset}>
+          <Text style={styles.trackTitle}>{track.title}</Text>
+        </Link>
         <Text style={styles.trackMeta}>{track.artist}</Text>
-        <Text style={styles.trackMeta}>{track.genre}</Text>
-      </View>
-      <Text style={styles.trackYear}>{track.year}</Text>
-    </View>
-  );
-}
-
-function CollabCard({
-  collab,
-}: {
-  collab: (typeof EPK_DATA.collaborations)[0];
-}) {
-  return (
-    <View style={styles.collabCard}>
-      <View style={styles.collabDot} />
-      <View style={{ flex: 1 }}>
-        <Text style={styles.collabTitle}>{collab.title}</Text>
-        <Text style={styles.collabArtist}>
-          {collab.artist} · {collab.year}
+        <Text style={styles.trackMeta}>
+          {track.genre} · prod. {track.producer}
         </Text>
+      </View>
+      <View style={styles.trackRight}>
+        <Text style={styles.trackYear}>{track.year}</Text>
+        <Text style={styles.trackDuration}>{track.duration}</Text>
       </View>
     </View>
   );
@@ -537,21 +527,19 @@ export function EPKDocument() {
       title={`Linarex — Electronic Press Kit ${EPK_DATA.year}`}
       author='Linarex'
       subject='Electronic Press Kit'
-      keywords='linarex, funk pop, afrobeat fusion, composer, music producer'
+      keywords='linarex, drummer, composer, rock, funk, fusion, producer'
       creator='Linarex Press Kit'
     >
       <Page size='A4' style={styles.page}>
-        {/* ── HERO ─────────────────────────────────────────────────────── */}
+        {/* HERO */}
         <View style={styles.hero}>
           <Image style={styles.heroBg} src={EPK_DATA.heroImage} />
           <View style={styles.heroOverlay} />
 
-          {/* Badge top-right */}
           <View style={styles.heroBadge}>
             <Text style={styles.heroBadgeText}>PRESS KIT {EPK_DATA.year}</Text>
           </View>
 
-          {/* Artist name bottom-left */}
           <View style={styles.heroContent}>
             <Text style={styles.heroEyebrow}>ELECTRONIC PRESS KIT</Text>
             <Text style={styles.heroName}>{EPK_DATA.artist}</Text>
@@ -561,17 +549,17 @@ export function EPKDocument() {
           </View>
         </View>
 
-        {/* ── BODY ─────────────────────────────────────────────────────── */}
+        {/* BODY */}
         <View style={styles.body}>
-          {/* Stats strip */}
           <StatStrip />
 
-          {/* Two columns: Bio + Discography */}
           <View style={styles.twoCol}>
-            {/* Left: Bio + Quote */}
+            {/* Left: Portrait + Bio + Quote */}
             <View style={styles.colLeft}>
+              <Image style={styles.portrait} src={EPK_DATA.portraitImage} />
+
               <View style={styles.section}>
-                <SectionHeader title='Artist Biography' />
+                <SectionHeader title='About' />
                 <Text style={styles.bioText}>{EPK_DATA.bio}</Text>
               </View>
 
@@ -580,64 +568,71 @@ export function EPKDocument() {
                   &ldquo;{EPK_DATA.quote}&rdquo;
                 </Text>
               </View>
-
-              {/* Platforms */}
-              <View style={styles.section}>
-                <SectionHeader title='Available On' />
-                <View style={styles.platformsGrid}>
-                  {EPK_DATA.platforms.map((p) => (
-                    <View key={p} style={styles.platformBadge}>
-                      <Text style={styles.platformText}>{p.toUpperCase()}</Text>
-                    </View>
-                  ))}
-                </View>
-              </View>
             </View>
 
-            {/* Right: Releases + Collaborations */}
+            {/* Right: Second photo + Discography */}
             <View style={styles.colRight}>
-              <View style={styles.section}>
-                <SectionHeader title='Key Releases' />
-                {EPK_DATA.releases.map((t) => (
-                  <TrackCard key={t.title} track={t} />
-                ))}
-              </View>
+              <Image
+                style={styles.secondaryPhoto}
+                src={EPK_DATA.secondaryImage}
+              />
 
               <View style={styles.section}>
-                <SectionHeader title='Collaborations' />
-                {EPK_DATA.collaborations.map((c) => (
-                  <CollabCard key={c.title + c.year} collab={c} />
+                <SectionHeader title='Discography' />
+                {EPK_DATA.releases.map((t) => (
+                  <TrackCard key={t.title} track={t} />
                 ))}
               </View>
             </View>
           </View>
 
-          {/* Divider */}
+          {/* Platforms — full width, clickable, name only */}
+          <View style={styles.section}>
+            <SectionHeader title='Listen On' />
+            <View style={styles.platformsGrid}>
+              {EPK_DATA.platforms.map((p) => (
+                <Link key={p.name} src={p.url} style={styles.platformBadge}>
+                  <Text style={styles.platformText}>
+                    {p.name.toUpperCase()}
+                  </Text>
+                </Link>
+              ))}
+            </View>
+          </View>
+
           <View style={styles.divider} />
 
-          {/* Contact section */}
+          {/* Contact — clickable mailto links */}
           <View style={styles.section}>
             <SectionHeader title='Contact' />
             <View style={styles.contactGrid}>
               {Object.values(EPK_DATA.contact).map((c) => (
                 <View key={c.role} style={styles.contactItem}>
                   <Text style={styles.contactRole}>{c.role}</Text>
-                  <Text style={styles.contactEmail}>{c.email}</Text>
+                  <Link src={`mailto:${c.email}`} style={styles.contactEmail}>
+                    {c.email}
+                  </Link>
                 </View>
               ))}
             </View>
           </View>
         </View>
 
-        {/* ── FOOTER ───────────────────────────────────────────────────── */}
+        {/* FOOTER */}
         <View style={styles.footer}>
-          <Text style={styles.footerText}>
+          <View style={styles.footerBrandRow}>
             <Text style={styles.footerAccent}>linarex</Text>
-            {'  ·  '}
-            {EPK_DATA.website}
-          </Text>
-          <Text style={styles.footerText}>{EPK_DATA.spotify}</Text>
-          <Text style={styles.footerText}>{EPK_DATA.instagram}</Text>
+            <Text style={styles.footerLink}>{'  ·  '}</Text>
+            <Link src={EPK_DATA.websiteUrl} style={styles.footerLink}>
+              {EPK_DATA.website}
+            </Link>
+          </View>
+          <Link src={EPK_DATA.spotifyUrl} style={styles.footerLink}>
+            {EPK_DATA.spotify}
+          </Link>
+          <Link src={EPK_DATA.instagramUrl} style={styles.footerLink}>
+            {EPK_DATA.instagram}
+          </Link>
         </View>
       </Page>
     </Document>

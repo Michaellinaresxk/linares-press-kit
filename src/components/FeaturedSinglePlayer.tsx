@@ -54,8 +54,6 @@ const FeaturedSinglePlayer = memo(function FeaturedSinglePlayer() {
     formatTime,
   } = useAudioPlayerFeatured(featuredSingle.audioUrl);
 
-  const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
-
   return (
     <section
       className='relative pt-10 min-h-screen flex items-center justify-center overflow-hidden'

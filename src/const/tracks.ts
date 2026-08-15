@@ -13,20 +13,20 @@ export interface Track {
 }
 
 export const featuredSingle: Track = {
-  id: 'renacer',
-  title: 'Renacer',
-  artist: 'Linarex ft. Skiba',
+  id: 'memories',
+  title: 'Memories',
+  artist: 'Linarex ft. Jacke Mattheus',
   year: '2026',
-  duration: 313,
+  duration: 402,
   description:
-    'Is a funk-driven love story about transformation and finding home. Perfect for late-night drives and uplifting playlists .',
+    'Memories is about the moment you can not switch off the dark, so you light up a memory — and that is enough to keep breathing.',
   coverImage:
-    'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1771093920/linarex/2026_ssgfrp.jpg',
+    'https://res.cloudinary.com/dwgzffsgl/image/upload/v1786661039/bg_qvvlw9.jpg',
 
-  audioUrl: '/audio/Renacer.wav',
+  audioUrl: '/audio/Memories.wav',
 
   spotifyUrl:
-    'https://open.spotify.com/intl-es/album/5JVDDkvNP77b5yz235Qu0R?si=BHdZGV2wTmGklQUWrrJ-wg',
+    'https://open.spotify.com/intl-es/album/57gkaRLcx11qK4Ok1PYdyW?si=bJMjK5vhRC29udAZTZNQJg',
 };
 
 export const tracks: Track[] = [
