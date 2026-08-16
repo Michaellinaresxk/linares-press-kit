@@ -229,7 +229,7 @@ export default function Links() {
           type='social'
         />
 
-        <EPKStrip />
+        {/* <EPKStrip /> */}
       </div>
     </section>
   );

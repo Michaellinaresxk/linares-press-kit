@@ -167,11 +167,11 @@ export default function Hero() {
               Listen Now
             </motion.a>
 
-            <DownloadEPKButton
+            {/* <DownloadEPKButton
               variant='ghost'
               size='md'
               label='Press Kit (EPK)'
-            />
+            /> */}
           </motion.div>
         </motion.div>
       </div>

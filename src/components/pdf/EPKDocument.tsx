@@ -1,21 +1,39 @@
 /**
  * EPKDocument.tsx
  *
- * Electronic Press Kit (EPK) PDF document for Linarex.
- * Generated server-side via /api/epk route using @react-pdf/renderer.
+ * Electronic Press Kit (EPK) PDF for Linarex — rediseño a DOS páginas.
+ * Se genera server-side vía /api/epk con @react-pdf/renderer.
  *
- * Usage:
  *   import { EPKDocument } from '@/components/pdf/EPKDocument';
  *   const stream = await renderToStream(<EPKDocument />);
  *
- * react-pdf gotchas respected here:
- *   - <Link> only ever wraps <Text> (never <View>/<Image>).
- *   - No array styles (style={[a, b]}) — one flattened style object per node.
- *   - Absolute image URLs only (relative /img/... paths break in server render).
- *   - NO `flex: 1` on <body> — it reserves the whole page height and shoves the
- *     column block to page 2, leaving page 1 blank. Content just flows instead.
+ * ── Decisiones de arquitectura ────────────────────────────────────────────────
+ * 1. DOS <Page> explícitas en vez de una que hace wrap.
+ *    Controlas exactamente qué va en cada hoja → nada "se cae" solo a la 2ª
+ *    página y evitas el bug de la página en blanco por completo.
+ *
+ * 2. <PhotoFrame> es la pieza clave que arregla tus imágenes.
+ *    El problema NO era objectFit: en react-pdf una <Image> con borderRadius NO
+ *    recorta su contenido a las esquinas redondeadas — la foto "se desborda"
+ *    por dentro del marco. Solución: un <View> contenedor con
+ *    { borderRadius, overflow: 'hidden' } que SÍ recorta, y la <Image> rellena
+ *    ese view al 100% con objectFit: 'cover'. Así el recorte es siempre limpio.
+ *
+ * 3. objectPosition controla QUÉ zona de la foto se conserva al recortar
+ *    ('50% 15%' = arriba, para no cortar la cara). Se pasa por foto.
+ *
+ * 4. Footer con { position:'absolute', bottom:0 } + prop `fixed` → se repite
+ *    fijado abajo en ambas páginas. Page.paddingBottom reserva su altura para
+ *    que el contenido nunca lo pise.
+ *
+ * ── Gotchas de react-pdf que se respetan aquí ────────────────────────────────
+ *   - <Link> solo envuelve <Text> (nunca <View>/<Image>).
+ *   - Un objeto de estilo plano por nodo (nada de style={[a, b]}).
+ *   - Solo URLs absolutas en <Image> (las rutas relativas /img/... rompen en SSR).
+ *   - Nada de flex:1 en el body (reservaba toda la página y empujaba el bloque).
  */
 
+import type { Style } from '@react-pdf/types';
 import {
   Document,
   Image,
@@ -27,8 +45,6 @@ import {
 } from '@react-pdf/renderer';
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
-// Brand palette mirrors the web (LinksPage / About): deep navy surfaces, a
-// #378add primary blue and #85b7eb light accent. Bold via fontFamily only.
 const COLORS = {
   bg: '#080e14',
   surface: '#0d1822',
@@ -43,7 +59,7 @@ const COLORS = {
   textMute: '#7c98ab',
   textFaint: '#4d6675',
   white: '#ffffff',
-};
+} as const;
 
 // ─── Styles ───────────────────────────────────────────────────────────────────
 const styles = StyleSheet.create({
@@ -51,18 +67,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica',
     backgroundColor: COLORS.bg,
     color: COLORS.white,
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingLeft: 0,
-    paddingRight: 0,
+    paddingBottom: 46, // reserva la altura del footer fijo
   },
-
   linkReset: { textDecoration: 'none' },
 
   // ── HERO ──
   hero: {
     position: 'relative',
-    height: 185,
+    height: 210,
     backgroundColor: COLORS.surface,
     overflow: 'hidden',
   },
@@ -70,8 +82,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    right: 0,
-    bottom: 0,
+    width: '100%',
+    height: '100%',
     objectFit: 'cover',
     opacity: 0.4,
   },
@@ -83,21 +95,16 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: 'rgba(6,12,20,0.6)',
   },
-  heroContent: {
-    position: 'absolute',
-    bottom: 26,
-    left: 40,
-    right: 40,
-  },
+  heroContent: { position: 'absolute', bottom: 30, left: 40, right: 40 },
   heroEyebrow: {
     fontSize: 8,
     fontFamily: 'Helvetica-Bold',
     letterSpacing: 4,
     color: COLORS.accent,
-    marginBottom: 5,
+    marginBottom: 6,
   },
   heroName: {
-    fontSize: 38,
+    fontSize: 42,
     fontFamily: 'Helvetica-Bold',
     color: COLORS.textHi,
     letterSpacing: -1,
@@ -106,12 +113,12 @@ const styles = StyleSheet.create({
   heroSubtitle: {
     fontSize: 10.5,
     color: COLORS.text,
-    marginTop: 6,
+    marginTop: 7,
     letterSpacing: 1.5,
   },
   heroBadge: {
     position: 'absolute',
-    top: 22,
+    top: 24,
     right: 40,
     backgroundColor: 'rgba(55,138,221,0.15)',
     borderWidth: 1,
@@ -128,19 +135,16 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
   },
 
-  // ── Body (no flex:1 — see header note) ──
-  body: {
-    paddingHorizontal: 40,
-    paddingTop: 24,
-    paddingBottom: 24,
-  },
+  // ── Body ──
+  body: { paddingHorizontal: 40, paddingTop: 22 },
+  bodyPage2: { paddingHorizontal: 40, paddingTop: 34 },
 
   // ── Section ──
-  section: { marginBottom: 16 },
+  section: { marginBottom: 18 },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 11,
   },
   sectionDot: {
     width: 4,
@@ -157,44 +161,26 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
 
-  // ── Photos ──
-  portrait: {
-    width: '100%',
-    height: 130,
+  // ── PhotoFrame (el <View> recorta; la <Image> rellena) ──
+  frame: {
     borderRadius: 8,
-    marginBottom: 14,
-    objectFit: 'cover',
-    objectPosition: 'center top', // ← controla qué zona se conserva
+    overflow: 'hidden',
     borderWidth: 1,
     borderColor: COLORS.border,
     borderStyle: 'solid',
+    backgroundColor: COLORS.surface,
   },
-  secondaryPhoto: {
-    width: '100%',
-    height: 90,
-    borderRadius: 8,
-    marginBottom: 14,
-    objectFit: 'contain', // ← antes 'cover'
-    backgroundColor: COLORS.surface, // ← el letterbox se lee como marco
-    borderWidth: 1,
-    borderColor: COLORS.border,
-    borderStyle: 'solid',
-  },
-  // ── Bio ──
-  bioText: {
-    fontSize: 10,
-    color: COLORS.text,
-    lineHeight: 1.7,
-  },
+  frameImg: { width: '100%', height: '100%', objectFit: 'cover' },
+  portraitFrame: { width: '100%', height: 300 },
 
   // ── Stats strip ──
   statsRow: {
     flexDirection: 'row',
     backgroundColor: COLORS.surface,
     borderRadius: 8,
-    paddingVertical: 13,
+    paddingVertical: 14,
     paddingHorizontal: 20,
-    marginBottom: 16,
+    marginBottom: 20,
     borderWidth: 1,
     borderColor: COLORS.border,
     borderStyle: 'solid',
@@ -209,7 +195,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.borderStrong,
   },
   statNumber: {
-    fontSize: 18,
+    fontSize: 19,
     fontFamily: 'Helvetica-Bold',
     color: COLORS.textHi,
     lineHeight: 1.1,
@@ -223,21 +209,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  // ── Two-column ──
-  twoCol: {
-    flexDirection: 'row',
-    gap: 20,
-    marginBottom: 16,
-  },
-  colLeft: { flex: 1.15 },
-  colRight: { flex: 0.85 },
+  // ── Two-column (página 1) ──
+  twoCol: { flexDirection: 'row', gap: 22 },
+  colLeft: { flex: 1 },
+  colRight: { flex: 1.05 },
 
-  // ── Quote ──
+  bioText: { fontSize: 10, color: COLORS.text, lineHeight: 1.7 },
   quoteBlock: {
     borderLeftWidth: 2,
     borderLeftColor: COLORS.blue,
     borderStyle: 'solid',
     paddingLeft: 14,
+    marginTop: 4,
   },
   quoteText: {
     fontSize: 9.5,
@@ -246,62 +229,63 @@ const styles = StyleSheet.create({
     lineHeight: 1.65,
   },
 
-  // ── Discography card ──
+  // ── Gallery (mosaico editorial) ──
+  galleryRow: { flexDirection: 'row', gap: 8, height: 190 },
+  galleryBig: { flex: 1.5, height: '100%' },
+  galleryStack: { flex: 1, gap: 8 },
+  gallerySmall: { flex: 1 },
+  galleryScrim: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 30,
+    backgroundColor: 'rgba(6,12,20,0.55)',
+  },
+  galleryCaption: {
+    position: 'absolute',
+    bottom: 8,
+    left: 10,
+    fontSize: 7,
+    fontFamily: 'Helvetica-Bold',
+    letterSpacing: 1.5,
+    color: COLORS.textHi,
+    textTransform: 'uppercase',
+  },
+
+  // ── Discography ──
   trackCard: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: COLORS.surface,
     borderRadius: 8,
     padding: 8,
-    marginBottom: 6,
+    marginBottom: 7,
     borderWidth: 1,
     borderColor: COLORS.border,
     borderStyle: 'solid',
   },
-  trackCover: {
-    width: 40,
-    height: 40,
-    borderRadius: 6,
-    marginRight: 9,
-    backgroundColor: COLORS.surfaceAlt,
-    objectFit: 'cover',
-  },
+  trackCoverFrame: { width: 44, height: 44, borderRadius: 6, marginRight: 10 },
   trackInfo: { flex: 1 },
   trackTitle: {
-    fontSize: 9.5,
+    fontSize: 10,
     fontFamily: 'Helvetica-Bold',
     color: COLORS.textHi,
     marginBottom: 2,
     textDecoration: 'none',
   },
-  trackMeta: {
-    fontSize: 6.5,
-    color: COLORS.textMute,
-    lineHeight: 1.4,
-  },
+  trackMeta: { fontSize: 6.8, color: COLORS.textMute, lineHeight: 1.4 },
   trackRight: { alignItems: 'flex-end', marginLeft: 6 },
-  trackYear: {
-    fontSize: 8,
-    fontFamily: 'Helvetica-Bold',
-    color: COLORS.blue,
-  },
-  trackDuration: {
-    fontSize: 6.5,
-    color: COLORS.textFaint,
-    marginTop: 2,
-  },
+  trackYear: { fontSize: 8, fontFamily: 'Helvetica-Bold', color: COLORS.blue },
+  trackDuration: { fontSize: 6.5, color: COLORS.textFaint, marginTop: 2 },
 
   // ── Platforms ──
-  platformsGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 6,
-  },
+  platformsGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
   platformBadge: {
     backgroundColor: COLORS.surfaceAlt,
     borderRadius: 4,
-    paddingVertical: 5,
-    paddingHorizontal: 9,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
     borderWidth: 1,
     borderColor: COLORS.border,
     borderStyle: 'solid',
@@ -320,7 +304,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.surface,
     borderRadius: 8,
-    padding: 11,
+    padding: 12,
     borderWidth: 1,
     borderColor: COLORS.border,
     borderStyle: 'solid',
@@ -340,15 +324,14 @@ const styles = StyleSheet.create({
     textDecoration: 'none',
   },
 
-  // ── Divider ──
-  divider: {
-    height: 1,
-    backgroundColor: COLORS.border,
-    marginBottom: 18,
-  },
+  divider: { height: 1, backgroundColor: COLORS.border, marginBottom: 18 },
 
-  // ── Footer ──
+  // ── Footer (fixed, se repite en ambas páginas) ──
   footer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -373,6 +356,25 @@ const styles = StyleSheet.create({
   },
 });
 
+// ─── Types ─────────────────────────────────────────────────────────────────────
+interface Release {
+  title: string;
+  artist: string;
+  genre: string;
+  producer: string;
+  duration: string;
+  year: string;
+  cover: string;
+  spotify: string;
+}
+
+interface GalleryItem {
+  src: string;
+  caption: string;
+  /** Zona de la foto a conservar al recortar, ej. '50% 20%' (arriba). */
+  objectPosition: string;
+}
+
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const EPK_DATA = {
   artist: 'LINAREX',
@@ -380,31 +382,45 @@ const EPK_DATA = {
   genre: 'Rock / Funk / Fusion',
   year: '2026',
 
-  bio: 'Linarex is a Dominican drummer, composer and producer based in Warsaw, Poland. With more than 20 years behind the drum kit and writing songs — much of it composing for other voices — his work is built on collaboration: he writes and produces each track, and guest vocalists bring the songs to life. Since his 2025 debut, Linarex has moved across rock, funk, afrobeat and folk, guided by one question: what does this emotion sound like? Always driven by true feeling..',
-
+  bio: 'Linarex is a Dominican drummer, composer and producer based in Warsaw, Poland. With more than 20 years behind the drum kit and writing songs — much of it composing for other voices — his work is built on collaboration: he writes and produces each track, and guest vocalists bring the songs to life.',
+  bioP2:
+    'Since his 2025 debut, Linarex has moved across rock, funk, afrobeat and folk, guided by one question: what does this emotion sound like?',
   quote:
     'Each song is an emotional journey through the human experience. May it slow you down — and may it also move you beyond the confines of yourself.',
 
-  // Honest, defensible numbers only.
   stats: [
     { number: '20+', label: 'Years drumming & composing' },
     { number: '3', label: 'Singles as Linarex' },
     { number: '2025', label: 'Debut single' },
   ],
 
-  // ── Photos ──
-  // Absolute Cloudinary URLs only. All three currently point to your one good
-  // photo as a placeholder — swap portraitImage / secondaryImage for real
-  // live/studio shots whenever you have the URLs. heroImage is your atmospheric bg.
+  // ── Fotos ──
   heroImage:
     'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg',
   portraitImage:
     'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170739/linarex/trenes_lj3rfh.jpg',
-  // TODO(Linarex): replace with a DIFFERENT real photo (live or studio).
-  secondaryImage:
-    'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170735/linarex/standing_wicdur.jpg',
 
-  // ── Discography (single source of truth — no duplicate Collaborations) ──
+  // ── Galería (mosaico) ──
+  // TODO(Linarex): idealmente 3 fotos DISTINTAS (live / studio / backstage).
+  // De momento sembradas con las que tienes; ajusta objectPosition por foto.
+  gallery: [
+    {
+      src: 'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170735/linarex/standing_wicdur.jpg',
+      caption: 'Live',
+      objectPosition: '50% 35%',
+    },
+    {
+      src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg',
+      caption: 'On stage',
+      objectPosition: '50% 50%',
+    },
+    {
+      src: 'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170739/linarex/trenes_lj3rfh.jpg',
+      caption: 'Studio',
+      objectPosition: '50% 20%',
+    },
+  ] as GalleryItem[],
+
   releases: [
     {
       title: 'Renacer',
@@ -441,7 +457,7 @@ const EPK_DATA = {
         'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763300435/504381421_17858001459453136_3713166365445180538_n_wdmog2.jpg',
       spotify: 'https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS',
     },
-  ],
+  ] as Release[],
 
   platforms: [
     {
@@ -454,13 +470,10 @@ const EPK_DATA = {
     },
     { name: 'Instagram', url: 'https://www.instagram.com/_linarex' },
     { name: 'TikTok', url: 'https://www.tiktok.com/@linarex59' },
-    // { name: 'Apple Music', url: '' }, // re-add with the real (non-404) URL
   ],
 
   contact: {
-    // general: { role: 'General Inquiries', email: 'linarexinfo@gmail.com' },
     booking: { role: 'Booking & Management', email: 'linarexinfo@gmail.com' },
-    // press: { role: 'Press & Media', email: 'linarexinfo@gmail.com' },
   },
 
   website: 'linares-press-kit.vercel.app',
@@ -472,7 +485,38 @@ const EPK_DATA = {
   instagramUrl: 'https://www.instagram.com/_linarex',
 };
 
-// ─── Sub-components ───────────────────────────────────────────────────────────
+// ─── Primitivas reutilizables ─────────────────────────────────────────────────
+
+interface PhotoFrameProps {
+  src: string;
+  /** Estilo del marco (tamaño/posición). Se fusiona con styles.frame. */
+  frameStyle?: Style;
+  /** Zona de la foto a conservar, ej. '50% 15%'. Default centrado. */
+  objectPosition?: string;
+  /** Si se pasa, dibuja un scrim + caption abajo a la izquierda. */
+  caption?: string;
+}
+
+/**
+ * Foto recortada limpia: el <View> recorta (overflow:hidden + borderRadius),
+ * la <Image> rellena al 100% con object-fit cover. Nada se desborda.
+ */
+function PhotoFrame({
+  src,
+  frameStyle,
+  objectPosition = '50% 50%',
+  caption,
+}: PhotoFrameProps) {
+  return (
+    <View
+      style={frameStyle ? { ...styles.frame, ...frameStyle } : styles.frame}
+    >
+      <Image src={src} style={{ ...styles.frameImg, objectPosition }} />
+      {caption ? <View style={styles.galleryScrim} /> : null}
+      {caption ? <Text style={styles.galleryCaption}>{caption}</Text> : null}
+    </View>
+  );
+}
 
 function SectionHeader({ title }: { title: string }) {
   return (
@@ -498,10 +542,36 @@ function StatStrip() {
   );
 }
 
-function TrackCard({ track }: { track: (typeof EPK_DATA.releases)[0] }) {
+/** Mosaico: una foto grande a la izquierda + dos apiladas a la derecha. */
+function Gallery() {
+  const [big, ...rest] = EPK_DATA.gallery;
+  return (
+    <View style={styles.galleryRow}>
+      <PhotoFrame
+        src={big.src}
+        frameStyle={styles.galleryBig}
+        objectPosition={big.objectPosition}
+        caption={big.caption}
+      />
+      <View style={styles.galleryStack}>
+        {rest.map((g) => (
+          <PhotoFrame
+            key={g.caption}
+            src={g.src}
+            frameStyle={styles.gallerySmall}
+            objectPosition={g.objectPosition}
+            caption={g.caption}
+          />
+        ))}
+      </View>
+    </View>
+  );
+}
+
+function TrackCard({ track }: { track: Release }) {
   return (
     <View style={styles.trackCard}>
-      <Image style={styles.trackCover} src={track.cover} />
+      <PhotoFrame src={track.cover} frameStyle={styles.trackCoverFrame} />
       <View style={styles.trackInfo}>
         <Link src={track.spotify} style={styles.linkReset}>
           <Text style={styles.trackTitle}>{track.title}</Text>
@@ -519,7 +589,27 @@ function TrackCard({ track }: { track: (typeof EPK_DATA.releases)[0] }) {
   );
 }
 
-// ─── Main document ────────────────────────────────────────────────────────────
+function PageFooter() {
+  return (
+    <View style={styles.footer} fixed>
+      <View style={styles.footerBrandRow}>
+        <Text style={styles.footerAccent}>linarex</Text>
+        <Text style={styles.footerLink}>{'  ·  '}</Text>
+        <Link src={EPK_DATA.websiteUrl} style={styles.footerLink}>
+          {EPK_DATA.website}
+        </Link>
+      </View>
+      <Link src={EPK_DATA.spotifyUrl} style={styles.footerLink}>
+        {EPK_DATA.spotify}
+      </Link>
+      <Link src={EPK_DATA.instagramUrl} style={styles.footerLink}>
+        {EPK_DATA.instagram}
+      </Link>
+    </View>
+  );
+}
+
+// ─── Documento ────────────────────────────────────────────────────────────────
 
 export function EPKDocument() {
   return (
@@ -530,16 +620,14 @@ export function EPKDocument() {
       keywords='linarex, drummer, composer, rock, funk, fusion, producer'
       creator='Linarex Press Kit'
     >
+      {/* ── PÁGINA 1 — Identidad e historia ── */}
       <Page size='A4' style={styles.page}>
-        {/* HERO */}
         <View style={styles.hero}>
           <Image style={styles.heroBg} src={EPK_DATA.heroImage} />
           <View style={styles.heroOverlay} />
-
           <View style={styles.heroBadge}>
             <Text style={styles.heroBadgeText}>PRESS KIT {EPK_DATA.year}</Text>
           </View>
-
           <View style={styles.heroContent}>
             <Text style={styles.heroEyebrow}>ELECTRONIC PRESS KIT</Text>
             <Text style={styles.heroName}>{EPK_DATA.artist}</Text>
@@ -549,44 +637,49 @@ export function EPKDocument() {
           </View>
         </View>
 
-        {/* BODY */}
         <View style={styles.body}>
           <StatStrip />
 
           <View style={styles.twoCol}>
-            {/* Left: Portrait + Bio + Quote */}
             <View style={styles.colLeft}>
-              <Image style={styles.portrait} src={EPK_DATA.portraitImage} />
-
+              <PhotoFrame
+                src={EPK_DATA.portraitImage}
+                frameStyle={styles.portraitFrame}
+                objectPosition='50% 15%'
+              />
+            </View>
+            <View style={styles.colRight}>
               <View style={styles.section}>
                 <SectionHeader title='About' />
                 <Text style={styles.bioText}>{EPK_DATA.bio}</Text>
               </View>
-
               <View style={styles.quoteBlock}>
                 <Text style={styles.quoteText}>
                   &ldquo;{EPK_DATA.quote}&rdquo;
                 </Text>
               </View>
             </View>
+          </View>
+        </View>
 
-            {/* Right: Second photo + Discography */}
-            <View style={styles.colRight}>
-              <Image
-                style={styles.secondaryPhoto}
-                src={EPK_DATA.secondaryImage}
-              />
+        <PageFooter />
+      </Page>
 
-              <View style={styles.section}>
-                <SectionHeader title='Discography' />
-                {EPK_DATA.releases.map((t) => (
-                  <TrackCard key={t.title} track={t} />
-                ))}
-              </View>
-            </View>
+      {/* ── PÁGINA 2 — Música y contacto ── */}
+      <Page size='A4' style={styles.page}>
+        <View style={styles.bodyPage2}>
+          <View style={styles.section}>
+            <SectionHeader title='Gallery' />
+            <Gallery />
           </View>
 
-          {/* Platforms — full width, clickable, name only */}
+          <View style={styles.section}>
+            <SectionHeader title='Discography' />
+            {EPK_DATA.releases.map((t) => (
+              <TrackCard key={t.title} track={t} />
+            ))}
+          </View>
+
           <View style={styles.section}>
             <SectionHeader title='Listen On' />
             <View style={styles.platformsGrid}>
@@ -602,7 +695,6 @@ export function EPKDocument() {
 
           <View style={styles.divider} />
 
-          {/* Contact — clickable mailto links */}
           <View style={styles.section}>
             <SectionHeader title='Contact' />
             <View style={styles.contactGrid}>
@@ -618,24 +710,10 @@ export function EPKDocument() {
           </View>
         </View>
 
-        {/* FOOTER */}
-        <View style={styles.footer}>
-          <View style={styles.footerBrandRow}>
-            <Text style={styles.footerAccent}>linarex</Text>
-            <Text style={styles.footerLink}>{'  ·  '}</Text>
-            <Link src={EPK_DATA.websiteUrl} style={styles.footerLink}>
-              {EPK_DATA.website}
-            </Link>
-          </View>
-          <Link src={EPK_DATA.spotifyUrl} style={styles.footerLink}>
-            {EPK_DATA.spotify}
-          </Link>
-          <Link src={EPK_DATA.instagramUrl} style={styles.footerLink}>
-            {EPK_DATA.instagram}
-          </Link>
-        </View>
+        <PageFooter />
       </Page>
     </Document>
   );
 }
+
 export default EPKDocument;

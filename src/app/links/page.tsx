@@ -179,16 +179,16 @@ const LINK_SECTIONS: LinkSection[] = [
     id: 'press',
     label: 'Press & booking',
     links: [
-      {
-        id: 'epk',
-        label: 'Press Kit (EPK)',
-        sublabel: 'One-page PDF · bio, releases, contact',
-        href: '/api/epk',
-        iconBg: '#185fa5',
-        icon: 'epk',
-        variant: 'epk',
-        download: true,
-      },
+      // {
+      //   id: 'epk',
+      //   label: 'Press Kit (EPK)',
+      //   sublabel: 'One-page PDF · bio, releases, contact',
+      //   href: '/api/epk',
+      //   iconBg: '#185fa5',
+      //   icon: 'epk',
+      //   variant: 'epk',
+      //   download: true,
+      // },
       {
         id: 'contact',
         label: 'Booking & Management',
@@ -344,7 +344,7 @@ export default function LinksPage() {
           className='absolute inset-0 bg-cover bg-center bg-no-repeat'
           style={{
             backgroundImage:
-              'url(https://res.cloudinary.com/dwgzffsgl/image/upload/v1763903688/bg_ijmkc7.jpg)',
+              'url(https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170735/linarex/standing_wicdur.jpg)',
           }}
         />
         <div className='absolute inset-0 bg-black/65' />
