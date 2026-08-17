@@ -1,19 +1,6 @@
 'use client';
 
-/**
- * TechnicalRider.tsx (updated)
- *
- * Changes from original:
- * - Replaced the "Download Complete Technical Rider (PDF)" placeholder button
- *   with two real download buttons:
- *     1. DownloadEPKButton  → GET /api/epk  (branded one-pager)
- *     2. A static PDF link  → /documents/technical-rider.pdf  (optional)
- *
- * No other logic was changed.
- */
-
 import technicalSpecs from '@/const/technicalSpecs';
-import DownloadEPKButton from '@/components/DownloadEPKButton';
 import { motion } from 'framer-motion';
 import { FileText, MapPin, Settings } from 'lucide-react';
 import { useState } from 'react';
@@ -94,14 +81,6 @@ function TechnicalRider() {
 
       {/* ── Download section ──────────────────────────────────────────── */}
       <div className='mt-6 pt-6 border-t border-gray-700 space-y-3'>
-        {/* EPK PDF — generated dynamically */}
-        <DownloadEPKButton
-          variant='secondary'
-          size='md'
-          label='Download Press Kit (EPK)'
-          className='w-full justify-center'
-        />
-
         {/* Technical rider PDF — static file (add /public/documents/technical-rider.pdf) */}
         <motion.a
           href='/documents/technical-rider.pdf'

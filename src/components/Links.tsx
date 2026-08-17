@@ -1,34 +1,10 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useMemo } from 'react';
-import { Play, Heart, FileDown } from 'lucide-react';
+import { useRef } from 'react';
+import { Play, Heart } from 'lucide-react';
 import { streamingPlatforms, socialPlatforms } from '@/const/links';
 import PlatformCard from './cards/PlatformCard';
-import DownloadEPKButton from '@/components/DownloadEPKButton';
-
-interface PlatformStats {
-  streaming: number;
-  social: number;
-  total: number;
-}
-
-const parseFollowers = (followersString: string): number =>
-  parseFloat(followersString.replace('K', '')) * 1000;
-
-function usePlatformStats(): PlatformStats {
-  return useMemo(() => {
-    const streaming = streamingPlatforms.reduce(
-      (acc, p) => acc + parseFollowers(p.followers),
-      0,
-    );
-    const social = socialPlatforms.reduce(
-      (acc, p) => acc + parseFollowers(p.followers),
-      0,
-    );
-    return { streaming, social, total: streaming + social };
-  }, []);
-}
 
 function AnimatedBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -151,52 +127,6 @@ function PlatformSection({
   );
 }
 
-function EPKStrip() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-      className='mt-4 pt-12'
-      style={{ borderTop: '1px solid rgba(55,138,221,0.15)' }}
-    >
-      <div
-        className='flex flex-col sm:flex-row items-center justify-between gap-6 rounded-2xl px-8 py-6'
-        style={{
-          background: 'rgba(13,17,23,0.6)',
-          border: '1px solid rgba(55,138,221,0.2)',
-        }}
-      >
-        <div className='flex items-center gap-4'>
-          <div
-            className='w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0'
-            style={{
-              background: 'rgba(24,95,165,0.2)',
-              border: '1px solid rgba(55,138,221,0.3)',
-            }}
-          >
-            <FileDown size={20} style={{ color: '#85b7eb' }} />
-          </div>
-          <div>
-            <p className='font-semibold text-sm' style={{ color: '#c8dcea' }}>
-              Press &amp; Booking
-            </p>
-            <p className='text-xs mt-0.5' style={{ color: '#3d5a6e' }}>
-              One-page EPK with bio, releases, and contact info
-            </p>
-          </div>
-        </div>
-        <DownloadEPKButton
-          variant='primary'
-          size='md'
-          label='Download EPK (PDF)'
-        />
-      </div>
-    </motion.div>
-  );
-}
-
 export default function Links() {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -228,8 +158,6 @@ export default function Links() {
           platforms={socialPlatforms}
           type='social'
         />
-
-        {/* <EPKStrip /> */}
       </div>
     </section>
   );

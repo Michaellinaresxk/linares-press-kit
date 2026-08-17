@@ -179,16 +179,16 @@ const LINK_SECTIONS: LinkSection[] = [
     id: 'press',
     label: 'Press & booking',
     links: [
-      // {
-      //   id: 'epk',
-      //   label: 'Press Kit (EPK)',
-      //   sublabel: 'One-page PDF · bio, releases, contact',
-      //   href: '/api/epk',
-      //   iconBg: '#185fa5',
-      //   icon: 'epk',
-      //   variant: 'epk',
-      //   download: true,
-      // },
+      {
+        id: 'epk',
+        label: 'Press Kit (EPK)',
+        sublabel: 'One-page PDF · bio, releases, contact',
+        href: '/linarex-epk.pdf',
+        iconBg: '#185fa5',
+        icon: 'epk',
+        variant: 'epk',
+        download: true,
+      },
       {
         id: 'contact',
         label: 'Booking & Management',

@@ -1,12 +1,8 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Link from 'next/dist/client/link';
 import { useRef } from 'react';
-import DownloadEPKButton from '@/components/DownloadEPKButton';
-
-// Paleta extraída del bg: azules fríos oscuros, grises pizarra, negro profundo
-// #0d1117 → base oscura | #8faabf → texto secundario | #c8dcea → texto destacado
-// #85b7eb → acento azul frío | #5a7a8e → labels tenues
 
 const HERO_STATS = [
   { number: '20+', label: 'Years' },
@@ -166,12 +162,22 @@ export default function Hero() {
             >
               Listen Now
             </motion.a>
-
-            {/* <DownloadEPKButton
-              variant='ghost'
-              size='md'
-              label='Press Kit (EPK)'
-            /> */}
+            <Link
+              href='/linarex-epk.pdf'
+              download
+              style={{
+                background: 'rgba(180,210,244,0.10)',
+                border: '1px solid rgba(133,183,235,0.35)',
+                color: '#85b7eb',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '0.75rem',
+                fontWeight: 500,
+                fontSize: '0.875rem',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              Press Kit (EPK)
+            </Link>
           </motion.div>
         </motion.div>
       </div>
