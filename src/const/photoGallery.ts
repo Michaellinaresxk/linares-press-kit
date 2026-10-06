@@ -41,7 +41,7 @@ export const photoGallery = [
   },
   {
     id: 1,
-    src: 'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763218282/callejon_ssosib.png',
+    src: '/img/Singin.png',
     venue: 'Found joy in the simplest moments.',
     location: 'Santo Domingo, DR',
     photographer: 'Anna Rodriguez',
@@ -61,18 +61,25 @@ export const photoGallery = [
     location: 'Warsaw, Poland',
     photographer: 'Adiel Zarco',
   },
-  // {
-  //   id: 4,
-  //   src: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&h=800&fit=crop',
-  //   venue: 'Hotel Atlantis',
-  //   location: 'Dubai, UAE',
-  //   photographer: 'Sarah Al-Zahra',
-  // },
-  // {
-  //   id: 5,
-  //   src: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&h=800&fit=crop',
-  //   venue: 'Jazz & Metal Fusion',
-  //   location: 'New York, USA',
-  //   photographer: 'Mike Johnson',
-  // },
+  {
+    id: 4,
+    src: '/img/train.jpg',
+    venue: 'Hotel Atlantis',
+    location: 'Dubai, UAE',
+    photographer: 'Sarah Al-Zahra',
+  },
+  {
+    id: 5,
+    src: '/img/DSC00047.jpg',
+    venue: 'Jazz & Metal Fusion',
+    location: 'New York, USA',
+    photographer: 'Mike Johnson',
+  },
+  {
+    id: 5,
+    src: '/img/perfil-2.jpg',
+    venue: 'Jazz & Metal Fusion',
+    location: 'New York, USA',
+    photographer: 'Mike Johnson',
+  },
 ];

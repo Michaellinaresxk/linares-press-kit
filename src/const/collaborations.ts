@@ -43,13 +43,15 @@ export const collaborations = [
   // {
   //   id: 4,
   //   title: 'Endless Sky',
-  //   collaborator: 'Michael Linares',
-  //   role: 'Guitarist',
+  //   collaborator: 'Jacke Matthews',
+  //   role: 'Vocalist',
   //   year: '2026',
   //   image:
   //     'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=600&h=600&fit=crop',
   //   color: 'from-gray-600 to-gray-800',
   //   genre: 'Acustic Indie Folk',
   //   duration: '4:15',
+  //   producer: 'Niger Grey',
+  //   audioUrl: 'audio/EndlessSky.wav',
   // },
 ];
