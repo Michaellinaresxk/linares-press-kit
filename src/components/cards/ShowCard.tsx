@@ -28,14 +28,14 @@ function ShowCard({ show, index }: ShowCardProps) {
     ({
       confirmed: 'bg-green-600/20 text-green-300 border-green-500/30',
       pending: 'bg-yellow-600/20 text-yellow-300 border-yellow-500/30',
-    }[status] || 'bg-gray-600/20 text-gray-300 border-gray-500/30');
+    })[status] || 'bg-gray-600/20 text-gray-300 border-gray-500/30';
 
   const getTypeStyles = (type: string) =>
     ({
       'Headline Show': 'bg-purple-600/20 text-purple-300 border-purple-500/30',
       Festival: 'bg-cyan-600/20 text-cyan-300 border-cyan-500/30',
       'Support Act': 'bg-gray-600/20 text-gray-300 border-gray-500/30',
-    }[type] || 'bg-gray-600/20 text-gray-300 border-gray-500/30');
+    })[type] || 'bg-gray-600/20 text-gray-300 border-gray-500/30';
 
   return (
     <motion.div
@@ -71,14 +71,14 @@ function ShowCard({ show, index }: ShowCardProps) {
             <div className='flex flex-wrap items-center gap-2'>
               <span
                 className={`px-2 py-1 rounded-full text-xs border ${getTypeStyles(
-                  show.type
+                  show.type,
                 )}`}
               >
                 {show.type}
               </span>
               <span
                 className={`px-2 py-1 rounded-full text-xs border ${getStatusStyles(
-                  show.status
+                  show.status,
                 )}`}
               >
                 {show.status}

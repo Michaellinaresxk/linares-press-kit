@@ -149,22 +149,18 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 1.3 }}
             className='flex flex-wrap items-center gap-4 pb-20'
           >
-            <motion.a
-              href='#collaborations'
-              className='px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300'
-              style={{
-                background: '#1d4a72',
-                border: '1px solid #378add',
-                color: '#c8dcea',
-              }}
-              whileHover={{ scale: 1.03, y: -1 }}
-              whileTap={{ scale: 0.97 }}
+            <Link
+              href='/Live-Music-Proposal.pdf'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='rounded-xl border border-[#378add] bg-[#1d4a72] px-6 py-3 text-sm font-semibold text-[#c8dcea] transition-transform duration-300 hover:-translate-y-px hover:scale-[1.03] active:scale-[0.97]'
             >
-              Listen Now
-            </motion.a>
+              Live Show Proposal
+            </Link>
             <Link
               href='/linarex-epk.pdf'
-              download
+              target='_blank'
+              rel='noopener noreferrer'
               style={{
                 background: 'rgba(180,210,244,0.10)',
                 border: '1px solid rgba(133,183,235,0.35)',
