@@ -42,8 +42,8 @@ export const photoGallery = [
   {
     id: 1,
     src: '/img/Singin.png',
-    venue: 'Found joy in the simplest moments.',
-    location: 'Santo Domingo, DR',
+    venue: 'Live at the Edge of Sound',
+    location: 'Deski, Warsaw, Poland',
     photographer: 'Anna Rodriguez',
   },
   {
@@ -57,29 +57,29 @@ export const photoGallery = [
     id: 3,
     src: 'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170739/linarex/trenes_lj3rfh.jpg',
 
-    venue: 'Six strings and good vibes.',
+    venue: 'In railway stations, stories unfold.',
     location: 'Warsaw, Poland',
     photographer: 'Adiel Zarco',
   },
   {
     id: 4,
     src: '/img/train.jpg',
-    venue: 'Hotel Atlantis',
-    location: 'Dubai, UAE',
+    venue: 'Train journeys, where music meets the tracks.',
+    location: 'Warsaw, Poland',
     photographer: 'Sarah Al-Zahra',
   },
   {
     id: 5,
     src: '/img/DSC00047.jpg',
-    venue: 'Jazz & Metal Fusion',
-    location: 'New York, USA',
+    venue: 'Energy in motion, captured in a frame.',
+    location: 'Warsaw, Poland',
     photographer: 'Mike Johnson',
   },
   {
     id: 5,
     src: '/img/perfil-2.jpg',
-    venue: 'Jazz & Metal Fusion',
-    location: 'New York, USA',
+    venue: 'In the studio, where magic happens.',
+    location: 'Warsaw, Poland',
     photographer: 'Mike Johnson',
   },
 ];
