@@ -1,0 +1,97 @@
+.footer {
+  border-top: 1px solid var(--border, rgba(91, 143, 168, 0.2));
+  padding: 28px 28px 36px;
+  background: var(--bg, #080c10);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1.2fr auto auto;
+  gap: 24px;
+  align-items: end;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.brand {
+  min-width: 0;
+}
+
+.name {
+  display: inline-block;
+  color: var(--white, #dce8f0);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+}
+
+.brand p {
+  margin: 8px 0 0;
+  max-width: 320px;
+  color: var(--muted, #7a96a6);
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.links a {
+  color: var(--muted, #7a96a6);
+  font-size: 0.72rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.links a:hover {
+  color: var(--white, #dce8f0);
+}
+
+.copyright {
+  margin: 0;
+  color: #4d6877;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+.footer a:focus-visible {
+  outline: 2px solid var(--blue, #5b8fa8);
+  outline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .links {
+    justify-content: flex-start;
+  }
+
+  .copyright {
+    text-align: left;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding-inline: 20px;
+  }
+
+  .inner {
+    gap: 18px;
+  }
+
+  .links {
+    gap: 10px 14px;
+  }
+}

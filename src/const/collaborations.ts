@@ -1,4 +1,4 @@
-import { siteConfig, siteGenres } from '@/lib/site-config';
+import { siteConfig, siteGenresOriginal } from '@/lib/site-config';
 
 export const collaborations = siteConfig.releases.map((release, index) => ({
   id: index + 1,
@@ -8,7 +8,7 @@ export const collaborations = siteConfig.releases.map((release, index) => ({
   year: release.year,
   image: release.coverImage,
   color: 'from-slate-600 to-slate-800',
-  genre: siteGenres,
+  genre: siteGenresOriginal,
   duration: release.durationLabel,
   audioUrl: release.audioUrl,
 }));

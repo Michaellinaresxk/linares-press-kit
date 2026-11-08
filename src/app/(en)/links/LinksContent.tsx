@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { ExternalLink, Download, ArrowRight } from 'lucide-react';
 import { featuredSingle } from '@/const/tracks';
 import { streamingPlatforms, socialPlatforms } from '@/const/links';
-import { siteConfig, siteGenres } from '@/lib/site-config';
+import { siteConfig, siteGenresOriginal } from '@/lib/site-config';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -385,14 +385,14 @@ export default function LinksPage() {
             {siteConfig.role}
           </p>
           <span
-            className='text-xs rounded-full px-3 py-1 tracking-wide'
+            className='text-xs rounded-full px-3 py-1 tracking-wide text-center'
             style={{
               color: '#85b7eb',
               background: 'rgba(13,24,34,0.6)',
               border: '1px solid rgba(55,138,221,0.3)',
             }}
           >
-            {siteGenres}
+            Original music: {siteGenresOriginal}
           </span>
         </motion.div>
 

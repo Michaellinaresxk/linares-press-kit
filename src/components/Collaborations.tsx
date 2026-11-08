@@ -2,10 +2,16 @@
 
 import { motion } from 'framer-motion';
 import { collaborations } from '@/const/collaborations';
+import { homeCopy, type HomeLocale } from '@/lib/i18n/home';
 import { useAudioPlayer } from '@/hooks/useAudioPlayer';
 import CollaborationCard from './cards/CollaborationCard';
 
-export default function Collaborations() {
+export default function Collaborations({
+  locale = 'en',
+}: {
+  locale?: HomeLocale;
+}) {
+  const copy = homeCopy[locale];
   const { playingId, isPlaying, togglePlay, stopAudio } = useAudioPlayer();
 
   return (
@@ -30,7 +36,7 @@ export default function Collaborations() {
             className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6'
             style={{ color: '#0d1117' }}
           >
-            COLLABORATIONS
+            {copy.collaborations.title}
           </h2>
 
           <motion.div
@@ -52,9 +58,7 @@ export default function Collaborations() {
             transition={{ delay: 0.7, duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Musical partnerships that transcend boundaries. Each collaboration
-            brings unique perspectives and creates something greater than the
-            sum of its parts.
+            {copy.collaborations.subtitle}
           </motion.p>
         </motion.div>
 
@@ -89,15 +93,14 @@ export default function Collaborations() {
             transition={{ delay: 0.5 }}
             viewport={{ once: true }}
           >
-            Open to New Collaborations
+            {copy.collaborations.openTo}
           </motion.h3>
 
           <p
             className='mb-6 md:mb-8 max-w-2xl mx-auto text-sm md:text-base lg:text-lg'
             style={{ color: '#3d5a6e' }}
           >
-            Always looking for talented artists to create something unique
-            together. Explore new sonic territories.
+            {copy.collaborations.openToCopy}
           </p>
 
           <div className='flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto'>
@@ -113,7 +116,7 @@ export default function Collaborations() {
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.3 }}
             >
-              Get in Touch
+              {copy.collaborations.getInTouch}
             </motion.a>
           </div>
         </motion.div>

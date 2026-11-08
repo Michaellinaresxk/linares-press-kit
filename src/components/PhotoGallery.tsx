@@ -7,15 +7,19 @@ import Image from 'next/image';
 import { artistGallery, liveGallery } from '@/const/photoGallery';
 import PhotoModal from './modal/PhotoModal';
 import { siteConfig } from '@/lib/site-config';
+import { homeCopy, withHomeVars, type HomeLocale } from '@/lib/i18n/home';
 
 type Photo = (typeof artistGallery)[number];
 type GalleryVariant = 'artist' | 'live';
 
 export default function PhotoGallery({
   variant = 'artist',
+  locale = 'en',
 }: {
   variant?: GalleryVariant;
+  locale?: HomeLocale;
 }) {
+  const copy = homeCopy[locale];
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
   const photos = variant === 'live' ? liveGallery : artistGallery;
@@ -60,15 +64,17 @@ export default function PhotoGallery({
             className='text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 md:mb-6'
             style={{ color: '#e8eef5' }}
           >
-            {isLiveGallery ? 'Live Gallery' : 'Gallery'}
+            {isLiveGallery ? copy.gallery.live : copy.gallery.artist}
           </h2>
           <p
             className='text-base md:text-lg max-w-3xl mx-auto px-4'
             style={{ color: '#5a7a8e' }}
           >
             {isLiveGallery
-              ? `Live moments from the ${siteConfig.liveShow}: connection, energy and music on stage.`
-              : 'Portraits, live moments and images from Linarex’s creative world.'}
+              ? withHomeVars(copy.gallery.liveCopy, {
+                  liveShow: siteConfig.liveShow.name,
+                })
+              : copy.gallery.artistCopy}
           </p>
         </motion.div>
 
@@ -91,7 +97,7 @@ export default function PhotoGallery({
               className='text-xl md:text-2xl font-bold'
               style={{ color: '#c8dcea' }}
             >
-              {isLiveGallery ? siteConfig.liveShow : 'Artist & press photos'}
+              {isLiveGallery ? siteConfig.liveShow.name : 'Artist & press photos'}
             </h3>
           </motion.div>
 

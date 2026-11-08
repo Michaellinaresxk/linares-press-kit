@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Send, Loader2 } from 'lucide-react';
 import { siteConfig } from '@/lib/site-config';
+import { homeCopy, type HomeLocale } from '@/lib/i18n/home';
 
 type FormState = {
   name: string;
@@ -30,7 +31,8 @@ const INPUT_STYLE = {
   color: '#c8dcea',
 };
 
-export default function Contact() {
+export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
+  const copy = homeCopy[locale];
   const containerRef = useRef<HTMLDivElement>(null);
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [status, setStatus] = useState<Status>('idle');
@@ -126,11 +128,10 @@ export default function Contact() {
             className='text-4xl lg:text-5xl font-bold mb-6'
             style={{ color: '#e8eef5' }}
           >
-            Contact
+            {copy.contact.title}
           </h2>
           <p className='text-lg max-w-3xl mx-auto' style={{ color: '#5a7a8e' }}>
-            Professional inquiries, booking requests, and collaboration
-            opportunities.
+            {copy.contact.copy}
           </p>
           <p className='mt-5 text-base' style={{ color: '#c8dcea' }}>
             Email{' '}

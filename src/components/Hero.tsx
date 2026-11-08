@@ -4,12 +4,18 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { useRef } from 'react';
 import { siteConfig } from '@/lib/site-config';
+import {
+  homeCopy,
+  withHomeVars,
+  type HomeLocale,
+} from '@/lib/i18n/home';
 
 const HERO_STATS = [
   { number: siteConfig.yearsOnStage, label: 'Years on stage' },
 ] as const;
 
-export default function Hero() {
+export default function Hero({ locale = 'en' }: { locale?: HomeLocale }) {
+  const copy = homeCopy[locale];
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -78,7 +84,7 @@ export default function Hero() {
                 color: '#85b7eb',
               }}
             >
-              DOMINICAN-BORN · WARSAW-BASED
+              {copy.hero.badge}
             </span>
           </motion.div>
 
@@ -136,7 +142,7 @@ export default function Hero() {
                   className='text-sm font-medium'
                   style={{ color: '#5a7a8e' }}
                 >
-                  {stat.label}
+                  {copy.hero.statLabel}
                 </div>
               </motion.div>
             ))}
@@ -155,7 +161,9 @@ export default function Hero() {
               rel='noopener noreferrer'
               className='rounded-xl border border-[#378add] bg-[#1d4a72] px-6 py-3 text-sm font-semibold text-[#c8dcea] transition-transform duration-300 hover:-translate-y-px hover:scale-[1.03] active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a9d8ec]'
             >
-              Listen to {siteConfig.releases[0].title} on Spotify
+              {withHomeVars(copy.hero.listenCta, {
+                title: siteConfig.releases[0].title,
+              })}
             </a>
             <a
               href={`mailto:${siteConfig.email}`}

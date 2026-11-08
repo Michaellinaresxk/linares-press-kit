@@ -25,8 +25,11 @@ export default function LinarexExperience() {
             className='mb-5 text-3xl font-bold sm:text-4xl'
             style={{ color: '#dce8f0' }}
           >
-            {siteConfig.liveShow}
+            {siteConfig.liveShow.name}
           </h2>
+          <p className='mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#7ab0cc]'>
+            {siteConfig.liveShow.subtitle}
+          </p>
           <p className='max-w-2xl text-base leading-8 text-[#a6bbc7]'>
             Linarex leads the band from behind the drums, sings selected parts,
             shares stories and brings the crowd into the moment. The set moves
@@ -34,17 +37,17 @@ export default function LinarexExperience() {
             real emotion.
           </p>
           <p className='mt-4 max-w-2xl text-sm leading-7 text-[#7a9aaa]'>
-            {siteConfig.live.currentLineup}{' '}
-            The first headline show was at {siteConfig.live.firstHeadlineShow}.
-            Available for {siteConfig.live.eventTypes}.
+            {siteConfig.liveShow.currentLineup}{' '}
+            The first headline show was at {siteConfig.liveShow.firstHeadlineShow}.
+            Available for {siteConfig.liveShow.eventTypes}.
           </p>
 
           <div className='mt-7 flex flex-wrap gap-3'>
             <span className='rounded-full border border-[#5b8fa844] px-4 py-2 text-sm text-[#dce8f0]'>
-              {siteConfig.live.setLengthShort} set
+              {siteConfig.liveShow.setLengthShort} set
             </span>
             <a
-              href={siteConfig.live.videoUrl}
+              href={siteConfig.liveShow.videoUrl}
               target='_blank'
               rel='noopener noreferrer'
               className='rounded-full border border-[#5b8fa844] px-4 py-2 text-sm text-[#dce8f0] transition-colors hover:border-[#5b8fa8] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7ab0cc]'
@@ -54,14 +57,14 @@ export default function LinarexExperience() {
           </div>
 
           <div className='mt-5 text-sm text-[#7a9aaa]'>
-            <p>{siteConfig.live.technicalDetails}</p>
+            <p>{siteConfig.liveShow.technicalDetails}</p>
           </div>
 
           <a
             href={bookingEmail}
             className='mt-8 inline-flex min-h-12 items-center gap-2 rounded-lg bg-[#5b8fa8] px-6 py-3 text-sm font-semibold text-[#080c10] transition-colors hover:bg-[#7ab0cc] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#dce8f0]'
           >
-            Book the {siteConfig.liveShow}
+            Book {siteConfig.liveShow.name}
             <ArrowUpRight size={17} aria-hidden='true' />
           </a>
         </div>
@@ -77,7 +80,7 @@ export default function LinarexExperience() {
           />
           <div className='absolute inset-0 bg-gradient-to-t from-[#080c10]/70 via-transparent to-transparent' />
           <p className='absolute bottom-4 left-4 text-sm font-semibold uppercase tracking-[0.18em] text-white'>
-            {siteConfig.liveShow}
+            {siteConfig.liveShow.name}
           </p>
         </div>
       </div>

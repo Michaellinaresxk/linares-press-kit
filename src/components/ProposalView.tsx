@@ -4,38 +4,34 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowDownToLine, ArrowUpRight, Play } from 'lucide-react';
+import BookerInfo from '@/components/BookerInfo';
 import PhotoGallery from '@/components/PhotoGallery';
+import SiteFooter from '@/components/SiteFooter';
+import { proposalCopy, withVars, type ProposalLocale } from '@/lib/i18n/proposal';
 import { bookingEmail, siteConfig } from '@/lib/site-config';
-import styles from './proposal.module.css';
+import styles from '../app/(en)/proposal/proposal.module.css';
 
-const performances = [
-  {
-    title: 'Live Set — Full Room',
-    label: 'Watch on YouTube',
-    href: siteConfig.live.videoUrl,
-    image: siteConfig.live.videoThumbnails.youtube,
-    alt: 'Linarex and the band performing live',
-  },
-  {
-    title: 'The Crowd — In Motion',
-    label: 'Watch on Instagram',
-    href: siteConfig.live.instagramVideoUrl,
-    image: siteConfig.live.videoThumbnails.instagram,
-    alt: 'The audience watching the Linarex and Jacke Matheus live show',
-  },
-] as const;
-
-const showTags = [
-  'Funk & Afrobeat',
-  'Pop Anthems',
-  'Rock Classics',
-  'Latin Hits',
-  'Original Songs',
-  siteConfig.live.setLengthShort,
-] as const;
-
-export default function ProposalContent() {
+export default function ProposalView({ locale }: { locale: ProposalLocale }) {
   const reduceMotion = useReducedMotion();
+  const t = proposalCopy[locale];
+  const show = siteConfig.liveShow;
+
+  const performances = [
+    {
+      title: t.liveSetTitle,
+      label: t.watchYoutube,
+      href: show.videoUrl,
+      image: show.videoThumbnails.youtube,
+      alt: t.liveSetAlt,
+    },
+    {
+      title: t.crowdTitle,
+      label: t.watchInstagram,
+      href: show.instagramVideoUrl,
+      image: show.videoThumbnails.instagram,
+      alt: t.crowdAlt,
+    },
+  ] as const;
 
   return (
     <main className={styles.page}>
@@ -56,22 +52,35 @@ export default function ProposalContent() {
           transition={{ duration: 0.7 }}
         >
           <div className={styles.heroMain}>
-            <p className={styles.eyebrow}>Live music · Warsaw, Poland</p>
+            <nav className={styles.langSwitch} aria-label={t.langSwitcherAria}>
+              <Link
+                href='/proposal'
+                aria-current={locale === 'en' ? 'page' : undefined}
+                className={locale === 'en' ? styles.langActive : undefined}
+              >
+                EN
+              </Link>
+              <span aria-hidden='true'>|</span>
+              <Link
+                href='/pl/proposal'
+                aria-current={locale === 'pl' ? 'page' : undefined}
+                className={locale === 'pl' ? styles.langActive : undefined}
+              >
+                PL
+              </Link>
+            </nav>
+            <p className={styles.eyebrow}>{t.eyebrow}</p>
             <h1 id='proposal-title' className={styles.heroTitle}>
-              LINAREX
-              <br />
-              <span>&amp;</span>
-              <br />
-              JACKE
-              <br />
-              MATHEUS
+              {siteConfig.liveShow.name.toUpperCase()}
             </h1>
-            <p className={styles.heroPitch}>
-              The band that turns any night into the one people talk about.
+            <p className={styles.heroSubtitle}>
+              {siteConfig.live.artists[0].name} &amp;{' '}
+              {siteConfig.live.artists[1].name}
             </p>
+            <p className={styles.heroPitch}>{t.heroPitch}</p>
             <div className={styles.heroActions}>
               <a className={styles.primaryAction} href={bookingEmail}>
-                Ask about booking
+                {t.heroCta}
                 <ArrowUpRight size={17} aria-hidden='true' />
               </a>
               <a
@@ -80,18 +89,21 @@ export default function ProposalContent() {
                 download
               >
                 <ArrowDownToLine size={17} aria-hidden='true' />
-                Download proposal PDF
+                {t.heroPdf}
               </a>
             </div>
           </div>
-          <div className={styles.heroTags} aria-label='Show genres and duration'>
-            {showTags.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
+          <div className={styles.heroTags} aria-label={t.liveRepertoireLabel}>
+            <p className={styles.tagLabel}>{t.liveRepertoireLabel}:</p>
+            <div className={styles.tagList}>
+              {[...siteConfig.genres.live, show.setLengthShort].map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
           </div>
         </motion.div>
         <p className={styles.heroCaption}>
-          First headline show · {siteConfig.live.firstHeadlineShow}
+          {t.firstHeadlineShow} · {show.firstHeadlineShow}
         </p>
       </section>
 
@@ -104,56 +116,45 @@ export default function ProposalContent() {
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.6 }}
         >
-          <p className={styles.sectionLabel}>The experience</p>
+          <p className={styles.sectionLabel}>{t.experienceLabel}</p>
           <h2 id='experience-title' className={styles.sectionTitle}>
-            The party is the point.
+            {t.experienceTitle}
           </h2>
-          <p className={styles.lead}>
-            Linarex &amp; Jacke Matheus are a live band built to do one thing:
-            turn your venue into the best night of the week.
-          </p>
+          <p className={styles.lead}>{t.experienceLead}</p>
+          <p className={styles.bodyText}>{t.experienceBody1}</p>
           <p className={styles.bodyText}>
-            Two Latin artists — Colombia and the Dominican Republic — with
-            their own music and years on stage, backed by a lineup of
-            Warsaw-based professionals. They play the hits everyone knows and
-            their own songs that hit just as hard: funk, pop, rock, Latin and
-            afrobeat.
-          </p>
-          <p className={styles.bodyText}>
-            Not a jukebox or background music: a real act that fills the floor,
-            keeps the room moving and gives your crowd a reason to stay. Made
-            for {siteConfig.live.eventTypes}.
+            {withVars(t.experienceBody2, { eventTypes: show.eventTypes })}
           </p>
         </motion.section>
 
         <section className={styles.section} aria-labelledby='energy-title'>
-          <p className={styles.sectionLabel}>What happens</p>
+          <p className={styles.sectionLabel}>{t.energyLabel}</p>
           <h2 id='energy-title' className={styles.sectionTitle}>
-            The energy
+            {t.energyTitle}
           </h2>
-          <p className={styles.energyLead}>Dance. Jump. Sing every word.</p>
-          <p className={styles.bodyText}>
-            Hit after hit, country after country — with original songs woven in
-            that land just as hard. The crowd doesn’t sit still. From the first
-            song to the last, the room stays alive.
-          </p>
-          <div className={styles.pills}>
-            {[...showTags.slice(0, 5), siteConfig.live.setLength, 'EN · ES · PL repertoire'].map(
-              (tag) => (
+          <p className={styles.energyLead}>{t.energyLead}</p>
+          <p className={styles.bodyText}>{t.energyBody}</p>
+          <div className={styles.pillsGroup}>
+            <p className={styles.tagLabel}>{t.liveRepertoireLabel}:</p>
+            <div className={styles.pills}>
+              {[...siteConfig.genres.live, show.setLength].map((tag) => (
                 <span className={styles.pill} key={tag}>
                   {tag}
                 </span>
-              ),
-            )}
+              ))}
+              <span className={styles.pill}>
+                {show.repertoireLanguages.join(' · ')}
+              </span>
+            </div>
           </div>
         </section>
 
         <section className={styles.section} aria-labelledby='stage-title'>
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.sectionLabel}>See it live</p>
+              <p className={styles.sectionLabel}>{t.stageLabel}</p>
               <h2 id='stage-title' className={styles.sectionTitle}>
-                See Linarex &amp; Jacke Matheus on stage.
+                {t.stageTitle}
               </h2>
             </div>
           </div>
@@ -196,9 +197,9 @@ export default function ProposalContent() {
         </section>
 
         <section className={styles.section} aria-labelledby='artists-title'>
-          <p className={styles.sectionLabel}>The people</p>
+          <p className={styles.sectionLabel}>{t.peopleLabel}</p>
           <h2 id='artists-title' className={styles.sectionTitle}>
-            Who’s playing
+            {t.peopleTitle}
           </h2>
           <div className={styles.artistGrid}>
             {siteConfig.live.artists.map((artist, index) => (
@@ -223,9 +224,7 @@ export default function ProposalContent() {
                   <p className={styles.artistOrigin}>{artist.origin}</p>
                   <h3>{artist.name}</h3>
                   <p className={styles.artistRole}>{artist.role}</p>
-                  <p className={styles.artistDescription}>
-                    {artist.description}
-                  </p>
+                  <p className={styles.artistDescription}>{artist.description}</p>
                 </div>
               </motion.article>
             ))}
@@ -233,65 +232,70 @@ export default function ProposalContent() {
         </section>
 
         <section className={styles.section} aria-labelledby='setup-title'>
-          <p className={styles.sectionLabel}>At a glance</p>
+          <p className={styles.sectionLabel}>{t.glanceLabel}</p>
           <h2 id='setup-title' className={styles.sectionTitle}>
-            What to expect
+            {t.glanceTitle}
           </h2>
           <dl className={styles.facts}>
             <div className={styles.fact}>
-              <dt>On stage</dt>
+              <dt>{t.onStage}</dt>
               <dd>
-                {siteConfig.live.musicians}
-                <p>{siteConfig.live.instruments.join(' · ')}</p>
+                {show.musicians}
+                <p>{show.instruments.join(' · ')}</p>
                 <p className={styles.factNote}>
-                  Expandable for larger stages:{' '}
-                  {siteConfig.live.expandableInstruments.join(' · ')}.
+                  {t.expandable}: {show.expandableInstruments.join(' · ')}.
                 </p>
               </dd>
             </div>
             <div className={styles.fact}>
-              <dt>Set length</dt>
+              <dt>{t.setLength}</dt>
               <dd>
-                {siteConfig.live.setLength}
-                <p>{siteConfig.live.setDescription}</p>
+                {show.setLength}
+                <p>{show.setDescription}</p>
               </dd>
             </div>
             <div className={styles.fact}>
-              <dt>Repertoire</dt>
+              <dt>{t.repertoire}</dt>
               <dd>
-                {siteConfig.live.repertoireLanguages.join(' · ')}
-                <p>{siteConfig.live.repertoireDescription}</p>
+                {show.repertoireLanguages.join(' · ')}
+                <p>{show.repertoireDescription}</p>
               </dd>
             </div>
             <div className={styles.fact}>
-              <dt>Availability</dt>
+              <dt>{t.availability}</dt>
               <dd>
-                Ask about dates
-                <p>{siteConfig.live.availability}</p>
+                {t.askDates}
+                <p>{show.availability}</p>
               </dd>
             </div>
           </dl>
-          <p className={styles.technicalDetails}>
-            {siteConfig.live.technicalDetails}
-          </p>
+          <p className={styles.technicalDetails}>{show.technicalDetails}</p>
         </section>
 
-        <section className={styles.gallerySection} aria-label='Live show photos'>
+        <section className={styles.section} aria-labelledby='booker-info-title'>
+          <p className={styles.sectionLabel}>{t.forBookersLabel}</p>
+          <h2 id='booker-info-title' className={styles.sectionTitle}>
+            {t.forBookersTitle}
+          </h2>
+          <BookerInfo locale={locale} />
+        </section>
+
+        <section className={styles.gallerySection} aria-label={t.photosAria}>
           <PhotoGallery variant='live' />
         </section>
 
         <blockquote className={styles.photoQuote}>
-          <p>Nobody came to sit down.</p>
+          <p>{t.quote}</p>
         </blockquote>
 
         <section className={styles.booking} aria-labelledby='booking-title'>
           <div>
-            <p className={styles.sectionLabel}>Bring the show to your room</p>
+            <p className={styles.sectionLabel}>{t.bookingLabel}</p>
             <h2 id='booking-title' className={styles.sectionTitle}>
-              Let’s make it happen.
+              {t.bookingTitle}
             </h2>
             <p className={styles.bodyText}>
-              Ask about dates, event details and booking the {siteConfig.liveShow}.
+              {withVars(t.bookingBody, { showName: siteConfig.liveShow.name })}
             </p>
           </div>
           <div className={styles.bookingActions}>
@@ -299,8 +303,13 @@ export default function ProposalContent() {
               {siteConfig.email}
               <ArrowUpRight size={17} aria-hidden='true' />
             </a>
-            <Link className={styles.textLink} href='/epk' target='_blank' rel='noopener noreferrer'>
-              Open the EPK
+            <Link
+              className={styles.textLink}
+              href='/epk'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              {t.openEpk}
             </Link>
             <a
               className={styles.textLink}
@@ -308,41 +317,12 @@ export default function ProposalContent() {
               target='_blank'
               rel='noopener noreferrer'
             >
-              Listen on Spotify
+              {t.listenSpotify}
             </a>
           </div>
         </section>
       </div>
-      <footer className={styles.footer}>
-        <div className={styles.footerInner}>
-          <div className={styles.footerBrand}>
-            <Link href='/' className={styles.footerName}>
-              {siteConfig.name}
-            </Link>
-            <p>
-              Live music · Warsaw, Poland
-              <br />
-              Original songs, familiar hits, one room moving together.
-            </p>
-          </div>
-          <nav className={styles.footerLinks} aria-label='Footer navigation'>
-            <Link href='/proposal'>Live show</Link>
-            <Link href='/epk' target='_blank' rel='noopener noreferrer'>
-              Press kit
-            </Link>
-            <a href={siteConfig.profiles.spotify} target='_blank' rel='noopener noreferrer'>
-              Spotify
-            </a>
-            <a href={siteConfig.profiles.instagram} target='_blank' rel='noopener noreferrer'>
-              Instagram
-            </a>
-            <a href={bookingEmail}>Booking</a>
-          </nav>
-          <p className={styles.footerCopyright}>
-            © {siteConfig.name} · All rights reserved
-          </p>
-        </div>
-      </footer>
+      <SiteFooter locale={locale} />
     </main>
   );
 }
