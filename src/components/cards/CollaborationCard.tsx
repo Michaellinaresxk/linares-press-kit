@@ -6,7 +6,8 @@ import {
   useMotionValue,
   useTransform,
 } from 'framer-motion';
-import { Calendar, ChevronDown, Headphones, Music, Users } from 'lucide-react';
+import { Calendar, ChevronDown, Music, Users } from 'lucide-react';
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import AudioControls from '../AudioControls';
 import { useAudioPlayerCollaboration } from '@/hooks/UseAudioPlayerCollaborationReturn';
@@ -128,17 +129,22 @@ const CollaborationCard = ({
           transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
           layout
         >
-          <motion.img
-            src={collaboration.image}
-            alt={`${collaboration.title} collaboration`}
-            className='w-full h-full object-cover'
-            loading='lazy'
+          <motion.div
+            className='absolute inset-0'
             animate={{
               scale: isHovered && !isTouchDevice ? 1.05 : 1,
               y: isHovered && !isTouchDevice ? -3 : 0,
             }}
             transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-          />
+          >
+            <Image
+              src={collaboration.image}
+              alt={`${collaboration.title} single cover`}
+              fill
+              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+              className='object-cover'
+            />
+          </motion.div>
 
           <div className='absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/5 pointer-events-none' />
           <div className='absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/85 via-black/40 to-transparent' />
@@ -294,28 +300,7 @@ const CollaborationCard = ({
               >
                 {/* Metadata */}
                 <div className='space-y-4'>
-                  <div className='flex items-center justify-between'>
-                    <div className='flex items-center space-x-3'>
-                      <span
-                        className='text-sm font-medium px-3 py-1.5 rounded-full flex items-center space-x-1'
-                        style={{
-                          color: '#1d4a72',
-                          background: 'rgba(24,95,165,0.1)',
-                        }}
-                      >
-                        <Headphones size={12} />
-                        <span>Producer:</span>
-                      </span>
-                      <span
-                        className='text-sm px-2 py-1 rounded-md'
-                        style={{
-                          color: '#3d5a6e',
-                          background: 'rgba(13,17,23,0.05)',
-                        }}
-                      >
-                        {collaboration.producer}
-                      </span>
-                    </div>
+                  <div className='flex justify-end'>
                     <div
                       className='flex items-center space-x-2'
                       style={{ color: '#5a7a8e' }}

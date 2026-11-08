@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Send, Loader2 } from 'lucide-react';
+import { siteConfig } from '@/lib/site-config';
 
 type FormState = {
   name: string;
@@ -131,6 +132,15 @@ export default function Contact() {
             Professional inquiries, booking requests, and collaboration
             opportunities.
           </p>
+          <p className='mt-5 text-base' style={{ color: '#c8dcea' }}>
+            Email{' '}
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className='underline decoration-[#5b8fa8] underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#85b7eb]'
+            >
+              {siteConfig.email}
+            </a>
+          </p>
         </motion.div>
 
         {/* Form card */}
@@ -155,7 +165,7 @@ export default function Contact() {
               General Inquiry
             </h3>
             <p className='text-center mb-8' style={{ color: '#3d5a6e' }}>
-              Send a message and I&apos;ll get back to you within 24–48 hours.
+              Send a message about a booking, collaboration or other inquiry.
             </p>
 
             {status === 'success' ? (
@@ -332,7 +342,7 @@ export default function Contact() {
                 style={{ borderTop: '1px solid rgba(55,138,221,0.1)' }}
               >
                 <p className='text-sm' style={{ color: '#3d5a6e' }}>
-                  Response time: 24–48 hours for general inquiries
+                  Please include the details relevant to your inquiry.
                 </p>
               </div>
             )}

@@ -1,3 +1,5 @@
+import { siteConfig, siteGenres, type SiteRelease } from '@/lib/site-config';
+
 export interface Track {
   id: string;
   title: string;
@@ -12,49 +14,20 @@ export interface Track {
   waveformColor?: string;
 }
 
-export const featuredSingle: Track = {
-  id: 'memories',
-  title: 'Memories',
-  artist: 'Linarex ft. Jacke Mattheus',
-  year: '2026',
-  duration: 402,
-  description:
-    'Memories is about the moment you can not switch off the dark, so you light up a memory — and that is enough to keep breathing.',
-  coverImage:
-    'https://res.cloudinary.com/dwgzffsgl/image/upload/v1786661039/bg_qvvlw9.jpg',
+function toTrack(release: SiteRelease): Track {
+  return {
+    id: release.id,
+    title: release.title,
+    artist: `${siteConfig.name} feat. ${release.collaborator}`,
+    duration: release.durationSeconds,
+    coverImage: release.coverImage,
+    audioUrl: release.audioUrl,
+    spotifyUrl: release.spotifyUrl,
+    description: release.description,
+    year: release.year,
+    genre: siteGenres,
+  };
+}
 
-  audioUrl: '/audio/Memories.wav',
-
-  spotifyUrl:
-    'https://open.spotify.com/intl-es/album/57gkaRLcx11qK4Ok1PYdyW?si=bJMjK5vhRC29udAZTZNQJg',
-};
-
-export const tracks: Track[] = [
-  {
-    id: 'renacer',
-    title: 'Renacer',
-    artist: 'Linarex',
-    duration: 196,
-    description:
-      'Is a funk-driven love story about transformation and finding home',
-    genre: 'Funk Pop',
-    year: '2026',
-    audioUrl: '/audio/Renacer.wav',
-    waveformColor: '#a855f7',
-    coverImage:
-      'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=400&h=400&fit=crop',
-  },
-  {
-    id: 'endless-sky',
-    title: 'Endless Sky',
-    duration: 255,
-    description:
-      'A tender acoustic journey where fingerpicked guitar meets introspective storytelling.',
-    genre: 'Acoustic Indie Folk',
-    year: '2026',
-    audioUrl: '/audio/endless-sky.mp3',
-    waveformColor: '#06b6d4',
-    coverImage:
-      'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=400&h=400&fit=crop',
-  },
-];
+export const featuredSingle: Track = toTrack(siteConfig.releases[0]);
+export const tracks: Track[] = siteConfig.releases.map(toTrack);

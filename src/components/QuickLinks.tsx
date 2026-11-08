@@ -7,12 +7,14 @@ function QuickLinks() {
     <div className='space-y-4'>
       {officialLinks.map((link, index) => {
         const Icon = link.icon;
+        const opensNewTab =
+          link.url === '/epk' || link.url.startsWith('http');
         return (
           <motion.a
             key={link.id}
             href={link.url}
-            target={link.url.startsWith('http') ? '_blank' : '_self'}
-            rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''}
+            target={opensNewTab ? '_blank' : undefined}
+            rel={opensNewTab ? 'noopener noreferrer' : undefined}
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}

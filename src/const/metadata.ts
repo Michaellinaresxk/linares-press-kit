@@ -1,86 +1,44 @@
 import type { Metadata } from 'next';
+import { siteConfig } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  // Títulos y descripciones
-  title:
-    'Linarex - Funk-Pop Composer & Music Producer | Debut Single "Renacer"',
-  description:
-    'Discover Linarex, an innovative funk-pop music producer. Stream "Renacer" on all major platforms. Daft Punk influences, international collaboration.',
-
-  // Keywords para SEO
-  keywords: [
-    'Linarex',
-    'lyricist',
-    'funk pop',
-    'composer',
-    'streaming',
-    'electronic music',
-  ],
-
-  // Información del autor
-  authors: [{ name: 'Linarex', url: 'https://linarex-music.com' }],
-  creator: 'Linarex',
-
-  // URLs canónicas
-  metadataBase: new URL('https://linarex-music.com'),
+  metadataBase: new URL(siteConfig.url),
+  title: siteConfig.seo.homeTitle,
+  description: siteConfig.seo.description,
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
   alternates: {
-    canonical: 'https://linarex-music.com',
-    languages: {
-      es: 'https://linarex-music.com/es',
-      en: 'https://linarex-music.com/en',
-    },
+    canonical: '/',
   },
-
-  // Open Graph (Facebook, LinkedIn, etc)
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    alternateLocale: ['es_ES'],
-    url: 'https://linarex-music.com',
-    siteName: 'Linarex Music',
-    title: 'Linarex - Funk-Pop Composer & Music Producer',
-    description:
-      'Discover innovative funk-pop music by Linarex. Stream "Renacer" now on Spotify, Apple Music, YouTube Music and more.',
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.seo.homeTitle,
+    description: siteConfig.seo.description,
     images: [
       {
-        url: 'https://linarex-music.com/og-image.jpg',
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: 'Linarex - Music Producer',
-        type: 'image/jpeg',
-      },
-      {
-        url: 'https://linarex-music.com/og-image-square.jpg',
-        width: 800,
-        height: 800,
-        alt: 'Linarex Profile',
+        alt: `${siteConfig.name} — ${siteConfig.role}`,
         type: 'image/jpeg',
       },
     ],
   },
-
-  // Twitter/X Card
   twitter: {
     card: 'summary_large_image',
-    title: 'Linarex - Funk-Pop Music Producer',
-    description:
-      'Listen to "Renacer" - A funk-pop track with Daft Punk influences',
-    creator: '@linarex_music',
-    images: ['https://linarex-music.com/twitter-image.jpg'],
+    title: siteConfig.seo.homeTitle,
+    description: siteConfig.seo.description,
+    images: [siteConfig.ogImage],
   },
-
-  // Apple specific
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'Linarex Music',
+    title: siteConfig.name,
   },
-
-  // Categoría y clasificación
   category: 'music',
-  classification: 'Music Producer | Composer',
-
-  // Robots y indexing
   robots: {
     index: true,
     follow: true,
@@ -92,13 +50,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-
-  // Información de color y tema
-  themeColor: '#000000',
-
-  // Icons
   icons: {
     icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
   },
 };

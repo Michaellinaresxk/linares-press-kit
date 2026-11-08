@@ -4,12 +4,7 @@ import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
 import QuoteSection from './QuoteSection';
-
-const ABOUT_STATS = [
-  '20+ years creating',
-  '3+ international collaborations',
-  // '11 countries explored',
-] as const;
+import { siteConfig } from '@/lib/site-config';
 
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -35,7 +30,7 @@ export default function About() {
                 <div className='w-full max-w-md mx-auto lg:max-w-full'>
                   <Image
                     src='/img/portrait.jpg'
-                    alt='Linarex - Creative Producer and Composer'
+                    alt='Portrait of Linarex'
                     width={800}
                     height={600}
                     className='w-full h-auto'
@@ -59,15 +54,7 @@ export default function About() {
                     className='text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-light leading-relaxed tracking-wide'
                     style={{ color: '#c8dcea' }}
                   >
-                    I create musical concepts guided by one question:{' '}
-                    <motion.span
-                      style={{ color: '#85b7eb', fontStyle: 'italic' }}
-                      whileHover={{ color: '#b5d4f4' }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      what does this emotion sound like?
-                    </motion.span>
-                    .
+                    From {siteConfig.origin} to {siteConfig.location}
                   </h2>
                 </motion.div>
 
@@ -81,37 +68,16 @@ export default function About() {
                   style={{ color: '#5a7a8e' }}
                 >
                   <p>
-                    I am Linarex, I&apos;m a composer from the Dominican
-                    Republic. Based in Poland, each song is an emotional journey
-                    through the human experience.
+                    Born in the {siteConfig.origin} and now based in{' '}
+                    {siteConfig.location}, {siteConfig.name} builds music from
+                    the instruments he knows firsthand: guitar, piano and
+                    drums. His sound is rooted in rock, progressive rock,
+                    jazz, funk and reggae.
                   </p>
                   <p>
-                    May it slow you down and may it also move you beyond the
-                    confines of yourself.
+                    From those roots comes music led by rhythm and feeling,
+                    including the latest single, {siteConfig.releases[0].title}.
                   </p>
-                </motion.div>
-
-                {/* Stats */}
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  viewport={{ once: true }}
-                  className='space-y-3'
-                >
-                  {ABOUT_STATS.map((stat, index) => (
-                    <motion.div
-                      key={stat}
-                      initial={{ opacity: 0, x: 10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                      viewport={{ once: true }}
-                      className='text-xs sm:text-sm lg:text-base font-light'
-                      style={{ color: '#3d5a6e' }}
-                    >
-                      {stat}
-                    </motion.div>
-                  ))}
                 </motion.div>
 
                 {/* Signature */}

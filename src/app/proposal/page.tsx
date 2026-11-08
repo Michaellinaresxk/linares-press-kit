@@ -1,0 +1,35 @@
+import type { Metadata } from 'next';
+import ProposalContent from './ProposalContent';
+import { siteConfig } from '@/lib/site-config';
+
+export const metadata: Metadata = {
+  title: siteConfig.seo.proposalTitle,
+  description: siteConfig.seo.proposalDescription,
+  alternates: {
+    canonical: '/proposal',
+  },
+  openGraph: {
+    type: 'website',
+    url: `${siteConfig.url}/proposal`,
+    title: siteConfig.seo.proposalTitle,
+    description: siteConfig.seo.proposalDescription,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.liveShow} live music proposal`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.seo.proposalTitle,
+    description: siteConfig.seo.proposalDescription,
+    images: [siteConfig.ogImage],
+  },
+};
+
+export default function ProposalPage() {
+  return <ProposalContent />;
+}

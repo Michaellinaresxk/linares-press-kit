@@ -1,9 +1,15 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  outputFileTracingRoot: __dirname,
+  turbopack: {
+    root: __dirname,
+  },
   images: {
-    domains: ['res.cloudinary.com', 'images.unsplash.com'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'res.cloudinary.com' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+    ],
   },
 };
 
