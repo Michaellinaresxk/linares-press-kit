@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ArrowUpRight, Music2 } from 'lucide-react';
-import { bookingEmail, siteConfig } from '@/lib/site-config';
+import { siteConfig } from '@/lib/site-config';
 import styles from './site-navigation.module.css';
 import type { SiteLocale } from '@/lib/i18n/navigation';
 
@@ -9,6 +12,8 @@ export default function SiteNavigation({
 }: {
   locale?: SiteLocale;
 }) {
+  const pathname = usePathname();
+  const isOverlay = pathname === '/proposal' || pathname === '/pl/proposal';
   const t = {
     en: {
       liveShow: 'Live show',
@@ -25,9 +30,10 @@ export default function SiteNavigation({
 
   const proposalHref = locale === 'pl' ? '/pl/proposal' : '/proposal';
   const epkHref = locale === 'pl' ? '/pl/epk' : '/epk';
+  const contactHref = locale === 'pl' ? '/pl#contact' : '/#contact';
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isOverlay ? styles.headerOverlay : ''}`}>
       <nav className={styles.nav} aria-label='Main navigation'>
         <Link
           className={styles.brand}
@@ -49,10 +55,10 @@ export default function SiteNavigation({
           <Link className={styles.navLink} href={epkHref}>
             {t.epk}
           </Link>
-          <a className={styles.bookingLink} href={bookingEmail}>
+          <Link className={styles.bookingLink} href={contactHref}>
             <span>{t.booking}</span>
             <ArrowUpRight size={15} aria-hidden='true' />
-          </a>
+          </Link>
         </div>
       </nav>
     </header>

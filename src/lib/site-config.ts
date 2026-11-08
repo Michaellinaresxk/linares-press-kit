@@ -87,6 +87,10 @@ export const siteConfig = {
   },
   url: 'https://linares-press-kit.vercel.app',
   ogImage: '/og-image.jpg',
+  documents: {
+    epkPdf: '/linarex-epk.pdf',
+    proposalPdf: '/Live-Music-Proposal.pdf',
+  },
   seo: {
     homeTitle: 'Linarex | Composer & Drummer in Warsaw – New Single "Memories"',
     description:
@@ -172,8 +176,7 @@ export const siteConfig = {
       originals: ['Memories', 'Renacer', 'Vaivén'],
     },
     techRiderUrl: undefined as string | undefined, // TODO Michael: add file in /public and set path, e.g. '/linarex-tech-rider.pdf'
-    availability:
-      'Based in Warsaw, available across Poland.', // TODO Michael: confirm if also available across Europe
+    availability: 'Based in Warsaw, available across Poland.', // TODO Michael: confirm if also available across Europe
     feeNote: 'Fee on request — formats for bars, events and festivals.',
     testimonials: [] as Testimonial[], // TODO Michael: add a real quote only (quote, name, venue)
   } satisfies LiveShowConfig,

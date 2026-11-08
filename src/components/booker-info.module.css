@@ -144,3 +144,17 @@
   outline: 2px solid var(--blue, #5b8fa8);
   outline-offset: 3px;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .cta,
+  .ctaSecondary,
+  .textLink {
+    transition: none;
+  }
+
+  .cta:hover,
+  .ctaSecondary:hover,
+  .textLink:hover {
+    transform: none;
+  }
+}

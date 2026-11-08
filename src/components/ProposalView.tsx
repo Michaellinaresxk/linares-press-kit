@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
+import { easeOut } from '@/lib/motion';
 import { ArrowDownToLine, ArrowUpRight, Play } from 'lucide-react';
 import BookerInfo from '@/components/BookerInfo';
 import PhotoGallery from '@/components/PhotoGallery';
@@ -47,12 +48,28 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
         <div className={styles.heroShade} />
         <motion.div
           className={styles.heroContent}
-          initial={reduceMotion ? false : { opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          initial={reduceMotion ? false : 'hidden'}
+          animate='show'
+          variants={
+            reduceMotion
+              ? undefined
+              : {
+                  hidden: {},
+                  show: {
+                    transition: { staggerChildren: 0.075, delayChildren: 0.12 },
+                  },
+                }
+          }
         >
           <div className={styles.heroMain}>
-            <nav className={styles.langSwitch} aria-label={t.langSwitcherAria}>
+            <motion.nav
+              className={styles.langSwitch}
+              aria-label={t.langSwitcherAria}
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: easeOut } },
+              }}
+            >
               <Link
                 href='/proposal'
                 aria-current={locale === 'en' ? 'page' : undefined}
@@ -68,39 +85,84 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
               >
                 PL
               </Link>
-            </nav>
-            <p className={styles.eyebrow}>{t.eyebrow}</p>
-            <h1 id='proposal-title' className={styles.heroTitle}>
+            </motion.nav>
+            <motion.p
+              className={styles.eyebrow}
+              variants={{
+                hidden: { opacity: 0, y: 14 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
+              }}
+            >
+              {t.eyebrow}
+            </motion.p>
+            <motion.h1
+              id='proposal-title'
+              className={styles.heroTitle}
+              variants={{
+                hidden: { opacity: 0, y: 22 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: easeOut } },
+              }}
+            >
               {siteConfig.liveShow.name.toUpperCase()}
-            </h1>
-            <p className={styles.heroSubtitle}>
+            </motion.h1>
+            <motion.p
+              className={styles.heroSubtitle}
+              variants={{
+                hidden: { opacity: 0, y: 14 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
+              }}
+            >
               {siteConfig.live.artists[0].name} &amp;{' '}
               {siteConfig.live.artists[1].name}
-            </p>
-            <p className={styles.heroPitch}>{t.heroPitch}</p>
-            <div className={styles.heroActions}>
-              <a className={styles.primaryAction} href={bookingEmail}>
+            </motion.p>
+            <motion.p
+              className={styles.heroPitch}
+              variants={{
+                hidden: { opacity: 0, y: 14 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: easeOut } },
+              }}
+            >
+              {t.heroPitch}
+            </motion.p>
+            <motion.div
+              className={styles.heroActions}
+              variants={{
+                hidden: { opacity: 0, y: 14 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: easeOut } },
+              }}
+            >
+              <Link
+                className={styles.primaryAction}
+                href={locale === 'pl' ? '/pl#contact' : '/#contact'}
+              >
                 {t.heroCta}
                 <ArrowUpRight size={17} aria-hidden='true' />
-              </a>
+              </Link>
               <a
                 className={styles.secondaryAction}
-                href='/Live-Music-Proposal.pdf'
+                href={siteConfig.documents.proposalPdf}
                 download
               >
                 <ArrowDownToLine size={17} aria-hidden='true' />
                 {t.heroPdf}
               </a>
-            </div>
+            </motion.div>
           </div>
-          <div className={styles.heroTags} aria-label={t.liveRepertoireLabel}>
+          <motion.div
+            className={styles.heroTags}
+            aria-label={t.liveRepertoireLabel}
+            variants={{
+              hidden: { opacity: 0, x: 16 },
+              show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: easeOut } },
+            }}
+          >
             <p className={styles.tagLabel}>{t.liveRepertoireLabel}:</p>
             <div className={styles.tagList}>
               {[...siteConfig.genres.live, show.setLengthShort].map((tag) => (
                 <span key={tag}>{tag}</span>
               ))}
             </div>
-          </div>
+          </motion.div>
         </motion.div>
         <p className={styles.heroCaption}>
           {t.firstHeadlineShow} · {show.firstHeadlineShow}
@@ -236,39 +298,76 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
           <h2 id='setup-title' className={styles.sectionTitle}>
             {t.glanceTitle}
           </h2>
-          <dl className={styles.facts}>
-            <div className={styles.fact}>
-              <dt>{t.onStage}</dt>
-              <dd>
-                {show.musicians}
-                <p>{show.instruments.join(' · ')}</p>
-                <p className={styles.factNote}>
-                  {t.expandable}: {show.expandableInstruments.join(' · ')}.
-                </p>
-              </dd>
-            </div>
-            <div className={styles.fact}>
-              <dt>{t.setLength}</dt>
-              <dd>
-                {show.setLength}
-                <p>{show.setDescription}</p>
-              </dd>
-            </div>
-            <div className={styles.fact}>
-              <dt>{t.repertoire}</dt>
-              <dd>
-                {show.repertoireLanguages.join(' · ')}
-                <p>{show.repertoireDescription}</p>
-              </dd>
-            </div>
-            <div className={styles.fact}>
-              <dt>{t.availability}</dt>
-              <dd>
-                {t.askDates}
-                <p>{show.availability}</p>
-              </dd>
-            </div>
-          </dl>
+          <motion.dl
+            className={styles.facts}
+            initial={reduceMotion ? false : 'hidden'}
+            whileInView='show'
+            viewport={{ once: true, amount: 0.12 }}
+            variants={
+              reduceMotion
+                ? undefined
+                : {
+                    hidden: {},
+                    show: { transition: { staggerChildren: 0.07 } },
+                  }
+            }
+          >
+            {[
+              {
+                label: t.onStage,
+                value: show.musicians,
+                lines: [
+                  show.instruments.join(' · '),
+                  `${t.expandable}: ${show.expandableInstruments.join(' · ')}.`,
+                ],
+                note: true,
+              },
+              {
+                label: t.setLength,
+                value: show.setLength,
+                lines: [show.setDescription],
+              },
+              {
+                label: t.repertoire,
+                value: show.repertoireLanguages.join(' · '),
+                lines: [show.repertoireDescription],
+              },
+              {
+                label: t.availability,
+                value: t.askDates,
+                lines: [show.availability],
+              },
+              {
+                label: t.idealFor,
+                value: show.eventTypes,
+                lines: [show.bookingAvailability],
+              },
+            ].map((fact) => (
+              <motion.div
+                className={styles.fact}
+                key={fact.label}
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  show: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.45, ease: easeOut },
+                  },
+                }}
+              >
+                <dt>{fact.label}</dt>
+                <dd>
+                  {fact.value}
+                  {fact.lines[0] && <p>{fact.lines[0]}</p>}
+                  {fact.lines[1] && (
+                    <p className={fact.note ? styles.factNote : undefined}>
+                      {fact.lines[1]}
+                    </p>
+                  )}
+                </dd>
+              </motion.div>
+            ))}
+          </motion.dl>
           <p className={styles.technicalDetails}>{show.technicalDetails}</p>
         </section>
 
@@ -281,7 +380,7 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
         </section>
 
         <section className={styles.gallerySection} aria-label={t.photosAria}>
-          <PhotoGallery variant='live' />
+          <PhotoGallery variant='live' locale={locale} />
         </section>
 
         <blockquote className={styles.photoQuote}>

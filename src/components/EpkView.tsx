@@ -3,24 +3,31 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowDownToLine, ArrowUpRight, Play } from 'lucide-react';
+import { ArrowDownToLine, ArrowUpRight, Disc3, Play, Send } from 'lucide-react';
 import BookerInfo from '@/components/BookerInfo';
 import PhotoGallery from '@/components/PhotoGallery';
 import SiteFooter from '@/components/SiteFooter';
 import { epkCopy, withEpkVars, type EpkLocale } from '@/lib/i18n/epk';
-import { bookingEmail, siteConfig, siteGenresOriginal } from '@/lib/site-config';
+import { easeOut } from '@/lib/motion';
+import {
+  bookingEmail,
+  siteConfig,
+  siteGenresOriginal,
+} from '@/lib/site-config';
 import styles from './epk.module.css';
 
 export default function EpkView({ locale }: { locale: EpkLocale }) {
   const reduceMotion = useReducedMotion();
   const t = epkCopy[locale];
   const show = siteConfig.liveShow;
+  const contactHref = locale === 'pl' ? '/pl#contact' : '/#contact';
+  const proposalHref = locale === 'pl' ? '/pl/proposal' : '/proposal';
 
   const reveal = {
-    initial: reduceMotion ? false : { opacity: 0, y: 22 },
+    initial: reduceMotion ? false : { opacity: 0, y: 18 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.15 },
-    transition: { duration: 0.55 },
+    viewport: { once: true, amount: 0.14 },
+    transition: { duration: 0.5, ease: easeOut },
   };
 
   const clips = [
@@ -40,12 +47,33 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
     },
   ] as const;
 
-  const listenToRelease = (releaseTitle: string) =>
-    locale === 'pl'
-      ? `${releaseTitle} · ${epkCopy.pl.listenOnSpotify}`
-      : `Listen to ${releaseTitle}`;
-
-  const proposalHref = locale === 'pl' ? '/pl/proposal' : '/proposal';
+  const facts = [
+    {
+      label: t.originLabel,
+      value: siteConfig.origin,
+      detail: siteConfig.role,
+    },
+    {
+      label: t.basedInLabel,
+      value: siteConfig.location,
+      detail: show.bookingAvailability,
+    },
+    {
+      label: t.experienceLabel,
+      value: `${siteConfig.yearsOnStage} ${locale === 'pl' ? 'lat' : 'years'}`,
+      detail: locale === 'pl' ? 'na scenie' : 'on stage',
+    },
+    {
+      label: locale === 'pl' ? 'Muzyka' : 'Music',
+      value: siteGenresOriginal,
+      detail: locale === 'pl' ? 'katalog i wydania' : 'catalog & releases',
+    },
+    {
+      label: locale === 'pl' ? 'Show' : 'Live show',
+      value: show.name,
+      detail: `${show.setLength} · ${show.repertoireLanguages.join(' / ')}`,
+    },
+  ];
 
   return (
     <main className={styles.page}>
@@ -70,142 +98,185 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
 
         <motion.header
           className={styles.hero}
-          initial={reduceMotion ? false : { opacity: 0, y: 22 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65 }}
+          initial={reduceMotion ? false : 'hidden'}
+          animate='show'
+          variants={
+            reduceMotion
+              ? undefined
+              : {
+                  hidden: {},
+                  show: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } },
+                }
+          }
         >
-          <div className={styles.portrait}>
-            <Image
-              src='/img/portrait.jpg'
-              alt='Portrait of Linarex'
-              width={144}
-              height={144}
-              priority
-            />
+          <div className={styles.heroTop}>
+            <motion.div
+              className={styles.portrait}
+              variants={{
+                hidden: { opacity: 0, scale: 0.94, y: 8 },
+                show: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
+              }}
+            >
+              <Image
+                src='/img/portrait.jpg'
+                alt={locale === 'pl' ? 'Portret Linarex' : 'Portrait of Linarex'}
+                width={144}
+                height={144}
+                priority
+              />
+            </motion.div>
+
+            <div className={styles.heroMain}>
+              <motion.p
+                className={styles.eyebrow}
+                variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: easeOut } } }}
+              >
+                {t.eyebrow}
+              </motion.p>
+              <motion.h1
+                className={styles.name}
+                variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { duration: 0.58, ease: easeOut } } }}
+              >
+                {siteConfig.name}
+              </motion.h1>
+              <motion.p
+                className={styles.role}
+                variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: easeOut } } }}
+              >
+                {siteConfig.role}
+              </motion.p>
+              <motion.p
+                className={styles.genres}
+                variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: easeOut } } }}
+              >
+                {locale === 'pl' ? 'Muzyka autorska' : 'Original music'}: {siteGenresOriginal}
+              </motion.p>
+            </div>
           </div>
-          <p className={styles.eyebrow}>{t.eyebrow}</p>
-          <h1 className={styles.name}>{siteConfig.name}</h1>
-          <p className={styles.role}>{siteConfig.role}</p>
-          <p className={styles.genres}>
-            Original music: {siteGenresOriginal}
-          </p>
-          <p className={styles.pitch}>{t.pitch}</p>
-          <div className={styles.actions}>
-            <a className={styles.bookingButton} href={bookingEmail}>
-              {t.bookingButton}
-              <ArrowUpRight size={16} aria-hidden='true' />
-            </a>
+
+          <motion.p
+            className={styles.pitch}
+            variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } } }}
+          >
+            {t.pitch}
+          </motion.p>
+
+          <motion.div
+            className={styles.actions}
+            variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } } }}
+          >
             <a
               className={styles.primaryButton}
-              href={siteConfig.releases[0].spotifyUrl}
-              target='_blank'
-              rel='noopener noreferrer'
+              href={siteConfig.documents.epkPdf}
+              download
             >
-              {listenToRelease(siteConfig.releases[0].title)}
+              <ArrowDownToLine size={16} aria-hidden='true' />
+              {t.downloadPdf}
             </a>
             <a
               className={styles.secondaryButton}
-              href='/linarex-epk.pdf'
+              href={siteConfig.profiles.spotify}
               target='_blank'
               rel='noopener noreferrer'
             >
-              <ArrowDownToLine size={15} aria-hidden='true' />
-              {t.downloadPdf}
+              <Disc3 size={16} aria-hidden='true' />
+              {t.spotifyCatalog}
             </a>
-          </div>
-          <a className={styles.heroEmail} href={bookingEmail}>
-            {siteConfig.email}
-          </a>
+            <Link className={styles.secondaryButton} href={contactHref}>
+              <Send size={16} aria-hidden='true' />
+              {t.contactCta}
+            </Link>
+          </motion.div>
+
+          <motion.div
+            className={styles.quickFacts}
+            aria-label={t.quickFacts}
+            variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.45, ease: easeOut } } }}
+          >
+            {facts.map((fact) => (
+              <div className={styles.factCard} key={fact.label}>
+                <p className={styles.factLabel}>{fact.label}</p>
+                <strong>{fact.value}</strong>
+                <span>{fact.detail}</span>
+              </div>
+            ))}
+          </motion.div>
         </motion.header>
 
-        <motion.section
-          className={styles.section}
-          aria-labelledby='about-title'
-          {...reveal}
-        >
-          <p className={styles.sectionLabel}>{t.theArtist}</p>
-          <h2 className={styles.sectionTitle} id='about-title'>
-            {t.aboutTitle}
-          </h2>
-          <p className={styles.bodyText}>{withEpkVars(t.aboutText, {
-            name: siteConfig.name,
-            origin: siteConfig.origin,
-            location: siteConfig.location,
-            yearsOnStage: siteConfig.yearsOnStage,
-          })}</p>
-        </motion.section>
+        <div className={`${styles.grid} ${styles.gridTwo}`}>
+          <motion.section className={styles.section} aria-labelledby='about-title' {...reveal}>
+            <p className={styles.sectionLabel}>{t.theArtist}</p>
+            <h2 className={styles.sectionTitle} id='about-title'>
+              {t.aboutTitle}
+            </h2>
+            <p className={styles.bodyText}>
+              {withEpkVars(t.aboutText, {
+                name: siteConfig.name,
+                origin: siteConfig.origin,
+                location: siteConfig.location,
+                yearsOnStage: siteConfig.yearsOnStage,
+              })}
+            </p>
+          </motion.section>
 
-        <motion.section
-          className={styles.section}
-          aria-labelledby='music-title'
-          {...reveal}
-        >
-          <p className={styles.sectionLabel}>{t.listenLabel}</p>
-          <h2 className={styles.sectionTitle} id='music-title'>
-            {t.musicTitle}
-          </h2>
-          <div className={styles.releases}>
-            {siteConfig.releases.map((release, index) => (
-              <motion.article
-                className={styles.release}
-                key={release.id}
-                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, delay: index * 0.08 }}
-                whileHover={reduceMotion ? undefined : { y: -3 }}
-              >
-                <Image
-                  src={release.coverImage}
-                  alt={`${release.title} single cover`}
-                  width={112}
-                  height={112}
-                  sizes='(max-width: 640px) 72px, 88px'
-                  className={styles.cover}
-                />
-                <div className={styles.releaseInfo}>
-                  {index === 0 && (
-                    <p className={styles.featuredLabel}>{t.featuredSingle}</p>
-                  )}
-                  <h3 className={styles.releaseTitle}>
+          <motion.section className={styles.section} aria-labelledby='music-title' {...reveal}>
+            <p className={styles.sectionLabel}>{t.listenLabel}</p>
+            <h2 className={styles.sectionTitle} id='music-title'>
+              {t.musicTitle}
+            </h2>
+            <div className={styles.releases}>
+              {siteConfig.releases.map((release, index) => (
+                <article className={styles.release} key={release.id}>
+                  <Image
+                    src={release.coverImage}
+                    alt={`${release.title} cover`}
+                    width={84}
+                    height={84}
+                    sizes='84px'
+                    className={styles.cover}
+                  />
+                  <div className={styles.releaseInfo}>
+                    {index === 0 && <p className={styles.featuredLabel}>{t.featuredSingle}</p>}
+                    <h3 className={styles.releaseTitle}>
+                      <a href={release.spotifyUrl} target='_blank' rel='noopener noreferrer'>
+                        {release.title}
+                      </a>
+                    </h3>
+                    <p className={styles.releaseDescription}>{release.description}</p>
+                    <p className={styles.releaseMeta}>
+                      {release.year} · {locale === 'pl' ? 'feat.' : 'feat.'} {release.collaborator}
+                    </p>
+                  </div>
+                  <div className={styles.releaseActions}>
                     <a
+                      className={styles.listenLink}
                       href={release.spotifyUrl}
                       target='_blank'
                       rel='noopener noreferrer'
+                      aria-label={`${t.listenOnSpotify}: ${release.title}`}
                     >
-                      {release.title}
+                      Spotify
                     </a>
-                  </h3>
-                  <p className={styles.releaseDescription}>
-                    {release.description}
-                  </p>
-                  <p className={styles.releaseMeta}>
-                    {release.year} · feat. {release.collaborator}
-                  </p>
-                </div>
-                <a
-                  className={styles.listenLink}
-                  href={release.spotifyUrl}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  aria-label={
-                    locale === 'pl'
-                      ? `${epkCopy.pl.listenOnSpotify} ${release.title}`
-                      : `Listen to ${release.title} on Spotify`
-                  }
-                >
-                  Spotify
-                </a>
-              </motion.article>
-            ))}
-          </div>
-        </motion.section>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className={styles.catalogBar}>
+              <p>{locale === 'pl' ? 'Pełny katalog, single i profile artysty.' : 'Full catalog, singles and artist profile.'}</p>
+              <a
+                className={styles.secondaryButton}
+                href={siteConfig.profiles.spotify}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <Disc3 size={16} aria-hidden='true' />
+                {t.spotifyCatalog}
+              </a>
+            </div>
+          </motion.section>
+        </div>
 
-        <motion.section
-          className={styles.liveProposal}
-          aria-labelledby='live-show-title'
-          {...reveal}
-        >
+        <motion.section className={styles.liveProposal} aria-labelledby='live-show-title' {...reveal}>
           <p className={styles.sectionLabel}>{t.forBookersLabel}</p>
           <h2 className={styles.sectionTitle} id='live-show-title'>
             {t.liveTitle}
@@ -216,9 +287,7 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
 
           <h3 className={styles.showName}>{siteConfig.liveShow.name}</h3>
           <p className={styles.showRole}>{t.liveShowSubtitle}</p>
-          <p className={styles.showDescription}>
-            {siteConfig.liveShow.description}
-          </p>
+          <p className={styles.showDescription}>{siteConfig.liveShow.description}</p>
 
           <dl className={styles.bookerFacts}>
             <div className={styles.bookerFact}>
@@ -243,31 +312,28 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
             </div>
           </dl>
 
-          <p className={styles.eventTypes}>
-            {siteConfig.liveShow.bookingAvailability}
-          </p>
-          <p className={styles.technicalDetails}>
-            {siteConfig.liveShow.technicalDetails}
-          </p>
-          <Link className={styles.proposalLink} href={proposalHref}>
-            {withEpkVars(t.openProposal, { showName: siteConfig.liveShow.name })}
-          </Link>
+          <div className={styles.metaBlock}>
+            <p className={styles.metaLine}>{siteConfig.liveShow.bookingAvailability}</p>
+            <p className={styles.metaLine}>{siteConfig.liveShow.technicalDetails}</p>
+          </div>
+
+          <div className={styles.actions}>
+            <Link className={styles.ghostButton} href={proposalHref}>
+              {withEpkVars(t.openProposal, { showName: siteConfig.liveShow.name })}
+              <ArrowUpRight size={15} aria-hidden='true' />
+            </Link>
+          </div>
 
           <BookerInfo locale={locale} />
 
           <div className={styles.performanceGrid}>
-            {clips.map((clip, index) => (
-              <motion.a
+            {clips.map((clip) => (
+              <a
                 className={styles.performanceCard}
                 key={clip.href}
                 href={clip.href}
                 target='_blank'
                 rel='noopener noreferrer'
-                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, delay: index * 0.08 }}
-                whileHover={reduceMotion ? undefined : { y: -4 }}
               >
                 <span className={styles.performanceImage}>
                   <Image
@@ -285,29 +351,54 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
                   <strong>{clip.title}</strong>
                   <span>{clip.label}</span>
                 </span>
-              </motion.a>
+              </a>
             ))}
           </div>
         </motion.section>
 
-        <PhotoGallery variant='artist' />
+        <PhotoGallery variant='artist' locale={locale} />
 
-        <motion.section
-          className={styles.section}
-          aria-labelledby='contact-title'
-          {...reveal}
-        >
+        <motion.section className={styles.contactPanel} aria-labelledby='contact-title' {...reveal}>
           <p className={styles.sectionLabel}>{t.getInTouch}</p>
           <h2 className={styles.sectionTitle} id='contact-title'>
             {t.contactTitle}
           </h2>
+          <p className={styles.bodyText}>
+            {locale === 'pl'
+              ? 'Rezerwacje, press, współprace i zapytania o koncert na żywo.'
+              : 'Bookings, press, collaborations and live show inquiries.'}
+          </p>
+          <div className={styles.contactActions}>
+            <Link className={styles.primaryButton} href={contactHref}>
+              <Send size={16} aria-hidden='true' />
+              {t.contactCta}
+            </Link>
+            <a
+              className={styles.secondaryButton}
+              href={siteConfig.profiles.spotify}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <Disc3 size={16} aria-hidden='true' />
+              {t.spotifyCatalog}
+            </a>
+            <a
+              className={styles.secondaryButton}
+              href={siteConfig.documents.epkPdf}
+              download
+            >
+              <ArrowDownToLine size={16} aria-hidden='true' />
+              {t.downloadPdf}
+            </a>
+          </div>
           <a className={styles.email} href={bookingEmail}>
             {siteConfig.email}
           </a>
           <nav className={styles.socialLinks} aria-label='Linarex profiles'>
-            {siteConfig.profiles &&
-              Object.entries(siteConfig.profiles).map(([key, profile]) => (
-                <a key={key} href={profile ?? '#'} target='_blank' rel='noopener noreferrer'>
+            {Object.entries(siteConfig.profiles)
+              .filter(([, url]) => url)
+              .map(([key, url]) => (
+                <a key={key} href={url!} target='_blank' rel='noopener noreferrer'>
                   {key === 'spotify'
                     ? 'Spotify'
                     : key === 'youtube'

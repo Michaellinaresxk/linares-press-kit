@@ -4,7 +4,8 @@ export type HomeCopy = {
   hero: {
     badge: string;
     statLabel: string;
-    listenCta: string;
+    bookingCta: string;
+    showCta: string;
   };
   music: {
     badge: string;
@@ -46,6 +47,7 @@ export type HomeCopy = {
     liveCopy: string;
     artist: string;
     artistCopy: string;
+    artistSectionLabel: string;
   };
 };
 
@@ -54,7 +56,8 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     hero: {
       badge: 'DOMINICAN-BORN · WARSAW-BASED',
       statLabel: 'Years on stage',
-      listenCta: 'Listen to {title} on Spotify',
+      bookingCta: 'Book the show',
+      showCta: 'See the live show',
     },
     music: {
       badge: 'LISTEN',
@@ -98,9 +101,12 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     },
     gallery: {
       live: 'Live Gallery',
-      liveCopy: 'Live moments from {liveShow}: connection, energy and music on stage.',
+      liveCopy:
+        'Live moments from {liveShow}: connection, energy and music on stage.',
       artist: 'Gallery',
-      artistCopy: 'Portraits, live moments and images from Linarex’s creative world.',
+      artistCopy:
+        'Portraits, live moments and images from Linarex’s creative world.',
+      artistSectionLabel: 'Artist & press photos',
     },
   },
   // Review by native speaker
@@ -108,7 +114,8 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     hero: {
       badge: 'URODZONY NA DOMINIKANIE · MIESZKAJĄCY W WARSAWIE',
       statLabel: 'Lat na scenie',
-      listenCta: 'Posłuchaj na Spotify — {title}',
+      bookingCta: 'Zarezerwuj koncert',
+      showCta: 'Zobacz koncert na żywo',
     },
     music: {
       badge: 'SŁUCHAJ',
@@ -152,9 +159,11 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     },
     gallery: {
       live: 'Galeria live',
-      liveCopy: 'Momenty na żywo z {liveShow}: połączenie, energia i muzyka na scenie.',
+      liveCopy:
+        'Momenty na żywo z {liveShow}: połączenie, energia i muzyka na scenie.',
       artist: 'Galeria',
       artistCopy: 'Zdjęcia portretów, na żywo i obrazy z linii Linarexa.',
+      artistSectionLabel: 'Zdjęcia artysty i prasowe',
     },
   },
 };

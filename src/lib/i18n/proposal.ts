@@ -40,6 +40,7 @@ type ProposalCopy = {
   repertoire: string;
   availability: string;
   askDates: string;
+  idealFor: string;
   photosAria: string;
   quote: string;
   bookingLabel: string;
@@ -53,15 +54,13 @@ type ProposalCopy = {
 
 export const proposalCopy: Record<ProposalLocale, ProposalCopy> = {
   en: {
-    metaTitle:
-      'Linarex Experience – Live Band in Warsaw | with Jacke Matheus',
+    metaTitle: 'Linarex Experience – Live Band in Warsaw | with Jacke Matheus',
     metaDescription:
       'Linarex Experience with Jacke Matheus: a Warsaw-based live band with original songs, familiar covers, audience connection and booking details for venues and events.',
     ogAlt: 'Linarex Experience live show with Jacke Matheus',
     langSwitcherAria: 'Language selection',
     eyebrow: 'Live music · Warsaw, Poland',
-    heroPitch:
-      'The band that turns any night into the one people talk about.',
+    heroPitch: 'The band that turns any night into the one people talk about.',
     heroCta: 'Ask about booking',
     heroPdf: 'Download proposal PDF',
     firstHeadlineShow: 'First headline show',
@@ -98,12 +97,12 @@ export const proposalCopy: Record<ProposalLocale, ProposalCopy> = {
     repertoire: 'Repertoire',
     availability: 'Availability',
     askDates: 'Ask about dates',
+    idealFor: 'Ideal for',
     photosAria: 'Live show photos',
     quote: 'Nobody came to sit down.',
     bookingLabel: 'Bring the show to your room',
     bookingTitle: 'Let’s make it happen.',
-    bookingBody:
-      'Ask about dates, event details and booking {showName}.',
+    bookingBody: 'Ask about dates, event details and booking {showName}.',
     openEpk: 'Open the EPK',
     listenSpotify: 'Listen on Spotify',
     forBookersLabel: 'For bookers',
@@ -156,6 +155,7 @@ export const proposalCopy: Record<ProposalLocale, ProposalCopy> = {
     repertoire: 'Repertuar',
     availability: 'Dostępność',
     askDates: 'Zapytaj o termin',
+    idealFor: 'Idealne na',
     photosAria: 'Zdjęcia z koncertów na żywo',
     quote: 'Nikt nie przyszedł tu siedzieć.',
     bookingLabel: 'Zaprosimy show do Twojego lokalu',

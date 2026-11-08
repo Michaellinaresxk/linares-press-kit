@@ -11,6 +11,12 @@ type EpkCopy = {
   pitch: string;
   bookingButton: string;
   downloadPdf: string;
+  spotifyCatalog: string;
+  contactCta: string;
+  quickFacts: string;
+  originLabel: string;
+  basedInLabel: string;
+  experienceLabel: string;
   theArtist: string;
   aboutTitle: string;
   aboutText: string;
@@ -46,9 +52,16 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
         'Meet Linarex and the Linarex Experience: live music led from the drums, original songs and covers, music, photos and booking contact.',
     },
     eyebrow: 'Electronic Press Kit',
-    pitch: 'Original music from a Dominican-born, Warsaw-based composer and drummer.',
+    pitch:
+      'Original music from a Dominican-born, Warsaw-based composer and drummer.',
     bookingButton: 'Book the Linarex Experience',
-    downloadPdf: 'Download EPK PDF',
+    downloadPdf: 'Download EPK',
+    spotifyCatalog: 'View Spotify catalog',
+    contactCta: 'Contact / booking',
+    quickFacts: 'Quick facts',
+    originLabel: 'Origin',
+    basedInLabel: 'Based in',
+    experienceLabel: 'Experience',
     theArtist: 'The artist',
     aboutTitle: 'About Linarex',
     aboutText:
@@ -85,9 +98,16 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
         'EPK Linarex Experience z Jacke Matheusem: muzyka, klipy live, booking i kontakt dla promoterów.',
     },
     eyebrow: 'Electronic Press Kit',
-    pitch: 'Własne utwory kompozytora i perkusisty z Dominikany, mieszkającego w Warszawie.',
+    pitch:
+      'Własne utwory kompozytora i perkusisty z Dominikany, mieszkającego w Warszawie.',
     bookingButton: 'Zarezerwuj występ Linarex Experience',
-    downloadPdf: 'Pobierz EPK PDF',
+    downloadPdf: 'Pobierz EPK',
+    spotifyCatalog: 'Zobacz katalog Spotify',
+    contactCta: 'Kontakt / rezerwacja',
+    quickFacts: 'Szybkie informacje',
+    originLabel: 'Pochodzenie',
+    basedInLabel: 'Baza',
+    experienceLabel: 'Doświadczenie',
     theArtist: 'O twórcy',
     aboutTitle: 'O Linarex',
     aboutText:
@@ -109,7 +129,8 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     liveSetAlt: 'Linarex Experience — koncert na żywo z Jacke Matheusem',
     crowdTitle: 'Publiczność — w ruchu',
     crowdLabel: 'Obejrzyj na Instagramie',
-    crowdAlt: 'Publiczność oglądająca koncert Linarex Experience z Jacke Matheusa',
+    crowdAlt:
+      'Publiczność oglądająca koncert Linarex Experience z Jacke Matheusa',
     getInTouch: 'Skontaktuj się',
     contactTitle: 'Kontakt prasowy i rezerwacyjny',
     openProposal: 'Zobacz ofertę {showName}',

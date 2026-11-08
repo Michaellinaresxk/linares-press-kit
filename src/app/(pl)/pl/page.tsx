@@ -10,7 +10,8 @@ import PhotoGallery from '@/components/PhotoGallery';
 import SiteFooter from '@/components/SiteFooter';
 
 export const metadata: Metadata = {
-  title: 'Linarex – Kompozytor i perkusista z Warszawy – Nowy singiel "Memories"',
+  title:
+    'Linarex – Kompozytor i perkusista z Warszawy – Nowy singiel "Memories"',
   description:
     'Kompozytor i perkusista z Dominikany, mieszkający w Warszawie. Posłuchaj nowego singla "Memories" i zarezerwuj koncert Linarex Experience z Jacke Matheusa.',
 };

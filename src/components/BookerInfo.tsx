@@ -100,8 +100,10 @@ export default function BookerInfo({ locale }: { locale: Locale }) {
       }))
     : [];
 
+  const sectionLabel = locale === 'pl' ? 'Dla bookerów' : 'For bookers';
+
   return (
-    <section className={styles.section} aria-label='For bookers'>
+    <section className={styles.section} aria-label={sectionLabel}>
       {videoLd && (
         <script
           type='application/ld+json'
@@ -213,7 +215,10 @@ export default function BookerInfo({ locale }: { locale: Locale }) {
         ) : (
           <p className={styles.text}>{t.noDates}</p>
         )}
-        <a className={styles.textLink} href={bookingEmail}>
+        <a
+          className={styles.textLink}
+          href={locale === 'pl' ? '/pl#contact' : '/#contact'}
+        >
           {t.askAvailability}
         </a>
       </div>

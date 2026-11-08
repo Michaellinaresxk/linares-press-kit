@@ -2,13 +2,10 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRef } from 'react';
 import { siteConfig } from '@/lib/site-config';
-import {
-  homeCopy,
-  withHomeVars,
-  type HomeLocale,
-} from '@/lib/i18n/home';
+import { homeCopy, type HomeLocale } from '@/lib/i18n/home';
 
 const HERO_STATS = [
   { number: siteConfig.yearsOnStage, label: 'Years on stage' },
@@ -148,29 +145,25 @@ export default function Hero({ locale = 'en' }: { locale?: HomeLocale }) {
             ))}
           </motion.div>
 
-          {/* One clear action keeps the artist's music at the center. */}
+          {/* Primary: booking/contact. Music lives in the featured single section next. */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.3 }}
-            className='flex flex-wrap items-center gap-x-6 gap-y-3 pb-20'
+            className='flex flex-wrap items-center gap-3 pb-20'
           >
-            <a
-              href={siteConfig.releases[0].spotifyUrl}
-              target='_blank'
-              rel='noopener noreferrer'
+            <Link
+              href={locale === 'pl' ? '/pl#contact' : '/#contact'}
               className='rounded-xl border border-[#378add] bg-[#1d4a72] px-6 py-3 text-sm font-semibold text-[#c8dcea] transition-transform duration-300 hover:-translate-y-px hover:scale-[1.03] active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a9d8ec]'
             >
-              {withHomeVars(copy.hero.listenCta, {
-                title: siteConfig.releases[0].title,
-              })}
-            </a>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className='text-sm font-medium text-[#c8dcea] underline decoration-[#5b8fa8] underline-offset-4 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#85b7eb]'
+              {copy.hero.bookingCta}
+            </Link>
+            <Link
+              href={locale === 'pl' ? '/pl/proposal' : '/proposal'}
+              className='rounded-xl border border-[#5b8fa866] bg-[#0d1318]/35 px-6 py-3 text-sm font-semibold text-[#dce8f0] backdrop-blur-sm transition-colors hover:border-[#7ab0cc] hover:bg-[#5b8fa81c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#85b7eb]'
             >
-              {siteConfig.email}
-            </a>
+              {copy.hero.showCta}
+            </Link>
           </motion.div>
         </motion.div>
       </div>

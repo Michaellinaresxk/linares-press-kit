@@ -15,9 +15,11 @@ type GalleryVariant = 'artist' | 'live';
 export default function PhotoGallery({
   variant = 'artist',
   locale = 'en',
+  className = '',
 }: {
   variant?: GalleryVariant;
   locale?: HomeLocale;
+  className?: string;
 }) {
   const copy = homeCopy[locale];
   const containerRef = useRef<HTMLDivElement>(null);
@@ -36,7 +38,7 @@ export default function PhotoGallery({
   return (
     <section
       ref={containerRef}
-      className='relative py-16 md:py-20 lg:py-32 overflow-hidden'
+      className={`relative py-16 md:py-20 lg:py-32 overflow-hidden ${className}`.trim()}
       style={{
         background: 'linear-gradient(to bottom, #111820, #0d1117, #111820)',
       }}
@@ -97,7 +99,9 @@ export default function PhotoGallery({
               className='text-xl md:text-2xl font-bold'
               style={{ color: '#c8dcea' }}
             >
-              {isLiveGallery ? siteConfig.liveShow.name : 'Artist & press photos'}
+              {isLiveGallery
+                ? siteConfig.liveShow.name
+                : copy.gallery.artistSectionLabel}
             </h3>
           </motion.div>
 
@@ -106,7 +110,11 @@ export default function PhotoGallery({
               <motion.button
                 type='button'
                 key={photo.id}
-                aria-label={`View photo: ${photo.alt}`}
+                aria-label={
+                  locale === 'pl'
+                    ? `Zobacz zdjęcie: ${photo.alt}`
+                    : `View photo: ${photo.alt}`
+                }
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}

@@ -14,6 +14,7 @@ export default function ExperienceTeaser({
 }) {
   const copy = homeCopy[locale];
   const reduceMotion = useReducedMotion();
+  const proposalHref = locale === 'pl' ? '/pl/proposal' : '/proposal';
 
   return (
     <section
@@ -38,18 +39,18 @@ export default function ExperienceTeaser({
               liveShow: siteConfig.liveShow.name,
             })}
           </h2>
-          <p className='text-sm font-medium uppercase tracking-[0.18em] text-[#7ab0cc]'>
+          <p className='mb-4 text-sm font-medium uppercase tracking-[0.18em] text-[#7ab0cc]'>
             {withHomeVars(copy.experience.subtitle, {
               liveShow: siteConfig.liveShow.name,
             })}
           </p>
           <p className='max-w-2xl text-base leading-8 text-[#a6bbc7]'>
-            A live band led from the drums: original songs and covers, stories
-            shared on stage, and a connection that brings the crowd into the
-            moment.
+            {withHomeVars(copy.experience.copy, {
+              liveShow: siteConfig.liveShow.name,
+            })}
           </p>
           <Link
-            href='/proposal'
+            href={proposalHref}
             className='mt-7 inline-flex min-h-12 items-center gap-2 rounded-lg border border-[#5b8fa8] px-5 py-3 text-sm font-semibold text-[#dce8f0] transition-colors hover:bg-[#5b8fa81c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a9d8ec]'
           >
             {copy.experience.explore}

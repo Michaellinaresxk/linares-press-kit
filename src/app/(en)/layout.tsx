@@ -88,7 +88,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AppMotionProvider>
-          <SiteNavigation locale="en" />
+          <SiteNavigation locale='en' />
           {children}
         </AppMotionProvider>
       </body>
