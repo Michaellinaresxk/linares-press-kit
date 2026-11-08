@@ -19,15 +19,15 @@ const performanceClips = [
   {
     title: 'Live Set — Full Room',
     label: 'Watch on YouTube',
-    href: siteConfig.live.videoUrl,
-    image: siteConfig.live.videoThumbnails.youtube,
+    href: siteConfig.liveShow.videoUrl,
+    image: siteConfig.liveShow.videoThumbnails.youtube,
     alt: 'Linarex and the band performing live',
   },
   {
     title: 'The Crowd — In Motion',
     label: 'Watch on Instagram',
-    href: siteConfig.live.instagramVideoUrl,
-    image: siteConfig.live.videoThumbnails.instagram,
+    href: siteConfig.liveShow.instagramVideoUrl,
+    image: siteConfig.liveShow.videoThumbnails.instagram,
     alt: 'The audience watching the Linarex Experience live show',
   },
 ];
@@ -69,7 +69,7 @@ export default function EpkContent() {
           </p>
           <div className={styles.actions}>
             <a className={styles.bookingButton} href={bookingEmail}>
-              Book the {siteConfig.liveShow}
+              Book the {siteConfig.liveShow.name}
               <ArrowUpRight size={16} aria-hidden='true' />
             </a>
             <a
@@ -185,46 +185,46 @@ export default function EpkContent() {
             The live show
           </h2>
           <p className={styles.bodyText}>
-            The {siteConfig.liveShow} is a separate live experience, with its
+            The {siteConfig.liveShow.name} is a separate live experience, with its
             own show details, performance clips, photos and booking information.
           </p>
 
           <h3 className={styles.showName}>Linarex &amp; Jacke Matheus</h3>
           <p className={styles.showDescription}>
-            {siteConfig.live.description}
+            {siteConfig.liveShow.description}
           </p>
 
           <dl className={styles.bookerFacts}>
             <div className={styles.bookerFact}>
               <dt>Musicians on stage</dt>
-              <dd>{siteConfig.live.musicians}</dd>
-              <p>{siteConfig.live.instrumentsDescription}</p>
-              <p>{siteConfig.live.expandableInstrumentsDescription}</p>
+              <dd>{siteConfig.liveShow.musicians}</dd>
+              <p>{siteConfig.liveShow.instrumentsDescription}</p>
+              <p>{siteConfig.liveShow.expandableInstrumentsDescription}</p>
             </div>
             <div className={styles.bookerFact}>
               <dt>Set length</dt>
-              <dd>{siteConfig.live.setLength}</dd>
-              <p>{siteConfig.live.setDescription}</p>
+              <dd>{siteConfig.liveShow.setLength}</dd>
+              <p>{siteConfig.liveShow.setDescription}</p>
             </div>
             <div className={styles.bookerFact}>
               <dt>Repertoire</dt>
-              <dd>{siteConfig.live.repertoireLanguagesDescription}</dd>
-              <p>{siteConfig.live.repertoireDescription}</p>
+              <dd>{siteConfig.liveShow.repertoireLanguagesDescription}</dd>
+              <p>{siteConfig.liveShow.repertoireDescription}</p>
             </div>
             <div className={styles.bookerFact}>
               <dt>First headline show</dt>
-              <dd>{siteConfig.live.firstHeadlineShow}</dd>
+              <dd>{siteConfig.liveShow.firstHeadlineShow}</dd>
             </div>
           </dl>
 
           <p className={styles.eventTypes}>
-            {siteConfig.live.bookingAvailability}
+            {siteConfig.liveShow.bookingAvailability}
           </p>
           <p className={styles.technicalDetails}>
-            {siteConfig.live.technicalDetails}
+            {siteConfig.liveShow.technicalDetails}
           </p>
           <Link className={styles.proposalLink} href='/proposal'>
-            Explore the {siteConfig.liveShow} proposal
+            Explore the {siteConfig.liveShow.name} proposal
           </Link>
 
           <div className={styles.performanceGrid}>
