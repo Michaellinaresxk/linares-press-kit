@@ -13,7 +13,7 @@
 .hero {
   position: relative;
   display: flex;
-  min-height: min(800px, calc(100svh - 76px));
+  min-height: clamp(720px, calc(100svh - 76px), 920px);
   align-items: flex-end;
   overflow: hidden;
   background: var(--card);
@@ -21,7 +21,7 @@
 
 .heroImage {
   object-fit: cover;
-  object-position: center 15%;
+  object-position: center 18%;
   filter: brightness(0.8) contrast(1.1);
 }
 
@@ -45,7 +45,7 @@
   justify-content: space-between;
   gap: clamp(24px, 5vw, 64px);
   margin: 0 auto;
-  padding: clamp(72px, 10vh, 112px) 0 88px;
+  padding: clamp(64px, 8vh, 104px) 0 96px;
 }
 
 .heroMain {
@@ -64,13 +64,13 @@
 }
 
 .heroTitle {
-  max-width: 10ch;
+  max-width: 12ch;
   margin: 0;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3.75rem, 8.5vw, 7.5rem);
+  font-size: clamp(3rem, 7vw, 6.6rem);
   font-weight: 400;
   letter-spacing: 0.01em;
-  line-height: 0.88;
+  line-height: 0.9;
   text-wrap: balance;
 }
 
@@ -92,7 +92,7 @@
   margin: 16px 0 0;
   color: #9aafbb;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-style: italic;
   line-height: 1.45;
 }
@@ -824,4 +824,67 @@
   .cardImage {
     transition: none;
   }
+}
+
+.langSwitch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: rgba(220, 232, 240, 0.72);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.langSwitch a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.langSwitch a:hover,
+.langActive {
+  color: #fff !important;
+}
+
+.heroSubtitle {
+  margin: 8px 0 0;
+  color: rgba(220, 232, 240, 0.86);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.tagLabel {
+  margin: 0 0 8px;
+  color: var(--blue);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tagList span {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(8, 12, 16, 0.35);
+  color: #fff;
+  padding: 7px 12px;
+  font-size: 0.74rem;
+  backdrop-filter: blur(6px);
+}
+
+.pillsGroup {
+  margin-top: 18px;
+}
+
+.pillsGroup .tagLabel {
+  margin-bottom: 10px;
 }

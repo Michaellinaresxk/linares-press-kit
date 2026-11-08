@@ -18,6 +18,36 @@
   margin: 0 auto;
 }
 
+.langSwitch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  color: var(--epk-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.langSwitch a {
+  color: var(--epk-muted);
+  text-decoration: none;
+}
+
+.langSwitch a:hover,
+.langSwitch a[aria-current='page'] {
+  color: var(--epk-white);
+}
+
+.langSwitch span[aria-hidden='true'] {
+  color: var(--epk-border);
+}
+
+.langActive {
+  color: var(--epk-white) !important;
+}
+
 .hero {
   position: relative;
   overflow: hidden;

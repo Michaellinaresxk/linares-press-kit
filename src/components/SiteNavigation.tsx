@@ -2,8 +2,30 @@ import Link from 'next/link';
 import { ArrowUpRight, Music2 } from 'lucide-react';
 import { bookingEmail, siteConfig } from '@/lib/site-config';
 import styles from './site-navigation.module.css';
+import type { SiteLocale } from '@/lib/i18n/navigation';
 
-export default function SiteNavigation() {
+export default function SiteNavigation({
+  locale = 'en',
+}: {
+  locale?: SiteLocale;
+}) {
+  const t = {
+    en: {
+      liveShow: 'Live show',
+      epk: 'EPK',
+      booking: 'Book the show',
+    },
+    // Review by native speaker
+    pl: {
+      liveShow: 'Koncert na żywo',
+      epk: 'EPK',
+      booking: 'Zarezerwuj koncert',
+    },
+  }[locale];
+
+  const proposalHref = locale === 'pl' ? '/pl/proposal' : '/proposal';
+  const epkHref = locale === 'pl' ? '/pl/epk' : '/epk';
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav} aria-label='Main navigation'>
@@ -21,19 +43,14 @@ export default function SiteNavigation() {
           </span>
         </Link>
         <div className={styles.links}>
-          <Link className={styles.navLink} href='/proposal'>
-            Live show
+          <Link className={styles.navLink} href={proposalHref}>
+            {t.liveShow}
           </Link>
-          <Link
-            className={styles.navLink}
-            href='/epk'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            EPK
+          <Link className={styles.navLink} href={epkHref}>
+            {t.epk}
           </Link>
           <a className={styles.bookingLink} href={bookingEmail}>
-            <span>Book the show</span>
+            <span>{t.booking}</span>
             <ArrowUpRight size={15} aria-hidden='true' />
           </a>
         </div>

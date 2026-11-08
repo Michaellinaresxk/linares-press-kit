@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Play, Heart } from 'lucide-react';
 import { streamingPlatforms, socialPlatforms } from '@/const/links';
+import { homeCopy, type HomeCopy, type HomeLocale } from '@/lib/i18n/home';
 import PlatformCard from './cards/PlatformCard';
 
 function AnimatedBackground() {
@@ -33,7 +34,7 @@ function AnimatedBackground() {
   );
 }
 
-function LinksHeader() {
+function LinksHeader({ copy }: { copy: HomeCopy['links'] }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -46,15 +47,13 @@ function LinksHeader() {
         className='text-4xl lg:text-5xl font-bold mb-6'
         style={{ color: '#e8eef5' }}
       >
-        Connect & Stream
+        {copy.title}
       </h2>
       <p
         className='text-lg max-w-3xl mx-auto mb-8'
         style={{ color: '#5a7a8e' }}
       >
-        Follow Linarex across all platforms for the latest music,
-        behind-the-scenes content, and direct interaction with the artist and
-        community.
+        {copy.copy}
       </p>
     </motion.div>
   );
@@ -127,7 +126,8 @@ function PlatformSection({
   );
 }
 
-export default function Links() {
+export default function Links({ locale = 'en' }: { locale?: HomeLocale }) {
+  const copy = homeCopy[locale];
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -142,10 +142,10 @@ export default function Links() {
       <AnimatedBackground />
 
       <div className='relative z-10 max-w-7xl mx-auto px-6 lg:px-8'>
-        <LinksHeader />
+        <LinksHeader copy={copy.links} />
 
         <PlatformSection
-          title='Streaming Platforms'
+          title={copy.links.streaming}
           icon={<Play size={28} />}
           iconColor='#85b7eb'
           platforms={streamingPlatforms}
@@ -153,7 +153,7 @@ export default function Links() {
         />
 
         <PlatformSection
-          title='Social Media'
+          title={copy.links.social}
           icon={<Heart size={28} />}
           iconColor='#5dcaa5'
           platforms={socialPlatforms}

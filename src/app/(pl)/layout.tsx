@@ -1,10 +1,9 @@
 import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { metadata as siteMetadata } from '@/const/metadata';
 import AppMotionProvider from '@/components/AppMotionProvider';
 import SiteNavigation from '@/components/SiteNavigation';
 import { siteConfig } from '@/lib/site-config';
-import './globals.css';
+import '../(en)/globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -25,7 +24,7 @@ const structuredData = {
   name: siteConfig.name,
   url: siteConfig.url,
   description: siteConfig.seo.description,
-  genre: siteConfig.genres,
+  genre: siteConfig.genres.original,
   foundingLocation: {
     '@type': 'Place',
     name: siteConfig.origin,
@@ -42,34 +41,27 @@ const structuredData = {
     contactType: 'Booking',
     email: siteConfig.email,
   },
-  track: siteConfig.releases.map((release) => ({
-    '@type': 'MusicRecording',
-    name: release.title,
-    datePublished: release.year,
-    url: release.spotifyUrl,
-    image: release.coverImage,
-    genre: siteConfig.genres,
-    byArtist: { '@id': artistId },
-    contributor: {
-      '@type': 'Person',
-      name: release.collaborator,
-    },
-  })),
 };
 
 export const viewport: Viewport = {
   themeColor: '#080c10',
 };
 
-export const metadata: Metadata = siteMetadata;
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
-export default function RootLayout({
+export default function PlRootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='pl'>
       <head>
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link
@@ -88,7 +80,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AppMotionProvider>
-          <SiteNavigation />
+          <SiteNavigation locale="pl" />
           {children}
         </AppMotionProvider>
       </body>

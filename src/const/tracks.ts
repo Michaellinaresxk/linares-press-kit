@@ -1,4 +1,4 @@
-import { siteConfig, siteGenres, type SiteRelease } from '@/lib/site-config';
+import { siteConfig, siteGenresOriginal, type SiteRelease } from '@/lib/site-config';
 
 export interface Track {
   id: string;
@@ -25,7 +25,7 @@ function toTrack(release: SiteRelease): Track {
     spotifyUrl: release.spotifyUrl,
     description: release.description,
     year: release.year,
-    genre: siteGenres,
+    genre: siteGenresOriginal,
   };
 }
 

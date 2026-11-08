@@ -2,38 +2,20 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowDownToLine, ArrowUpRight, Play } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowDownToLine, ArrowUpRight, Play } from 'lucide-react';
+import BookerInfo from '@/components/BookerInfo';
 import PhotoGallery from '@/components/PhotoGallery';
-import { bookingEmail, siteConfig, siteGenres } from '@/lib/site-config';
+import SiteFooter from '@/components/SiteFooter';
+import { epkCopy, withEpkVars, type EpkLocale } from '@/lib/i18n/epk';
+import { bookingEmail, siteConfig, siteGenresOriginal } from '@/lib/site-config';
 import styles from './epk.module.css';
 
-const socialProfiles = [
-  { name: 'Spotify', url: siteConfig.profiles.spotify },
-  { name: 'YouTube', url: siteConfig.profiles.youtube },
-  { name: 'Instagram', url: siteConfig.profiles.instagram },
-  { name: 'TikTok', url: siteConfig.profiles.tiktok },
-];
-
-const performanceClips = [
-  {
-    title: 'Live Set — Full Room',
-    label: 'Watch on YouTube',
-    href: siteConfig.live.videoUrl,
-    image: siteConfig.live.videoThumbnails.youtube,
-    alt: 'Linarex and the band performing live',
-  },
-  {
-    title: 'The Crowd — In Motion',
-    label: 'Watch on Instagram',
-    href: siteConfig.live.instagramVideoUrl,
-    image: siteConfig.live.videoThumbnails.instagram,
-    alt: 'The audience watching the Linarex Experience live show',
-  },
-];
-
-export default function EpkContent() {
+export default function EpkView({ locale }: { locale: EpkLocale }) {
   const reduceMotion = useReducedMotion();
+  const t = epkCopy[locale];
+  const show = siteConfig.liveShow;
+
   const reveal = {
     initial: reduceMotion ? false : { opacity: 0, y: 22 },
     whileInView: { opacity: 1, y: 0 },
@@ -41,9 +23,51 @@ export default function EpkContent() {
     transition: { duration: 0.55 },
   };
 
+  const clips = [
+    {
+      title: t.liveSetTitle,
+      label: t.liveSetLabel,
+      href: show.videoUrl,
+      image: show.videoThumbnails.youtube,
+      alt: t.liveSetAlt,
+    },
+    {
+      title: t.crowdTitle,
+      label: t.crowdLabel,
+      href: show.instagramVideoUrl,
+      image: show.videoThumbnails.instagram,
+      alt: t.crowdAlt,
+    },
+  ] as const;
+
+  const listenToRelease = (releaseTitle: string) =>
+    locale === 'pl'
+      ? `${releaseTitle} · ${epkCopy.pl.listenOnSpotify}`
+      : `Listen to ${releaseTitle}`;
+
+  const proposalHref = locale === 'pl' ? '/pl/proposal' : '/proposal';
+
   return (
     <main className={styles.page}>
       <div className={styles.content}>
+        <nav className={styles.langSwitch} aria-label={t.langSwitcherAria}>
+          <Link
+            href='/epk'
+            aria-current={locale === 'en' ? 'page' : undefined}
+            className={locale === 'en' ? styles.langActive : undefined}
+          >
+            EN
+          </Link>
+          <span aria-hidden='true'>|</span>
+          <Link
+            href='/pl/epk'
+            aria-current={locale === 'pl' ? 'page' : undefined}
+            className={locale === 'pl' ? styles.langActive : undefined}
+          >
+            PL
+          </Link>
+        </nav>
+
         <motion.header
           className={styles.hero}
           initial={reduceMotion ? false : { opacity: 0, y: 22 }}
@@ -59,17 +83,16 @@ export default function EpkContent() {
               priority
             />
           </div>
-          <p className={styles.eyebrow}>Electronic Press Kit</p>
+          <p className={styles.eyebrow}>{t.eyebrow}</p>
           <h1 className={styles.name}>{siteConfig.name}</h1>
           <p className={styles.role}>{siteConfig.role}</p>
-          <p className={styles.genres}>{siteGenres}</p>
-          <p className={styles.pitch}>
-            Original music from a Dominican-born, Warsaw-based composer and
-            drummer.
+          <p className={styles.genres}>
+            Original music: {siteGenresOriginal}
           </p>
+          <p className={styles.pitch}>{t.pitch}</p>
           <div className={styles.actions}>
             <a className={styles.bookingButton} href={bookingEmail}>
-              Book the {siteConfig.liveShow}
+              {t.bookingButton}
               <ArrowUpRight size={16} aria-hidden='true' />
             </a>
             <a
@@ -78,7 +101,7 @@ export default function EpkContent() {
               target='_blank'
               rel='noopener noreferrer'
             >
-              Listen to {siteConfig.releases[0].title}
+              {listenToRelease(siteConfig.releases[0].title)}
             </a>
             <a
               className={styles.secondaryButton}
@@ -87,7 +110,7 @@ export default function EpkContent() {
               rel='noopener noreferrer'
             >
               <ArrowDownToLine size={15} aria-hidden='true' />
-              Download PDF
+              {t.downloadPdf}
             </a>
           </div>
           <a className={styles.heroEmail} href={bookingEmail}>
@@ -100,17 +123,16 @@ export default function EpkContent() {
           aria-labelledby='about-title'
           {...reveal}
         >
-          <p className={styles.sectionLabel}>The artist</p>
+          <p className={styles.sectionLabel}>{t.theArtist}</p>
           <h2 className={styles.sectionTitle} id='about-title'>
-            About {siteConfig.name}
+            {t.aboutTitle}
           </h2>
-          <p className={styles.bodyText}>
-            {siteConfig.name} was born in the {siteConfig.origin} and is based
-            in {siteConfig.location}. A multi-instrumentalist, {siteConfig.name}{' '}
-            composes on guitar, piano and drums. With {siteConfig.yearsOnStage}{' '}
-            years on stage, his musical roots span rock and progressive rock,
-            jazz, funk and reggae.
-          </p>
+          <p className={styles.bodyText}>{withEpkVars(t.aboutText, {
+            name: siteConfig.name,
+            origin: siteConfig.origin,
+            location: siteConfig.location,
+            yearsOnStage: siteConfig.yearsOnStage,
+          })}</p>
         </motion.section>
 
         <motion.section
@@ -118,9 +140,9 @@ export default function EpkContent() {
           aria-labelledby='music-title'
           {...reveal}
         >
-          <p className={styles.sectionLabel}>Listen</p>
+          <p className={styles.sectionLabel}>{t.listenLabel}</p>
           <h2 className={styles.sectionTitle} id='music-title'>
-            Music
+            {t.musicTitle}
           </h2>
           <div className={styles.releases}>
             {siteConfig.releases.map((release, index) => (
@@ -143,7 +165,7 @@ export default function EpkContent() {
                 />
                 <div className={styles.releaseInfo}>
                   {index === 0 && (
-                    <p className={styles.featuredLabel}>Featured single</p>
+                    <p className={styles.featuredLabel}>{t.featuredSingle}</p>
                   )}
                   <h3 className={styles.releaseTitle}>
                     <a
@@ -166,7 +188,11 @@ export default function EpkContent() {
                   href={release.spotifyUrl}
                   target='_blank'
                   rel='noopener noreferrer'
-                  aria-label={`Listen to ${release.title} on Spotify`}
+                  aria-label={
+                    locale === 'pl'
+                      ? `${epkCopy.pl.listenOnSpotify} ${release.title}`
+                      : `Listen to ${release.title} on Spotify`
+                  }
                 >
                   Spotify
                 </a>
@@ -180,54 +206,57 @@ export default function EpkContent() {
           aria-labelledby='live-show-title'
           {...reveal}
         >
-          <p className={styles.sectionLabel}>For bookers</p>
+          <p className={styles.sectionLabel}>{t.forBookersLabel}</p>
           <h2 className={styles.sectionTitle} id='live-show-title'>
-            The live show
+            {t.liveTitle}
           </h2>
           <p className={styles.bodyText}>
-            The {siteConfig.liveShow} is a separate live experience, with its
-            own show details, performance clips, photos and booking
-            information.
+            {withEpkVars(t.liveBody, { showName: siteConfig.liveShow.name })}
           </p>
 
-          <h3 className={styles.showName}>Linarex &amp; Jacke Matheus</h3>
-          <p className={styles.showDescription}>{siteConfig.live.description}</p>
+          <h3 className={styles.showName}>{siteConfig.liveShow.name}</h3>
+          <p className={styles.showRole}>{t.liveShowSubtitle}</p>
+          <p className={styles.showDescription}>
+            {siteConfig.liveShow.description}
+          </p>
 
           <dl className={styles.bookerFacts}>
             <div className={styles.bookerFact}>
-              <dt>Musicians on stage</dt>
-              <dd>{siteConfig.live.musicians}</dd>
-              <p>{siteConfig.live.instrumentsDescription}</p>
-              <p>{siteConfig.live.expandableInstrumentsDescription}</p>
+              <dt>{t.musiciansOnStage}</dt>
+              <dd>{siteConfig.liveShow.musicians}</dd>
+              <p>{siteConfig.liveShow.instrumentsDescription}</p>
+              <p>{siteConfig.liveShow.expandableInstrumentsDescription}</p>
             </div>
             <div className={styles.bookerFact}>
-              <dt>Set length</dt>
-              <dd>{siteConfig.live.setLength}</dd>
-              <p>{siteConfig.live.setDescription}</p>
+              <dt>{t.setLength}</dt>
+              <dd>{siteConfig.liveShow.setLength}</dd>
+              <p>{siteConfig.liveShow.setDescription}</p>
             </div>
             <div className={styles.bookerFact}>
-              <dt>Repertoire</dt>
-              <dd>{siteConfig.live.repertoireLanguagesDescription}</dd>
-              <p>{siteConfig.live.repertoireDescription}</p>
+              <dt>{t.repertoire}</dt>
+              <dd>{siteConfig.liveShow.repertoireLanguagesDescription}</dd>
+              <p>{siteConfig.liveShow.repertoireDescription}</p>
             </div>
             <div className={styles.bookerFact}>
-              <dt>First headline show</dt>
-              <dd>{siteConfig.live.firstHeadlineShow}</dd>
+              <dt>{t.firstHeadlineShow}</dt>
+              <dd>{siteConfig.liveShow.firstHeadlineShow}</dd>
             </div>
           </dl>
 
           <p className={styles.eventTypes}>
-            {siteConfig.live.bookingAvailability}
+            {siteConfig.liveShow.bookingAvailability}
           </p>
           <p className={styles.technicalDetails}>
-            {siteConfig.live.technicalDetails}
+            {siteConfig.liveShow.technicalDetails}
           </p>
-          <Link className={styles.proposalLink} href='/proposal'>
-            Explore the {siteConfig.liveShow} proposal
+          <Link className={styles.proposalLink} href={proposalHref}>
+            {withEpkVars(t.openProposal, { showName: siteConfig.liveShow.name })}
           </Link>
 
+          <BookerInfo locale={locale} />
+
           <div className={styles.performanceGrid}>
-            {performanceClips.map((clip, index) => (
+            {clips.map((clip, index) => (
               <motion.a
                 className={styles.performanceCard}
                 key={clip.href}
@@ -261,7 +290,6 @@ export default function EpkContent() {
           </div>
         </motion.section>
 
-        <PhotoGallery variant='live' />
         <PhotoGallery variant='artist' />
 
         <motion.section
@@ -269,41 +297,32 @@ export default function EpkContent() {
           aria-labelledby='contact-title'
           {...reveal}
         >
-          <p className={styles.sectionLabel}>Get in touch</p>
+          <p className={styles.sectionLabel}>{t.getInTouch}</p>
           <h2 className={styles.sectionTitle} id='contact-title'>
-            Press & booking contact
+            {t.contactTitle}
           </h2>
           <a className={styles.email} href={bookingEmail}>
             {siteConfig.email}
           </a>
           <nav className={styles.socialLinks} aria-label='Linarex profiles'>
-            {socialProfiles.map((profile) => (
-              <a
-                key={profile.name}
-                href={profile.url}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                {profile.name}
-              </a>
-            ))}
+            {siteConfig.profiles &&
+              Object.entries(siteConfig.profiles).map(([key, profile]) => (
+                <a key={key} href={profile ?? '#'} target='_blank' rel='noopener noreferrer'>
+                  {key === 'spotify'
+                    ? 'Spotify'
+                    : key === 'youtube'
+                      ? 'YouTube'
+                      : key === 'instagram'
+                        ? 'Instagram'
+                        : key === 'tiktok'
+                          ? 'TikTok'
+                          : 'Apple Music'}
+                </a>
+              ))}
           </nav>
-          <p className={styles.appleTodo}>{siteConfig.appleMusicTodo}</p>
         </motion.section>
-
-        <footer className={styles.footer}>
-          <span>
-            {siteConfig.name} · {siteConfig.location}
-          </span>
-          <a
-            href={siteConfig.profiles.spotify}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            Listen on Spotify
-          </a>
-        </footer>
       </div>
+      <SiteFooter locale={locale} />
     </main>
   );
 }

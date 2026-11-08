@@ -7,9 +7,15 @@ export const metadata: Metadata = {
   description: siteConfig.seo.proposalDescription,
   alternates: {
     canonical: '/proposal',
+    languages: {
+      en: '/proposal',
+      pl: '/pl/proposal',
+      'x-default': '/proposal',
+    },
   },
   openGraph: {
     type: 'website',
+    locale: 'en_US',
     url: `${siteConfig.url}/proposal`,
     title: siteConfig.seo.proposalTitle,
     description: siteConfig.seo.proposalDescription,
@@ -18,7 +24,7 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: `${siteConfig.liveShow} live music proposal`,
+        alt: `${siteConfig.liveShow.name} live show with Jacke Matheus`,
       },
     ],
   },

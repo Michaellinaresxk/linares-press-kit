@@ -5,14 +5,20 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import QuoteSection from './QuoteSection';
 import { siteConfig } from '@/lib/site-config';
+import {
+  homeCopy,
+  withHomeVars,
+  type HomeLocale,
+} from '@/lib/i18n/home';
 
-export default function About() {
+export default function About({ locale = 'en' }: { locale?: HomeLocale }) {
+  const copy = homeCopy[locale];
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
       <div className='relative bg-black'>
-        <QuoteSection />
+        <QuoteSection quote={copy.about.quote} />
         <section
           ref={containerRef}
           className='relative min-h-screen bg-black flex items-center overflow-hidden'
@@ -54,7 +60,10 @@ export default function About() {
                     className='text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-light leading-relaxed tracking-wide'
                     style={{ color: '#c8dcea' }}
                   >
-                    From {siteConfig.origin} to {siteConfig.location}
+                    {withHomeVars(copy.about.fromOriginToLocation, {
+            origin: siteConfig.origin,
+            location: siteConfig.location,
+          })}
                   </h2>
                 </motion.div>
 
@@ -68,15 +77,16 @@ export default function About() {
                   style={{ color: '#5a7a8e' }}
                 >
                   <p>
-                    Born in the {siteConfig.origin} and now based in{' '}
-                    {siteConfig.location}, {siteConfig.name} builds music from
-                    the instruments he knows firsthand: guitar, piano and
-                    drums. His sound is rooted in rock, progressive rock,
-                    jazz, funk and reggae.
+                    {withHomeVars(copy.about.bornAndNow, {
+                      name: siteConfig.name,
+                      origin: siteConfig.origin,
+                      location: siteConfig.location,
+                    })}
                   </p>
                   <p>
-                    From those roots comes music led by rhythm and feeling,
-                    including the latest single, {siteConfig.releases[0].title}.
+                    {withHomeVars(copy.about.latestSingle, {
+                      title: siteConfig.releases[0].title,
+                    })}
                   </p>
                 </motion.div>
 
@@ -132,7 +142,7 @@ export default function About() {
                     whileHover={{ x: -3 }}
                     transition={{ duration: 0.2 }}
                   >
-                    Get In Touch
+                    {copy.about.getInTouch}
                     <motion.span
                       className='inline-block ml-2 group-hover:ml-3 transition-all duration-300'
                       animate={{ x: [0, 3, 0] }}

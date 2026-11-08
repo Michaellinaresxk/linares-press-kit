@@ -5,8 +5,14 @@ import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { siteConfig } from '@/lib/site-config';
+import { homeCopy, withHomeVars, type HomeLocale } from '@/lib/i18n/home';
 
-export default function ExperienceTeaser() {
+export default function ExperienceTeaser({
+  locale = 'en',
+}: {
+  locale?: HomeLocale;
+}) {
+  const copy = homeCopy[locale];
   const reduceMotion = useReducedMotion();
 
   return (
@@ -22,14 +28,21 @@ export default function ExperienceTeaser() {
           transition={{ duration: 0.6 }}
         >
           <p className='mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#7ab0cc]'>
-            The live show
+            {copy.experience.label}
           </p>
           <h2
             id='experience-teaser-title'
             className='mb-4 text-3xl font-semibold text-[#dce8f0] sm:text-4xl'
           >
-            {siteConfig.liveShow}
+            {withHomeVars(copy.experience.title, {
+              liveShow: siteConfig.liveShow.name,
+            })}
           </h2>
+          <p className='text-sm font-medium uppercase tracking-[0.18em] text-[#7ab0cc]'>
+            {withHomeVars(copy.experience.subtitle, {
+              liveShow: siteConfig.liveShow.name,
+            })}
+          </p>
           <p className='max-w-2xl text-base leading-8 text-[#a6bbc7]'>
             A live band led from the drums: original songs and covers, stories
             shared on stage, and a connection that brings the crowd into the
@@ -39,7 +52,7 @@ export default function ExperienceTeaser() {
             href='/proposal'
             className='mt-7 inline-flex min-h-12 items-center gap-2 rounded-lg border border-[#5b8fa8] px-5 py-3 text-sm font-semibold text-[#dce8f0] transition-colors hover:bg-[#5b8fa81c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a9d8ec]'
           >
-            Explore the live show
+            {copy.experience.explore}
             <ArrowUpRight size={17} aria-hidden='true' />
           </Link>
         </motion.div>
@@ -61,7 +74,7 @@ export default function ExperienceTeaser() {
           />
           <div className='absolute inset-0 bg-gradient-to-t from-[#080c10]/70 via-transparent to-transparent' />
           <p className='absolute bottom-4 left-4 text-xs font-semibold uppercase tracking-[0.2em] text-white'>
-            {siteConfig.live.firstHeadlineShow}
+            {siteConfig.liveShow.firstHeadlineShow}
           </p>
         </motion.div>
       </div>

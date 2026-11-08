@@ -1,4 +1,5 @@
 import { featuredSingle } from '@/const/tracks';
+import { homeCopy, type HomeLocale } from '@/lib/i18n/home';
 
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
@@ -42,7 +43,12 @@ const ANIMATION_CONFIG = {
   },
 } as const;
 
-const FeaturedSinglePlayer = memo(function FeaturedSinglePlayer() {
+const FeaturedSinglePlayer = memo(function FeaturedSinglePlayer({
+  locale = 'en',
+}: {
+  locale?: HomeLocale;
+}) {
+  const copy = homeCopy[locale];
   const {
     isPlaying,
     currentTime,
@@ -83,7 +89,7 @@ const FeaturedSinglePlayer = memo(function FeaturedSinglePlayer() {
               color: '#85b7eb',
             }}
           >
-            LISTEN
+            {copy.music.badge}
           </span>
         </motion.div>
 
@@ -95,7 +101,7 @@ const FeaturedSinglePlayer = memo(function FeaturedSinglePlayer() {
           className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 tracking-tight'
           style={{ color: '#e8eef5' }}
         >
-          NEW SINGLE
+          {copy.music.title}
         </motion.h2>
 
         {/* Player container */}
