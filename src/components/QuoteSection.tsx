@@ -11,6 +11,7 @@ interface QuoteSectionProps {
 }
 
 export default function QuoteSection({
+  quote = 'I create musical concepts guided by one question: what does this emotion sound like?',
   className = '',
   textColor = 'text-white',
   lineColor = 'bg-white',
@@ -56,8 +57,7 @@ export default function QuoteSection({
             className={`${textColor} font-light italic leading-relaxed tracking-wide text-center`}
           >
             <span className='text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl'>
-              I create universal emotions that connect souls and search for the
-              voice that can set them free.
+              {quote}
             </span>
           </blockquote>
         </motion.div>

@@ -56,6 +56,7 @@ const FeaturedSinglePlayer = memo(function FeaturedSinglePlayer() {
 
   return (
     <section
+      id='music'
       className='relative pt-10 min-h-screen flex items-center justify-center overflow-hidden'
       aria-label='Featured single player'
     >
@@ -154,7 +155,7 @@ const FeaturedSinglePlayer = memo(function FeaturedSinglePlayer() {
               {featuredSingle.description}
             </p>
             <span className='font-semibold' style={{ color: '#85b7eb' }}>
-              {featuredSingle.year}
+              {featuredSingle.year} · {featuredSingle.artist}
             </span>
           </motion.div>
 

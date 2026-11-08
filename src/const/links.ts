@@ -1,4 +1,5 @@
 import { Share2, Users } from 'lucide-react';
+import { bookingEmail, siteConfig } from '@/lib/site-config';
 
 // Tipos base
 interface BasePlatform {
@@ -10,14 +11,11 @@ interface BasePlatform {
 }
 
 export interface StreamingPlatform extends BasePlatform {
-  followers: string;
-  monthlyListeners: string;
-  verified: boolean;
+  verified?: boolean;
 }
 
 export interface SocialPlatform extends BasePlatform {
   handle: string;
-  followers: string;
   type: 'photo' | 'video' | 'text' | 'community' | 'professional';
 }
 
@@ -25,32 +23,16 @@ export const streamingPlatforms: StreamingPlatform[] = [
   {
     id: 1,
     name: 'Spotify',
-    followers: '12.5K',
-    monthlyListeners: '45.2K',
-    url: 'https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS?si=6-KHEpmPQ3mTHwnLdw2iDg',
+    url: siteConfig.profiles.spotify,
     color: '#1DB954',
-    description: 'Main catalog and playlists',
-    verified: true,
+    description: 'Listen to the Linarex catalogue.',
   },
   {
     id: 2,
-    name: 'Apple Music',
-    followers: '8.3K',
-    monthlyListeners: '32.1K',
-    url: 'https://music.apple.com/artist/linarex',
-    color: '#FA243C',
-    description: 'High-quality streaming',
-    verified: true,
-  },
-  {
-    id: 3,
     name: 'YouTube',
-    followers: '15.7K',
-    monthlyListeners: '78.4K',
-    url: 'https://www.youtube.com/channel/UCZIaGK7NF4roKF039W_7O1Q',
+    url: siteConfig.profiles.youtube,
     color: '#FF0000',
-    description: 'Music videos and live sessions',
-    verified: true,
+    description: 'Music videos and live sessions.',
   },
 ];
 
@@ -59,21 +41,19 @@ export const socialPlatforms: SocialPlatform[] = [
     id: 1,
     name: 'Instagram',
     handle: '@_linarex',
-    followers: '18.4K',
-    url: 'https://www.instagram.com/_linarex',
+    url: siteConfig.profiles.instagram,
     color: '#E4405F',
     type: 'photo',
-    description: 'Behind the scenes, studio life',
+    description: 'Follow Linarex on Instagram.',
   },
   {
     id: 4,
     name: 'TikTok',
     handle: '@linarex59',
-    followers: '25.1K',
-    url: 'https://www.tiktok.com/@linarex59',
+    url: siteConfig.profiles.tiktok,
     color: '#000000',
     type: 'video',
-    description: 'Short-form content, music clips',
+    description: 'Follow Linarex on TikTok.',
   },
 ];
 
@@ -88,15 +68,15 @@ export const officialLinks = [
   {
     id: 1,
     name: 'Booking & Management',
-    url: 'mailto:linarexinfo@gmail.com',
+    url: bookingEmail,
     description: 'Professional inquiries and booking',
     icon: Users,
   },
   {
     id: 2,
     name: 'Press Kit',
-    url: '#media-kit',
-    description: 'Media assets and press materials',
+    url: '/epk',
+    description: 'Linarex Electronic Press Kit',
     icon: Share2,
   },
 ];

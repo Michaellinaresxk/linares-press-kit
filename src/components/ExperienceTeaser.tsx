@@ -1,0 +1,70 @@
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
+import { siteConfig } from '@/lib/site-config';
+
+export default function ExperienceTeaser() {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <section
+      className='relative overflow-hidden border-y border-[#5b8fa822] bg-[#0d1318] px-4 py-16 sm:px-6 md:py-24 lg:px-8'
+      aria-labelledby='experience-teaser-title'
+    >
+      <div className='mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[1fr_0.85fr] lg:gap-16'>
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
+          <p className='mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#7ab0cc]'>
+            The live show
+          </p>
+          <h2
+            id='experience-teaser-title'
+            className='mb-4 text-3xl font-semibold text-[#dce8f0] sm:text-4xl'
+          >
+            {siteConfig.liveShow}
+          </h2>
+          <p className='max-w-2xl text-base leading-8 text-[#a6bbc7]'>
+            A live band led from the drums: original songs and covers, stories
+            shared on stage, and a connection that brings the crowd into the
+            moment.
+          </p>
+          <Link
+            href='/proposal'
+            className='mt-7 inline-flex min-h-12 items-center gap-2 rounded-lg border border-[#5b8fa8] px-5 py-3 text-sm font-semibold text-[#dce8f0] transition-colors hover:bg-[#5b8fa81c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a9d8ec]'
+          >
+            Explore the live show
+            <ArrowUpRight size={17} aria-hidden='true' />
+          </Link>
+        </motion.div>
+
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, scale: 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7 }}
+          className='relative overflow-hidden rounded-xl border border-[#5b8fa833]'
+        >
+          <Image
+            src='/img/DSC00047.jpg'
+            alt='Linarex performing on drums during the live show'
+            width={900}
+            height={650}
+            sizes='(max-width: 1024px) 100vw, 42vw'
+            className='aspect-[4/3] w-full object-cover'
+          />
+          <div className='absolute inset-0 bg-gradient-to-t from-[#080c10]/70 via-transparent to-transparent' />
+          <p className='absolute bottom-4 left-4 text-xs font-semibold uppercase tracking-[0.2em] text-white'>
+            {siteConfig.live.firstHeadlineShow}
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

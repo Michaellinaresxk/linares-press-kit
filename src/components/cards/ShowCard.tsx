@@ -1,9 +1,9 @@
-import { upcomingShows } from '@/const/photoGallery';
+import type { UpcomingShow } from '@/const/photoGallery';
 import { motion } from 'framer-motion';
 import { MapPin, Ticket } from 'lucide-react';
 
 interface ShowCardProps {
-  show: (typeof upcomingShows)[0];
+  show: UpcomingShow;
   index: number;
 }
 

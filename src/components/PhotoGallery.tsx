@@ -4,14 +4,22 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Camera } from 'lucide-react';
 import Image from 'next/image';
-import { photoGallery } from '@/const/photoGallery';
+import { artistGallery, liveGallery } from '@/const/photoGallery';
 import PhotoModal from './modal/PhotoModal';
+import { siteConfig } from '@/lib/site-config';
 
-type Photo = (typeof photoGallery)[0];
+type Photo = (typeof artistGallery)[number];
+type GalleryVariant = 'artist' | 'live';
 
-export default function PhotoGallery() {
+export default function PhotoGallery({
+  variant = 'artist',
+}: {
+  variant?: GalleryVariant;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
+  const photos = variant === 'live' ? liveGallery : artistGallery;
+  const isLiveGallery = variant === 'live';
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -52,15 +60,15 @@ export default function PhotoGallery() {
             className='text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 md:mb-6'
             style={{ color: '#e8eef5' }}
           >
-            Gallery
+            {isLiveGallery ? 'Live Gallery' : 'Gallery'}
           </h2>
           <p
             className='text-base md:text-lg max-w-3xl mx-auto px-4'
             style={{ color: '#5a7a8e' }}
           >
-            Experience Linarex live. From intimate hotel venues to major
-            festivals, each performance is a unique journey through progressive
-            soundscapes.
+            {isLiveGallery
+              ? `Live moments from the ${siteConfig.liveShow}: connection, energy and music on stage.`
+              : 'Portraits, live moments and images from Linarex’s creative world.'}
           </p>
         </motion.div>
 
@@ -73,34 +81,41 @@ export default function PhotoGallery() {
             className='flex items-center mb-6 md:mb-8'
             id='gallery'
           >
-            <Camera size={24} className='mr-3' style={{ color: '#85b7eb' }} />
+            <Camera
+              size={24}
+              className='mr-3'
+              style={{ color: '#85b7eb' }}
+              aria-hidden='true'
+            />
             <h3
               className='text-xl md:text-2xl font-bold'
               style={{ color: '#c8dcea' }}
             >
-              Live Gallery
+              {isLiveGallery ? siteConfig.liveShow : 'Artist & press photos'}
             </h3>
           </motion.div>
 
           <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4'>
-            {photoGallery.map((photo, index) => (
-              <motion.div
+            {photos.map((photo, index) => (
+              <motion.button
+                type='button'
                 key={photo.id}
+                aria-label={`View photo: ${photo.alt}`}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className='relative aspect-square rounded-lg overflow-hidden cursor-pointer group'
+                className='group relative block aspect-square w-full overflow-hidden rounded-lg border-0 bg-transparent p-0 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#85b7eb]'
                 onClick={() => setSelectedPhoto(photo)}
                 whileHover={{ scale: 1.05 }}
               >
                 <Image
                   src={photo.src}
-                  alt={`${photo.venue} - ${photo.location}`}
+                  alt={photo.alt}
                   width={600}
                   height={400}
+                  sizes='(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
                   className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-110'
-                  loading='lazy'
                 />
                 <div
                   className='absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end'
@@ -113,12 +128,14 @@ export default function PhotoGallery() {
                     >
                       {photo.venue}
                     </p>
-                    <p
-                      className='text-xs truncate'
-                      style={{ color: '#5a7a8e' }}
-                    >
-                      {photo.location}
-                    </p>
+                    {photo.location && (
+                      <p
+                        className='text-xs truncate'
+                        style={{ color: '#5a7a8e' }}
+                      >
+                        {photo.location}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -126,9 +143,13 @@ export default function PhotoGallery() {
                   className='absolute top-2 right-2 rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300'
                   style={{ background: 'rgba(13,17,23,0.6)' }}
                 >
-                  <Camera size={12} style={{ color: '#85b7eb' }} />
+                  <Camera
+                    size={12}
+                    style={{ color: '#85b7eb' }}
+                    aria-hidden='true'
+                  />
                 </div>
-              </motion.div>
+              </motion.button>
             ))}
           </div>
         </div>

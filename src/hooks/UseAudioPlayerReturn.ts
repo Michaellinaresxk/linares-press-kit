@@ -88,7 +88,7 @@ export function useAudioPlayerFeatured(audioUrl: string): UseAudioPlayerReturn {
     }
 
     const audio = audioRef.current;
-    audio.src = audioUrl;
+    audio.preload = 'metadata';
 
     console.log('[AudioPlayer] 🎵 Cargando:', audioUrl);
 
@@ -118,12 +118,16 @@ export function useAudioPlayerFeatured(audioUrl: string): UseAudioPlayerReturn {
     };
 
     const handleDurationChange = () => {
-      const duration = audio.duration || 0;
+      const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
       console.log('[AudioPlayer] ⏱️ Duración:', formatTime(duration));
       setState((prev) => ({
         ...prev,
         duration,
       }));
+    };
+
+    const handleLoadedMetadata = () => {
+      handleDurationChange();
     };
 
     const handlePlaying = () => {
@@ -183,12 +187,14 @@ export function useAudioPlayerFeatured(audioUrl: string): UseAudioPlayerReturn {
     audio.addEventListener('canplay', handleCanPlay);
     audio.addEventListener('timeupdate', handleTimeUpdate);
     audio.addEventListener('durationchange', handleDurationChange);
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
     audio.addEventListener('playing', handlePlaying);
     audio.addEventListener('pause', handlePause);
     audio.addEventListener('ended', handleEnded);
     audio.addEventListener('error', handleError);
 
     // Iniciar carga
+    audio.src = audioUrl;
     audio.load();
 
     // CLEANUP
@@ -197,6 +203,7 @@ export function useAudioPlayerFeatured(audioUrl: string): UseAudioPlayerReturn {
       audio.removeEventListener('canplay', handleCanPlay);
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('durationchange', handleDurationChange);
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       audio.removeEventListener('playing', handlePlaying);
       audio.removeEventListener('pause', handlePause);
       audio.removeEventListener('ended', handleEnded);

@@ -1,13 +1,12 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Link from 'next/dist/client/link';
+import Image from 'next/image';
 import { useRef } from 'react';
+import { siteConfig } from '@/lib/site-config';
 
 const HERO_STATS = [
-  { number: '20+', label: 'Years' },
-  { number: '3+', label: 'Collaborations' },
-  // { number: '11', label: 'Countries' },
+  { number: siteConfig.yearsOnStage, label: 'Years on stage' },
 ] as const;
 
 export default function Hero() {
@@ -24,19 +23,20 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className='relative min-h-screen w-full overflow-hidden'
+      className='relative min-h-[calc(100svh-64px)] w-full overflow-hidden'
     >
       {/* Background Image */}
       <motion.div
         style={{ y: backgroundY }}
         className='absolute inset-0 w-full h-full'
       >
-        <div
-          className='w-full h-full bg-cover bg-center bg-no-repeat'
-          style={{
-            backgroundPosition: 'center top',
-            backgroundImage: 'url(./bg2.png)',
-          }}
+        <Image
+          src='/bg2.png'
+          alt='Linarex in a dramatic portrait for the artist homepage'
+          fill
+          priority
+          sizes='100vw'
+          className='object-cover object-top'
         />
 
         {/* Overlay izquierdo: oscurece la zona del texto */}
@@ -61,7 +61,7 @@ export default function Hero() {
       <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <motion.div
           style={{ y: textY }}
-          className='max-w-4xl h-screen flex flex-col justify-end lg:justify-center'
+          className='max-w-4xl min-h-[calc(100svh-64px)] flex flex-col justify-end lg:justify-center'
         >
           {/* Badge */}
           <motion.div
@@ -78,7 +78,7 @@ export default function Hero() {
                 color: '#85b7eb',
               }}
             >
-              MUSIC WITHOUT BOUNDARIES
+              DOMINICAN-BORN · WARSAW-BASED
             </span>
           </motion.div>
 
@@ -92,7 +92,7 @@ export default function Hero() {
               className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight tracking-tight'
               style={{ color: '#e8eef5' }}
             >
-              LINAREX
+              {siteConfig.name.toUpperCase()}
             </h1>
           </motion.div>
 
@@ -107,7 +107,7 @@ export default function Hero() {
               className='text-xl sm:text-2xl lg:text-3xl font-light'
               style={{ color: '#8faabf' }}
             >
-              Composer & Creative Producer
+              {siteConfig.role}
             </h2>
           </motion.div>
 
@@ -142,38 +142,27 @@ export default function Hero() {
             ))}
           </motion.div>
 
-          {/* CTAs */}
+          {/* One clear action keeps the artist's music at the center. */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.3 }}
-            className='flex flex-wrap items-center gap-4 pb-20'
+            className='flex flex-wrap items-center gap-x-6 gap-y-3 pb-20'
           >
-            <Link
-              href='/Live-Music-Proposal.pdf'
+            <a
+              href={siteConfig.releases[0].spotifyUrl}
               target='_blank'
               rel='noopener noreferrer'
-              className='rounded-xl border border-[#378add] bg-[#1d4a72] px-6 py-3 text-sm font-semibold text-[#c8dcea] transition-transform duration-300 hover:-translate-y-px hover:scale-[1.03] active:scale-[0.97]'
+              className='rounded-xl border border-[#378add] bg-[#1d4a72] px-6 py-3 text-sm font-semibold text-[#c8dcea] transition-transform duration-300 hover:-translate-y-px hover:scale-[1.03] active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a9d8ec]'
             >
-              Live Show Proposal
-            </Link>
-            <Link
-              href='/linarex-epk.pdf'
-              target='_blank'
-              rel='noopener noreferrer'
-              style={{
-                background: 'rgba(180,210,244,0.10)',
-                border: '1px solid rgba(133,183,235,0.35)',
-                color: '#85b7eb',
-                padding: '0.75rem 1.5rem',
-                borderRadius: '0.75rem',
-                fontWeight: 500,
-                fontSize: '0.875rem',
-                transition: 'all 0.3s ease',
-              }}
+              Listen to {siteConfig.releases[0].title} on Spotify
+            </a>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className='text-sm font-medium text-[#c8dcea] underline decoration-[#5b8fa8] underline-offset-4 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#85b7eb]'
             >
-              Press Kit (EPK)
-            </Link>
+              {siteConfig.email}
+            </a>
           </motion.div>
         </motion.div>
       </div>

@@ -14,6 +14,9 @@ function PhotoModal({ photo, onClose }: PhotoModalProps) {
   return (
     <motion.div
       className='fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 backdrop-blur-sm'
+      role='dialog'
+      aria-modal='true'
+      aria-label={photo.alt}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -45,7 +48,7 @@ function PhotoModal({ photo, onClose }: PhotoModalProps) {
               src={photo.src}
               width={600}
               height={400}
-              alt={`${photo.venue} - ${photo.location}`}
+              alt={photo.alt}
               className='w-full h-full object-cover'
               priority
             />
@@ -64,24 +67,29 @@ function PhotoModal({ photo, onClose }: PhotoModalProps) {
               {photo.venue}
             </h3>
 
-            <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3'>
-              <motion.div
-                className='flex items-center space-x-2 text-gray-300 hover:text-white transition-colors cursor-pointer group'
-                whileHover={{ x: 4 }}
-              >
-                <MapPin size={16} className='text-pink-400 flex-shrink-0' />
-                <span className='text-sm md:text-base'>{photo.location}</span>
-              </motion.div>
-
-              <motion.div
-                className='flex items-center space-x-2 text-gray-300 hover:text-white transition-colors cursor-pointer'
-                whileHover={{ x: 4 }}
-              >
-                <Camera size={16} className='text-cyan-400 flex-shrink-0' />
-                <span className='text-sm md:text-base'>
-                  by {photo.photographer}
-                </span>
-              </motion.div>
+            <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
+              {photo.location && (
+                <div className='flex items-center space-x-2 text-gray-300'>
+                  <MapPin
+                    size={16}
+                    className='flex-shrink-0 text-pink-400'
+                    aria-hidden='true'
+                  />
+                  <span className='text-sm md:text-base'>{photo.location}</span>
+                </div>
+              )}
+              {photo.photographer && (
+                <div className='flex items-center space-x-2 text-gray-300'>
+                  <Camera
+                    size={16}
+                    className='flex-shrink-0 text-cyan-400'
+                    aria-hidden='true'
+                  />
+                  <span className='text-sm md:text-base'>
+                    by {photo.photographer}
+                  </span>
+                </div>
+              )}
             </div>
           </motion.div>
         </div>
