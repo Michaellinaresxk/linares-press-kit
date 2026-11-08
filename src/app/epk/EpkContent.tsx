@@ -289,7 +289,6 @@ export default function EpkContent() {
               </a>
             ))}
           </nav>
-          <p className={styles.appleTodo}>{siteConfig.appleMusicTodo}</p>
         </motion.section>
 
         <footer className={styles.footer}>
