@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import About from '@/components/About';
 import Collaborations from '@/components/Collaborations';
+import ConnectAndStream from '@/components/ConnectAndStream';
 import Contact from '@/components/Contact';
 import ExperienceTeaser from '@/components/ExperienceTeaser';
 import Hero from '@/components/Hero';
@@ -26,6 +27,7 @@ export default function PolishHome() {
       <About locale='pl' />
       <Collaborations locale='pl' />
       <PhotoGallery variant='artist' locale='pl' />
+      <ConnectAndStream locale='pl' />
       {/* <Links locale='pl' /> */}
       <Contact locale='pl' />
       <SiteFooter locale='pl' />
