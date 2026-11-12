@@ -22,11 +22,11 @@ export default function PolishHome() {
       {/* Story arc: artist → latest music → live show → origin story → collaborators → press photos → follow → book. */}
       <Hero locale='pl' />
       <Music locale='pl' />
-      <ExperienceTeaser locale='pl' />
+      {/* <ExperienceTeaser locale='pl' /> */}
       <About locale='pl' />
       <Collaborations locale='pl' />
       <PhotoGallery variant='artist' locale='pl' />
-      <Links locale='pl' />
+      {/* <Links locale='pl' /> */}
       <Contact locale='pl' />
       <SiteFooter locale='pl' />
     </div>

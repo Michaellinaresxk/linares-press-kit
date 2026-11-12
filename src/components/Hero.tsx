@@ -7,10 +7,6 @@ import { useRef } from 'react';
 import { siteConfig } from '@/lib/site-config';
 import { homeCopy, type HomeLocale } from '@/lib/i18n/home';
 
-const HERO_STATS = [
-  { number: siteConfig.yearsOnStage, label: 'Years on stage' },
-] as const;
-
 export default function Hero({ locale = 'en' }: { locale?: HomeLocale }) {
   const copy = homeCopy[locale];
   const containerRef = useRef<HTMLDivElement>(null);
@@ -126,12 +122,6 @@ export default function Hero({ locale = 'en' }: { locale?: HomeLocale }) {
               className='rounded-xl border border-[#378add] bg-[#1d4a72] px-6 py-3 text-sm font-semibold text-[#c8dcea] transition-transform duration-300 hover:-translate-y-px hover:scale-[1.03] active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a9d8ec]'
             >
               {copy.hero.memoriesCta}
-            </Link>
-            <Link
-              href={locale === 'en' ? '/epk' : '/pl/epk'}
-              className='rounded-xl border border-[#5b8fa866] bg-[#0d1318]/35 px-6 py-3 text-sm font-semibold text-[#dce8f0] backdrop-blur-sm transition-colors hover:border-[#7ab0cc] hover:bg-[#5b8fa81c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#85b7eb]'
-            >
-              {copy.hero.bookerCta}
             </Link>
             <Link
               href={locale === 'en' ? '/proposal' : '/pl/proposal'}

@@ -14,11 +14,11 @@ export default function Home() {
       {/* Story arc: artist → latest music → live show → origin story → collaborators → press photos → follow → book. */}
       <Hero locale='en' />
       <Music locale='en' />
-      <ExperienceTeaser locale='en' />
+      {/* <ExperienceTeaser locale='en' /> */}
       <About locale='en' />
       <Collaborations locale='en' />
       <PhotoGallery variant='artist' locale='en' />
-      <Links locale='en' />
+      {/* <Links locale='en' /> */}
       <Contact locale='en' />
       <SiteFooter locale='en' />
     </div>

@@ -68,7 +68,7 @@ export const siteConfig = {
   name: 'Linarex',
   role: 'Composer, Drummer & Executive Producer',
   genres: {
-    original: ['Indie Rock', 'Indie Pop', 'Afro Pop Fusion', 'Funk Pop'],
+    original: ['Indie Rock', 'Afro Pop Fusion', 'Funk Pop'],
     live: [
       'Funk & Afrobeat',
       'Pop Anthems',
@@ -94,14 +94,13 @@ export const siteConfig = {
   seo: {
     homeTitle: 'Linarex | Composer & Drummer in Warsaw – New Single "Memories"',
     description:
-      'Dominican-born composer and drummer based in Warsaw. Listen to the new single "Memories" and book the Linarex Experience live show with Jacke Matheus.',
+      'Dominican-born composer and drummer based in Warsaw. Listen to the new single "Memories" and book the Linarex Experience live show.',
     epkTitle: 'Linarex – Electronic Press Kit | Linarex Experience',
     epkDescription:
-      'Meet Linarex and the Linarex Experience live show with Jacke Matheus: music, photos, performance clips and booking contact.',
-    proposalTitle:
-      'Linarex Experience – Live Band in Warsaw | with Jacke Matheus',
+      'Meet Linarex and the Linarex Experience live show: music, photos, performance clips and booking contact.',
+    proposalTitle: 'Linarex Experience – Live Band in Warsaw',
     proposalDescription:
-      'Linarex Experience with Jacke Matheus: a Warsaw-based live band with original songs, familiar covers, audience connection and booking details for venues and events.',
+      'Linarex Experience: a Warsaw-based live band with original songs, familiar covers, audience connection and booking details for venues and events.',
   },
   profiles: {
     spotify: spotifyArtistUrl,
@@ -121,7 +120,7 @@ export const siteConfig = {
           'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170735/linarex/standing_wicdur.jpg',
         imageAlt: 'Linarex, Dominican-born composer and drummer',
         description:
-          'Dominican-born and Warsaw-based, Linarex is a composer and multi-instrumentalist who leads the band from the drums and sings selected parts.',
+          'Writes the songs and runs the night from behind the kit: reading the room, driving the groove and keeping people on their feet.',
       },
       {
         name: 'Jacke Matheus',
@@ -148,7 +147,8 @@ export const siteConfig = {
       'Expandable to include brass and percussion for larger stages.',
     repertoireLanguages: ['English', 'Spanish', 'Polish'],
     repertoireLanguagesDescription: 'English, Spanish & Polish',
-    repertoireDescription: 'Original songs plus selected covers from every era.',
+    repertoireDescription:
+      'Original songs plus selected covers from every era.',
     setDescription: 'Adaptable to your programming needs.',
     eventTypes: 'venues, bars, festivals and city or park events',
     bookingAvailability:

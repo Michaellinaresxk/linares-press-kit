@@ -19,6 +19,7 @@ type EpkCopy = {
   experienceLabel: string;
   theArtist: string;
   aboutTitle: string;
+  /** Paragraphs are separated by "\n\n". Render with `whitespace-pre-line` or split on "\n\n". */
   aboutText: string;
   listenLabel: string;
   musicTitle: string;
@@ -49,14 +50,14 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     metadata: {
       title: 'Linarex – Electronic Press Kit',
       description:
-        'Electronic press kit for Linarex: artist bio, original music, photos, and contact for press and bookings.',
+        'Linarex press kit: bio, original music, live show, photos and booking contact. Dominican-born composer and drummer based in Warsaw.',
     },
     eyebrow: 'Electronic Press Kit',
     pitch:
-      'Original music from a Dominican-born, Warsaw-based composer and drummer.',
+      'Dominican-born, Warsaw-based composer, drummer and executive producer. Songs that start with a feeling and end with a room moving together.',
     bookingButton: 'Contact for bookings',
     downloadPdf: 'Download EPK',
-    spotifyCatalog: 'View Spotify catalog',
+    spotifyCatalog: 'Listen to the music',
     contactCta: 'Contact / booking',
     quickFacts: 'Quick facts',
     originLabel: 'Origin',
@@ -65,7 +66,7 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     theArtist: 'The artist',
     aboutTitle: 'About Linarex',
     aboutText:
-      '{name} was born in the {origin} and is based in {location}. A multi-instrumentalist, {name} composes on guitar, piano and drums. With {yearsOnStage} years on stage, his musical roots span rock and progressive rock, jazz, funk and reggae.',
+      '{name} writes from one question: what does this emotion sound like?\n\nBorn in the {origin} and based in {location}, he has spent {yearsOnStage} years on stage, from summer seasons in Jurata with Rongo Rongo to backing artists across Warsaw’s venues. Rock, progressive rock, jazz, funk and reggae shaped his ear; guitar, piano and drums are where his songs begin.\n\nEvery release finds its own sound. “Vaivén” (2025) opened the door with sun-soaked afro-latin pop. “Renacer” (2026) moved into funk-pop with a Daft Punk-style groove. “Memories” (2026, feat. Jacke Matheus) is atmospheric indie rock woven with real voices of family and friends, because some memories keep the light on.\n\nNew music is on the way.',
     listenLabel: 'Listen',
     musicTitle: 'Music',
     featuredSingle: 'Featured single',
@@ -73,17 +74,17 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     forBookersLabel: 'For bookers',
     liveTitle: 'The live show',
     liveBody:
-      '{showName} is the live show: Linarex and the band, featuring Jacke Matheus.',
+      'Live, Linarex leads {showName} from behind the kit, with Jacke Matheus up front: original songs, the hits everyone knows, and a band that reads the room and keeps people on their feet.',
     musiciansOnStage: 'Musicians on stage',
     setLength: 'Set length',
     repertoire: 'Repertoire',
     firstHeadlineShow: 'First headline show',
     liveSetTitle: 'Live Set — Full Room',
     liveSetLabel: 'Watch on YouTube',
-    liveSetAlt: 'Linarex Experience live show with Jacke Matheus',
+    liveSetAlt: 'Full room watching Linarex Experience perform live',
     crowdTitle: 'The Crowd — In Motion',
     crowdLabel: 'Watch on Instagram',
-    crowdAlt: 'The audience watching the Linarex Experience live show',
+    crowdAlt: 'Crowd dancing at a Linarex Experience show',
     getInTouch: 'Get in touch',
     contactTitle: 'Press & booking contact',
     openProposal: 'Explore the {showName} proposal',
@@ -95,44 +96,44 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     metadata: {
       title: 'Linarex – Electronic Press Kit',
       description:
-        'Electronic press kit Linarex: bio artysty, muzyka, zdjęcia i kontakt dla prasy oraz rezerwacji.',
+        'Press kit Linarex: biografia, muzyka autorska, koncert na żywo, zdjęcia i kontakt w sprawie rezerwacji. Kompozytor i perkusista z Dominikany, mieszkający w Warszawie.',
     },
     eyebrow: 'Electronic Press Kit',
     pitch:
-      'Własne utwory kompozytora i perkusisty z Dominikany, mieszkającego w Warszawie.',
+      'Kompozytor, perkusista i producent wykonawczy z Dominikany, mieszkający w Warszawie. Piosenki, które zaczynają się od emocji, a kończą salą w ruchu.',
     bookingButton: 'Kontakt w sprawie rezerwacji',
     downloadPdf: 'Pobierz EPK',
-    spotifyCatalog: 'Zobacz katalog Spotify',
+    spotifyCatalog: 'Posłuchaj muzyki',
     contactCta: 'Kontakt / rezerwacja',
-    quickFacts: 'Szybkie informacje',
+    quickFacts: 'W skrócie',
     originLabel: 'Pochodzenie',
     basedInLabel: 'Baza',
     experienceLabel: 'Doświadczenie',
-    theArtist: 'O twórcy',
-    aboutTitle: 'O Linarex',
+    theArtist: 'Artysta',
+    aboutTitle: 'Kim jest Linarex',
+    // Polish needs grammatical cases, so place names are written out instead of using {origin}/{location}.
     aboutText:
-      '{name} urodził się na {origin} i mieszka w {location}. {name} to multiinstrumentalista, kompozytor gitary, pianiny i perkusji. Ma {yearsOnStage} lat doświadczenia na scenie, a jego muzyczne korzenie sięgają rocka, progresywnego rocka, jazzu, funku i reggae.',
+      '{name} tworzy, kierując się jednym pytaniem: jak brzmi ta emocja?\n\nUrodzony na Dominikanie, mieszka w Warszawie. Na scenie od {yearsOnStage} lat: od letnich sezonów w Juracie z zespołem Rongo Rongo po koncerty u boku innych artystów na warszawskich scenach. Rock, rock progresywny, jazz, funk i reggae ukształtowały jego słuch; jego piosenki rodzą się przy gitarze, pianinie i perkusji.\n\nKażde wydawnictwo ma własne brzmienie. „Vaivén” (2025) otworzył drzwi słonecznym afro-latin popem. „Renacer” (2026) wszedł w funk-pop z groove’em w stylu Daft Punk. „Memories” (2026, feat. Jacke Matheus) to atmosferyczny indie rock, w który wplecione są prawdziwe głosy rodziny i przyjaciół, bo niektóre wspomnienia nie pozwalają zgasnąć światłu.\n\nNowa muzyka jest w drodze.',
     listenLabel: 'Słuchaj',
     musicTitle: 'Muzyka',
-    featuredSingle: 'Singiel',
+    featuredSingle: 'Najnowszy singiel',
     listenOnSpotify: 'Posłuchaj na Spotify',
     forBookersLabel: 'Dla bookerów',
     liveTitle: 'Koncert na żywo',
     liveBody:
-      '{showName} to koncert na żywo: Linarex i zespół, z udziałem Jacke Matheusa.',
+      'Na żywo Linarex prowadzi {showName} zza perkusji, a z przodu sceny stoi Jacke Matheus: autorskie utwory, hity, które znają wszyscy, i zespół, który wyczuwa salę i nie pozwala nikomu usiąść.',
     musiciansOnStage: 'Muzycy na scenie',
     setLength: 'Długość setu',
     repertoire: 'Repertuar',
-    firstHeadlineShow: 'Pierwszy koncert headline',
+    firstHeadlineShow: 'Pierwszy koncert jako headliner',
     liveSetTitle: 'Koncert na żywo — pełna sala',
     liveSetLabel: 'Obejrzyj na YouTube',
-    liveSetAlt: 'Linarex Experience — koncert na żywo z Jacke Matheusem',
-    crowdTitle: 'Publiczność — w ruchu',
+    liveSetAlt: 'Pełna sala podczas koncertu Linarex Experience',
+    crowdTitle: 'Publiczność w ruchu',
     crowdLabel: 'Obejrzyj na Instagramie',
-    crowdAlt:
-      'Publiczność oglądająca koncert Linarex Experience z Jacke Matheusa',
+    crowdAlt: 'Tańcząca publiczność na koncercie Linarex Experience',
     getInTouch: 'Skontaktuj się',
-    contactTitle: 'Kontakt prasowy i rezerwacyjny',
+    contactTitle: 'Kontakt prasowy i rezerwacje',
     openProposal: 'Zobacz ofertę {showName}',
     liveShowSubtitle: 'z Jacke Matheusem',
     langSwitcherAria: 'Wybór języka',

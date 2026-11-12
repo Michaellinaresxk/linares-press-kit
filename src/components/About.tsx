@@ -5,11 +5,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import QuoteSection from './QuoteSection';
 import { siteConfig } from '@/lib/site-config';
-import {
-  homeCopy,
-  withHomeVars,
-  type HomeLocale,
-} from '@/lib/i18n/home';
+import { homeCopy, withHomeVars, type HomeLocale } from '@/lib/i18n/home';
 
 export default function About({ locale = 'en' }: { locale?: HomeLocale }) {
   const copy = homeCopy[locale];
@@ -61,9 +57,9 @@ export default function About({ locale = 'en' }: { locale?: HomeLocale }) {
                     style={{ color: '#c8dcea' }}
                   >
                     {withHomeVars(copy.about.fromOriginToLocation, {
-            origin: siteConfig.origin,
-            location: siteConfig.location,
-          })}
+                      origin: siteConfig.origin,
+                      location: siteConfig.location,
+                    })}
                   </h2>
                 </motion.div>
 
