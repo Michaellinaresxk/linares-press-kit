@@ -1,16 +1,3 @@
-export interface UpcomingShow {
-  id: number;
-  date: string;
-  venue: string;
-  city: string;
-  country: string;
-  type: string;
-  status: string;
-  ticketLink: string;
-}
-
-export const upcomingShows: UpcomingShow[] = [];
-
 export interface GalleryPhoto {
   id: number;
   src: string;
