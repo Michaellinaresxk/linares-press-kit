@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import ProposalContent from './ProposalContent';
+import ProposalView from '@/components/ProposalView';
 import { siteConfig } from '@/lib/site-config';
 
 export const metadata: Metadata = {
@@ -37,5 +37,5 @@ export const metadata: Metadata = {
 };
 
 export default function ProposalPage() {
-  return <ProposalContent />;
+  return <ProposalView locale='en' />;
 }

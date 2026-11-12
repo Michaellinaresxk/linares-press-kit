@@ -1,0 +1,126 @@
+[    2479ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[    2576ms] [WARNING] Image with src "/img/portrait.jpg" is using quality "95" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/utils/warn-once.js:15
+[    2633ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+          <SegmentViewNode type="page" pagePath="(en)/page.tsx">
+            <SegmentTrieNode>
+            <Home>
+              <div className="relative">
+                <Hero>
+                <Music locale="en">
+                  <FeaturedSinglePlayer locale="en">
+                    <section id="music" className="relative p..." aria-label="Featured s...">
+                      <BackgroundEffects>
+                        <div>
+                        <div className="absolute i..." aria-hidden="true">
+                          <EffectOrb position={{id:0, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "97.62950543419461%"
+-                                 left: "37.2391%"
++                                 top: "48.78404072320107%"
+-                                 top: "15.1119%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:1, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "1.672334046739976%"
+-                                 left: "15.2802%"
++                                 top: "58.775774140928114%"
+-                                 top: "38.0205%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:2, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "5.464748962035615%"
+-                                 left: "48.5206%"
++                                 top: "76.90327748753212%"
+-                                 top: "7.14451%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:3, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "84.76985335309344%"
+-                                 left: "99.4337%"
++                                 top: "59.15748115544991%"
+-                                 top: "24.0352%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:4, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "23.140780079638724%"
+-                                 left: "84.1604%"
++                                 top: "34.530754685524066%"
+-                                 top: "40.2697%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:5, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "45.84616268525493%"
+-                                 left: "55.7405%"
++                                 top: "77.07314954013404%"
+-                                 top: "95.4883%"
+                                }}
+                                ref={function}
+                              >
+                      ...
+                ...
+          ...
+        ...
+ @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[    2643ms] [LOG] [AudioPlayer] 🎵 Cargando: /audio/Memories.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:74
+[    2644ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/Memories.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    2645ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/Renacer.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    2645ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/vaiven.mp3 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    2827ms] [LOG] [AudioPlayer] 📥 Descargando... @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:78
+[    2925ms] [LOG] [Fast Refresh] done in 1794493332028ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[    3457ms] [WARNING] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. @ webpack-internal:///(app-pages-browser)/./node_modules/motion-utils/dist/es/warn-once.mjs:15
+[    3470ms] [LOG] [AudioPlayer] ⏱️ Duración: 0:24 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:112
+[    3470ms] [LOG] [AudioPlayer] ⏱️ Duración: 0:24 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:112
+[    3470ms] [LOG] [AudioPlayer] ✅ Audio listo para reproducir @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:90
+[    3781ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0
+[    4082ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0
+[    4329ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0

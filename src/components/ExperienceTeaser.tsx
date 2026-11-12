@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Play } from 'lucide-react';
 import { siteConfig } from '@/lib/site-config';
 import { homeCopy, withHomeVars, type HomeLocale } from '@/lib/i18n/home';
 
@@ -65,18 +65,27 @@ export default function ExperienceTeaser({
           transition={{ duration: 0.7 }}
           className='relative overflow-hidden rounded-xl border border-[#5b8fa833]'
         >
-          <Image
-            src='/img/DSC00047.jpg'
-            alt='Linarex performing on drums during the live show'
-            width={900}
-            height={650}
-            sizes='(max-width: 1024px) 100vw, 42vw'
-            className='aspect-[4/3] w-full object-cover'
-          />
-          <div className='absolute inset-0 bg-gradient-to-t from-[#080c10]/70 via-transparent to-transparent' />
-          <p className='absolute bottom-4 left-4 text-xs font-semibold uppercase tracking-[0.2em] text-white'>
-            {siteConfig.liveShow.firstHeadlineShow}
-          </p>
+          <Link
+            href={proposalHref}
+            className='group relative block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a9d8ec]'
+            aria-label={copy.experience.explore}
+          >
+            <Image
+              src='/img/DSC00047.jpg'
+              alt='Linarex performing on drums during the live show'
+              width={900}
+              height={650}
+              sizes='(max-width: 1024px) 100vw, 42vw'
+              className='aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]'
+            />
+            <div className='absolute inset-0 bg-gradient-to-t from-[#080c10]/70 via-transparent to-transparent' />
+            <span className='absolute top-1/2 left-1/2 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/70 bg-[#080c10]/55 text-white backdrop-blur-sm transition-transform duration-300 group-hover:scale-110'>
+              <Play size={20} fill='currentColor' aria-hidden='true' />
+            </span>
+            <p className='absolute bottom-4 left-4 text-xs font-semibold uppercase tracking-[0.2em] text-white'>
+              {siteConfig.liveShow.firstHeadlineShow}
+            </p>
+          </Link>
         </motion.div>
       </div>
     </section>

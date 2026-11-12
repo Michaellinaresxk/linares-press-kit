@@ -54,7 +54,13 @@ function formatShowDate(date: string, locale: Locale) {
   }).format(d);
 }
 
-export default function BookerInfo({ locale }: { locale: Locale }) {
+export default function BookerInfo({
+  locale,
+  showVideo = true,
+}: {
+  locale: Locale;
+  showVideo?: boolean;
+}) {
   const t = copy[locale];
   const show = siteConfig.liveShow;
   const hasCovers = (show.sampleSetlist?.covers?.length ?? 0) > 0;
@@ -117,7 +123,7 @@ export default function BookerInfo({ locale }: { locale: Locale }) {
         />
       )}
 
-      {show.video && (
+      {showVideo && show.video && (
         <div className={styles.block}>
           <h3 className={styles.question}>{t.soundTitle}</h3>
           <YouTubeFacade
@@ -194,34 +200,7 @@ export default function BookerInfo({ locale }: { locale: Locale }) {
         </div>
       )}
 
-      <div className={styles.block}>
-        <h3 className={styles.question}>{t.datesTitle}</h3>
-        {hasShows ? (
-          <ul className={styles.shows}>
-            {siteConfig.shows.map((event) => (
-              <li key={`${event.date}-${event.venue}`}>
-                <strong>{formatShowDate(event.date, locale)}</strong>
-                <span>
-                  {event.venue} · {event.city}
-                </span>
-                {event.url && (
-                  <a href={event.url} target='_blank' rel='noopener noreferrer'>
-                    Info
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className={styles.text}>{t.noDates}</p>
-        )}
-        <a
-          className={styles.textLink}
-          href={locale === 'pl' ? '/pl#contact' : '/#contact'}
-        >
-          {t.askAvailability}
-        </a>
-      </div>
+      {/* Dates section removed as there are no upcoming shows */}
 
       <div className={styles.block}>
         <h3 className={styles.question}>{t.contactTitle}</h3>

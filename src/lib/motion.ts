@@ -11,7 +11,10 @@ export const fadeUp = (reduceMotion: boolean | null, delay = 0): Variants => ({
   },
 });
 
-export const stagger = (reduceMotion: boolean | null, staggerChildren = 0.08) =>
+export const stagger = (
+  reduceMotion: boolean | null,
+  staggerChildren = 0.08,
+) =>
   reduceMotion
     ? undefined
     : {

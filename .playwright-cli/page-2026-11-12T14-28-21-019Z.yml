@@ -1,0 +1,253 @@
+- generic [active] [ref=f22e1]:
+  - banner [ref=f22e2]:
+    - navigation "Main navigation" [ref=f22e3]:
+      - link "Linarex home" [ref=f22e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f22e9]:
+          - generic [ref=f22e10]: Linarex
+          - generic [ref=f22e11]: Music · Warsaw
+      - generic [ref=f22e12]:
+        - link "Home" [ref=f22e13] [cursor=pointer]:
+          - /url: /
+        - link "Live show" [ref=f22e14] [cursor=pointer]:
+          - /url: /proposal
+        - link "EPK" [ref=f22e15] [cursor=pointer]:
+          - /url: /epk
+        - generic "Language" [ref=f22e16]:
+          - link "EN" [ref=f22e17] [cursor=pointer]:
+            - /url: /epk
+          - generic [aria-hidden] [ref=f22e18]: /
+          - link "PL" [ref=f22e19] [cursor=pointer]:
+            - /url: /pl/epk
+        - link "Book the show" [ref=f22e20] [cursor=pointer]:
+          - /url: /#contact
+  - main [ref=f22e25]:
+    - generic [ref=f22e26]:
+      - navigation "Language selection" [ref=f22e27]:
+        - link "EN" [ref=f22e28] [cursor=pointer]:
+          - /url: /epk
+        - generic [aria-hidden] [ref=f22e29]: "|"
+        - link "PL" [ref=f22e30] [cursor=pointer]:
+          - /url: /pl/epk
+      - generic [ref=f22e31]:
+        - generic [ref=f22e32]:
+          - img "Portrait of Linarex" [ref=f22e34]
+          - generic [ref=f22e35]:
+            - paragraph [ref=f22e36]: Electronic Press Kit
+            - heading "Linarex" [level=1] [ref=f22e37]
+            - paragraph [ref=f22e38]: Composer, Drummer & Executive Producer
+            - paragraph [ref=f22e39]: "Original music: Indie Rock · Indie Pop · Afro Pop Fusion · Funk Pop"
+        - paragraph [ref=f22e40]: Original music from a Dominican-born, Warsaw-based composer and drummer.
+        - generic [ref=f22e41]:
+          - link "Download EPK" [ref=f22e42] [cursor=pointer]:
+            - /url: /linarex-epk.pdf
+          - link "View Spotify catalog" [ref=f22e45] [cursor=pointer]:
+            - /url: "#music"
+          - link "Contact / booking" [ref=f22e51] [cursor=pointer]:
+            - /url: "#contact"
+        - generic "Quick facts" [ref=f22e55]:
+          - generic [ref=f22e56]:
+            - paragraph [ref=f22e57]: Origin
+            - strong [ref=f22e58]: Dominican Republic
+            - generic [ref=f22e59]: Composer, Drummer & Executive Producer
+          - generic [ref=f22e60]:
+            - paragraph [ref=f22e61]: Based in
+            - strong [ref=f22e62]: Warsaw, Poland
+          - generic [ref=f22e63]:
+            - paragraph [ref=f22e64]: Experience
+            - strong [ref=f22e65]: 20+ years
+            - generic [ref=f22e66]: on stage
+          - generic [ref=f22e67]:
+            - paragraph [ref=f22e68]: Music
+            - strong [ref=f22e69]: Indie Rock · Indie Pop · Afro Pop Fusion · Funk Pop
+            - generic [ref=f22e70]: catalog & releases
+      - generic [ref=f22e71]:
+        - region "About Linarex" [ref=f22e72]:
+          - paragraph [ref=f22e73]: The artist
+          - heading "About Linarex" [level=2] [ref=f22e74]
+          - paragraph [ref=f22e75]: Linarex was born in the Dominican Republic and is based in Warsaw, Poland. A multi-instrumentalist, Linarex composes on guitar, piano and drums. With 20+ years on stage, his musical roots span rock and progressive rock, jazz, funk and reggae.
+        - region "The live show" [ref=f22e76]:
+          - paragraph [ref=f22e77]: Live show
+          - heading "The live show" [level=2] [ref=f22e78]
+          - paragraph [ref=f22e79]: "Linarex Experience is the live show: Linarex and the band, featuring Jacke Matheus."
+          - generic [ref=f22e80]:
+            - generic [ref=f22e81]:
+              - term [ref=f22e82]: First headline show
+              - definition [ref=f22e83]: Deski, Warsaw
+            - generic [ref=f22e84]:
+              - term [ref=f22e85]: Set length
+              - definition [ref=f22e86]: 60–90 minutes
+            - generic [ref=f22e87]:
+              - term [ref=f22e88]: Repertoire
+              - definition [ref=f22e89]: English · Spanish · Polish
+              - paragraph [ref=f22e90]: Drums · Guitar · Bass · Keys
+          - generic [ref=f22e91]:
+            - link "Linarex Experience live show with Jacke Matheus Live Set — Full Room Watch on YouTube" [ref=f22e92] [cursor=pointer]:
+              - /url: https://www.youtube.com/shorts/jqD3Qzr_MPY
+              - img "Linarex Experience live show with Jacke Matheus" [ref=f22e94]
+              - generic [ref=f22e98]:
+                - strong [ref=f22e99]: Live Set — Full Room
+                - generic [ref=f22e100]: Watch on YouTube
+            - link "The audience watching the Linarex Experience live show The Crowd — In Motion Watch on Instagram" [ref=f22e101] [cursor=pointer]:
+              - /url: https://www.instagram.com/p/Dcs35--NXNG/
+              - img "The audience watching the Linarex Experience live show" [ref=f22e103]
+              - generic [ref=f22e107]:
+                - strong [ref=f22e108]: The Crowd — In Motion
+                - generic [ref=f22e109]: Watch on Instagram
+          - generic [ref=f22e110]:
+            - paragraph [ref=f22e111]: "Full live offer: repertoire, lineup and booking details."
+            - link "Explore the Linarex Experience proposal" [ref=f22e112] [cursor=pointer]:
+              - /url: /proposal
+        - region "Music" [ref=f22e113]:
+          - paragraph [ref=f22e114]: Listen
+          - heading "Music" [level=2] [ref=f22e115]
+          - generic [ref=f22e116]:
+            - article [ref=f22e117]:
+              - img "Memories cover" [ref=f22e118]
+              - generic [ref=f22e119]:
+                - paragraph [ref=f22e120]: Featured single
+                - heading [level=3] [ref=f22e121]:
+                  - link "Memories" [ref=f22e122] [cursor=pointer]:
+                    - /url: https://open.spotify.com/album/57gkaRLcx11qK4Ok1PYdyW
+                - paragraph [ref=f22e123]: When you can't turn off the dark, you turn on a memory.
+                - paragraph [ref=f22e124]: 2026 · feat. Jacke Matheus
+              - 'link "Listen on Spotify: Memories" [ref=f22e126] [cursor=pointer]':
+                - /url: https://open.spotify.com/album/57gkaRLcx11qK4Ok1PYdyW
+                - text: Spotify
+            - article [ref=f22e127]:
+              - img "Renacer cover" [ref=f22e128]
+              - generic [ref=f22e129]:
+                - heading [level=3] [ref=f22e130]:
+                  - link "Renacer" [ref=f22e131] [cursor=pointer]:
+                    - /url: https://open.spotify.com/album/5JVDDkvNP77b5yz235Qu0R
+                - paragraph [ref=f22e132]: A new beginning, featuring Skiwa.
+                - paragraph [ref=f22e133]: 2026 · feat. Skiwa
+              - 'link "Listen on Spotify: Renacer" [ref=f22e135] [cursor=pointer]':
+                - /url: https://open.spotify.com/album/5JVDDkvNP77b5yz235Qu0R
+                - text: Spotify
+            - article [ref=f22e136]:
+              - img "Vaivén cover" [ref=f22e137]
+              - generic [ref=f22e138]:
+                - heading [level=3] [ref=f22e139]:
+                  - link "Vaivén" [ref=f22e140] [cursor=pointer]:
+                    - /url: https://open.spotify.com/intl-es/track/77R8ciAdBDoVzHsL3GAjDB?autoplay_ok=1
+                - paragraph [ref=f22e141]: Featuring Daniel Rivero.
+                - paragraph [ref=f22e142]: 2025 · feat. Daniel Rivero
+              - 'link "Listen on Spotify: Vaivén" [ref=f22e144] [cursor=pointer]':
+                - /url: https://open.spotify.com/intl-es/track/77R8ciAdBDoVzHsL3GAjDB?autoplay_ok=1
+                - text: Spotify
+          - generic [ref=f22e145]:
+            - paragraph [ref=f22e146]: Full catalog, singles and artist profile.
+            - link "View Spotify catalog" [ref=f22e147] [cursor=pointer]:
+              - /url: https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS
+      - generic [ref=f22e154]:
+        - generic [ref=f22e155]:
+          - heading "Gallery" [level=2] [ref=f22e156]
+          - paragraph [ref=f22e157]: Portraits, live moments and images from Linarex’s creative world.
+        - generic [ref=f22e158]:
+          - heading "Artist & press photos" [level=3] [ref=f22e163]
+          - generic [ref=f22e164]:
+            - 'button "View photo: Portrait of Linarex in dark clothing" [ref=f22e165]':
+              - img "Portrait of Linarex in dark clothing" [ref=f22e166]
+              - paragraph [ref=f22e169]: Artist portrait
+            - 'button "View photo: Linarex singing on stage with a guitarist during a live show" [ref=f22e174]':
+              - img "Linarex singing on stage with a guitarist during a live show" [ref=f22e175]
+              - paragraph [ref=f22e178]: Live performance
+            - 'button "View photo: Full-length portrait of Linarex standing outdoors" [ref=f22e183]':
+              - img "Full-length portrait of Linarex standing outdoors" [ref=f22e184]
+              - paragraph [ref=f22e187]: Artist portrait
+            - 'button "View photo: Linarex photographed near railway tracks" [ref=f22e192]':
+              - img "Linarex photographed near railway tracks" [ref=f22e193]
+              - paragraph [ref=f22e196]: On the road
+            - 'button "View photo: Portrait of Linarex beside railway tracks at sunset" [ref=f22e201]':
+              - img "Portrait of Linarex beside railway tracks at sunset" [ref=f22e202]
+              - paragraph [ref=f22e205]: On the road
+            - 'button "View photo: Linarex playing drums during a live performance" [ref=f22e210]':
+              - img "Linarex playing drums during a live performance" [ref=f22e211]
+              - paragraph [ref=f22e214]: Live performance
+            - 'button "View photo: Artist portrait of Linarex in profile view" [ref=f22e219]':
+              - img "Artist portrait of Linarex in profile view" [ref=f22e220]
+              - paragraph [ref=f22e223]: Artist portrait
+      - region "Find Linarex online" [ref=f22e228]:
+        - paragraph [ref=f22e229]: Connect & Stream
+        - heading "Find Linarex online" [level=2] [ref=f22e230]
+        - paragraph [ref=f22e231]: Listen to the music and follow Linarex across streaming and social platforms.
+        - navigation "Linarex profiles" [ref=f22e232]:
+          - link "Spotify Stream music" [ref=f22e233] [cursor=pointer]:
+            - /url: https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS
+            - generic [ref=f22e237]:
+              - strong [ref=f22e238]: Spotify
+              - generic [ref=f22e239]: Stream music
+            - generic [aria-hidden] [ref=f22e240]: →
+          - link "YouTube Watch videos" [ref=f22e241] [cursor=pointer]:
+            - /url: https://www.youtube.com/@linarexmusic
+            - generic [ref=f22e246]:
+              - strong [ref=f22e247]: YouTube
+              - generic [ref=f22e248]: Watch videos
+            - generic [aria-hidden] [ref=f22e249]: →
+          - link "Instagram Follow updates" [ref=f22e250] [cursor=pointer]:
+            - /url: https://www.instagram.com/_linarex
+            - generic [ref=f22e255]:
+              - strong [ref=f22e256]: Instagram
+              - generic [ref=f22e257]: Follow updates
+            - generic [aria-hidden] [ref=f22e258]: →
+          - link "TikTok Short videos" [ref=f22e259] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@linarex59
+            - generic [ref=f22e263]:
+              - strong [ref=f22e264]: TikTok
+              - generic [ref=f22e265]: Short videos
+            - generic [aria-hidden] [ref=f22e266]: →
+      - generic [ref=f22e269]:
+        - generic [ref=f22e270]:
+          - heading "Contact" [level=2] [ref=f22e271]
+          - paragraph [ref=f22e272]: Professional inquiries, booking requests, and collaboration opportunities.
+          - paragraph [ref=f22e273]:
+            - text: Email
+            - link "linarexinfo@gmail.com" [ref=f22e274] [cursor=pointer]:
+              - /url: mailto:linarexinfo@gmail.com
+          - paragraph [ref=f22e275]: We use your data only to respond to your inquiry.
+        - generic [ref=f22e277]:
+          - heading "General Inquiry" [level=3] [ref=f22e278]
+          - paragraph [ref=f22e279]: Send a message about a booking, collaboration or other inquiry.
+          - generic [ref=f22e280]:
+            - generic [ref=f22e281]:
+              - generic [ref=f22e282]:
+                - generic [ref=f22e283]: Name
+                - textbox "Your name" [ref=f22e284]
+              - generic [ref=f22e285]:
+                - generic [ref=f22e286]: Email
+                - textbox "your@email.com" [ref=f22e287]
+            - generic [ref=f22e288]:
+              - generic [ref=f22e289]: Phone (optional)
+              - textbox "+48 123 456 789" [ref=f22e290]
+            - generic [ref=f22e291]:
+              - generic [ref=f22e292]: Subject
+              - combobox [ref=f22e293]:
+                - option "Select inquiry type" [selected]
+                - option "Booking Request"
+                - option "Collaboration"
+                - option "Press/Media"
+                - option "Technical"
+                - option "Other"
+            - generic [ref=f22e294]:
+              - generic [ref=f22e295]: Message
+              - textbox "Tell us about your inquiry..." [ref=f22e296]
+            - button "Send Message" [ref=f22e297]
+          - paragraph [ref=f22e303]: Please include the details relevant to your inquiry.
+    - generic [ref=f22e305]:
+      - generic [ref=f22e306]:
+        - link "Linarex" [ref=f22e307] [cursor=pointer]:
+          - /url: /
+        - paragraph [ref=f22e308]: Live music · Warsaw, PolandOriginal songs, familiar hits, one room moving together.
+      - navigation "Footer navigation" [ref=f22e309]:
+        - link "Live show" [ref=f22e310] [cursor=pointer]:
+          - /url: /proposal
+        - link "Press kit" [ref=f22e311] [cursor=pointer]:
+          - /url: /epk
+        - link "Spotify" [ref=f22e312] [cursor=pointer]:
+          - /url: https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS
+        - link "Instagram" [ref=f22e313] [cursor=pointer]:
+          - /url: https://www.instagram.com/_linarex
+        - link "Booking" [ref=f22e314] [cursor=pointer]:
+          - /url: mailto:linarexinfo@gmail.com
+      - paragraph [ref=f22e315]: © Linarex · All rights reserved

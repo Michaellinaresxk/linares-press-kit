@@ -1,0 +1,113 @@
+# Skill: Linarex Quality Gate
+
+## Purpose
+
+This skill ensures the Linarex Next.js project maintains functionality after changes. It runs TypeScript checks, lint, and end-to-end tests to verify the EPK (Electronic Press Kit) functionality works correctly.
+
+## When to Use
+
+- Before completing any code change in the Linarex project
+- After implementing new features (EPK, BookerInfo, contact flows, etc.)
+- Before deployment to verify everything works
+
+## Commands
+
+### 1. TypeScript Check
+
+```bash
+cd /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex && npx tsc --noEmit
+```
+
+- Pass criteria: command exits 0 with no type errors
+- Location: `src/components/`, `src/lib/`, `src/app/`
+
+### 2. Lint Check
+
+```bash
+cd /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex && npm run lint
+```
+
+- Pass criteria: no blocking errors
+- Project script: `eslint` (Next.js 15 / ESLint config in repo)
+
+### 3. Build Check
+
+```bash
+cd /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex && npm run build
+```
+
+- Pass criteria: compiles successfully without errors
+- This validates all TSX/TS files, metadata, and routing
+
+### 4. E2E Tests (Playwright)
+
+```bash
+cd /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex && npx playwright test
+```
+
+- Runs all tests in `tests/e2e/`
+- Reports: HTML report opened with `npx playwright show-report`
+- Tests verify:
+  - EPK page loads without errors
+  - Homepage renders correctly
+  - No "New dates coming soon" text (since no dates exist)
+  - Contact email links are present and enabled
+  - Live show repertoire description includes original songs and covers
+
+### 5. Local Development Start
+
+```bash
+cd /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex && npm run dev
+```
+
+- Starts dev server at <http://localhost:3000>
+- Manual verification: navigate to /epk, /, and check all sections
+
+## Verification Checklist (Post-Change)
+
+### EPK Functionality
+
+- [ ] EPK page (`/epk`) loads without 500 errors
+- [ ] Hero section displays artist name, role, and pitch
+- [ ] "Original music" pitch text is present
+- [ ] About section shows artist roots/style (Dominican Republic, musical genres)
+- [ ] Repertoire description mentions "Original songs plus selected covers"
+- [ ] Live show section shows "Linarex Experience" with Jacke Matheus
+- [ ] "Connect & Stream" section is visible with Spotify/YouTube/Instagram links
+- [ ] No `#contact` anchor link in hero actions (contact is inline)
+- [ ] BookerInfo does not show "New dates coming soon"
+
+### Contact Flow
+
+- [ ] Email `mailto:linarexinfo@gmail.com` link is present in EPK
+- [ ] No anchor `#contact` redirects away from EPK page
+- [ ] WhatsApp link (if configured) works
+
+### Technical Compliance
+
+- [ ] TypeScript: no type errors (`npx tsc --noEmit`)
+- [ ] Lint: no blocking errors (`npm run lint`)
+- [ ] Build: compiles successfully (`npm run build`)
+- [ ] E2E: all Playwright tests pass (`npx playwright test`)
+
+## Example Workflow
+
+```bash
+# 1. Make changes to components
+# 2. Check TypeScript
+npx tsc --noEmit
+# 3. Run lint
+npm run lint
+# 4. Build
+npm run build
+# 5. Run E2E tests
+npx playwright test
+# 6. If all pass, deploy
+```
+
+## Notes
+
+- The project uses Next.js 15 with app router (`/app/(en)/epk/page.tsx`)
+- EPK is rendered at `/epk` and `/pl/epk` locales
+- BookerInfo section shows "For bookers" info but dates are omitted when no shows exist
+- Connect & Stream section was added per user feedback requirements

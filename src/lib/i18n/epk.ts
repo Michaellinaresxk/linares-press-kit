@@ -47,14 +47,14 @@ type EpkCopy = {
 export const epkCopy: Record<EpkLocale, EpkCopy> = {
   en: {
     metadata: {
-      title: 'Linarex – Electronic Press Kit | Linarex Experience',
+      title: 'Linarex – Electronic Press Kit',
       description:
-        'Meet Linarex and the Linarex Experience: live music led from the drums, original songs and covers, music, photos and booking contact.',
+        'Electronic press kit for Linarex: artist bio, original music, photos, and contact for press and bookings.',
     },
     eyebrow: 'Electronic Press Kit',
     pitch:
       'Original music from a Dominican-born, Warsaw-based composer and drummer.',
-    bookingButton: 'Book the Linarex Experience',
+    bookingButton: 'Contact for bookings',
     downloadPdf: 'Download EPK',
     spotifyCatalog: 'View Spotify catalog',
     contactCta: 'Contact / booking',
@@ -93,14 +93,14 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
   // Review by native speaker
   pl: {
     metadata: {
-      title: 'Linarex – EPK | Linarex Experience z Jacke Matheusem',
+      title: 'Linarex – Electronic Press Kit',
       description:
-        'EPK Linarex Experience z Jacke Matheusem: muzyka, klipy live, booking i kontakt dla promoterów.',
+        'Electronic press kit Linarex: bio artysty, muzyka, zdjęcia i kontakt dla prasy oraz rezerwacji.',
     },
     eyebrow: 'Electronic Press Kit',
     pitch:
       'Własne utwory kompozytora i perkusisty z Dominikany, mieszkającego w Warszawie.',
-    bookingButton: 'Zarezerwuj występ Linarex Experience',
+    bookingButton: 'Kontakt w sprawie rezerwacji',
     downloadPdf: 'Pobierz EPK',
     spotifyCatalog: 'Zobacz katalog Spotify',
     contactCta: 'Kontakt / rezerwacja',

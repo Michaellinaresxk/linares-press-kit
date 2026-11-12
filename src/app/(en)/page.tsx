@@ -11,12 +11,13 @@ import SiteFooter from '@/components/SiteFooter';
 export default function Home() {
   return (
     <div className='relative'>
+      {/* Story arc: artist → latest music → live show → origin story → collaborators → press photos → follow → book. */}
       <Hero locale='en' />
       <Music locale='en' />
+      <ExperienceTeaser locale='en' />
       <About locale='en' />
       <Collaborations locale='en' />
       <PhotoGallery variant='artist' locale='en' />
-      <ExperienceTeaser locale='en' />
       <Links locale='en' />
       <Contact locale='en' />
       <SiteFooter locale='en' />

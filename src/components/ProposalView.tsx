@@ -171,50 +171,18 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
 
       <div className={styles.content}>
         <motion.section
-          className={styles.intro}
-          aria-labelledby='experience-title'
+          className={styles.section}
+          aria-labelledby='stage-title'
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.55 }}
         >
-          <p className={styles.sectionLabel}>{t.experienceLabel}</p>
-          <h2 id='experience-title' className={styles.sectionTitle}>
-            {t.experienceTitle}
-          </h2>
-          <p className={styles.lead}>{t.experienceLead}</p>
-          <p className={styles.bodyText}>{t.experienceBody1}</p>
-          <p className={styles.bodyText}>
-            {withVars(t.experienceBody2, { eventTypes: show.eventTypes })}
-          </p>
-        </motion.section>
-
-        <section className={styles.section} aria-labelledby='energy-title'>
-          <p className={styles.sectionLabel}>{t.energyLabel}</p>
-          <h2 id='energy-title' className={styles.sectionTitle}>
-            {t.energyTitle}
-          </h2>
-          <p className={styles.energyLead}>{t.energyLead}</p>
-          <p className={styles.bodyText}>{t.energyBody}</p>
-          <div className={styles.pillsGroup}>
-            <p className={styles.tagLabel}>{t.liveRepertoireLabel}:</p>
-            <div className={styles.pills}>
-              {[...siteConfig.genres.live, show.setLength].map((tag) => (
-                <span className={styles.pill} key={tag}>
-                  {tag}
-                </span>
-              ))}
-              <span className={styles.pill}>
-                {show.repertoireLanguages.join(' · ')}
-              </span>
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.section} aria-labelledby='stage-title'>
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.sectionLabel}>{t.stageLabel}</p>
+              <p className={styles.sectionLabel} data-step='01'>
+                {t.stageLabel}
+              </p>
               <h2 id='stage-title' className={styles.sectionTitle}>
                 {t.stageTitle}
               </h2>
@@ -256,10 +224,57 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
               </motion.a>
             ))}
           </div>
+        </motion.section>
+
+        <motion.section
+          className={styles.intro}
+          aria-labelledby='experience-title'
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6 }}
+        >
+          <p className={styles.sectionLabel} data-step='02'>
+            {t.experienceLabel}
+          </p>
+          <h2 id='experience-title' className={styles.sectionTitle}>
+            {t.experienceTitle}
+          </h2>
+          <p className={styles.lead}>{t.experienceLead}</p>
+          <p className={styles.bodyText}>{t.experienceBody1}</p>
+          <p className={styles.bodyText}>
+            {withVars(t.experienceBody2, { eventTypes: show.eventTypes })}
+          </p>
+        </motion.section>
+
+        <section className={styles.section} aria-labelledby='energy-title'>
+          <p className={styles.sectionLabel} data-step='03'>
+            {t.energyLabel}
+          </p>
+          <h2 id='energy-title' className={styles.sectionTitle}>
+            {t.energyTitle}
+          </h2>
+          <p className={styles.energyLead}>{t.energyLead}</p>
+          <p className={styles.bodyText}>{t.energyBody}</p>
+          <div className={styles.pillsGroup}>
+            <p className={styles.tagLabel}>{t.liveRepertoireLabel}:</p>
+            <div className={styles.pills}>
+              {[...siteConfig.genres.live, show.setLength].map((tag) => (
+                <span className={styles.pill} key={tag}>
+                  {tag}
+                </span>
+              ))}
+              <span className={styles.pill}>
+                {show.repertoireLanguages.join(' · ')}
+              </span>
+            </div>
+          </div>
         </section>
 
         <section className={styles.section} aria-labelledby='artists-title'>
-          <p className={styles.sectionLabel}>{t.peopleLabel}</p>
+          <p className={styles.sectionLabel} data-step='04'>
+            {t.peopleLabel}
+          </p>
           <h2 id='artists-title' className={styles.sectionTitle}>
             {t.peopleTitle}
           </h2>
@@ -294,7 +309,9 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
         </section>
 
         <section className={styles.section} aria-labelledby='setup-title'>
-          <p className={styles.sectionLabel}>{t.glanceLabel}</p>
+          <p className={styles.sectionLabel} data-step='05'>
+            {t.glanceLabel}
+          </p>
           <h2 id='setup-title' className={styles.sectionTitle}>
             {t.glanceTitle}
           </h2>
@@ -372,11 +389,13 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
         </section>
 
         <section className={styles.section} aria-labelledby='booker-info-title'>
-          <p className={styles.sectionLabel}>{t.forBookersLabel}</p>
+          <p className={styles.sectionLabel} data-step='06'>
+            {t.forBookersLabel}
+          </p>
           <h2 id='booker-info-title' className={styles.sectionTitle}>
             {t.forBookersTitle}
           </h2>
-          <BookerInfo locale={locale} />
+          <BookerInfo locale={locale} showVideo={false} />
         </section>
 
         <section className={styles.gallerySection} aria-label={t.photosAria}>
@@ -389,7 +408,9 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
 
         <section className={styles.booking} aria-labelledby='booking-title'>
           <div>
-            <p className={styles.sectionLabel}>{t.bookingLabel}</p>
+            <p className={styles.sectionLabel} data-step='07'>
+              {t.bookingLabel}
+            </p>
             <h2 id='booking-title' className={styles.sectionTitle}>
               {t.bookingTitle}
             </h2>
