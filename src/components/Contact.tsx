@@ -11,6 +11,11 @@ type FormState = {
   email: string;
   subject: string;
   message: string;
+  phone: string;
+  date?: string;
+  city?: string;
+  eventType?: string;
+  budget?: string;
 };
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
@@ -20,6 +25,7 @@ const INITIAL_FORM: FormState = {
   email: '',
   subject: '',
   message: '',
+  phone: '',
 };
 
 const INPUT_CLASS =
@@ -33,6 +39,7 @@ const INPUT_STYLE = {
 
 export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
   const copy = homeCopy[locale];
+  const f = copy.contact.form;
   const containerRef = useRef<HTMLDivElement>(null);
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [status, setStatus] = useState<Status>('idle');
@@ -63,7 +70,7 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
 
     if (!name.trim() || !email.trim() || !subject || !message.trim()) {
       setStatus('error');
-      setErrorMsg('Please fill in all fields before sending.');
+      setErrorMsg(f.requiredError);
       return;
     }
 
@@ -142,6 +149,9 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
               {siteConfig.email}
             </a>
           </p>
+          <p className='mt-2 text-sm' style={{ color: '#3d5a6e' }}>
+            {copy.contact.privacy}
+          </p>
         </motion.div>
 
         {/* Form card */}
@@ -163,10 +173,10 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
               className='text-2xl font-bold mb-2 text-center'
               style={{ color: '#c8dcea' }}
             >
-              General Inquiry
+              {f.title}
             </h3>
             <p className='text-center mb-8' style={{ color: '#3d5a6e' }}>
-              Send a message about a booking, collaboration or other inquiry.
+              {f.description}
             </p>
 
             {status === 'success' ? (
@@ -184,7 +194,6 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
                     style={{ color: '#5dcaa5' }}
                     fill='none'
                     viewBox='0 0 24 24'
-                    stroke='currentColor'
                   >
                     <path
                       strokeLinecap='round'
@@ -198,17 +207,17 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
                   className='text-xl font-semibold mb-2'
                   style={{ color: '#c8dcea' }}
                 >
-                  Message sent!
+                  {f.successTitle}
                 </h4>
                 <p className='mb-6' style={{ color: '#3d5a6e' }}>
-                  Thanks for reaching out. I&apos;ll get back to you soon.
+                  {f.successBody}
                 </p>
                 <button
                   onClick={() => setStatus('idle')}
                   className='text-sm transition-colors'
                   style={{ color: '#85b7eb' }}
                 >
-                  Send another message
+                  {f.sendAnother}
                 </button>
               </motion.div>
             ) : (
@@ -219,7 +228,7 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
                       className='block mb-2 font-medium text-sm'
                       style={{ color: '#8faabf' }}
                     >
-                      Name
+                      {f.name}
                     </label>
                     <input
                       type='text'
@@ -229,7 +238,7 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
                       disabled={isLoading}
                       className={INPUT_CLASS}
                       style={INPUT_STYLE}
-                      placeholder='Your name'
+                      placeholder={f.namePlaceholder}
                     />
                   </div>
                   <div>
@@ -237,7 +246,7 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
                       className='block mb-2 font-medium text-sm'
                       style={{ color: '#8faabf' }}
                     >
-                      Email
+                      {f.email}
                     </label>
                     <input
                       type='email'
@@ -247,7 +256,8 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
                       disabled={isLoading}
                       className={INPUT_CLASS}
                       style={INPUT_STYLE}
-                      placeholder='your@email.com'
+                      placeholder={f.emailPlaceholder}
+                      required
                     />
                   </div>
                 </div>
@@ -257,7 +267,26 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
                     className='block mb-2 font-medium text-sm'
                     style={{ color: '#8faabf' }}
                   >
-                    Subject
+                    {f.phone}
+                  </label>
+                  <input
+                    type='tel'
+                    name='phone'
+                    value={form.phone}
+                    onChange={handleChange}
+                    disabled={isLoading}
+                    className={INPUT_CLASS}
+                    style={INPUT_STYLE}
+                    placeholder={f.phonePlaceholder}
+                  />
+                </div>
+
+                <div>
+                  <label
+                    className='block mb-2 font-medium text-sm'
+                    style={{ color: '#8faabf' }}
+                  >
+                    {f.subject}
                   </label>
                   <select
                     name='subject'
@@ -267,12 +296,12 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
                     className={INPUT_CLASS}
                     style={INPUT_STYLE}
                   >
-                    <option value=''>Select inquiry type</option>
-                    <option value='Booking Request'>Booking Request</option>
-                    <option value='Collaboration'>Collaboration</option>
-                    <option value='Press/Media'>Press/Media</option>
-                    <option value='Technical'>Technical</option>
-                    <option value='Other'>Other</option>
+                    <option value=''>{f.subjectPlaceholder}</option>
+                    <option value='Booking Request'>{f.subjects.booking}</option>
+                    <option value='Collaboration'>{f.subjects.collaboration}</option>
+                    <option value='Press/Media'>{f.subjects.press}</option>
+                    <option value='Technical'>{f.subjects.technical}</option>
+                    <option value='Other'>{f.subjects.other}</option>
                   </select>
                 </div>
 
@@ -281,7 +310,7 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
                     className='block mb-2 font-medium text-sm'
                     style={{ color: '#8faabf' }}
                   >
-                    Message
+                    {f.message}
                   </label>
                   <textarea
                     name='message'
@@ -291,9 +320,91 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
                     rows={6}
                     className={INPUT_CLASS}
                     style={{ ...INPUT_STYLE, resize: 'vertical' }}
-                    placeholder='Tell us about your inquiry...'
+                    placeholder={f.messagePlaceholder}
+                    required
                   />
                 </div>
+
+                {form.subject === 'Booking Request' && (
+                  <div className='grid md:grid-cols-2 gap-6'>
+                    <div>
+                      <label
+                        className='block mb-2 font-medium text-sm'
+                        style={{ color: '#8faabf' }}
+                      >
+                        {f.eventDate}
+                      </label>
+                      <input
+                        type='date'
+                        name='date'
+                        value={form.date}
+                        onChange={handleChange}
+                        disabled={isLoading}
+                        className={INPUT_CLASS}
+                        style={INPUT_STYLE}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        className='block mb-2 font-medium text-sm'
+                        style={{ color: '#8faabf' }}
+                      >
+                        {f.city}
+                      </label>
+                      <input
+                        type='text'
+                        name='city'
+                        value={form.city}
+                        onChange={handleChange}
+                        disabled={isLoading}
+                        className={INPUT_CLASS}
+                        style={INPUT_STYLE}
+                        placeholder={f.cityPlaceholder}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        className='block mb-2 font-medium text-sm'
+                        style={{ color: '#8faabf' }}
+                      >
+                        {f.eventType}
+                      </label>
+                      <select
+                        name='eventType'
+                        value={form.eventType}
+                        onChange={handleChange}
+                        disabled={isLoading}
+                        className={INPUT_CLASS}
+                        style={INPUT_STYLE}
+                      >
+                        <option value=''>{f.eventTypePlaceholder}</option>
+                        <option value='Corporate'>{f.eventTypes.corporate}</option>
+                        <option value='Wedding'>{f.eventTypes.wedding}</option>
+                        <option value='Festival'>{f.eventTypes.festival}</option>
+                        <option value='Club'>{f.eventTypes.club}</option>
+                        <option value='Other'>{f.eventTypes.other}</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label
+                        className='block mb-2 font-medium text-sm'
+                        style={{ color: '#8faabf' }}
+                      >
+                        {f.budget}
+                      </label>
+                      <input
+                        type='number'
+                        name='budget'
+                        value={form.budget}
+                        onChange={handleChange}
+                        disabled={isLoading}
+                        className={INPUT_CLASS}
+                        style={INPUT_STYLE}
+                        placeholder={f.budgetPlaceholder}
+                      />
+                    </div>
+                  </div>
+                )}
 
                 {status === 'error' && (
                   <motion.p
@@ -325,12 +436,12 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
                   {isLoading ? (
                     <>
                       <Loader2 size={20} className='animate-spin' />
-                      <span>Sending...</span>
+                      <span>{f.sending}</span>
                     </>
                   ) : (
                     <>
                       <Send size={20} />
-                      <span>Send Message</span>
+                      <span>{f.send}</span>
                     </>
                   )}
                 </motion.button>
@@ -343,7 +454,7 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
                 style={{ borderTop: '1px solid rgba(55,138,221,0.1)' }}
               >
                 <p className='text-sm' style={{ color: '#3d5a6e' }}>
-                  Please include the details relevant to your inquiry.
+                  {f.hint}
                 </p>
               </div>
             )}

@@ -1,11 +1,55 @@
 export type HomeLocale = 'en' | 'pl';
 
+export type ContactFormCopy = {
+  title: string;
+  description: string;
+  name: string;
+  namePlaceholder: string;
+  email: string;
+  emailPlaceholder: string;
+  phone: string;
+  phonePlaceholder: string;
+  subject: string;
+  subjectPlaceholder: string;
+  subjects: {
+    booking: string;
+    collaboration: string;
+    press: string;
+    technical: string;
+    other: string;
+  };
+  message: string;
+  messagePlaceholder: string;
+  eventDate: string;
+  city: string;
+  cityPlaceholder: string;
+  eventType: string;
+  eventTypePlaceholder: string;
+  eventTypes: {
+    corporate: string;
+    wedding: string;
+    festival: string;
+    club: string;
+    other: string;
+  };
+  budget: string;
+  budgetPlaceholder: string;
+  sending: string;
+  send: string;
+  successTitle: string;
+  successBody: string;
+  sendAnother: string;
+  hint: string;
+  requiredError: string;
+};
+
 export type HomeCopy = {
   hero: {
     badge: string;
     statLabel: string;
-    bookingCta: string;
-    showCta: string;
+    memoriesCta: string;
+    bookerCta: string;
+    eventCta: string;
   };
   music: {
     badge: string;
@@ -41,6 +85,9 @@ export type HomeCopy = {
   contact: {
     title: string;
     copy: string;
+    privacy: string;
+    success: string;
+    form: ContactFormCopy;
   };
   gallery: {
     live: string;
@@ -56,8 +103,9 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     hero: {
       badge: 'DOMINICAN-BORN · WARSAW-BASED',
       statLabel: 'Years on stage',
-      bookingCta: 'Book the show',
-      showCta: 'See the live show',
+      memoriesCta: 'Listen to Memories',
+      bookerCta: 'Press kit',
+      eventCta: 'Book the Linarex Experience',
     },
     music: {
       badge: 'LISTEN',
@@ -98,6 +146,52 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     contact: {
       title: 'Contact',
       copy: 'Professional inquiries, booking requests, and collaboration opportunities.',
+      privacy: 'We use your data only to respond to your inquiry. ',
+      success:
+        'Message sent! Thank you for contacting. I will get back to you soon.',
+      form: {
+        title: 'General Inquiry',
+        description:
+          'Send a message about a booking, collaboration or other inquiry.',
+        name: 'Name',
+        namePlaceholder: 'Your name',
+        email: 'Email',
+        emailPlaceholder: 'your@email.com',
+        phone: 'Phone (optional)',
+        phonePlaceholder: '+48 123 456 789',
+        subject: 'Subject',
+        subjectPlaceholder: 'Select inquiry type',
+        subjects: {
+          booking: 'Booking Request',
+          collaboration: 'Collaboration',
+          press: 'Press/Media',
+          technical: 'Technical',
+          other: 'Other',
+        },
+        message: 'Message',
+        messagePlaceholder: 'Tell us about your inquiry...',
+        eventDate: 'Event date',
+        city: 'City',
+        cityPlaceholder: 'City',
+        eventType: 'Event type',
+        eventTypePlaceholder: 'Select event type',
+        eventTypes: {
+          corporate: 'Corporate',
+          wedding: 'Wedding',
+          festival: 'Festival',
+          club: 'Club',
+          other: 'Other',
+        },
+        budget: 'Budget approximate',
+        budgetPlaceholder: 'Budget in EUR',
+        sending: 'Sending...',
+        send: 'Send Message',
+        successTitle: 'Message sent!',
+        successBody: "Thanks for reaching out. I'll get back to you soon.",
+        sendAnother: 'Send another message',
+        hint: 'Please include the details relevant to your inquiry.',
+        requiredError: 'Please fill in all required fields before sending.',
+      },
     },
     gallery: {
       live: 'Live Gallery',
@@ -114,8 +208,9 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     hero: {
       badge: 'URODZONY NA DOMINIKANIE · MIESZKAJĄCY W WARSAWIE',
       statLabel: 'Lat na scenie',
-      bookingCta: 'Zarezerwuj koncert',
-      showCta: 'Zobacz koncert na żywo',
+      memoriesCta: 'Posłuchaj Memories',
+      bookerCta: 'Press kit',
+      eventCta: 'Contrata Linarex Experience',
     },
     music: {
       badge: 'SŁUCHAJ',
@@ -156,6 +251,52 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     contact: {
       title: 'Kontakt',
       copy: 'Zapytania prasowe, rezerwacje i możliwości współpracy.',
+      privacy: 'Używamy Twoich danych tylko do odpowiedzi na Twoje pytanie. ',
+      success: 'Wiadomość wysłana! Dziękuję za kontakt. Odpowiem wkrótce.',
+      form: {
+        title: 'Zapytanie ogólne',
+        description:
+          'Napisz w sprawie koncertu, współpracy lub innego zapytania.',
+        name: 'Imię',
+        namePlaceholder: 'Twoje imię',
+        email: 'E-mail',
+        emailPlaceholder: 'twoj@email.com',
+        phone: 'Telefon (opcjonalnie)',
+        phonePlaceholder: '+48 123 456 789',
+        subject: 'Temat',
+        subjectPlaceholder: 'Wybierz rodzaj zapytania',
+        subjects: {
+          booking: 'Rezerwacja koncertu',
+          collaboration: 'Współpraca',
+          press: 'Prasa / media',
+          technical: 'Techniczne',
+          other: 'Inne',
+        },
+        message: 'Wiadomość',
+        messagePlaceholder: 'Opisz swoje zapytanie...',
+        eventDate: 'Data wydarzenia',
+        city: 'Miasto',
+        cityPlaceholder: 'Miasto',
+        eventType: 'Rodzaj wydarzenia',
+        eventTypePlaceholder: 'Wybierz rodzaj wydarzenia',
+        eventTypes: {
+          corporate: 'Wydarzenie firmowe',
+          wedding: 'Wesele',
+          festival: 'Festiwal',
+          club: 'Klub',
+          other: 'Inne',
+        },
+        budget: 'Budżet (orientacyjny)',
+        budgetPlaceholder: 'Budżet w EUR',
+        sending: 'Wysyłanie...',
+        send: 'Wyślij wiadomość',
+        successTitle: 'Wiadomość wysłana!',
+        successBody:
+          'Dziękuję za kontakt. Odpowiem najszybciej, jak to możliwe.',
+        sendAnother: 'Wyślij kolejną wiadomość',
+        hint: 'Podaj szczegóły dotyczące swojego zapytania.',
+        requiredError: 'Uzupełnij wszystkie wymagane pola przed wysłaniem.',
+      },
     },
     gallery: {
       live: 'Galeria live',

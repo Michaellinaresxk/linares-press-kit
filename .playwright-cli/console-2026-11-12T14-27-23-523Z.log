@@ -1,0 +1,787 @@
+[     451ms] [LOG] [Fast Refresh] done in 1203ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[     508ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[    1656ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[    1779ms] [WARNING] Image with src "/img/portrait.jpg" is using quality "95" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/utils/warn-once.js:15
+[    1811ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+          <SegmentViewNode type="page" pagePath="(en)/page.tsx">
+            <SegmentTrieNode>
+            <Home>
+              <div className="relative">
+                <Hero>
+                <Music locale="en">
+                  <FeaturedSinglePlayer locale="en">
+                    <section id="music" className="relative p..." aria-label="Featured s...">
+                      <BackgroundEffects>
+                        <div>
+                        <div className="absolute i..." aria-hidden="true">
+                          <EffectOrb position={{id:0, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "45.06496903621857%"
+-                                 left: "34.6576%"
++                                 top: "27.93412397655749%"
+-                                 top: "11.0668%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:1, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "67.23214636272684%"
+-                                 left: "89.2146%"
++                                 top: "4.5997142038441075%"
+-                                 top: "68.6766%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:2, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "9.866382608638425%"
+-                                 left: "32.3938%"
++                                 top: "5.098532492946751%"
+-                                 top: "34.7351%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:3, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "5.659784490357578%"
+-                                 left: "30.2398%"
++                                 top: "85.09957392603738%"
+-                                 top: "69.945%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:4, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "41.38044377449474%"
+-                                 left: "57.1843%"
++                                 top: "71.32827506728913%"
+-                                 top: "89.9315%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:5, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "52.39823500150226%"
+-                                 left: "56.8387%"
++                                 top: "20.80321504645871%"
+-                                 top: "86.4184%"
+                                }}
+                                ref={function}
+                              >
+                      ...
+                ...
+          ...
+        ...
+ @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[    1817ms] [WARNING] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. @ webpack-internal:///(app-pages-browser)/./node_modules/motion-utils/dist/es/warn-once.mjs:15
+[    1821ms] [LOG] [AudioPlayer] 🎵 Cargando: /audio/Memories.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:74
+[    1822ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/Memories.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    1822ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/Renacer.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    1822ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/vaiven.mp3 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    1835ms] [LOG] [AudioPlayer] 📥 Descargando... @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:78
+[    1947ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[    1990ms] [LOG] [AudioPlayer] ⏱️ Duración: 0:24 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:112
+[    1990ms] [LOG] [AudioPlayer] ⏱️ Duración: 0:24 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:112
+[    1990ms] [LOG] [AudioPlayer] ✅ Audio listo para reproducir @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:90
+[    2013ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/webpack/4ccea6a09d0aec3c.webpack.hot-update.json:0
+[    2645ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/webpack/4c7909df245153e5.webpack.hot-update.json:0
+[    2662ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[    2983ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/webpack/4c7909df245153e5.webpack.hot-update.json:0
+[    3337ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[    4169ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[    4269ms] [WARNING] Image with src "/img/portrait.jpg" is using quality "95" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/utils/warn-once.js:15
+[    4303ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+          <SegmentViewNode type="page" pagePath="(en)/page.tsx">
+            <SegmentTrieNode>
+            <Home>
+              <div className="relative">
+                <Hero>
+                <Music locale="en">
+                  <FeaturedSinglePlayer locale="en">
+                    <section id="music" className="relative p..." aria-label="Featured s...">
+                      <BackgroundEffects>
+                        <div>
+                        <div className="absolute i..." aria-hidden="true">
+                          <EffectOrb position={{id:0, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "82.6076018430324%"
+-                                 left: "47.1313%"
++                                 top: "60.03987066247439%"
+-                                 top: "5.4582%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:1, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "67.48720419683163%"
+-                                 left: "7.92559%"
++                                 top: "68.68575564073772%"
+-                                 top: "33.7163%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:2, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "0.16947157712858818%"
+-                                 left: "6.94334%"
++                                 top: "52.718034170511594%"
+-                                 top: "13.9793%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:3, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "23.507292492593134%"
+-                                 left: "5.80493%"
++                                 top: "94.72127327982938%"
+-                                 top: "1.53429%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:4, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "7.80121305085979%"
+-                                 left: "25.0868%"
++                                 top: "82.30111017919533%"
+-                                 top: "23.8008%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:5, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "82.12419473524359%"
+-                                 left: "39.8742%"
++                                 top: "47.00280974407496%"
+-                                 top: "61.666%"
+                                }}
+                                ref={function}
+                              >
+                      ...
+                ...
+          ...
+        ...
+ @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[    4309ms] [WARNING] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. @ webpack-internal:///(app-pages-browser)/./node_modules/motion-utils/dist/es/warn-once.mjs:15
+[    4312ms] [LOG] [AudioPlayer] 🎵 Cargando: /audio/Memories.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:74
+[    4312ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/Memories.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    4313ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/Renacer.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    4313ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/vaiven.mp3 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    4323ms] [LOG] [AudioPlayer] 📥 Descargando... @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:78
+[    4544ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[    4588ms] [LOG] [AudioPlayer] ⏱️ Duración: 0:24 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:112
+[    4589ms] [LOG] [AudioPlayer] ⏱️ Duración: 0:24 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:112
+[    4589ms] [LOG] [AudioPlayer] ✅ Audio listo para reproducir @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:90
+[    4772ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/webpack/640e196950554d12.webpack.hot-update.json:0
+[    5116ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/webpack/e54f25165e2b6afc.webpack.hot-update.json:0
+[    5698ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[    6270ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[    6335ms] [WARNING] Image with src "/img/portrait.jpg" is using quality "95" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/utils/warn-once.js:15
+[    6360ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+          <SegmentViewNode type="page" pagePath="(en)/page.tsx">
+            <SegmentTrieNode>
+            <Home>
+              <div className="relative">
+                <Hero>
+                <Music locale="en">
+                  <FeaturedSinglePlayer locale="en">
+                    <section id="music" className="relative p..." aria-label="Featured s...">
+                      <BackgroundEffects>
+                        <div>
+                        <div className="absolute i..." aria-hidden="true">
+                          <EffectOrb position={{id:0, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "62.58945354071768%"
+-                                 left: "45.5192%"
++                                 top: "12.653757037686741%"
+-                                 top: "0.208685%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:1, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "84.50185911621676%"
+-                                 left: "55.7842%"
++                                 top: "83.27681252400203%"
+-                                 top: "19.3207%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:2, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "76.40136812736039%"
+-                                 left: "87.7513%"
++                                 top: "60.49155319383256%"
+-                                 top: "57.1832%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:3, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "37.371712419604606%"
+-                                 left: "58.2471%"
++                                 top: "22.691146827244822%"
+-                                 top: "53.0107%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:4, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "38.03028045903507%"
+-                                 left: "79.5851%"
++                                 top: "1.8277786421613818%"
+-                                 top: "67.5141%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:5, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "52.13776384471913%"
+-                                 left: "56.5531%"
++                                 top: "31.38583105552747%"
+-                                 top: "31.384%"
+                                }}
+                                ref={function}
+                              >
+                      ...
+                ...
+          ...
+        ...
+ @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[    6365ms] [WARNING] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. @ webpack-internal:///(app-pages-browser)/./node_modules/motion-utils/dist/es/warn-once.mjs:15
+[    6367ms] [LOG] [AudioPlayer] 🎵 Cargando: /audio/Memories.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:74
+[    6368ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/Memories.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    6368ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/Renacer.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    6368ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/vaiven.mp3 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    6375ms] [LOG] [AudioPlayer] 📥 Descargando... @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:78
+[    6467ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[    6480ms] [LOG] [AudioPlayer] ⏱️ Duración: 0:24 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:112
+[    6480ms] [LOG] [AudioPlayer] ⏱️ Duración: 0:24 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:112
+[    6480ms] [LOG] [AudioPlayer] ✅ Audio listo para reproducir @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:90
+[    6562ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/webpack/30574ff9a7fa8c45.webpack.hot-update.json:0
+[    6902ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/webpack/c022adb8148ad68c.webpack.hot-update.json:0
+[    7145ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[    7715ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[    7785ms] [WARNING] Image with src "/img/portrait.jpg" is using quality "95" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/utils/warn-once.js:15
+[    7817ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+          <SegmentViewNode type="page" pagePath="(en)/page.tsx">
+            <SegmentTrieNode>
+            <Home>
+              <div className="relative">
+                <Hero>
+                <Music locale="en">
+                  <FeaturedSinglePlayer locale="en">
+                    <section id="music" className="relative p..." aria-label="Featured s...">
+                      <BackgroundEffects>
+                        <div>
+                        <div className="absolute i..." aria-hidden="true">
+                          <EffectOrb position={{id:0, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "63.54329585051512%"
+-                                 left: "86.713%"
++                                 top: "75.15451007200475%"
+-                                 top: "63.1177%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:1, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "11.705795823782339%"
+-                                 left: "31.7663%"
++                                 top: "63.73546324396452%"
+-                                 top: "22.1997%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:2, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "95.22001849432044%"
+-                                 left: "54.926%"
++                                 top: "89.84005145020959%"
+-                                 top: "3.0201%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:3, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "6.0356209612724925%"
+-                                 left: "4.05257%"
++                                 top: "41.683157973974225%"
+-                                 top: "18.2903%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:4, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "92.36284223693056%"
+-                                 left: "77.0224%"
++                                 top: "79.4060260319214%"
+-                                 top: "55.8729%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:5, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "12.87536498626446%"
+-                                 left: "79.3233%"
++                                 top: "58.29846008649121%"
+-                                 top: "75.6435%"
+                                }}
+                                ref={function}
+                              >
+                      ...
+                ...
+          ...
+        ...
+ @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[    7821ms] [WARNING] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. @ webpack-internal:///(app-pages-browser)/./node_modules/motion-utils/dist/es/warn-once.mjs:15
+[    7824ms] [LOG] [AudioPlayer] 🎵 Cargando: /audio/Memories.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:74
+[    7824ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/Memories.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    7825ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/Renacer.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    7825ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/vaiven.mp3 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    7835ms] [LOG] [AudioPlayer] 📥 Descargando... @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:78
+[    7942ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[    7953ms] [LOG] [AudioPlayer] ⏱️ Duración: 0:24 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:112
+[    7953ms] [LOG] [AudioPlayer] ⏱️ Duración: 0:24 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:112
+[    7953ms] [LOG] [AudioPlayer] ✅ Audio listo para reproducir @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:90
+[    7991ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/webpack/0d4b012bdf4e9ab8.webpack.hot-update.json:0
+[    8527ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/webpack/c2f4b5fa2ecb0155.webpack.hot-update.json:0
+[    8587ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[    9513ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[    9602ms] [WARNING] Image with src "/img/portrait.jpg" is using quality "95" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/utils/warn-once.js:15
+[    9640ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+          <SegmentViewNode type="page" pagePath="(en)/page.tsx">
+            <SegmentTrieNode>
+            <Home>
+              <div className="relative">
+                <Hero>
+                <Music locale="en">
+                  <FeaturedSinglePlayer locale="en">
+                    <section id="music" className="relative p..." aria-label="Featured s...">
+                      <BackgroundEffects>
+                        <div>
+                        <div className="absolute i..." aria-hidden="true">
+                          <EffectOrb position={{id:0, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "74.38323474996473%"
+-                                 left: "51.7982%"
++                                 top: "71.61422898999228%"
+-                                 top: "33.8723%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:1, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "98.42092274479938%"
+-                                 left: "16.9167%"
++                                 top: "20.249130777512857%"
+-                                 top: "1.23571%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:2, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "35.29171521168841%"
+-                                 left: "71.3581%"
++                                 top: "22.982170592496743%"
+-                                 top: "65.0147%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:3, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "15.530092212759106%"
+-                                 left: "19.0961%"
++                                 top: "15.817040350576118%"
+-                                 top: "20.9989%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:4, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "82.01628956202968%"
+-                                 left: "39.7477%"
++                                 top: "15.077320786859671%"
+-                                 top: "25.7766%"
+                                }}
+                                ref={function}
+                              >
+                          <EffectOrb position={{id:5, ...}}>
+                            <motion.div className="absolute w..." animate={{x:[...],y:[...], ...}} ...>
+                              <div
+                                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/20 to-pink..."
+                                aria-hidden="true"
+                                style={{
++                                 left: "23.297534345751416%"
+-                                 left: "20.7729%"
++                                 top: "74.06999983508369%"
+-                                 top: "37.1468%"
+                                }}
+                                ref={function}
+                              >
+                      ...
+                ...
+          ...
+        ...
+ @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[    9646ms] [WARNING] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. @ webpack-internal:///(app-pages-browser)/./node_modules/motion-utils/dist/es/warn-once.mjs:15
+[    9649ms] [LOG] [AudioPlayer] 🎵 Cargando: /audio/Memories.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:74
+[    9649ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/Memories.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    9650ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/Renacer.wav @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    9650ms] [LOG] [Collaboration Audio] 🎵 Cargando: /audio/vaiven.mp3 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerCollaborationReturn.ts:76
+[    9656ms] [LOG] [AudioPlayer] 📥 Descargando... @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:78
+[    9752ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[    9768ms] [LOG] [AudioPlayer] ⏱️ Duración: 0:24 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:112
+[    9768ms] [LOG] [AudioPlayer] ⏱️ Duración: 0:24 @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:112
+[    9768ms] [LOG] [AudioPlayer] ✅ Audio listo para reproducir @ webpack-internal:///(app-pages-browser)/./src/hooks/UseAudioPlayerReturn.ts:90
+[    9843ms] [LOG] [Fast Refresh] done in 92ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   10563ms] [LOG] [Fast Refresh] done in 811ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   10609ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   10748ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   10755ms] [LOG] [Fast Refresh] done in 7ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   10879ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0
+[   10943ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   10966ms] [LOG] [Fast Refresh] done in 24ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   11245ms] [LOG] [Fast Refresh] done in 303ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   11289ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   11429ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   11451ms] [LOG] [Fast Refresh] done in 23ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   11545ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0
+[   11607ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   11635ms] [LOG] [Fast Refresh] done in 28ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   11904ms] [LOG] [Fast Refresh] done in 297ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   11976ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   12110ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0
+[   12117ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   12128ms] [LOG] [Fast Refresh] done in 11ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   12470ms] [LOG] [Fast Refresh] done in 353ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   12517ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   12665ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   12777ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0
+[   12836ms] [LOG] [Fast Refresh] done in 170ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   12843ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   12866ms] [LOG] [Fast Refresh] done in 22ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   13995ms] [LOG] [Fast Refresh] done in 1151ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   14020ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   14142ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0
+[   14202ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   14220ms] [LOG] [Fast Refresh] done in 17ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   14721ms] [LOG] [Fast Refresh] done in 518ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   14744ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   14798ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0
+[   15330ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   15393ms] [LOG] [Fast Refresh] done in 62ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   15947ms] [LOG] [Fast Refresh] done in 617ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   15962ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   16104ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0
+[   16172ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   16188ms] [LOG] [Fast Refresh] done in 17ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   16572ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0
+[   16602ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   16649ms] [LOG] [Fast Refresh] done in 47ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   16792ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   16810ms] [LOG] [Fast Refresh] done in 17ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   17081ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0
+[   17086ms] [LOG] [Fast Refresh] done in 293ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   17136ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   17277ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   17282ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   17378ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/?_rsc=zhugj:0
+[   17379ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0
+[   17434ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   17446ms] [LOG] [Fast Refresh] done in 11ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   18190ms] [LOG] [Fast Refresh] done in 755ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   18244ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   18512ms] [LOG] [Fast Refresh] done in 267ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   18533ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   18675ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0
+[   18683ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   18694ms] [LOG] [Fast Refresh] done in 11ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   18945ms] [LOG] [Fast Refresh] done in 261ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   18983ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   19109ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   19113ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   19195ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/favicon.ico:0
+[   19245ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   19262ms] [LOG] [Fast Refresh] done in 16ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   19369ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   19373ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   19496ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   19500ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   19618ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   19622ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   19742ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   19747ms] [LOG] [Fast Refresh] done in 5ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   19866ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   19872ms] [LOG] [Fast Refresh] done in 6ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   19982ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   19986ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   20111ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   20115ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   20237ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   20241ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   20380ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   20386ms] [LOG] [Fast Refresh] done in 7ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   20691ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   20821ms] [LOG] [Fast Refresh] done in 130ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   21172ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   21178ms] [LOG] [Fast Refresh] done in 5ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   21295ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   21299ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   21422ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   21427ms] [LOG] [Fast Refresh] done in 5ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   21620ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   21626ms] [LOG] [Fast Refresh] done in 5ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   21745ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   21752ms] [LOG] [Fast Refresh] done in 7ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   21873ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   21877ms] [LOG] [Fast Refresh] done in 5ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   21995ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   21998ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   22170ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   22175ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   22316ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   22321ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   22456ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   22465ms] [LOG] [Fast Refresh] done in 9ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   22587ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   22592ms] [LOG] [Fast Refresh] done in 5ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   22714ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   22718ms] [LOG] [Fast Refresh] done in 5ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   22888ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   22892ms] [LOG] [Fast Refresh] done in 5ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   23018ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   23022ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   23149ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   23153ms] [LOG] [Fast Refresh] done in 5ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   23280ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   23284ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   23545ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   23552ms] [LOG] [Fast Refresh] done in 7ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   23719ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   23724ms] [LOG] [Fast Refresh] done in 5ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   24685ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   24697ms] [LOG] [Fast Refresh] done in 12ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   24825ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   24830ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   24981ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   24986ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   25115ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   25119ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   25243ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   25247ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   25378ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   25381ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   25498ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   25502ms] [LOG] [Fast Refresh] done in 5ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   25614ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   25618ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   25738ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   25743ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   25857ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   25873ms] [LOG] [Fast Refresh] done in 16ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   26014ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   26017ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   26146ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   26150ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   26282ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   26286ms] [LOG] [Fast Refresh] done in 5ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   26411ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   26416ms] [LOG] [Fast Refresh] done in 5ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   26544ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   26548ms] [LOG] [Fast Refresh] done in 4ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13

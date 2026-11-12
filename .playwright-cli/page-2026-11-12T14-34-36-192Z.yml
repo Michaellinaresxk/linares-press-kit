@@ -1,0 +1,221 @@
+- generic [active] [ref=f25e1]:
+  - banner [ref=f25e2]:
+    - navigation "Main navigation" [ref=f25e3]:
+      - link "Linarex home" [ref=f25e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f25e9]:
+          - generic [ref=f25e10]: Linarex
+          - generic [ref=f25e11]: Music · Warsaw
+      - generic [ref=f25e12]:
+        - link "Home" [ref=f25e13] [cursor=pointer]:
+          - /url: /
+        - link "Live show" [ref=f25e14] [cursor=pointer]:
+          - /url: /proposal
+        - link "EPK" [ref=f25e15] [cursor=pointer]:
+          - /url: /epk
+        - generic "Language" [ref=f25e16]:
+          - link "EN" [ref=f25e17] [cursor=pointer]:
+            - /url: /proposal
+          - generic [aria-hidden] [ref=f25e18]: /
+          - link "PL" [ref=f25e19] [cursor=pointer]:
+            - /url: /pl/proposal
+        - link "Book the show" [ref=f25e20] [cursor=pointer]:
+          - /url: /#contact
+  - main [ref=f25e25]:
+    - region "LINAREX EXPERIENCE" [ref=f25e26]:
+      - img "Linarex and Jacke Matheus sharing a moment together" [ref=f25e27]
+      - generic [ref=f25e29]:
+        - generic [ref=f25e30]:
+          - navigation "Language selection" [ref=f25e31]:
+            - link "EN" [ref=f25e32] [cursor=pointer]:
+              - /url: /proposal
+            - generic [aria-hidden] [ref=f25e33]: "|"
+            - link "PL" [ref=f25e34] [cursor=pointer]:
+              - /url: /pl/proposal
+          - paragraph [ref=f25e35]: Live music · Warsaw, Poland
+          - heading "LINAREX EXPERIENCE" [level=1] [ref=f25e36]
+          - paragraph [ref=f25e37]: Linarex & Jacke Matheus
+          - paragraph [ref=f25e38]: The band that turns any night into the one people talk about.
+          - generic [ref=f25e39]:
+            - link "Ask about booking" [ref=f25e40] [cursor=pointer]:
+              - /url: /#contact
+            - link "Download proposal PDF" [ref=f25e44] [cursor=pointer]:
+              - /url: /Live-Music-Proposal.pdf
+        - generic "Live repertoire" [ref=f25e47]:
+          - paragraph [ref=f25e48]: "Live repertoire:"
+          - generic [ref=f25e49]:
+            - generic [ref=f25e50]: Funk & Afrobeat
+            - generic [ref=f25e51]: Pop Anthems
+            - generic [ref=f25e52]: Rock Classics
+            - generic [ref=f25e53]: Latin Pop Hits
+            - generic [ref=f25e54]: Original Songs
+            - generic [ref=f25e55]: 60–90 min
+      - paragraph [ref=f25e56]: First headline show · Deski, Warsaw
+    - generic [ref=f25e57]:
+      - region "See Linarex Experience on stage." [ref=f25e58]:
+        - generic [ref=f25e60]:
+          - paragraph [ref=f25e61]: 01·See it live
+          - heading "See Linarex Experience on stage." [level=2] [ref=f25e62]
+        - generic [ref=f25e63]:
+          - link "Linarex Experience live show with Jacke Matheus Live Set — Full Room Watch on YouTube" [ref=f25e64] [cursor=pointer]:
+            - /url: https://www.youtube.com/shorts/jqD3Qzr_MPY
+            - img "Linarex Experience live show with Jacke Matheus" [ref=f25e66]
+            - generic [ref=f25e71]:
+              - strong [ref=f25e72]: Live Set — Full Room
+              - generic [ref=f25e73]: Watch on YouTube
+          - link "Linarex Experience live show with Jacke Matheus The Crowd — In Motion Watch on Instagram" [ref=f25e77] [cursor=pointer]:
+            - /url: https://www.instagram.com/p/Dcs35--NXNG/
+            - img "Linarex Experience live show with Jacke Matheus" [ref=f25e79]
+            - generic [ref=f25e84]:
+              - strong [ref=f25e85]: The Crowd — In Motion
+              - generic [ref=f25e86]: Watch on Instagram
+      - region "The party is the point." [ref=f25e90]:
+        - paragraph [ref=f25e91]: 02·The experience
+        - heading "The party is the point." [level=2] [ref=f25e92]
+        - paragraph [ref=f25e93]: "Linarex Experience is a live band built to do one thing: turn your venue into the best night of the week."
+        - paragraph [ref=f25e94]: "Two artists — Colombia and the Dominican Republic — with their own music and years on stage, backed by a lineup of Warsaw-based professionals. They play the hits everyone knows and their own songs that hit just as hard: funk, pop, rock, Latin pop and afrobeat."
+        - paragraph [ref=f25e95]: "Not a jukebox or background music: a real act that fills the floor, keeps the room moving and gives your crowd a reason to stay. Made for venues, bars, festivals and city or park events."
+      - region "The energy" [ref=f25e96]:
+        - paragraph [ref=f25e97]: 03·What happens
+        - heading "The energy" [level=2] [ref=f25e98]
+        - paragraph [ref=f25e99]: Dance. Jump. Sing every word.
+        - paragraph [ref=f25e100]: Hit after hit, country after country — with original songs woven in that land just as hard. The crowd doesn’t sit still. From the first song to the last, the room stays alive.
+        - generic [ref=f25e101]:
+          - paragraph [ref=f25e102]: "Live repertoire:"
+          - generic [ref=f25e103]:
+            - generic [ref=f25e104]: Funk & Afrobeat
+            - generic [ref=f25e105]: Pop Anthems
+            - generic [ref=f25e106]: Rock Classics
+            - generic [ref=f25e107]: Latin Pop Hits
+            - generic [ref=f25e108]: Original Songs
+            - generic [ref=f25e109]: 60–90 minutes
+            - generic [ref=f25e110]: English · Spanish · Polish
+      - region "Who’s playing" [ref=f25e111]:
+        - paragraph [ref=f25e112]: 04·The people
+        - heading "Who’s playing" [level=2] [ref=f25e113]
+        - generic [ref=f25e114]:
+          - article [ref=f25e115]:
+            - img "Linarex, Dominican-born composer and drummer" [ref=f25e117]
+            - generic [ref=f25e118]:
+              - paragraph [ref=f25e119]: Dominican Republic
+              - heading "Linarex" [level=3] [ref=f25e120]
+              - paragraph [ref=f25e121]: Composer, Drummer & Executive Producer
+              - paragraph [ref=f25e122]: Dominican-born and Warsaw-based, Linarex is a composer and multi-instrumentalist who leads the band from the drums and sings selected parts.
+          - article [ref=f25e123]:
+            - img "Jacke Matheus, Colombian vocalist and guitarist" [ref=f25e125]
+            - generic [ref=f25e126]:
+              - paragraph [ref=f25e127]: Colombia
+              - heading "Jacke Matheus" [level=3] [ref=f25e128]
+              - paragraph [ref=f25e129]: Vocalist & Guitarist
+              - paragraph [ref=f25e130]: Colombian vocalist and guitarist whose stage presence draws the audience into the performance.
+      - region "What to expect" [ref=f25e131]:
+        - paragraph [ref=f25e132]: 05·At a glance
+        - heading "What to expect" [level=2] [ref=f25e133]
+        - generic [ref=f25e134]:
+          - generic [ref=f25e135]:
+            - term [ref=f25e136]: On stage
+            - definition [ref=f25e137]:
+              - text: 4 musicians
+              - paragraph [ref=f25e138]: Drums · Guitar · Bass · Keys
+              - paragraph [ref=f25e139]: "Expandable for larger stages: Brass · Percussion."
+          - generic [ref=f25e140]:
+            - term [ref=f25e141]: Set length
+            - definition [ref=f25e142]:
+              - text: 60–90 minutes
+              - paragraph [ref=f25e143]: Adaptable to your programming needs.
+          - generic [ref=f25e144]:
+            - term [ref=f25e145]: Repertoire
+            - definition [ref=f25e146]:
+              - text: English · Spanish · Polish
+              - paragraph [ref=f25e147]: Original songs plus selected covers from every era.
+          - generic [ref=f25e148]:
+            - term [ref=f25e149]: Availability
+            - definition [ref=f25e150]:
+              - text: Ask about dates
+              - paragraph [ref=f25e151]: Based in Warsaw, available across Poland.
+          - generic [ref=f25e152]:
+            - term [ref=f25e153]: Ideal for
+            - definition [ref=f25e154]:
+              - text: venues, bars, festivals and city or park events
+              - paragraph [ref=f25e155]: Available for venues, bars, festivals and city or park events.
+        - paragraph [ref=f25e156]: Full setlist and technical rider available on request.
+      - region "Everything you need to book" [ref=f25e157]:
+        - paragraph [ref=f25e158]: 06·For bookers
+        - heading "Everything you need to book" [level=2] [ref=f25e159]
+        - region "For bookers" [ref=f25e160]:
+          - generic [ref=f25e161]:
+            - heading "What do you play?" [level=3] [ref=f25e162]
+            - paragraph [ref=f25e163]: Sample setlist
+            - generic [ref=f25e165]:
+              - paragraph [ref=f25e166]: Originals
+              - list [ref=f25e167]:
+                - listitem [ref=f25e168]: Memories
+                - listitem [ref=f25e169]: Renacer
+                - listitem [ref=f25e170]: Vaivén
+          - generic [ref=f25e171]:
+            - heading "Where can you play?" [level=3] [ref=f25e172]
+            - paragraph [ref=f25e173]: Based in Warsaw, available across Poland.
+          - generic [ref=f25e174]:
+            - heading "How much?" [level=3] [ref=f25e175]
+            - paragraph [ref=f25e176]: Fee on request — formats for bars, events and festivals.
+          - generic [ref=f25e177]:
+            - heading "Fast contact" [level=3] [ref=f25e178]
+            - 'link "Email: linarexinfo@gmail.com" [ref=f25e180] [cursor=pointer]':
+              - /url: mailto:linarexinfo@gmail.com
+      - region "Live show photos" [ref=f25e181]:
+        - generic [ref=f25e183]:
+          - generic [ref=f25e184]:
+            - heading "Live Gallery" [level=2] [ref=f25e185]
+            - paragraph [ref=f25e186]: "Live moments from Linarex Experience: connection, energy and music on stage."
+          - generic [ref=f25e187]:
+            - heading "Linarex Experience" [level=3] [ref=f25e192]
+            - generic [ref=f25e193]:
+              - 'button "View photo: Linarex Experience live performance photo 1: Linarex and the band on stage" [ref=f25e194]':
+                - 'img "Linarex Experience live performance photo 1: Linarex and the band on stage" [ref=f25e195]'
+                - paragraph [ref=f25e198]: Linarex Experience
+              - 'button "View photo: Linarex Experience live performance photo 2: the band performing" [ref=f25e203]':
+                - 'img "Linarex Experience live performance photo 2: the band performing" [ref=f25e204]'
+                - paragraph [ref=f25e207]: Linarex Experience
+              - 'button "View photo: Linarex Experience live performance photo 3: musicians on stage" [ref=f25e212]':
+                - 'img "Linarex Experience live performance photo 3: musicians on stage" [ref=f25e213]'
+                - paragraph [ref=f25e216]: Linarex Experience
+              - 'button "View photo: Linarex Experience live performance photo 4: a moment from the show" [ref=f25e221]':
+                - 'img "Linarex Experience live performance photo 4: a moment from the show" [ref=f25e222]'
+                - paragraph [ref=f25e225]: Linarex Experience
+              - 'button "View photo: Linarex Experience live performance photo 5: the band on stage" [ref=f25e230]':
+                - 'img "Linarex Experience live performance photo 5: the band on stage" [ref=f25e231]'
+                - paragraph [ref=f25e234]: Linarex Experience
+              - 'button "View photo: Two musicians performing together during the Linarex Experience" [ref=f25e239]':
+                - img "Two musicians performing together during the Linarex Experience" [ref=f25e240]
+                - paragraph [ref=f25e243]: Linarex Experience
+      - blockquote [ref=f25e248]:
+        - paragraph [ref=f25e249]: “Nobody came to sit down.”
+      - region "Let’s make it happen." [ref=f25e250]:
+        - generic [ref=f25e251]:
+          - paragraph [ref=f25e252]: 07·Bring the show to your room
+          - heading "Let’s make it happen." [level=2] [ref=f25e253]
+          - paragraph [ref=f25e254]: Ask about dates, event details and booking Linarex Experience.
+        - generic [ref=f25e255]:
+          - link "linarexinfo@gmail.com" [ref=f25e256] [cursor=pointer]:
+            - /url: mailto:linarexinfo@gmail.com
+          - link "Open the EPK" [ref=f25e260] [cursor=pointer]:
+            - /url: /epk
+          - link "Listen on Spotify" [ref=f25e261] [cursor=pointer]:
+            - /url: https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS
+    - generic [ref=f25e263]:
+      - generic [ref=f25e264]:
+        - link "Linarex" [ref=f25e265] [cursor=pointer]:
+          - /url: /
+        - paragraph [ref=f25e266]: Live music · Warsaw, PolandOriginal songs, familiar hits, one room moving together.
+      - navigation "Footer navigation" [ref=f25e267]:
+        - link "Live show" [ref=f25e268] [cursor=pointer]:
+          - /url: /proposal
+        - link "Press kit" [ref=f25e269] [cursor=pointer]:
+          - /url: /epk
+        - link "Spotify" [ref=f25e270] [cursor=pointer]:
+          - /url: https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS
+        - link "Instagram" [ref=f25e271] [cursor=pointer]:
+          - /url: https://www.instagram.com/_linarex
+        - link "Booking" [ref=f25e272] [cursor=pointer]:
+          - /url: mailto:linarexinfo@gmail.com
+      - paragraph [ref=f25e273]: © Linarex · All rights reserved

@@ -148,7 +148,7 @@ export const siteConfig = {
       'Expandable to include brass and percussion for larger stages.',
     repertoireLanguages: ['English', 'Spanish', 'Polish'],
     repertoireLanguagesDescription: 'English, Spanish & Polish',
-    repertoireDescription: 'Hits from every era, original songs included.',
+    repertoireDescription: 'Original songs plus selected covers from every era.',
     setDescription: 'Adaptable to your programming needs.',
     eventTypes: 'venues, bars, festivals and city or park events',
     bookingAvailability:

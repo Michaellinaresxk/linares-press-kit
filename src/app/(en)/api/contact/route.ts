@@ -6,7 +6,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, subject, message } = body;
+    const { name, email, subject, message, phone, date, city, eventType, budget } = body;
 
     if (!name?.trim() || !email?.trim() || !subject || !message?.trim()) {
       return NextResponse.json(
@@ -23,6 +23,30 @@ export async function POST(request: Request) {
       );
     }
 
+    // Build details string with optional fields
+    const details: Record<string, string> = {
+      From: name,
+      Email: email,
+      Subject: subject,
+    };
+
+    if (phone?.trim()) details.Phone = phone;
+    if (date?.trim()) details['Event date'] = date;
+    if (city?.trim()) details.City = city;
+    if (eventType?.trim()) details['Event type'] = eventType;
+    if (budget?.trim()) details['Budget'] = budget;
+
+    // Build detail rows HTML
+    let detailRows = '';
+    for (const [label, value] of Object.entries(details)) {
+      detailRows += `
+        <tr>
+          <td style="padding: 8px 0; color: #666; font-size: 13px; width: 80px;">${label}</td>
+          <td style="padding: 8px 0; font-size: 14px; font-weight: 500;">${value}</td>
+        </tr>
+      `;
+    }
+
     const { error } = await resend.emails.send({
       from: process.env.EMAIL_FROM!,
       to: process.env.EMAIL_TO!,
@@ -37,20 +61,7 @@ export async function POST(request: Request) {
           </div>
           <div style="background: #f9f9f9; padding: 32px; border-radius: 0 0 8px 8px; border: 1px solid #e5e5e5; border-top: none;">
             <table style="width: 100%; border-collapse: collapse;">
-              <tr>
-                <td style="padding: 8px 0; color: #666; font-size: 13px; width: 80px;">From</td>
-                <td style="padding: 8px 0; font-size: 14px; font-weight: 500;">${name}</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px 0; color: #666; font-size: 13px;">Email</td>
-                <td style="padding: 8px 0; font-size: 14px;">
-                  <a href="mailto:${email}" style="color: #7c3aed;">${email}</a>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding: 8px 0; color: #666; font-size: 13px;">Subject</td>
-                <td style="padding: 8px 0; font-size: 14px;">${subject}</td>
-              </tr>
+              ${detailRows}
             </table>
             <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 20px 0;" />
             <p style="font-size: 13px; color: #666; margin: 0 0 8px;">Message</p>

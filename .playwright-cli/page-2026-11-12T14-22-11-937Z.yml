@@ -1,0 +1,253 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation "Main navigation" [ref=e3]:
+      - link "Linarex home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e9]:
+          - generic [ref=e10]: Linarex
+          - generic [ref=e11]: Music · Warsaw
+      - generic [ref=e12]:
+        - link "Home" [ref=e13] [cursor=pointer]:
+          - /url: /
+        - link "Live show" [ref=e14] [cursor=pointer]:
+          - /url: /proposal
+        - link "EPK" [ref=e15] [cursor=pointer]:
+          - /url: /epk
+        - generic "Language" [ref=e16]:
+          - link "EN" [ref=e17] [cursor=pointer]:
+            - /url: /
+          - generic [aria-hidden] [ref=e18]: /
+          - link "PL" [ref=e19] [cursor=pointer]:
+            - /url: /pl
+        - link "Book the show" [ref=e20] [cursor=pointer]:
+          - /url: /#contact
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - img "Linarex in a dramatic portrait for the artist homepage" [ref=e28]
+      - generic [ref=e32]:
+        - generic [ref=e33]: DOMINICAN-BORN · WARSAW-BASED
+        - heading "LINAREX" [level=1] [ref=e35]
+        - heading "Composer, Drummer & Executive Producer" [level=2] [ref=e37]
+        - generic [ref=e38]:
+          - link "Escuchar Memories" [ref=e39] [cursor=pointer]:
+            - /url: /#contact
+          - link "Press kit" [ref=e40] [cursor=pointer]:
+            - /url: /epk
+          - link "Book the Linarex Experience" [ref=e41] [cursor=pointer]:
+            - /url: /proposal
+    - region "Featured single player" [ref=e42]:
+      - generic [ref=e47]:
+        - generic [ref=e48]: LISTEN
+        - heading "NEW SINGLE" [level=2] [ref=e49]
+        - generic [ref=e50]:
+          - img "Memories cover art" [ref=e53]
+          - generic [ref=e54]:
+            - heading "Memories" [level=3] [ref=e55]
+            - paragraph [ref=e56]: When you can't turn off the dark, you turn on a memory.
+            - generic [ref=e57]: 2026 · Linarex feat. Jacke Matheus
+          - generic [ref=e58]:
+            - generic [ref=e59]:
+              - button "Skip backwards" [disabled] [ref=e60]
+              - button "Play" [ref=e63]
+              - button "Skip forwards" [disabled] [ref=e66]
+            - generic [ref=e69]:
+              - slider "Audio progress slider" [disabled]: "0"
+              - progressbar "Audio progress" [ref=e70] [cursor=pointer]
+              - generic [ref=e72]:
+                - time [ref=e73]: 0:00
+                - time [ref=e74]: 0:00
+            - link "Stream Memories on Spotify" [ref=e76] [cursor=pointer]:
+              - /url: https://open.spotify.com/album/57gkaRLcx11qK4Ok1PYdyW
+              - generic [ref=e81]: Stream on Spotify
+    - generic [ref=e82]:
+      - blockquote [ref=e91]: "I create musical concepts guided by one question: what does this emotion sound like?"
+      - generic [ref=e94]:
+        - img "Portrait of Linarex" [ref=e97]
+        - generic [ref=e98]:
+          - heading "From Dominican Republic to Warsaw, Poland" [level=2] [ref=e100]
+          - generic [ref=e101]:
+            - paragraph [ref=e102]: "Born in the Dominican Republic and now based in Warsaw, Poland, Linarex builds music from the instruments he knows firsthand: guitar, piano and drums. His sound is rooted in rock, progressive rock, jazz, funk and reggae."
+            - paragraph [ref=e103]: From those roots comes music led by rhythm and feeling, including the latest single, Memories.
+          - generic [ref=e104]: Linarex
+          - link "Get In Touch →" [ref=e108] [cursor=pointer]:
+            - /url: "#contact"
+            - text: Get In Touch
+            - generic [ref=e109]: →
+    - generic [ref=e111]:
+      - generic [ref=e112]:
+        - heading "COLLABORATIONS" [level=2] [ref=e113]
+        - paragraph [ref=e114]: Musical partnerships that transcend boundaries. Each collaboration brings unique perspectives and creates something greater than the sum of its parts.
+      - generic [ref=e115]:
+        - generic [ref=e118] [cursor=pointer]:
+          - img "Memories single cover" [ref=e120]
+          - generic [ref=e122]:
+            - generic [ref=e123]:
+              - generic [ref=e129]: Collaboration
+              - generic [ref=e130]: •
+              - generic [ref=e131]: "2026"
+            - heading "Memories" [level=3] [ref=e132]
+            - paragraph [ref=e133]: feat. Jacke Matheus
+        - generic [ref=e136] [cursor=pointer]:
+          - img "Renacer single cover" [ref=e138]
+          - generic [ref=e140]:
+            - generic [ref=e141]:
+              - generic [ref=e147]: Collaboration
+              - generic [ref=e148]: •
+              - generic [ref=e149]: "2026"
+            - heading "Renacer" [level=3] [ref=e150]
+            - paragraph [ref=e151]: feat. Skiwa
+        - generic [ref=e154] [cursor=pointer]:
+          - img "Vaivén single cover" [ref=e156]
+          - generic [ref=e158]:
+            - generic [ref=e159]:
+              - generic [ref=e165]: Collaboration
+              - generic [ref=e166]: •
+              - generic [ref=e167]: "2025"
+            - heading "Vaivén" [level=3] [ref=e168]
+            - paragraph [ref=e169]: feat. Daniel Rivero
+      - generic [ref=e170]:
+        - heading "Open to New Collaborations" [level=3] [ref=e171]
+        - paragraph [ref=e172]: Always looking for talented artists to create something unique together.
+        - link "Get in Touch" [ref=e174] [cursor=pointer]:
+          - /url: "#contact"
+    - generic [ref=e176]:
+      - generic [ref=e177]:
+        - heading "Gallery" [level=2] [ref=e178]
+        - paragraph [ref=e179]: Portraits, live moments and images from Linarex’s creative world.
+      - generic [ref=e180]:
+        - heading "Artist & press photos" [level=3] [ref=e185]
+        - generic [ref=e186]:
+          - 'button "View photo: Portrait of Linarex in dark clothing" [ref=e187]':
+            - img "Portrait of Linarex in dark clothing" [ref=e188]
+            - paragraph [ref=e191]: Artist portrait
+          - 'button "View photo: Linarex singing on stage with a guitarist during a live show" [ref=e196]':
+            - img "Linarex singing on stage with a guitarist during a live show" [ref=e197]
+            - paragraph [ref=e200]: Live performance
+          - 'button "View photo: Full-length portrait of Linarex standing outdoors" [ref=e205]':
+            - img "Full-length portrait of Linarex standing outdoors" [ref=e206]
+            - paragraph [ref=e209]: Artist portrait
+          - 'button "View photo: Linarex photographed near railway tracks" [ref=e214]':
+            - img "Linarex photographed near railway tracks" [ref=e215]
+            - paragraph [ref=e218]: On the road
+          - 'button "View photo: Portrait of Linarex beside railway tracks at sunset" [ref=e223]':
+            - img "Portrait of Linarex beside railway tracks at sunset" [ref=e224]
+            - paragraph [ref=e227]: On the road
+          - 'button "View photo: Linarex playing drums during a live performance" [ref=e232]':
+            - img "Linarex playing drums during a live performance" [ref=e233]
+            - paragraph [ref=e236]: Live performance
+          - 'button "View photo: Artist portrait of Linarex in profile view" [ref=e241]':
+            - img "Artist portrait of Linarex in profile view" [ref=e242]
+            - paragraph [ref=e245]: Artist portrait
+    - region "Linarex Experience" [ref=e250]:
+      - generic [ref=e251]:
+        - generic [ref=e252]:
+          - paragraph [ref=e253]: The live show
+          - heading "Linarex Experience" [level=2] [ref=e254]
+          - paragraph [ref=e255]: with Jacke Matheus
+          - paragraph [ref=e256]: "A live band led from the drums: original songs and covers, stories shared on stage, and a connection that brings the crowd into the moment."
+          - link "Explore the live show" [ref=e257] [cursor=pointer]:
+            - /url: /proposal
+        - generic [ref=e261]:
+          - img "Linarex performing on drums during the live show" [ref=e262]
+          - paragraph [ref=e264]: Deski, Warsaw
+    - generic [ref=e266]:
+      - generic [ref=e267]:
+        - heading "Connect & Stream" [level=2] [ref=e268]
+        - paragraph [ref=e269]: Follow Linarex across all platforms for the latest music, behind-the-scenes content, and direct interaction with the artist and community.
+      - generic [ref=e270]:
+        - heading "Streaming Platforms" [level=3] [ref=e275]
+        - generic [ref=e276]:
+          - link "S Spotify Listen to the Linarex catalogue. Stream" [ref=e277] [cursor=pointer]:
+            - /url: https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS
+            - generic [ref=e278]:
+              - generic [ref=e280]:
+                - generic [ref=e281]: S
+                - heading "Spotify" [level=3] [ref=e283]
+              - paragraph [ref=e284]: Listen to the Linarex catalogue.
+              - generic [ref=e285]: Stream
+          - link "Y YouTube Music videos and live sessions. Stream" [ref=e291] [cursor=pointer]:
+            - /url: https://www.youtube.com/@linarexmusic
+            - generic [ref=e292]:
+              - generic [ref=e294]:
+                - generic [ref=e295]: "Y"
+                - heading "YouTube" [level=3] [ref=e297]
+              - paragraph [ref=e298]: Music videos and live sessions.
+              - generic [ref=e299]: Stream
+      - generic [ref=e305]:
+        - heading "Social Media" [level=3] [ref=e310]
+        - generic [ref=e311]:
+          - link "I Instagram @_linarex Follow Linarex on Instagram. photo" [ref=e312] [cursor=pointer]:
+            - /url: https://www.instagram.com/_linarex
+            - generic [ref=e313]:
+              - generic [ref=e315]:
+                - generic [ref=e316]: I
+                - generic [ref=e317]:
+                  - heading "Instagram" [level=3] [ref=e318]
+                  - paragraph [ref=e319]: "@_linarex"
+              - paragraph [ref=e320]: Follow Linarex on Instagram.
+              - generic [ref=e321]: photo
+          - link "T TikTok @linarex59 Follow Linarex on TikTok. video" [ref=e327] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@linarex59
+            - generic [ref=e328]:
+              - generic [ref=e330]:
+                - generic [ref=e331]: T
+                - generic [ref=e332]:
+                  - heading "TikTok" [level=3] [ref=e333]
+                  - paragraph [ref=e334]: "@linarex59"
+              - paragraph [ref=e335]: Follow Linarex on TikTok.
+              - generic [ref=e336]: video
+    - generic [ref=e343]:
+      - generic [ref=e344]:
+        - heading "Contact" [level=2] [ref=e345]
+        - paragraph [ref=e346]: Professional inquiries, booking requests, and collaboration opportunities.
+        - paragraph [ref=e347]:
+          - text: Email
+          - link "linarexinfo@gmail.com" [ref=e348] [cursor=pointer]:
+            - /url: mailto:linarexinfo@gmail.com
+        - paragraph [ref=e349]: We use your data only to respond to your inquiry.
+      - generic [ref=e351]:
+        - heading "General Inquiry" [level=3] [ref=e352]
+        - paragraph [ref=e353]: Send a message about a booking, collaboration or other inquiry.
+        - generic [ref=e354]:
+          - generic [ref=e355]:
+            - generic [ref=e356]:
+              - generic [ref=e357]: Name
+              - textbox "Your name" [ref=e358]
+            - generic [ref=e359]:
+              - generic [ref=e360]: Email
+              - textbox "your@email.com" [ref=e361]
+          - generic [ref=e362]:
+            - generic [ref=e363]: Phone (optional)
+            - textbox "+48 123 456 789" [ref=e364]
+          - generic [ref=e365]:
+            - generic [ref=e366]: Subject
+            - combobox [ref=e367]:
+              - option "Select inquiry type" [selected]
+              - option "Booking Request"
+              - option "Collaboration"
+              - option "Press/Media"
+              - option "Technical"
+              - option "Other"
+          - generic [ref=e368]:
+            - generic [ref=e369]: Message
+            - textbox "Tell us about your inquiry..." [ref=e370]
+          - button "Send Message" [ref=e371]
+        - paragraph [ref=e377]: Please include the details relevant to your inquiry.
+    - contentinfo [ref=e378]:
+      - generic [ref=e379]:
+        - generic [ref=e380]:
+          - link "Linarex" [ref=e381] [cursor=pointer]:
+            - /url: /
+          - paragraph [ref=e382]: Live music · Warsaw, PolandOriginal songs, familiar hits, one room moving together.
+        - navigation "Footer navigation" [ref=e383]:
+          - link "Live show" [ref=e384] [cursor=pointer]:
+            - /url: /proposal
+          - link "Press kit" [ref=e385] [cursor=pointer]:
+            - /url: /epk
+          - link "Spotify" [ref=e386] [cursor=pointer]:
+            - /url: https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS
+          - link "Instagram" [ref=e387] [cursor=pointer]:
+            - /url: https://www.instagram.com/_linarex
+          - link "Booking" [ref=e388] [cursor=pointer]:
+            - /url: mailto:linarexinfo@gmail.com
+        - paragraph [ref=e389]: © Linarex · All rights reserved

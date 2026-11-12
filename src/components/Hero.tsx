@@ -26,7 +26,7 @@ export default function Hero({ locale = 'en' }: { locale?: HomeLocale }) {
   return (
     <section
       ref={containerRef}
-      className='relative min-h-[calc(100svh-64px)] w-full overflow-hidden'
+      className='relative min-h-[calc(100svh-76px)] w-full overflow-hidden'
     >
       {/* Background Image */}
       <motion.div
@@ -64,7 +64,7 @@ export default function Hero({ locale = 'en' }: { locale?: HomeLocale }) {
       <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <motion.div
           style={{ y: textY }}
-          className='max-w-4xl min-h-[calc(100svh-64px)] flex flex-col justify-end lg:justify-center'
+          className='max-w-4xl min-h-[calc(100svh-76px)] flex flex-col justify-end lg:justify-center'
         >
           {/* Badge */}
           <motion.div
@@ -114,37 +114,6 @@ export default function Hero({ locale = 'en' }: { locale?: HomeLocale }) {
             </h2>
           </motion.div>
 
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className='flex flex-wrap gap-6 lg:gap-8 text-left mb-8'
-          >
-            {HERO_STATS.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 1 + index * 0.1 }}
-                className='text-center'
-              >
-                <div
-                  className='text-2xl sm:text-3xl font-bold mb-1'
-                  style={{ color: '#c8dcea' }}
-                >
-                  {stat.number}
-                </div>
-                <div
-                  className='text-sm font-medium'
-                  style={{ color: '#5a7a8e' }}
-                >
-                  {copy.hero.statLabel}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
           {/* Primary: booking/contact. Music lives in the featured single section next. */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -153,16 +122,22 @@ export default function Hero({ locale = 'en' }: { locale?: HomeLocale }) {
             className='flex flex-wrap items-center gap-3 pb-20'
           >
             <Link
-              href={locale === 'pl' ? '/pl#contact' : '/#contact'}
+              href={locale === 'pl' ? '/pl#music' : '/#music'}
               className='rounded-xl border border-[#378add] bg-[#1d4a72] px-6 py-3 text-sm font-semibold text-[#c8dcea] transition-transform duration-300 hover:-translate-y-px hover:scale-[1.03] active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a9d8ec]'
             >
-              {copy.hero.bookingCta}
+              {copy.hero.memoriesCta}
             </Link>
             <Link
-              href={locale === 'pl' ? '/pl/proposal' : '/proposal'}
+              href={locale === 'en' ? '/epk' : '/pl/epk'}
               className='rounded-xl border border-[#5b8fa866] bg-[#0d1318]/35 px-6 py-3 text-sm font-semibold text-[#dce8f0] backdrop-blur-sm transition-colors hover:border-[#7ab0cc] hover:bg-[#5b8fa81c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#85b7eb]'
             >
-              {copy.hero.showCta}
+              {copy.hero.bookerCta}
+            </Link>
+            <Link
+              href={locale === 'en' ? '/proposal' : '/pl/proposal'}
+              className='rounded-xl border border-[#5b8fa866] bg-[#0d1318]/35 px-6 py-3 text-sm font-semibold text-[#dce8f0] backdrop-blur-sm transition-colors hover:border-[#7ab0cc] hover:bg-[#5b8fa81c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#85b7eb]'
+            >
+              {copy.hero.eventCta}
             </Link>
           </motion.div>
         </motion.div>

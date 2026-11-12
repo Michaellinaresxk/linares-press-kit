@@ -30,6 +30,7 @@ export default function SiteFooter({
   locale?: SiteFooterLocale;
 }) {
   const t = copy[locale];
+  const homeHref = locale === 'pl' ? '/pl' : '/';
   const proposalHref = locale === 'pl' ? '/pl/proposal' : '/proposal';
   const epkHref = locale === 'pl' ? '/pl/epk' : '/epk';
 
@@ -37,7 +38,7 @@ export default function SiteFooter({
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.brand}>
-          <Link href='/' className={styles.name}>
+          <Link href={homeHref} className={styles.name}>
             {siteConfig.name}
           </Link>
           <p>
