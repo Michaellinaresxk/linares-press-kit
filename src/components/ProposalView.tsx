@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { easeOut } from '@/lib/motion';
 import { ArrowDownToLine, ArrowUpRight, Play } from 'lucide-react';
-import BookerInfo from '@/components/BookerInfo';
 import PhotoGallery from '@/components/PhotoGallery';
 import SiteFooter from '@/components/SiteFooter';
 import { proposalCopy, withVars, type ProposalLocale } from '@/lib/i18n/proposal';
@@ -388,16 +387,6 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
           <p className={styles.technicalDetails}>{show.technicalDetails}</p>
         </section>
 
-        <section className={styles.section} aria-labelledby='booker-info-title'>
-          <p className={styles.sectionLabel} data-step='06'>
-            {t.forBookersLabel}
-          </p>
-          <h2 id='booker-info-title' className={styles.sectionTitle}>
-            {t.forBookersTitle}
-          </h2>
-          <BookerInfo locale={locale} showVideo={false} />
-        </section>
-
         <section className={styles.gallerySection} aria-label={t.photosAria}>
           <PhotoGallery variant='live' locale={locale} />
         </section>
@@ -408,7 +397,7 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
 
         <section className={styles.booking} aria-labelledby='booking-title'>
           <div>
-            <p className={styles.sectionLabel} data-step='07'>
+            <p className={styles.sectionLabel} data-step='06'>
               {t.bookingLabel}
             </p>
             <h2 id='booking-title' className={styles.sectionTitle}>

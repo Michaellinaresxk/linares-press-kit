@@ -48,8 +48,6 @@ type ProposalCopy = {
   bookingBody: string;
   openEpk: string;
   listenSpotify: string;
-  forBookersLabel: string;
-  forBookersTitle: string;
 };
 
 export const proposalCopy: Record<ProposalLocale, ProposalCopy> = {
@@ -106,8 +104,6 @@ export const proposalCopy: Record<ProposalLocale, ProposalCopy> = {
       'Tell us your date, your city and your crowd. We’ll bring {showName}.',
     openEpk: 'Open the EPK',
     listenSpotify: 'Listen on Spotify',
-    forBookersLabel: 'For bookers',
-    forBookersTitle: 'Quick answers for bookers',
   },
   // Review by native speaker
   pl: {
@@ -165,8 +161,6 @@ export const proposalCopy: Record<ProposalLocale, ProposalCopy> = {
       'Podaj datę, miasto i opowiedz nam o swoich gościach. Resztę zrobi {showName}.',
     openEpk: 'Otwórz EPK',
     listenSpotify: 'Posłuchaj na Spotify',
-    forBookersLabel: 'Dla bookerów',
-    forBookersTitle: 'Szybkie odpowiedzi dla bookerów',
   },
 };
 
