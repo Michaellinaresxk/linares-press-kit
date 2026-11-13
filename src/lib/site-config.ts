@@ -35,12 +35,15 @@ export type LiveShowConfig = {
   instrumentsDescription: string;
   expandableInstruments: string[];
   expandableInstrumentsDescription: string;
+  formats: string;
   repertoireLanguages: string[];
   repertoireLanguagesDescription: string;
   repertoireDescription: string;
   setDescription: string;
   eventTypes: string;
   bookingAvailability: string;
+  logistics: string;
+  trajectory: string;
   currentLineup: string;
   description: string;
   technicalDetails: string;
@@ -114,13 +117,13 @@ export const siteConfig = {
     artists: [
       {
         name: 'Linarex',
-        role: 'Composer, Drummer & Executive Producer',
+        role: 'Composer & Drummer',
         origin: 'Dominican Republic',
         image:
           'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170735/linarex/standing_wicdur.jpg',
         imageAlt: 'Linarex, Dominican-born composer and drummer',
         description:
-          'Writes the songs and runs the night from behind the kit: reading the room, driving the groove and keeping people on their feet.',
+          'The composer behind every song, and the heartbeat of every show. From behind the kit, he turns poetic lyrics into energy you can feel.',
       },
       {
         name: 'Jacke Matheus',
@@ -145,21 +148,29 @@ export const siteConfig = {
     expandableInstruments: ['Brass', 'Percussion'],
     expandableInstrumentsDescription:
       'Expandable to include brass and percussion for larger stages.',
+    formats: '4-piece band · acoustic duo or trio (on request)',
     repertoireLanguages: ['English', 'Spanish', 'Polish'],
     repertoireLanguagesDescription: 'English, Spanish & Polish',
     repertoireDescription:
       'Original songs plus selected covers from every era.',
     setDescription: 'Adaptable to your programming needs.',
-    eventTypes: 'venues, bars, festivals and city or park events',
+    eventTypes:
+      'venues, bars, festivals, private and corporate events, and city or park events',
     bookingAvailability:
-      'Available for venues, bars, festivals and city or park events.',
+      'Available for venues, bars, festivals, private and corporate events, and city or park events.',
+    logistics:
+      'Warsaw-based, available across Poland. Full setlist and technical rider on request.',
+    trajectory:
+      '20+ years on stage: from summer seasons in Jurata to backing artists across Warsaw.',
     currentLineup:
       'Linarex leads a four-piece band from the drums, with Jacke Matheus on vocals and guitar.',
     description:
       'Linarex leads the band from the drums, sings selected parts, shares stories and brings the crowd into the show. Together with Colombian vocalist and guitarist Jacke Matheus, the band moves between original songs and covers, creating energy, good vibes and real emotion.',
     technicalDetails: 'Full setlist and technical rider available on request.',
     videoUrl: 'https://www.youtube.com/shorts/jqD3Qzr_MPY',
-    instagramVideoUrl: 'https://www.instagram.com/p/Dcs35--NXNG/',
+    instagramVideoUrl:
+      'https://www.youtube.com/watch?v=UGQpFUqNYTU&list=RDUGQpFUqNYTU&start_radio=1',
+
     videoThumbnails: {
       youtube:
         'https://res.cloudinary.com/michaelxk-com/image/upload/v1789322425/linarex/DSC00064_ydfxra.jpg',

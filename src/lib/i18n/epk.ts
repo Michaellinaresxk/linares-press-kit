@@ -66,7 +66,7 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     theArtist: 'The artist',
     aboutTitle: 'About Linarex',
     aboutText:
-      '{name} writes from one question: what does this emotion sound like?\n\nBorn in the {origin} and based in {location}, he has spent {yearsOnStage} years on stage, from summer seasons in Jurata with Rongo Rongo to backing artists across Warsaw’s venues. Rock, progressive rock, jazz, funk and reggae shaped his ear; guitar, piano and drums are where his songs begin.\n\nEvery release finds its own sound. “Vaivén” (2025) opened the door with sun-soaked afro-latin pop. “Renacer” (2026) moved into funk-pop with a Daft Punk-style groove. “Memories” (2026, feat. Jacke Matheus) is atmospheric indie rock woven with real voices of family and friends, because some memories keep the light on.\n\nNew music is on the way.',
+      'Shaped by more than 20 years on stage, {name} is a composer of musical concepts. Each song is an emotional journey through the human experience, written to slow you down and to move you beyond the confines of yourself.\n\nOn stage, those journeys become energy: poetic words, delivered with passion and good vibes, that bring people together.',
     listenLabel: 'Listen',
     musicTitle: 'Music',
     featuredSingle: 'Featured single',
@@ -74,7 +74,7 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     forBookersLabel: 'For bookers',
     liveTitle: 'The live show',
     liveBody:
-      'Live, Linarex leads {showName} from behind the kit, with Jacke Matheus up front: original songs, the hits everyone knows, and a band that reads the room and keeps people on their feet.',
+      '{showName} is a night to enjoy, to dance and to feel. Songs with meaning, poetic lyrics and good vibes, delivered with energy, style and the confidence of more than 20 years on stage. Linarex leads it all from behind the kit, turning every show into a shared moment people take home with them.',
     musiciansOnStage: 'Musicians on stage',
     setLength: 'Set length',
     repertoire: 'Repertoire',
@@ -83,7 +83,7 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     liveSetLabel: 'Watch on YouTube',
     liveSetAlt: 'Full room watching Linarex Experience perform live',
     crowdTitle: 'The Crowd — In Motion',
-    crowdLabel: 'Watch on Instagram',
+    crowdLabel: 'Watch on YouTube',
     crowdAlt: 'Crowd dancing at a Linarex Experience show',
     getInTouch: 'Get in touch',
     contactTitle: 'Press & booking contact',
@@ -91,16 +91,16 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     liveShowSubtitle: 'with Jacke Matheus',
     langSwitcherAria: 'Language selection',
   },
-  // Review by native speaker
+  // Tłumaczenie PL — wierna kopia wersji EN (zweryfikuj z native speakerem).
   pl: {
     metadata: {
       title: 'Linarex – Electronic Press Kit',
       description:
-        'Press kit Linarex: biografia, muzyka autorska, koncert na żywo, zdjęcia i kontakt w sprawie rezerwacji. Kompozytor i perkusista z Dominikany, mieszkający w Warszawie.',
+        'Press kit Linarex: bio, muzyka autorska, koncert na żywo, zdjęcia i kontakt w sprawie rezerwacji. Kompozytor i perkusista z Dominikany, mieszkający w Warszawie.',
     },
     eyebrow: 'Electronic Press Kit',
     pitch:
-      'Kompozytor, perkusista i producent wykonawczy z Dominikany, mieszkający w Warszawie. Piosenki, które zaczynają się od emocji, a kończą salą w ruchu.',
+      'Kompozytor, perkusista i producent wykonawczy z Dominikany, mieszkający w Warszawie. Utwory, które zaczynają się od uczucia, a kończą salą poruszającą się razem.',
     bookingButton: 'Kontakt w sprawie rezerwacji',
     downloadPdf: 'Pobierz EPK',
     spotifyCatalog: 'Posłuchaj muzyki',
@@ -110,18 +110,17 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     basedInLabel: 'Baza',
     experienceLabel: 'Doświadczenie',
     theArtist: 'Artysta',
-    aboutTitle: 'Kim jest Linarex',
-    // Polish needs grammatical cases, so place names are written out instead of using {origin}/{location}.
+    aboutTitle: 'O Linarexie',
     aboutText:
-      '{name} tworzy, kierując się jednym pytaniem: jak brzmi ta emocja?\n\nUrodzony na Dominikanie, mieszka w Warszawie. Na scenie od {yearsOnStage} lat: od letnich sezonów w Juracie z zespołem Rongo Rongo po koncerty u boku innych artystów na warszawskich scenach. Rock, rock progresywny, jazz, funk i reggae ukształtowały jego słuch; jego piosenki rodzą się przy gitarze, pianinie i perkusji.\n\nKażde wydawnictwo ma własne brzmienie. „Vaivén” (2025) otworzył drzwi słonecznym afro-latin popem. „Renacer” (2026) wszedł w funk-pop z groove’em w stylu Daft Punk. „Memories” (2026, feat. Jacke Matheus) to atmosferyczny indie rock, w który wplecione są prawdziwe głosy rodziny i przyjaciół, bo niektóre wspomnienia nie pozwalają zgasnąć światłu.\n\nNowa muzyka jest w drodze.',
-    listenLabel: 'Słuchaj',
+      'Ukształtowany przez ponad 20 lat na scenie, {name} jest kompozytorem muzycznych koncepcji. Każda piosenka to emocjonalna podróż przez ludzkie doświadczenie — napisana po to, by cię spowolnić i poruszyć poza granice samego siebie.\n\nNa scenie te podróże stają się energią: poetyckie słowa, przekazywane z pasją i dobrymi wibracjami, które łączą ludzi.',
+    listenLabel: 'Posłuchaj',
     musicTitle: 'Muzyka',
     featuredSingle: 'Najnowszy singiel',
     listenOnSpotify: 'Posłuchaj na Spotify',
     forBookersLabel: 'Dla bookerów',
     liveTitle: 'Koncert na żywo',
     liveBody:
-      'Na żywo Linarex prowadzi {showName} zza perkusji, a z przodu sceny stoi Jacke Matheus: autorskie utwory, hity, które znają wszyscy, i zespół, który wyczuwa salę i nie pozwala nikomu usiąść.',
+      '{showName} to wieczór pełen radości, tańca i emocji. Piosenki z przesłaniem, poetyckie teksty i dobre wibracje, przekazywane z energią, stylem i pewnością wynikającą z ponad 20 lat na scenie. Linarex prowadzi całość zza perkusji, zamieniając każdy koncert we wspólne przeżycie, które ludzie zabierają ze sobą do domu.',
     musiciansOnStage: 'Muzycy na scenie',
     setLength: 'Długość setu',
     repertoire: 'Repertuar',
@@ -130,7 +129,7 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     liveSetLabel: 'Obejrzyj na YouTube',
     liveSetAlt: 'Pełna sala podczas koncertu Linarex Experience',
     crowdTitle: 'Publiczność w ruchu',
-    crowdLabel: 'Obejrzyj na Instagramie',
+    crowdLabel: 'Obejrzyj na YouTube',
     crowdAlt: 'Tańcząca publiczność na koncercie Linarex Experience',
     getInTouch: 'Skontaktuj się',
     contactTitle: 'Kontakt prasowy i rezerwacje',

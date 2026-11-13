@@ -7,7 +7,11 @@ import { easeOut } from '@/lib/motion';
 import { ArrowDownToLine, ArrowUpRight, Play } from 'lucide-react';
 import PhotoGallery from '@/components/PhotoGallery';
 import SiteFooter from '@/components/SiteFooter';
-import { proposalCopy, withVars, type ProposalLocale } from '@/lib/i18n/proposal';
+import {
+  proposalCopy,
+  withVars,
+  type ProposalLocale,
+} from '@/lib/i18n/proposal';
 import { bookingEmail, siteConfig } from '@/lib/site-config';
 import styles from '../app/(en)/proposal/proposal.module.css';
 
@@ -15,21 +19,31 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
   const reduceMotion = useReducedMotion();
   const t = proposalCopy[locale];
   const show = siteConfig.liveShow;
+  const whatsapp = siteConfig.contact.whatsapp;
 
-  const performances = [
+  const liveReferences = [
     {
-      title: t.liveSetTitle,
-      label: t.watchYoutube,
+      title:
+        locale === 'pl'
+          ? 'Koncert na żywo — pełna sala'
+          : 'Live Set — Full Room',
+      label: locale === 'pl' ? 'Obejrzyj na YouTube' : 'Watch on YouTube',
       href: show.videoUrl,
       image: show.videoThumbnails.youtube,
-      alt: t.liveSetAlt,
+      alt:
+        locale === 'pl'
+          ? 'Pełna sala podczas koncertu Linarex Experience'
+          : 'Full room watching Linarex Experience perform live',
     },
     {
-      title: t.crowdTitle,
-      label: t.watchInstagram,
+      title: locale === 'pl' ? 'Publiczność w ruchu' : 'The Crowd — In Motion',
+      label: locale === 'pl' ? 'Obejrzyj na YouTube' : 'Watch on YouTube',
       href: show.instagramVideoUrl,
       image: show.videoThumbnails.instagram,
-      alt: t.crowdAlt,
+      alt:
+        locale === 'pl'
+          ? 'Tańcząca publiczność na koncercie Linarex Experience'
+          : 'Crowd dancing at a Linarex Experience show',
     },
   ] as const;
 
@@ -66,7 +80,11 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
               aria-label={t.langSwitcherAria}
               variants={{
                 hidden: { opacity: 0, y: 10 },
-                show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: easeOut } },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.45, ease: easeOut },
+                },
               }}
             >
               <Link
@@ -89,7 +107,11 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
               className={styles.eyebrow}
               variants={{
                 hidden: { opacity: 0, y: 14 },
-                show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.5, ease: easeOut },
+                },
               }}
             >
               {t.eyebrow}
@@ -99,26 +121,24 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
               className={styles.heroTitle}
               variants={{
                 hidden: { opacity: 0, y: 22 },
-                show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: easeOut } },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.7, ease: easeOut },
+                },
               }}
             >
               {siteConfig.liveShow.name.toUpperCase()}
             </motion.h1>
             <motion.p
-              className={styles.heroSubtitle}
-              variants={{
-                hidden: { opacity: 0, y: 14 },
-                show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
-              }}
-            >
-              {siteConfig.live.artists[0].name} &amp;{' '}
-              {siteConfig.live.artists[1].name}
-            </motion.p>
-            <motion.p
               className={styles.heroPitch}
               variants={{
                 hidden: { opacity: 0, y: 14 },
-                show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: easeOut } },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.55, ease: easeOut },
+                },
               }}
             >
               {t.heroPitch}
@@ -127,7 +147,11 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
               className={styles.heroActions}
               variants={{
                 hidden: { opacity: 0, y: 14 },
-                show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: easeOut } },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.55, ease: easeOut },
+                },
               }}
             >
               <Link
@@ -147,81 +171,41 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
               </a>
             </motion.div>
           </div>
-          <motion.div
-            className={styles.heroTags}
-            aria-label={t.liveRepertoireLabel}
-            variants={{
-              hidden: { opacity: 0, x: 16 },
-              show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: easeOut } },
-            }}
-          >
-            <p className={styles.tagLabel}>{t.liveRepertoireLabel}:</p>
-            <div className={styles.tagList}>
-              {[...siteConfig.genres.live, show.setLengthShort].map((tag) => (
-                <span key={tag}>{tag}</span>
-              ))}
-            </div>
-          </motion.div>
         </motion.div>
-        <p className={styles.heroCaption}>
-          {t.firstHeadlineShow} · {show.firstHeadlineShow}
-        </p>
       </section>
 
       <div className={styles.content}>
         <motion.section
           className={styles.section}
-          aria-labelledby='stage-title'
+          aria-labelledby='video-title'
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.55 }}
         >
-          <div className={styles.sectionHeading}>
-            <div>
-              <p className={styles.sectionLabel} data-step='01'>
-                {t.stageLabel}
-              </p>
-              <h2 id='stage-title' className={styles.sectionTitle}>
-                {t.stageTitle}
-              </h2>
-            </div>
-          </div>
-          <div className={styles.performanceGrid}>
-            {performances.map((performance, index) => (
-              <motion.a
-                key={performance.href}
-                href={performance.href}
-                target='_blank'
-                rel='noopener noreferrer'
-                className={styles.performanceCard}
-                initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={reduceMotion ? undefined : { y: -4 }}
-              >
-                <span className={styles.performanceImage}>
-                  <Image
-                    src={performance.image}
-                    alt={performance.alt}
-                    fill
-                    sizes='(max-width: 700px) 100vw, 50vw'
-                    className={styles.cardImage}
-                  />
-                  <span className={styles.playIcon} aria-hidden='true'>
-                    <Play size={18} fill='currentColor' />
-                  </span>
-                </span>
-                <span className={styles.performanceMeta}>
-                  <span>
-                    <strong>{performance.title}</strong>
-                    <span className={styles.videoLabel}>{performance.label}</span>
-                  </span>
-                  <ArrowUpRight size={18} aria-hidden='true' />
-                </span>
-              </motion.a>
-            ))}
+          <p className={styles.sectionLabel} data-step='01'>
+            {t.videoLabel}
+          </p>
+          <h2 id='video-title' className={styles.sectionTitle}>
+            {t.videoTitle}
+          </h2>
+          <div style={{ marginTop: 24, maxWidth: 960 }}>
+            <video
+              controls
+              playsInline
+              preload='metadata'
+              style={{
+                width: '100%',
+                borderRadius: 12,
+                background: '#000',
+                display: 'block',
+              }}
+            >
+              <source src='https://res.cloudinary.com/michaelxk-com/video/upload/v1794582357/linarex/videos/672e3775-1f72-4f74-b4a4-e5c6616fc9b6_dhbonv.mov' />
+              {locale === 'pl'
+                ? 'Twoja przeglądarka nie obsługuje odtwarzania wideo.'
+                : 'Your browser does not support the video tag.'}
+            </video>
           </div>
         </motion.section>
 
@@ -240,35 +224,66 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
             {t.experienceTitle}
           </h2>
           <p className={styles.lead}>{t.experienceLead}</p>
-          <p className={styles.bodyText}>{t.experienceBody1}</p>
-          <p className={styles.bodyText}>
-            {withVars(t.experienceBody2, { eventTypes: show.eventTypes })}
-          </p>
+          <p className={styles.bodyText}>{t.experienceBody}</p>
+          <p className={styles.bodyText}>{show.trajectory || t.trajectory}</p>
         </motion.section>
 
-        <section className={styles.section} aria-labelledby='energy-title'>
+        <motion.section
+          className={styles.section}
+          aria-labelledby='live-show-title'
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.55 }}
+        >
           <p className={styles.sectionLabel} data-step='03'>
-            {t.energyLabel}
+            {t.liveShowLabel}
           </p>
-          <h2 id='energy-title' className={styles.sectionTitle}>
-            {t.energyTitle}
+          <h2 id='live-show-title' className={styles.sectionTitle}>
+            {t.liveShowTitle}
           </h2>
-          <p className={styles.energyLead}>{t.energyLead}</p>
-          <p className={styles.bodyText}>{t.energyBody}</p>
-          <div className={styles.pillsGroup}>
-            <p className={styles.tagLabel}>{t.liveRepertoireLabel}:</p>
-            <div className={styles.pills}>
-              {[...siteConfig.genres.live, show.setLength].map((tag) => (
-                <span className={styles.pill} key={tag}>
-                  {tag}
+          <p className={styles.bodyText}>{t.liveShowBody}</p>
+
+          <p className={styles.tagLabel} style={{ marginTop: 28 }}>
+            {t.liveReferencesLabel}
+          </p>
+          <div className={styles.performanceGrid} style={{ marginTop: 14 }}>
+            {liveReferences.map((item, index) => (
+              <motion.a
+                key={item.href}
+                href={item.href}
+                target='_blank'
+                rel='noopener noreferrer'
+                className={styles.performanceCard}
+                initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={reduceMotion ? undefined : { y: -4 }}
+              >
+                <span className={styles.performanceImage}>
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    fill
+                    sizes='(max-width: 700px) 100vw, 50vw'
+                    className={styles.cardImage}
+                  />
+                  <span className={styles.playIcon} aria-hidden='true'>
+                    <Play size={18} fill='currentColor' />
+                  </span>
                 </span>
-              ))}
-              <span className={styles.pill}>
-                {show.repertoireLanguages.join(' · ')}
-              </span>
-            </div>
+                <span className={styles.performanceMeta}>
+                  <span>
+                    <strong>{item.title}</strong>
+                    <span className={styles.videoLabel}>{item.label}</span>
+                  </span>
+                  <ArrowUpRight size={18} aria-hidden='true' />
+                </span>
+              </motion.a>
+            ))}
           </div>
-        </section>
+        </motion.section>
 
         <section className={styles.section} aria-labelledby='artists-title'>
           <p className={styles.sectionLabel} data-step='04'>
@@ -300,18 +315,20 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
                   <p className={styles.artistOrigin}>{artist.origin}</p>
                   <h3>{artist.name}</h3>
                   <p className={styles.artistRole}>{artist.role}</p>
-                  <p className={styles.artistDescription}>{artist.description}</p>
+                  <p className={styles.artistDescription}>
+                    {artist.description}
+                  </p>
                 </div>
               </motion.article>
             ))}
           </div>
         </section>
 
-        <section className={styles.section} aria-labelledby='setup-title'>
+        <section className={styles.section} aria-labelledby='glance-title'>
           <p className={styles.sectionLabel} data-step='05'>
             {t.glanceLabel}
           </p>
-          <h2 id='setup-title' className={styles.sectionTitle}>
+          <h2 id='glance-title' className={styles.sectionTitle}>
             {t.glanceTitle}
           </h2>
           <motion.dl
@@ -330,13 +347,11 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
           >
             {[
               {
-                label: t.onStage,
-                value: show.musicians,
+                label: t.formats,
+                value: show.formats,
                 lines: [
-                  show.instruments.join(' · '),
-                  `${t.expandable}: ${show.expandableInstruments.join(' · ')}.`,
+                  `${show.instruments.join(' · ')} · ${show.expandableInstruments.join(', ')}`,
                 ],
-                note: true,
               },
               {
                 label: t.setLength,
@@ -345,18 +360,23 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
               },
               {
                 label: t.repertoire,
-                value: show.repertoireLanguages.join(' · '),
-                lines: [show.repertoireDescription],
+                value: show.repertoireDescription,
+                lines: [],
               },
               {
-                label: t.availability,
-                value: t.askDates,
-                lines: [show.availability],
+                label: t.languages,
+                value: show.repertoireLanguages.join(' · '),
+                lines: [],
               },
               {
                 label: t.idealFor,
                 value: show.eventTypes,
-                lines: [show.bookingAvailability],
+                lines: [],
+              },
+              {
+                label: t.logistics,
+                value: show.logistics || show.availability || '',
+                lines: [],
               },
             ].map((fact) => (
               <motion.div
@@ -374,30 +394,30 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
                 <dt>{fact.label}</dt>
                 <dd>
                   {fact.value}
-                  {fact.lines[0] && <p>{fact.lines[0]}</p>}
-                  {fact.lines[1] && (
-                    <p className={fact.note ? styles.factNote : undefined}>
-                      {fact.lines[1]}
-                    </p>
-                  )}
+                  {fact.lines.filter(Boolean).map((line) => (
+                    <p key={line}>{line}</p>
+                  ))}
                 </dd>
               </motion.div>
             ))}
           </motion.dl>
-          <p className={styles.technicalDetails}>{show.technicalDetails}</p>
         </section>
 
-        <section className={styles.gallerySection} aria-label={t.photosAria}>
-          <PhotoGallery variant='live' locale={locale} />
+        <section className={styles.section} aria-label={t.photosAria}>
+          <p className={styles.sectionLabel} data-step='06'>
+            {locale === 'pl' ? 'Galeria' : 'Gallery'}
+          </p>
+          <div className={styles.gallerySection}>
+            <PhotoGallery variant='live' locale={locale} />
+          </div>
+          <blockquote className={styles.photoQuote}>
+            <p>{t.galleryPhrase}</p>
+          </blockquote>
         </section>
-
-        <blockquote className={styles.photoQuote}>
-          <p>{t.quote}</p>
-        </blockquote>
 
         <section className={styles.booking} aria-labelledby='booking-title'>
           <div>
-            <p className={styles.sectionLabel} data-step='06'>
+            <p className={styles.sectionLabel} data-step='07'>
               {t.bookingLabel}
             </p>
             <h2 id='booking-title' className={styles.sectionTitle}>
@@ -412,22 +432,25 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
               {siteConfig.email}
               <ArrowUpRight size={17} aria-hidden='true' />
             </a>
+            {whatsapp && (
+              <a
+                className={styles.secondaryAction}
+                href={`https://wa.me/${whatsapp}`}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {t.whatsapp}
+                <ArrowUpRight size={17} aria-hidden='true' />
+              </a>
+            )}
             <Link
               className={styles.textLink}
-              href='/epk'
+              href={locale === 'pl' ? '/pl/epk' : '/epk'}
               target='_blank'
               rel='noopener noreferrer'
             >
               {t.openEpk}
             </Link>
-            <a
-              className={styles.textLink}
-              href={siteConfig.profiles.spotify}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              {t.listenSpotify}
-            </a>
           </div>
         </section>
       </div>
