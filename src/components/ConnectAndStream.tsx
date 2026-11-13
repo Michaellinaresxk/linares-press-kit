@@ -1,5 +1,6 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { Disc3, Instagram, Youtube } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { easeOut } from '@/lib/motion';
@@ -88,7 +89,7 @@ export default function ConnectAndStream({
                   icon: <AppleMusicIcon size={22} />,
                   hint: locale === 'pl' ? 'Słuchaj muzyki' : 'Stream music',
                 },
-              } as Record<string, { label: string; icon: React.ReactNode; hint: string }>)[key] || {
+              } as Record<string, { label: string; icon: ReactNode; hint: string }>)[key] || {
                 label: key,
                 icon: <Disc3 size={22} />,
                 hint: '',

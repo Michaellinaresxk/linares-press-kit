@@ -22,7 +22,7 @@ export const artistGallery: GalleryPhoto[] = [
   },
   {
     id: 3,
-    src: 'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170735/linarex/standing_wicdur.jpg',
+    src: 'https://res.cloudinary.com/michaelxk-com/image/upload/v1789319514/linarex/DSC00061_bpqysl.jpg',
     alt: 'Full-length portrait of Linarex standing outdoors',
     venue: 'Artist portrait',
   },

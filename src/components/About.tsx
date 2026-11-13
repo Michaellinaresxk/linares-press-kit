@@ -29,13 +29,13 @@ export default function About({ locale = 'en' }: { locale?: HomeLocale }) {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 viewport={{ once: true, margin: '-100px' }}
               >
-                <div className='w-full max-w-md mx-auto lg:max-w-full'>
+                <div className='w-full max-w-full'>
                   <Image
                     src='/img/portrait.jpg'
                     alt='Portrait of Linarex'
-                    width={800}
-                    height={600}
-                    className='w-full h-auto'
+                    width={1000}
+                    height={1464}
+                    className='h-auto w-full max-w-full'
                     sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw'
                     priority
                     quality={95}
