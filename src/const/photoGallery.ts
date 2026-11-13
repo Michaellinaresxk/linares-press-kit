@@ -46,7 +46,7 @@ export const artistGallery: GalleryPhoto[] = [
   },
   {
     id: 7,
-    src: '/img/perfil-2.jpg',
+    src: '/img/linarex.jpg',
     alt: 'Artist portrait of Linarex in profile view',
     venue: 'Artist portrait',
   },
