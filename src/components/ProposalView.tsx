@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -20,6 +21,7 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
   const t = proposalCopy[locale];
   const show = siteConfig.liveShow;
   const whatsapp = siteConfig.contact.whatsapp;
+  const [playMainVideo, setPlayMainVideo] = useState(false);
 
   const liveReferences = [
     {
@@ -190,22 +192,81 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
             {t.videoTitle}
           </h2>
           <div style={{ marginTop: 24, maxWidth: 960 }}>
-            <video
-              controls
-              playsInline
-              preload='metadata'
-              style={{
-                width: '100%',
-                borderRadius: 12,
-                background: '#000',
-                display: 'block',
-              }}
-            >
-              <source src='https://res.cloudinary.com/michaelxk-com/video/upload/v1794582357/linarex/videos/672e3775-1f72-4f74-b4a4-e5c6616fc9b6_dhbonv.mov' />
-              {locale === 'pl'
-                ? 'Twoja przeglądarka nie obsługuje odtwarzania wideo.'
-                : 'Your browser does not support the video tag.'}
-            </video>
+            {playMainVideo ? (
+              <video
+                controls
+                autoPlay
+                playsInline
+                preload='metadata'
+                aria-label={t.embeddedVideoLabel}
+                style={{
+                  width: '100%',
+                  aspectRatio: '16 / 9',
+                  borderRadius: 12,
+                  background: '#000',
+                  display: 'block',
+                }}
+              >
+                <source src='https://res.cloudinary.com/michaelxk-com/video/upload/v1794582357/linarex/videos/672e3775-1f72-4f74-b4a4-e5c6616fc9b6_dhbonv.mov' />
+                {locale === 'pl'
+                  ? 'Twoja przeglądarka nie obsługuje odtwarzania wideo.'
+                  : 'Your browser does not support the video tag.'}
+              </video>
+            ) : (
+              <button
+                type='button'
+                onClick={() => setPlayMainVideo(true)}
+                aria-label={`${locale === 'pl' ? 'Odtwórz wideo' : 'Play video'}: ${t.embeddedVideoLabel}`}
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  aspectRatio: '16 / 9',
+                  border: 0,
+                  padding: 0,
+                  borderRadius: 12,
+                  overflow: 'hidden',
+                  cursor: 'pointer',
+                  background: '#000',
+                  display: 'block',
+                }}
+              >
+                <Image
+                  src='https://res.cloudinary.com/michaelxk-com/image/upload/v1789319376/linarex/DSC00109_fijgbd.jpg'
+                  alt=''
+                  fill
+                  sizes='(max-width: 960px) 100vw, 960px'
+                  style={{ objectFit: 'cover' }}
+                />
+                <span
+                  aria-hidden='true'
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background:
+                      'linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0.1))',
+                  }}
+                />
+                <span
+                  aria-hidden='true'
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 64,
+                    height: 64,
+                    borderRadius: '50%',
+                    background: 'rgba(8, 12, 16, 0.6)',
+                    border: '1px solid rgba(255,255,255,0.7)',
+                    color: '#fff',
+                    display: 'grid',
+                    placeItems: 'center',
+                  }}
+                >
+                  <Play size={24} fill='currentColor' />
+                </span>
+              </button>
+            )}
           </div>
         </motion.section>
 

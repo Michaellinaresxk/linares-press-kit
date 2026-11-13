@@ -48,7 +48,7 @@ const DEFAULTS = {
   DARK_OVERLAY: 0.7,
   BASE_ANIMATION_DURATION: 8,
   DEFAULT_IMAGE:
-    'url(https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170735/linarex/standing_wicdur.jpg)',
+    'url(https://res.cloudinary.com/michaelxk-com/image/upload/v1794595320/linarex/hat_t6m7or.jpg)',
   MAX_EFFECT_COUNT: 20,
   MIN_ANIMATION_DURATION: 4,
 } as const;

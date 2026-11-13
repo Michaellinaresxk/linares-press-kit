@@ -12,6 +12,7 @@ type ProposalCopy = {
   heroPdf: string;
   videoLabel: string;
   videoTitle: string;
+  embeddedVideoLabel: string;
   experienceLabel: string;
   experienceTitle: string;
   experienceLead: string;
@@ -52,7 +53,8 @@ export const proposalCopy: Record<ProposalLocale, ProposalCopy> = {
     heroCta: 'Ask about booking',
     heroPdf: 'Download proposal PDF',
     videoLabel: 'See it live',
-    videoTitle: 'The crowd at Deski, Warsaw.',
+    videoTitle: 'One night. Good vibes. A room that refused to sit down.',
+    embeddedVideoLabel: 'Linarex Experience: a night of good vibes, live',
     experienceLabel: 'The experience',
     experienceTitle: 'A real show, built for your room.',
     experienceLead:
@@ -99,7 +101,9 @@ export const proposalCopy: Record<ProposalLocale, ProposalCopy> = {
     heroCta: 'Zapytaj o rezerwację',
     heroPdf: 'Pobierz ofertę PDF',
     videoLabel: 'Zobacz na żywo',
-    videoTitle: 'Publiczność w Deski, Warszawa.',
+    videoTitle: 'Jedna noc. Dobre wibracje. Pokój, który odmówił siadać.',
+    embeddedVideoLabel:
+      'Linarex Experience: jedna noc, dobre wibracje, na żywo',
     experienceLabel: 'Doświadczenie',
     experienceTitle: 'Prawdziwy show, stworzony dla Twojego miejsca.',
     experienceLead:
