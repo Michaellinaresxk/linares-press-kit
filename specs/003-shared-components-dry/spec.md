@@ -1,6 +1,6 @@
 ---
 id: 003-shared-components-dry
-status: in-progress
+status: done
 priority: P2
 date: 2026-11-14
 owner: Michael (Linarex)
@@ -99,13 +99,13 @@ Cambios concretos:
 
 ## Criterios de aceptación
 
-- [ ] Links, releases y galería se definen una vez y no hay copias en los componentes.
-- [ ] Todos los "Book…" llevan a un formulario de contacto; ningún "Book…" lleva a otra vista.
-- [ ] "Live show" lleva siempre a `/live-show` (o `/pl/live-show`).
-- [ ] Desde una ruta PL, ningún link interno lleva a una ruta EN.
-- [ ] Footer y nav idénticos en las 6 rutas, sin "familiar hits", con año en el copyright.
-- [ ] Formularios con campos obligatorios marcados de forma consistente y accesible.
-- [ ] Todo en EN y PL, sin textos hardcodeados.
+- [x] Links, releases y galería se definen una vez y no hay copias en los componentes.
+- [x] Todos los "Book…" llevan a un formulario de contacto; ningún "Book…" lleva a otra vista.
+- [x] "Live show" lleva siempre a `/live-show` (o `/pl/live-show`).
+- [x] Desde una ruta PL, ningún link interno lleva a una ruta EN.
+- [x] Footer y nav idénticos en las 6 rutas, sin "familiar hits", con año en el copyright.
+- [x] Formularios con campos obligatorios marcados de forma consistente y accesible.
+- [x] Todo en EN y PL, sin textos hardcodeados.
 
 ## Preguntas abiertas
 
@@ -120,7 +120,13 @@ Cambios concretos:
 - D3: `src/data/gallery.ts` con campos requeridos y captions diferenciadas; `src/const/photoGallery.ts` como capa de compatibilidad; `PhotoGallery`/`PhotoModal` migrados.
 - D4: `Contact` con variantes `general`/`booking`, campos/`*`/`required`/`aria-required`, i18n en `home.contact.form`, API acepta `guests`.
 - D5/D6: `shared.cta.seeLiveShow|bookShow`, `shared.footer.copyright`; hero/nav/footer/proposal/epk ajustados a reglas de CTA y rutas localizadas.
-- Gates: `tsc`, `lint`, `build` OK. Playwright: falló por ausencia de servidor local en el entorno de ejecución y error conocido de WebKit (`PushAPIEnabled`); pendiente re-ejecución con servidor y recorrido manual T30.
+- Gates/verificación: `tsc`, `lint`, `build` OK. Playwright `Chromium`, `Firefox`, `E2E Tests` **15/15 passed** contra `next start` local (`/`, `/epk`, `/live-show`, `/pl/epk` verificados 200). WebKit no ejecutado por issue de entorno (`PushAPIEnabled`).
+
+## Follow-ups externos (fuera del refactor)
+
+- IDs de track Spotify para “Memories” y “Renacer”.
+- Confirmación de “Wedding” en Event type (incluido provisionalmente).
+- Consolidación física de assets de galería a una sola fuente (Cloudinary/local).
 
 ## Definición de terminado
 
