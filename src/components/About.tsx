@@ -57,8 +57,8 @@ export default function About({ locale = 'en' }: { locale?: HomeLocale }) {
                     style={{ color: '#c8dcea' }}
                   >
                     {withHomeVars(copy.about.fromOriginToLocation, {
-                      origin: siteConfig.origin,
-                      location: siteConfig.location,
+                      origin: copy.originName,
+                      location: copy.locationName,
                     })}
                   </h2>
                 </motion.div>

@@ -32,6 +32,8 @@ export type ContactFormCopy = {
     club: string;
     other: string;
   };
+  attendees: string;
+  attendeesPlaceholder: string;
   budget: string;
   budgetPlaceholder: string;
   sending: string;
@@ -46,6 +48,7 @@ export type ContactFormCopy = {
 export type HomeCopy = {
   hero: {
     badge: string;
+    subtitle: string;
     statLabel: string;
     memoriesCta: string;
     bookerCta: string;
@@ -54,7 +57,11 @@ export type HomeCopy = {
   music: {
     badge: string;
     title: string;
+    memoriesTagline: string;
+    streamOnSpotify: string;
   };
+  originName: string;
+  locationName: string;
   about: {
     quote: string;
     fromOriginToLocation: string;
@@ -68,6 +75,8 @@ export type HomeCopy = {
     openTo: string;
     openToCopy: string;
     getInTouch: string;
+    cardLabel: string;
+    clickToExplore: string;
   };
   experience: {
     label: string;
@@ -102,6 +111,7 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
   en: {
     hero: {
       badge: 'CARIBBEAN ROOTS · WARSAW NIGHTS',
+      subtitle: 'Composer, Drummer & Executive Producer',
       statLabel: 'Years on stage',
       memoriesCta: 'Listen to Memories',
       bookerCta: 'Press kit',
@@ -110,6 +120,8 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     music: {
       badge: 'LISTEN',
       title: 'NEW SINGLE',
+      memoriesTagline: "When you can't turn off the dark, you turn on a memory.",
+      streamOnSpotify: 'Stream on Spotify',
     },
     about: {
       quote:
@@ -121,6 +133,8 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
         'On stage, those journeys become energy: poetic words, delivered with passion and good vibes, that bring people together.',
       getInTouch: 'Write to me',
     },
+    originName: 'Dominican Republic',
+    locationName: 'Warsaw, Poland',
     collaborations: {
       title: 'COLLABORATIONS',
       subtitle:
@@ -129,6 +143,8 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
       openToCopy:
         'If you sing, play or write, and something here moved you, let’s find out what we sound like together.',
       getInTouch: 'Let’s talk',
+      cardLabel: 'Collaboration',
+      clickToExplore: 'Click to explore',
     },
     experience: {
       label: 'The live show',
@@ -182,6 +198,8 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
           club: 'Club / Bar',
           other: 'Other',
         },
+        attendees: 'Approximate number of guests',
+        attendeesPlaceholder: 'e.g. 120',
         budget: 'Approximate budget',
         budgetPlaceholder: 'Budget in EUR',
         sending: 'Sending...',
@@ -201,54 +219,61 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
       artistSectionLabel: 'Artist & press photos',
     },
   },
-  // Tłumaczenie PL — wierna kopia wersji EN (zweryfikuj z native speakerem).
+  // Tłumaczenie PL — zweryfikuj z native speakerem.
   pl: {
     hero: {
       badge: 'KARAIBSKIE KORZENIE · WARSZAWSKIE NOCE',
+      subtitle: 'Kompozytor, perkusista i producent wykonawczy',
       statLabel: 'Lat na scenie',
       memoriesCta: 'Posłuchaj „Memories”',
-      bookerCta: 'Press kit',
+      bookerCta: 'Materiały prasowe',
       eventCta: 'Zarezerwuj Linarex Experience',
     },
     music: {
       badge: 'POSŁUCHAJ',
       title: 'NOWY SINGIEL',
+      memoriesTagline: 'Gdy nie da się zgasić ciemności, zapalasz wspomnienie.',
+      streamOnSpotify: 'Odtwórz w Spotify',
     },
     about: {
       quote:
         'Tworzę muzyczne koncepcje, kierując się jednym pytaniem: jak brzmi ta emocja?',
       fromOriginToLocation: 'Z {origin} do {location}',
       bornAndNow:
-        'Ukształtowany przez ponad 20 lat na scenie, Linarex jest kompozytorem muzycznych koncepcji. Każda piosenka to emocjonalna podróż przez ludzkie doświadczenie — napisana po to, by cię spowolnić i poruszyć poza granice samego siebie.',
+        'Po ponad 20 latach na scenie Linarex tworzy muzyczne koncepcje. Każdy utwór to emocjonalna podróż przez ludzkie doświadczenie — napisana po to, by na chwilę zwolnić i poruszyć coś głębokiego.',
       latestSingle:
-        'Na scenie te podróże stają się energią: poetyckie słowa, przekazywane z pasją i dobrymi wibracjami, które łączą ludzi.',
+        'Na scenie te podróże stają się energią: poetyckie słowa przekazywane z pasją i dobrą energią, która łączy ludzi.',
       getInTouch: 'Napisz do mnie',
     },
+    originName: 'Dominikany',
+    locationName: 'Warszawy',
     collaborations: {
       title: 'WSPÓŁPRACE',
       subtitle:
-        'Niektóre piosenki potrzebują więcej niż jednego głosu. Te powstały w przestrzeni między dwoma światami, dwoma językami i dwoma sposobami odczuwania tego samego.',
-      openTo: 'Masz głos do następnej?',
+        'Niektóre utwory potrzebują więcej niż jednego głosu. Te powstały w przestrzeni między dwoma światami, dwoma językami i dwoma sposobami odczuwania tego samego.',
+      openTo: 'Masz głos do następnego utworu?',
       openToCopy:
-        'Jeśli śpiewasz, grasz lub piszesz, a coś tutaj cię poruszyło — sprawdźmy, jak brzmimy razem.',
+        'Jeśli śpiewasz, grasz lub piszesz, a coś tutaj Cię poruszyło — sprawdźmy, jak zabrzmimy razem.',
       getInTouch: 'Porozmawiajmy',
+      cardLabel: 'Współpraca',
+      clickToExplore: 'Kliknij, aby zobaczyć więcej',
     },
     experience: {
       label: 'Koncert na żywo',
       title: '{liveShow}',
-      copy: 'Zespół na żywo prowadzony zza perkusji. Autorskie utwory obok hitów, które wszyscy znają, frontman, który nie pozwala sali usiąść, i noc, która kończy się tym, że nieznajomi śpiewają ten sam refren.',
+      copy: 'Zespół na żywo prowadzony zza perkusji. Autorskie utwory obok hitów, które znają wszyscy, frontman, który nie pozwala sali zwolnić tempa, i wieczór, który kończy się wspólnym śpiewem refrenu.',
       explore: 'Zobacz koncert na żywo',
       subtitle: 'z Jacke Matheusem',
     },
     links: {
       title: 'Znajdź muzykę',
-      copy: 'Nowe utwory, klipy z koncertów i wszystko, co dzieje się pomiędzy. Wybierz swoją platformę.',
+      copy: 'Nowe utwory, nagrania z koncertów i wszystko, co dzieje się pomiędzy. Wybierz swoją platformę.',
       streaming: 'Słuchaj',
       social: 'Obserwuj',
     },
     contact: {
       title: 'Porozmawiajmy',
-      copy: 'Koncert, współpraca, zapytanie prasowe albo pomysł na utwór, który nie daje ci spokoju. Napisz. Czytam każdą wiadomość.',
+      copy: 'Koncert, współpraca, zapytanie prasowe albo pomysł na utwór, który nie daje Ci spokoju. Napisz — czytam każdą wiadomość.',
       privacy: 'Twoje dane są używane wyłącznie do udzielenia odpowiedzi na wiadomość.',
       success:
         'Wiadomość wysłana! Dzięki za kontakt. Odezwę się wkrótce.',
@@ -285,6 +310,8 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
           club: 'Klub / bar',
           other: 'Inne',
         },
+        attendees: 'Przybliżona liczba gości',
+        attendeesPlaceholder: 'np. 120',
         budget: 'Orientacyjny budżet',
         budgetPlaceholder: 'Budżet w EUR',
         sending: 'Wysyłanie...',
@@ -298,7 +325,7 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     },
     gallery: {
       live: 'Galeria koncertowa',
-      liveCopy: 'Pot, światła i sala, która nie chciała usiąść.',
+      liveCopy: 'Pot, światła i sala, która nie chce stać w miejscu.',
       artist: 'Galeria',
       artistCopy: 'Portrety, sceny i drogi pomiędzy nimi.',
       artistSectionLabel: 'Zdjęcia artysty i prasowe',

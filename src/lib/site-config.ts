@@ -27,7 +27,6 @@ export type Show = {
 export type LiveShowConfig = {
   name: string;
   subtitle: string;
-  firstHeadlineShow: string;
   setLength: string;
   setLengthShort: string;
   musicians: string;
@@ -139,7 +138,6 @@ export const siteConfig = {
   liveShow: {
     name: 'Linarex Experience',
     subtitle: 'with Jacke Matheus',
-    firstHeadlineShow: 'Deski, Warsaw',
     setLength: '60–90 minutes',
     setLengthShort: '60–90 min',
     musicians: '4 musicians',
@@ -225,13 +223,13 @@ export const siteConfig = {
       year: '2025',
       durationSeconds: 193,
       durationLabel: '3:13',
-      collaborator: 'Daniel Rivero',
+      collaborator: 'Dani Rivero',
       spotifyUrl:
         'https://open.spotify.com/intl-es/track/77R8ciAdBDoVzHsL3GAjDB?autoplay_ok=1',
       coverImage:
         'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763300435/504381421_17858001459453136_3713166365445180538_n_wdmog2.jpg',
       audioUrl: '/audio/vaiven.mp3',
-      description: 'Featuring Daniel Rivero.',
+      description: 'Featuring Dani Rivero.',
     },
   ],
 };

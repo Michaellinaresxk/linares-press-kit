@@ -31,7 +31,6 @@ type EpkCopy = {
   musiciansOnStage: string;
   setLength: string;
   repertoire: string;
-  firstHeadlineShow: string;
   liveSetTitle: string;
   liveSetLabel: string;
   liveSetAlt: string;
@@ -74,11 +73,10 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     forBookersLabel: 'For bookers',
     liveTitle: 'The live show',
     liveBody:
-      '{showName} is a night to enjoy, to dance and to feel. Songs with meaning, poetic lyrics and good vibes, delivered with energy, style and the confidence of more than 20 years on stage. Linarex leads it all from behind the kit, turning every show into a shared moment people take home with them.',
+      'Led from the drums by Linarex, {showName} brings songs with meaning, movement and a real connection with the audience. It is a live experience built to turn any event into a shared moment.',
     musiciansOnStage: 'Musicians on stage',
     setLength: 'Set length',
     repertoire: 'Repertoire',
-    firstHeadlineShow: 'First headline show',
     liveSetTitle: 'Live Set — Full Room',
     liveSetLabel: 'Watch on YouTube',
     liveSetAlt: 'Full room watching Linarex Experience perform live',
@@ -91,7 +89,7 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     liveShowSubtitle: 'with Jacke Matheus',
     langSwitcherAria: 'Language selection',
   },
-  // Tłumaczenie PL — wierna kopia wersji EN (zweryfikuj z native speakerem).
+  // Zweryfikuj z native speakerem
   pl: {
     metadata: {
       title: 'Linarex – Electronic Press Kit',
@@ -100,7 +98,7 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     },
     eyebrow: 'Electronic Press Kit',
     pitch:
-      'Kompozytor, perkusista i producent wykonawczy z Dominikany, mieszkający w Warszawie. Utwory, które zaczynają się od uczucia, a kończą salą poruszającą się razem.',
+      'Kompozytor, perkusista i producent wykonawczy z Dominikany, mieszkający w Warszawie. Utwory, które zaczynają się od emocji, a kończą salą poruszaną wspólnym rytmem.',
     bookingButton: 'Kontakt w sprawie rezerwacji',
     downloadPdf: 'Pobierz EPK',
     spotifyCatalog: 'Posłuchaj muzyki',
@@ -112,19 +110,18 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     theArtist: 'Artysta',
     aboutTitle: 'O Linarexie',
     aboutText:
-      'Ukształtowany przez ponad 20 lat na scenie, {name} jest kompozytorem muzycznych koncepcji. Każda piosenka to emocjonalna podróż przez ludzkie doświadczenie — napisana po to, by cię spowolnić i poruszyć poza granice samego siebie.\n\nNa scenie te podróże stają się energią: poetyckie słowa, przekazywane z pasją i dobrymi wibracjami, które łączą ludzi.',
+      'Po ponad 20 latach na scenie {name} tworzy muzyczne koncepcje. Każdy utwór to emocjonalna podróż przez ludzkie doświadczenie — napisana po to, by na chwilę zwolnić i poruszyć coś głębokiego.\n\nNa scenie te podróże stają się energią: poetyckie słowa przekazywane z pasją i dobrą energią, która łączy ludzi.',
     listenLabel: 'Posłuchaj',
     musicTitle: 'Muzyka',
     featuredSingle: 'Najnowszy singiel',
-    listenOnSpotify: 'Posłuchaj na Spotify',
+    listenOnSpotify: 'Posłuchaj w Spotify',
     forBookersLabel: 'Dla bookerów',
     liveTitle: 'Koncert na żywo',
     liveBody:
-      '{showName} to wieczór pełen radości, tańca i emocji. Piosenki z przesłaniem, poetyckie teksty i dobre wibracje, przekazywane z energią, stylem i pewnością wynikającą z ponad 20 lat na scenie. Linarex prowadzi całość zza perkusji, zamieniając każdy koncert we wspólne przeżycie, które ludzie zabierają ze sobą do domu.',
+      'Prowadzony zza perkusji przez Linarexa {showName} łączy utwory z przesłaniem, taneczną energię i prawdziwy kontakt z publicznością. To koncert, który zamienia wydarzenie we wspólne przeżycie.',
     musiciansOnStage: 'Muzycy na scenie',
     setLength: 'Długość setu',
     repertoire: 'Repertuar',
-    firstHeadlineShow: 'Pierwszy koncert jako headliner',
     liveSetTitle: 'Koncert na żywo — pełna sala',
     liveSetLabel: 'Obejrzyj na YouTube',
     liveSetAlt: 'Pełna sala podczas koncertu Linarex Experience',

@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import AudioControls from '../AudioControls';
 import { useAudioPlayerCollaboration } from '@/hooks/UseAudioPlayerCollaborationReturn';
+import { homeCopy, type HomeLocale } from '@/lib/i18n/home';
 
 type Collaboration = (typeof collaborations)[0];
 
@@ -21,6 +22,7 @@ interface CollaborationCardProps {
   isPlaying: boolean;
   onTogglePlay: (id: number) => void;
   onStop: () => void;
+  locale?: HomeLocale;
 }
 
 const CollaborationCard = ({
@@ -30,7 +32,9 @@ const CollaborationCard = ({
   isPlaying,
   onTogglePlay,
   onStop,
+  locale = 'en',
 }: CollaborationCardProps) => {
+  const copy = homeCopy[locale];
   const [isExpanded, setIsExpanded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [showHint, setShowHint] = useState(false);
@@ -234,7 +238,7 @@ const CollaborationCard = ({
               transition={{ delay: 0.4, duration: 0.5 }}
             >
               <Users size={12} />
-              <span className='font-medium'>Collaboration</span>
+              <span className='font-medium'>{copy.collaborations.cardLabel}</span>
               <span>•</span>
               <span>{collaboration.year}</span>
             </motion.div>
@@ -413,7 +417,7 @@ const CollaborationCard = ({
                   className='text-sm font-medium'
                   style={{ color: '#c8dcea' }}
                 >
-                  Click to explore
+                  {copy.collaborations.clickToExplore}
                 </span>
               </div>
             </div>

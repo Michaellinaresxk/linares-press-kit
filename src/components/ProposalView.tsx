@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { easeOut } from '@/lib/motion';
 import { ArrowDownToLine, ArrowUpRight, Play } from 'lucide-react';
+import Contact from '@/components/Contact';
 import PhotoGallery from '@/components/PhotoGallery';
 import SiteFooter from '@/components/SiteFooter';
 import {
@@ -286,7 +287,7 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
           </h2>
           <p className={styles.lead}>{t.experienceLead}</p>
           <p className={styles.bodyText}>{t.experienceBody}</p>
-          <p className={styles.bodyText}>{show.trajectory || t.trajectory}</p>
+          {t.trajectory ? <p className={styles.bodyText}>{t.trajectory}</p> : null}
         </motion.section>
 
         <motion.section
@@ -487,31 +488,33 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
             <p className={styles.bodyText}>
               {withVars(t.bookingBody, { showName: siteConfig.liveShow.name })}
             </p>
-          </div>
-          <div className={styles.bookingActions}>
-            <a className={styles.primaryAction} href={bookingEmail}>
-              {siteConfig.email}
-              <ArrowUpRight size={17} aria-hidden='true' />
-            </a>
-            {whatsapp && (
-              <a
-                className={styles.secondaryAction}
-                href={`https://wa.me/${whatsapp}`}
+            <div className={styles.bookingActions}>
+              <a className={styles.textLink} href={bookingEmail}>
+                {siteConfig.email}
+              </a>
+              {whatsapp && (
+                <a
+                  className={styles.secondaryAction}
+                  href={`https://wa.me/${whatsapp}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  {t.whatsapp}
+                  <ArrowUpRight size={17} aria-hidden='true' />
+                </a>
+              )}
+              <Link
+                className={styles.textLink}
+                href={locale === 'pl' ? '/pl/epk' : '/epk'}
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                {t.whatsapp}
-                <ArrowUpRight size={17} aria-hidden='true' />
-              </a>
-            )}
-            <Link
-              className={styles.textLink}
-              href={locale === 'pl' ? '/pl/epk' : '/epk'}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              {t.openEpk}
-            </Link>
+                {t.openEpk}
+              </Link>
+            </div>
+          </div>
+          <div style={{ marginTop: 24 }}>
+            <Contact locale={locale} mode='booking' embedded />
           </div>
         </section>
       </div>

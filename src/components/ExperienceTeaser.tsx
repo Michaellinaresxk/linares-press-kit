@@ -82,9 +82,6 @@ export default function ExperienceTeaser({
             <span className='absolute top-1/2 left-1/2 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/70 bg-[#080c10]/55 text-white backdrop-blur-sm transition-transform duration-300 group-hover:scale-110'>
               <Play size={20} fill='currentColor' aria-hidden='true' />
             </span>
-            <p className='absolute bottom-4 left-4 text-xs font-semibold uppercase tracking-[0.2em] text-white'>
-              {siteConfig.liveShow.firstHeadlineShow}
-            </p>
           </Link>
         </motion.div>
       </div>

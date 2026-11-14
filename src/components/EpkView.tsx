@@ -15,6 +15,7 @@ import Contact from '@/components/Contact';
 import PhotoGallery from '@/components/PhotoGallery';
 import SiteFooter from '@/components/SiteFooter';
 import { epkCopy, withEpkVars, type EpkLocale } from '@/lib/i18n/epk';
+import { homeCopy } from '@/lib/i18n/home';
 import { easeOut } from '@/lib/motion';
 import { siteConfig, siteGenresOriginal } from '@/lib/site-config';
 import styles from './epk.module.css';
@@ -64,6 +65,7 @@ function AppleMusicIcon({ size = 20 }: { size?: number }) {
 export default function EpkView({ locale }: { locale: EpkLocale }) {
   const reduceMotion = useReducedMotion();
   const t = epkCopy[locale];
+  const home = homeCopy[locale];
 
   const reveal = {
     initial: reduceMotion ? false : { opacity: 0, y: 18 },
@@ -75,12 +77,12 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
   const facts = [
     {
       label: t.originLabel,
-      value: siteConfig.origin,
-      detail: siteConfig.role,
+      value: home.originName,
+      detail: home.hero.subtitle,
     },
     {
       label: t.basedInLabel,
-      value: siteConfig.location,
+      value: home.locationName,
       detail: '',
     },
     {
@@ -212,7 +214,7 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
                   },
                 }}
               >
-                {siteConfig.role}
+                {home.hero.subtitle}
               </motion.p>
               <motion.p
                 className={styles.genres}
@@ -332,10 +334,6 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
             </p>
 
             <dl className={styles.bookerFacts}>
-              <div className={styles.bookerFact}>
-                <dt>{t.firstHeadlineShow}</dt>
-                <dd>{siteConfig.liveShow.firstHeadlineShow}</dd>
-              </div>
               <div className={styles.bookerFact}>
                 <dt>{t.setLength}</dt>
                 <dd>{siteConfig.liveShow.setLength}</dd>

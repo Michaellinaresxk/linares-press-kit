@@ -15,6 +15,7 @@ type FormState = {
   date?: string;
   city?: string;
   eventType?: string;
+  attendees?: string;
   budget?: string;
 };
 
@@ -26,6 +27,11 @@ const INITIAL_FORM: FormState = {
   subject: '',
   message: '',
   phone: '',
+  date: '',
+  city: '',
+  eventType: '',
+  attendees: '',
+  budget: '',
 };
 
 const INPUT_CLASS =
@@ -37,11 +43,21 @@ const INPUT_STYLE = {
   color: '#c8dcea',
 };
 
-export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
+type ContactProps = {
+  locale?: HomeLocale;
+  mode?: 'default' | 'booking';
+  embedded?: boolean;
+};
+
+export default function Contact({ locale = 'en', mode = 'default', embedded = false }: ContactProps) {
   const copy = homeCopy[locale];
   const f = copy.contact.form;
   const containerRef = useRef<HTMLDivElement>(null);
-  const [form, setForm] = useState<FormState>(INITIAL_FORM);
+  const bookingMode = mode === 'booking';
+  const [form, setForm] = useState<FormState>({
+    ...INITIAL_FORM,
+    subject: bookingMode ? 'Booking Request' : '',
+  });
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -88,7 +104,7 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
       if (!res.ok) throw new Error(data.error || 'Something went wrong.');
 
       setStatus('success');
-      setForm(INITIAL_FORM);
+      setForm({ ...INITIAL_FORM, subject: bookingMode ? 'Booking Request' : '' });
     } catch (err) {
       setStatus('error');
       setErrorMsg(
@@ -101,67 +117,14 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
 
   const isLoading = status === 'loading';
 
-  return (
-    <section
-      id='contact'
-      ref={containerRef}
-      className='relative py-20 lg:py-32 overflow-hidden'
-      style={{
-        background: 'linear-gradient(to bottom, #111820, #0d1117, #0a0f16)',
-      }}
+  const formCard = (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className={embedded ? 'w-full' : 'max-w-4xl mx-auto'}
     >
-      {/* Background blobs */}
-      <div className='absolute inset-0 opacity-15 pointer-events-none'>
-        <motion.div
-          style={{ y, background: '#185fa5' }}
-          className='absolute top-20 right-1/4 w-96 h-96 rounded-full blur-3xl'
-        />
-        <motion.div
-          style={{ y: yReverse, background: '#0f6e56' }}
-          className='absolute bottom-20 left-1/4 w-80 h-80 rounded-full blur-3xl'
-        />
-      </div>
-
-      <div className='relative z-10 max-w-7xl mx-auto px-6 lg:px-8'>
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className='text-center mb-16'
-        >
-          <h2
-            className='text-4xl lg:text-5xl font-bold mb-6'
-            style={{ color: '#e8eef5' }}
-          >
-            {copy.contact.title}
-          </h2>
-          <p className='text-lg max-w-3xl mx-auto' style={{ color: '#5a7a8e' }}>
-            {copy.contact.copy}
-          </p>
-          <p className='mt-5 text-base' style={{ color: '#c8dcea' }}>
-            Email{' '}
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className='underline decoration-[#5b8fa8] underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#85b7eb]'
-            >
-              {siteConfig.email}
-            </a>
-          </p>
-          <p className='mt-2 text-sm' style={{ color: '#3d5a6e' }}>
-            {copy.contact.privacy}
-          </p>
-        </motion.div>
-
-        {/* Form card */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className='max-w-4xl mx-auto'
-        >
           <div
             className='rounded-2xl p-8'
             style={{
@@ -281,51 +244,33 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
                   />
                 </div>
 
-                <div>
-                  <label
-                    className='block mb-2 font-medium text-sm'
-                    style={{ color: '#8faabf' }}
-                  >
-                    {f.subject}
-                  </label>
-                  <select
-                    name='subject'
-                    value={form.subject}
-                    onChange={handleChange}
-                    disabled={isLoading}
-                    className={INPUT_CLASS}
-                    style={INPUT_STYLE}
-                  >
-                    <option value=''>{f.subjectPlaceholder}</option>
-                    <option value='Booking Request'>{f.subjects.booking}</option>
-                    <option value='Collaboration'>{f.subjects.collaboration}</option>
-                    <option value='Press/Media'>{f.subjects.press}</option>
-                    <option value='Technical'>{f.subjects.technical}</option>
-                    <option value='Other'>{f.subjects.other}</option>
-                  </select>
-                </div>
+                {!bookingMode && (
+                  <div>
+                    <label
+                      className='block mb-2 font-medium text-sm'
+                      style={{ color: '#8faabf' }}
+                    >
+                      {f.subject}
+                    </label>
+                    <select
+                      name='subject'
+                      value={form.subject}
+                      onChange={handleChange}
+                      disabled={isLoading}
+                      className={INPUT_CLASS}
+                      style={INPUT_STYLE}
+                    >
+                      <option value=''>{f.subjectPlaceholder}</option>
+                      <option value='Booking Request'>{f.subjects.booking}</option>
+                      <option value='Collaboration'>{f.subjects.collaboration}</option>
+                      <option value='Press/Media'>{f.subjects.press}</option>
+                      <option value='Technical'>{f.subjects.technical}</option>
+                      <option value='Other'>{f.subjects.other}</option>
+                    </select>
+                  </div>
+                )}
 
-                <div>
-                  <label
-                    className='block mb-2 font-medium text-sm'
-                    style={{ color: '#8faabf' }}
-                  >
-                    {f.message}
-                  </label>
-                  <textarea
-                    name='message'
-                    value={form.message}
-                    onChange={handleChange}
-                    disabled={isLoading}
-                    rows={6}
-                    className={INPUT_CLASS}
-                    style={{ ...INPUT_STYLE, resize: 'vertical' }}
-                    placeholder={f.messagePlaceholder}
-                    required
-                  />
-                </div>
-
-                {form.subject === 'Booking Request' && (
+                {(bookingMode || form.subject === 'Booking Request') && (
                   <div className='grid md:grid-cols-2 gap-6'>
                     <div>
                       <label
@@ -390,21 +335,62 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
                         className='block mb-2 font-medium text-sm'
                         style={{ color: '#8faabf' }}
                       >
-                        {f.budget}
+                        {f.attendees}
                       </label>
                       <input
                         type='number'
-                        name='budget'
-                        value={form.budget}
+                        name='attendees'
+                        min={1}
+                        value={form.attendees}
                         onChange={handleChange}
                         disabled={isLoading}
                         className={INPUT_CLASS}
                         style={INPUT_STYLE}
-                        placeholder={f.budgetPlaceholder}
+                        placeholder={f.attendeesPlaceholder}
                       />
                     </div>
+                    {!bookingMode && (
+                      <div className='md:col-span-2'>
+                        <label
+                          className='block mb-2 font-medium text-sm'
+                          style={{ color: '#8faabf' }}
+                        >
+                          {f.budget}
+                        </label>
+                        <input
+                          type='number'
+                          name='budget'
+                          value={form.budget}
+                          onChange={handleChange}
+                          disabled={isLoading}
+                          className={INPUT_CLASS}
+                          style={INPUT_STYLE}
+                          placeholder={f.budgetPlaceholder}
+                        />
+                      </div>
+                    )}
                   </div>
                 )}
+
+                <div>
+                  <label
+                    className='block mb-2 font-medium text-sm'
+                    style={{ color: '#8faabf' }}
+                  >
+                    {f.message}
+                  </label>
+                  <textarea
+                    name='message'
+                    value={form.message}
+                    onChange={handleChange}
+                    disabled={isLoading}
+                    rows={6}
+                    className={INPUT_CLASS}
+                    style={{ ...INPUT_STYLE, resize: 'vertical' }}
+                    placeholder={f.messagePlaceholder}
+                    required
+                  />
+                </div>
 
                 {status === 'error' && (
                   <motion.p
@@ -460,6 +446,66 @@ export default function Contact({ locale = 'en' }: { locale?: HomeLocale }) {
             )}
           </div>
         </motion.div>
+  );
+
+  if (embedded) {
+    return <div ref={containerRef}>{formCard}</div>;
+  }
+
+  return (
+    <section
+      id='contact'
+      ref={containerRef}
+      className='relative py-20 lg:py-32 overflow-hidden'
+      style={{
+        background: 'linear-gradient(to bottom, #111820, #0d1117, #0a0f16)',
+      }}
+    >
+      {/* Background blobs */}
+      <div className='absolute inset-0 opacity-15 pointer-events-none'>
+        <motion.div
+          style={{ y, background: '#185fa5' }}
+          className='absolute top-20 right-1/4 w-96 h-96 rounded-full blur-3xl'
+        />
+        <motion.div
+          style={{ y: yReverse, background: '#0f6e56' }}
+          className='absolute bottom-20 left-1/4 w-80 h-80 rounded-full blur-3xl'
+        />
+      </div>
+
+      <div className='relative z-10 max-w-7xl mx-auto px-6 lg:px-8'>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className='text-center mb-16'
+        >
+          <h2
+            className='text-4xl lg:text-5xl font-bold mb-6'
+            style={{ color: '#e8eef5' }}
+          >
+            {copy.contact.title}
+          </h2>
+          <p className='text-lg max-w-3xl mx-auto' style={{ color: '#5a7a8e' }}>
+            {copy.contact.copy}
+          </p>
+          <p className='mt-5 text-base' style={{ color: '#c8dcea' }}>
+            Email{' '}
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className='underline decoration-[#5b8fa8] underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#85b7eb]'
+            >
+              {siteConfig.email}
+            </a>
+          </p>
+          <p className='mt-2 text-sm' style={{ color: '#3d5a6e' }}>
+            {copy.contact.privacy}
+          </p>
+        </motion.div>
+
+        {formCard}
       </div>
     </section>
   );
