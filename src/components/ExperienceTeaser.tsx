@@ -14,7 +14,7 @@ export default function ExperienceTeaser({
 }) {
   const copy = homeCopy[locale];
   const reduceMotion = useReducedMotion();
-  const proposalHref = locale === 'pl' ? '/pl/proposal' : '/proposal';
+  const proposalHref = locale === 'pl' ? '/pl/live-show' : '/live-show';
 
   return (
     <section
@@ -72,7 +72,11 @@ export default function ExperienceTeaser({
           >
             <Image
               src='/img/DSC00047.jpg'
-              alt='Linarex performing on drums during the live show'
+              alt={
+                locale === 'pl'
+                  ? 'Linarex grający na perkusji podczas koncertu na żywo'
+                  : 'Linarex performing on drums during the live show'
+              }
               width={900}
               height={650}
               sizes='(max-width: 1024px) 100vw, 42vw'

@@ -223,7 +223,7 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
   pl: {
     hero: {
       badge: 'KARAIBSKIE KORZENIE · WARSZAWSKIE NOCE',
-      subtitle: 'Kompozytor, perkusista i producent wykonawczy',
+      subtitle: 'Kompozytor, perkusista i Executive Producer',
       statLabel: 'Lat na scenie',
       memoriesCta: 'Posłuchaj „Memories”',
       bookerCta: 'Materiały prasowe',
@@ -233,7 +233,7 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
       badge: 'POSŁUCHAJ',
       title: 'NOWY SINGIEL',
       memoriesTagline: 'Gdy nie da się zgasić ciemności, zapalasz wspomnienie.',
-      streamOnSpotify: 'Odtwórz w Spotify',
+      streamOnSpotify: 'Słuchaj na Spotify',
     },
     about: {
       quote:

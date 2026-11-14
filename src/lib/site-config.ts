@@ -91,7 +91,10 @@ export const siteConfig = {
   ogImage: '/og-image.jpg',
   documents: {
     epkPdf: '/linarex-epk.pdf',
+    epkPdfPl: '/linarex-epk-pl.pdf',
     proposalPdf: '/Live-Music-Proposal.pdf',
+    liveShowPdf: '/linarex-live-show.pdf',
+    liveShowPdfPl: '/linarex-live-show-pl.pdf',
   },
   seo: {
     homeTitle: 'Linarex | Composer & Drummer in Warsaw – New Single "Memories"',

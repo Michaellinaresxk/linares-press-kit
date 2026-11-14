@@ -94,6 +94,18 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
     },
   ];
 
+  const bookerInfo = {
+    setLength: locale === 'pl' ? '60–90 minut' : siteConfig.liveShow.setLength,
+    languages:
+      locale === 'pl'
+        ? 'angielski · hiszpański · polski'
+        : siteConfig.liveShow.repertoireLanguages.join(' · '),
+    instruments:
+      locale === 'pl'
+        ? 'Perkusja · Gitara · Bas · Klawisze'
+        : siteConfig.liveShow.instruments.join(' · '),
+  };
+
   const profiles = Object.entries(siteConfig.profiles).filter(([, url]) => url);
 
   const liveVideos = [
@@ -257,7 +269,11 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
           >
             <a
               className={styles.primaryButton}
-              href={siteConfig.documents.epkPdf}
+              href={
+                locale === 'pl'
+                  ? siteConfig.documents.epkPdfPl
+                  : siteConfig.documents.epkPdf
+              }
               download
             >
               <ArrowDownToLine size={16} aria-hidden='true' />
@@ -331,12 +347,12 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
             <dl className={styles.bookerFacts}>
               <div className={styles.bookerFact}>
                 <dt>{t.setLength}</dt>
-                <dd>{siteConfig.liveShow.setLength}</dd>
+                <dd>{bookerInfo.setLength}</dd>
               </div>
               <div className={styles.bookerFact}>
                 <dt>{t.repertoire}</dt>
-                <dd>{siteConfig.liveShow.repertoireLanguages.join(' · ')}</dd>
-                <p>{siteConfig.liveShow.instruments.join(' · ')}</p>
+                <dd>{bookerInfo.languages}</dd>
+                <p>{bookerInfo.instruments}</p>
               </div>
             </dl>
 
@@ -377,7 +393,7 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
               </p>
               <Link
                 className={styles.secondaryButton}
-                href={locale === 'pl' ? '/pl/proposal' : '/proposal'}
+                href={locale === 'pl' ? '/pl/live-show' : '/live-show'}
               >
                 {withEpkVars(t.openProposal, {
                   showName: siteConfig.liveShow.name,

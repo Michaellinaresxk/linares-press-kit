@@ -16,7 +16,7 @@ import {
 } from '@/lib/i18n/proposal';
 import { sharedCopy } from '@/lib/i18n/shared';
 import { bookingEmail, siteConfig } from '@/lib/site-config';
-import styles from '../app/(en)/proposal/proposal.module.css';
+import styles from '../app/(en)/live-show/live-show.module.css';
 
 export default function ProposalView({ locale }: { locale: ProposalLocale }) {
   const reduceMotion = useReducedMotion();
@@ -25,6 +25,32 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
   const show = siteConfig.liveShow;
   const whatsapp = siteConfig.contact.whatsapp;
   const [playMainVideo, setPlayMainVideo] = useState(false);
+
+  const localizedShow = {
+    formats: locale === 'pl' ? '4-osobowy zespół · duet lub trio akustyczne (na życzenie)' : show.formats,
+    instrumentsLine:
+      locale === 'pl'
+        ? 'Perkusja · Gitara · Bas · Klawisze · możliwość rozszerzenia o sekcję dętą i instrumenty perkusyjne'
+        : `${show.instruments.join(' · ')} · ${show.expandableInstruments.join(', ')}`,
+    setLength: locale === 'pl' ? '60–90 minut' : show.setLength,
+    setDescription:
+      locale === 'pl'
+        ? 'Długość i przebieg koncertu dopasowane do charakteru wydarzenia.'
+        : show.setDescription,
+    repertoireDescription:
+      locale === 'pl'
+        ? 'Autorskie utwory oraz wybrane covery z różnych epok.'
+        : show.repertoireDescription,
+    languages: locale === 'pl' ? 'angielski · hiszpański · polski' : show.repertoireLanguages.join(' · '),
+    eventTypes:
+      locale === 'pl'
+        ? 'kluby i bary, festiwale, wydarzenia prywatne i firmowe oraz imprezy miejskie i plenerowe'
+        : show.eventTypes,
+    logistics:
+      locale === 'pl'
+        ? 'Zespół z Warszawy, dostępny w całej Polsce. Pełna setlista i rider techniczny na życzenie.'
+        : show.logistics || show.availability || '',
+  };
 
   const liveReferences = [
     {
@@ -57,7 +83,11 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
       <section className={styles.hero} aria-labelledby='proposal-title'>
         <Image
           src='/img/risas.jpg'
-          alt='Linarex and Jacke Matheus sharing a moment together'
+          alt={
+            locale === 'pl'
+              ? 'Linarex i Jacke Matheus dzielący wspólny moment'
+              : 'Linarex and Jacke Matheus sharing a moment together'
+          }
           fill
           priority
           sizes='100vw'
@@ -93,7 +123,7 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
               }}
             >
               <Link
-                href='/proposal'
+                href='/live-show'
                 aria-current={locale === 'en' ? 'page' : undefined}
                 className={locale === 'en' ? styles.langActive : undefined}
               >
@@ -101,7 +131,7 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
               </Link>
               <span aria-hidden='true'>|</span>
               <Link
-                href='/pl/proposal'
+                href='/pl/live-show'
                 aria-current={locale === 'pl' ? 'page' : undefined}
                 className={locale === 'pl' ? styles.langActive : undefined}
               >
@@ -168,7 +198,11 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
               </Link>
               <a
                 className={styles.secondaryAction}
-                href={siteConfig.documents.proposalPdf}
+                href={
+                  locale === 'pl'
+                    ? siteConfig.documents.liveShowPdfPl
+                    : siteConfig.documents.liveShowPdf
+                }
                 download
               >
                 <ArrowDownToLine size={17} aria-hidden='true' />
@@ -359,10 +393,30 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
           <div className={styles.artistGrid}>
             {siteConfig.live.artists.map((artist, index) => {
               const isLinarex = artist.name === siteConfig.name;
-              const role = isLinarex ? shared.people.linarex.role : artist.role;
+              const isJacke = artist.name === 'Jacke Matheus';
+              const role = isLinarex
+                ? shared.people.linarex.role
+                : locale === 'pl' && isJacke
+                  ? 'Wokalista i gitarzysta'
+                  : artist.role;
+              const origin =
+                locale === 'pl' && isJacke
+                  ? 'Kolumbia'
+                  : locale === 'pl' && isLinarex
+                    ? 'Dominikana'
+                    : artist.origin;
               const description = isLinarex
                 ? shared.people.linarex.bio
-                : artist.description;
+                : locale === 'pl' && isJacke
+                  ? 'Kolumbijski wokalista i gitarzysta, którego obecność sceniczna wciąga publiczność w występ.'
+                  : artist.description;
+              const imageAlt = isLinarex
+                ? locale === 'pl'
+                  ? 'Linarex, kompozytor i perkusista z Dominikany'
+                  : artist.imageAlt
+                : locale === 'pl' && isJacke
+                  ? 'Jacke Matheus, kolumbijski wokalista i gitarzysta'
+                  : artist.imageAlt;
 
               return (
                 <motion.article
@@ -376,14 +430,14 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
                   <div className={styles.artistImage}>
                     <Image
                       src={artist.image}
-                      alt={artist.imageAlt}
+                      alt={imageAlt}
                       fill
                       sizes='(max-width: 700px) 100vw, 50vw'
                       className={styles.cardImage}
                     />
                   </div>
                   <div className={styles.artistInfo}>
-                    <p className={styles.artistOrigin}>{artist.origin}</p>
+                    <p className={styles.artistOrigin}>{origin}</p>
                     <h3>{artist.name}</h3>
                     <p className={styles.artistRole}>{role}</p>
                     <p className={styles.artistDescription}>{description}</p>
@@ -418,34 +472,32 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
             {[
               {
                 label: t.formats,
-                value: show.formats,
-                lines: [
-                  `${show.instruments.join(' · ')} · ${show.expandableInstruments.join(', ')}`,
-                ],
+                value: localizedShow.formats,
+                lines: [localizedShow.instrumentsLine],
               },
               {
                 label: t.setLength,
-                value: show.setLength,
-                lines: [show.setDescription],
+                value: localizedShow.setLength,
+                lines: [localizedShow.setDescription],
               },
               {
                 label: t.repertoire,
-                value: show.repertoireDescription,
+                value: localizedShow.repertoireDescription,
                 lines: [],
               },
               {
                 label: t.languages,
-                value: show.repertoireLanguages.join(' · '),
+                value: localizedShow.languages,
                 lines: [],
               },
               {
                 label: t.idealFor,
-                value: show.eventTypes,
+                value: localizedShow.eventTypes,
                 lines: [],
               },
               {
                 label: t.logistics,
-                value: show.logistics || show.availability || '',
+                value: localizedShow.logistics,
                 lines: [],
               },
             ].map((fact) => (

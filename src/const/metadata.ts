@@ -1,22 +1,23 @@
 import type { Metadata } from 'next';
 import { siteConfig } from '@/lib/site-config';
+import { buildMetadata } from '@/lib/seo/metadata';
+
+const base = buildMetadata({
+  route: 'home',
+  locale: 'en',
+  title: siteConfig.seo.homeTitle,
+  description: siteConfig.seo.description,
+  imageAlt: `${siteConfig.name} — ${siteConfig.role}`,
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: siteConfig.seo.homeTitle,
-  description: siteConfig.seo.description,
+  ...base,
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
-  alternates: {
-    canonical: '/',
-  },
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: siteConfig.url,
+    ...base.openGraph,
     siteName: siteConfig.name,
-    title: siteConfig.seo.homeTitle,
-    description: siteConfig.seo.description,
     images: [
       {
         url: siteConfig.ogImage,
@@ -26,12 +27,6 @@ export const metadata: Metadata = {
         type: 'image/jpeg',
       },
     ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: siteConfig.seo.homeTitle,
-    description: siteConfig.seo.description,
-    images: [siteConfig.ogImage],
   },
   appleWebApp: {
     capable: true,

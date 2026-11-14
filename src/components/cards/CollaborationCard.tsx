@@ -143,7 +143,11 @@ const CollaborationCard = ({
           >
             <Image
               src={collaboration.image}
-              alt={`${collaboration.title} single cover`}
+              alt={
+                locale === 'pl'
+                  ? `Okładka singla ${collaboration.title}`
+                  : `${collaboration.title} single cover`
+              }
               fill
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               className='object-cover'

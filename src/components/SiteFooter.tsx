@@ -33,7 +33,7 @@ export default function SiteFooter({
   const t = copy[locale];
   const shared = sharedCopy[locale];
   const homeHref = locale === 'pl' ? '/pl' : '/';
-  const proposalHref = locale === 'pl' ? '/pl/proposal' : '/proposal';
+  const proposalHref = locale === 'pl' ? '/pl/live-show' : '/live-show';
   const epkHref = locale === 'pl' ? '/pl/epk' : '/epk';
 
   return (
