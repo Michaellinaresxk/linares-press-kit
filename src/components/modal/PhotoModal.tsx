@@ -13,7 +13,8 @@ function PhotoModal({ photo, locale = 'en', onClose }: PhotoModalProps) {
   if (!photo) return null;
 
   const alt = photo.alt[locale];
-  const venue = photo.venue[locale];
+  const venue = (photo.caption ?? photo.venue)[locale];
+  const credit = photo.photographer ?? (photo.credit && photo.credit !== 'TBD' ? photo.credit : undefined);
 
   return (
     <motion.div
@@ -82,7 +83,7 @@ function PhotoModal({ photo, locale = 'en', onClose }: PhotoModalProps) {
                   <span className='text-sm md:text-base'>{photo.location}</span>
                 </div>
               )}
-              {photo.photographer && (
+              {credit && (
                 <div className='flex items-center space-x-2 text-gray-300'>
                   <Camera
                     size={16}
@@ -90,7 +91,7 @@ function PhotoModal({ photo, locale = 'en', onClose }: PhotoModalProps) {
                     aria-hidden='true'
                   />
                   <span className='text-sm md:text-base'>
-                    by {photo.photographer}
+                    by {credit}
                   </span>
                 </div>
               )}

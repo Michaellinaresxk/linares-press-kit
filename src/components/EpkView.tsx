@@ -19,6 +19,7 @@ import { homeCopy } from '@/lib/i18n/home';
 import { sharedCopy } from '@/lib/i18n/shared';
 import { easeOut } from '@/lib/motion';
 import { siteConfig, siteGenresOriginal } from '@/lib/site-config';
+import { releases } from '@/data/releases';
 import styles from './epk.module.css';
 
 function SpotifyIcon({ size = 20 }: { size?: number }) {
@@ -285,7 +286,7 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
             </a>
             <a className={styles.secondaryButton} href='#contact'>
               <Send size={16} aria-hidden='true' />
-              {t.contactCta}
+              {shared.cta.bookShow}
             </a>
           </motion.div>
 
@@ -413,11 +414,11 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
               {t.musicTitle}
             </h2>
             <div className={styles.releases}>
-              {siteConfig.releases.map((release, index) => (
+              {releases.map((release, index) => (
                 <article className={styles.release} key={release.id}>
                   <Image
                     src={release.coverImage}
-                    alt={`${release.title} cover`}
+                    alt={shared.release.coverAlt[release.coverAltKey]}
                     width={84}
                     height={84}
                     sizes='84px'
@@ -437,8 +438,7 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
                       </a>
                     </h3>
                     <p className={styles.releaseDescription}>
-                      {shared.music[release.id as keyof typeof shared.music]
-                        ?.tagline ?? release.description}
+                      {shared.music[release.taglineKey].tagline}
                     </p>
                     <p className={styles.releaseMeta}>
                       {release.year} · feat. {release.collaborator}
@@ -553,7 +553,7 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
         </motion.section>
 
         <section id='contact'>
-          <Contact locale={locale} />
+          <Contact locale={locale} variant='general' />
         </section>
       </div>
       <SiteFooter locale={locale} />

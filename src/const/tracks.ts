@@ -1,8 +1,5 @@
-import {
-  siteConfig,
-  siteGenresOriginal,
-  type SiteRelease,
-} from '@/lib/site-config';
+import { siteConfig, siteGenresOriginal } from '@/lib/site-config';
+import { releases, type Release } from '@/data/releases';
 
 export interface Track {
   id: string;
@@ -12,13 +9,12 @@ export interface Track {
   coverImage: string;
   audioUrl: string;
   spotifyUrl?: string;
-  description: string;
   year: string;
   genre?: string;
   waveformColor?: string;
 }
 
-function toTrack(release: SiteRelease): Track {
+function toTrack(release: Release): Track {
   return {
     id: release.id,
     title: release.title,
@@ -27,11 +23,10 @@ function toTrack(release: SiteRelease): Track {
     coverImage: release.coverImage,
     audioUrl: release.audioUrl,
     spotifyUrl: release.spotifyUrl,
-    description: release.description,
     year: release.year,
     genre: siteGenresOriginal,
   };
 }
 
-export const featuredSingle: Track = toTrack(siteConfig.releases[0]);
-export const tracks: Track[] = siteConfig.releases.map(toTrack);
+export const featuredSingle: Track = toTrack(releases[0]);
+export const tracks: Track[] = releases.map(toTrack);

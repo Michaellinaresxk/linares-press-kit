@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from 'react';
 import AudioControls from '../AudioControls';
 import { useAudioPlayerCollaboration } from '@/hooks/UseAudioPlayerCollaborationReturn';
 import { homeCopy, type HomeLocale } from '@/lib/i18n/home';
+import { sharedCopy } from '@/lib/i18n/shared';
 
 type Collaboration = (typeof collaborations)[0];
 
@@ -143,11 +144,7 @@ const CollaborationCard = ({
           >
             <Image
               src={collaboration.image}
-              alt={
-                locale === 'pl'
-                  ? `Okładka singla ${collaboration.title}`
-                  : `${collaboration.title} single cover`
-              }
+              alt={sharedCopy[locale].release.coverAlt[collaboration.coverAltKey]}
               fill
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               className='object-cover'

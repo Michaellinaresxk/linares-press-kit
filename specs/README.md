@@ -15,7 +15,7 @@ se marcan `status: done`. Si una queda obsoleta → `status: superseded` + link 
 |---|---|---|---|---|
 | 001 | [Posicionamiento global – raíces caribeñas](001-global-positioning-caribbean-roots/spec.md) | Todas las rutas | **P1** | — |
 | 002 | [i18n + SEO + renombrar ruta](002-i18n-seo-routes/spec.md) | Todas las rutas | **P1** | — |
-| 003 | [Componentes y datos compartidos (DRY)](003-shared-components-dry/spec.md) | Todas las rutas | P2 | 002 (R1, nueva ruta) |
+| 003 | [Componentes y datos compartidos (DRY)](003-shared-components-dry/spec.md) | Todas las rutas | P2 (in-progress) | 002 (R1, nueva ruta) |
 | 004 | [EPK – fotos de prensa y PDF](004-epk-press-kit/spec.md) | /epk | P2 | 003 (D3, galería) |
 | 005 | [Ajustes Live show + Home](005-live-show-and-home-adjustments/spec.md) | /live-show, / | P3 | 001, 003 |
 

@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { bookingEmail, siteConfig } from '@/lib/site-config';
+import { links } from '@/lib/links';
+import { siteConfig } from '@/lib/site-config';
 import { sharedCopy } from '@/lib/i18n/shared';
 import styles from './site-footer.module.css';
 
@@ -8,22 +9,22 @@ const copy = {
     taglineLine1: 'Live music · Warsaw, Poland',
     liveShow: 'Live show',
     pressKit: 'Press kit',
-    booking: 'Booking',
     navAria: 'Footer navigation',
-    copyright: 'All rights reserved',
   },
   // Review by native speaker
   pl: {
     taglineLine1: 'Muzyka na żywo · Warszawa, Polska',
     liveShow: 'Koncert na żywo',
     pressKit: 'Materiały prasowe',
-    booking: 'Rezerwacja',
     navAria: 'Nawigacja w stopce',
-    copyright: 'Wszelkie prawa zastrzeżone',
   },
 } as const;
 
 export type SiteFooterLocale = keyof typeof copy;
+
+function withFooterVars(text: string, vars: Record<string, string>) {
+  return text.replace(/\{(\w+)\}/g, (_, key) => vars[key] ?? `{${key}}`);
+}
 
 export default function SiteFooter({
   locale = 'en',
@@ -35,6 +36,7 @@ export default function SiteFooter({
   const homeHref = locale === 'pl' ? '/pl' : '/';
   const proposalHref = locale === 'pl' ? '/pl/live-show' : '/live-show';
   const epkHref = locale === 'pl' ? '/pl/epk' : '/epk';
+  const year = String(new Date().getFullYear());
 
   return (
     <footer className={styles.footer}>
@@ -55,23 +57,26 @@ export default function SiteFooter({
             {t.pressKit}
           </Link>
           <a
-            href={siteConfig.profiles.spotify}
+            href={links.profiles.spotifyArtist}
             target='_blank'
             rel='noopener noreferrer'
           >
             Spotify
           </a>
           <a
-            href={siteConfig.profiles.instagram}
+            href={links.profiles.instagram}
             target='_blank'
             rel='noopener noreferrer'
           >
             Instagram
           </a>
-          <a href={bookingEmail}>{t.booking}</a>
+          <Link href='#contact'>{shared.cta.bookShow}</Link>
         </nav>
         <p className={styles.copyright}>
-          © {siteConfig.name} · {t.copyright}
+          {withFooterVars(shared.footer.copyright, {
+            year,
+            name: siteConfig.name,
+          })}
         </p>
       </div>
     </footer>

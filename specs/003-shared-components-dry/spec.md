@@ -1,6 +1,6 @@
 ---
 id: 003-shared-components-dry
-status: draft
+status: in-progress
 priority: P2
 date: 2026-11-14
 owner: Michael (Linarex)
@@ -109,9 +109,18 @@ Cambios concretos:
 
 ## Preguntas abiertas
 
-- [ ] IDs de track en Spotify de "Memories" y "Renacer".
-- [ ] ¿"Wedding" se queda en Event type?
-- [ ] ¿A qué cuenta de Cloudinary (o carpeta local) se consolida todo?
+- [ ] IDs de track en Spotify de "Memories" y "Renacer" (actualmente URLs provisionales con TODO en `src/lib/links.ts`).
+- [ ] ¿"Wedding" se queda en Event type? (incluido provisionalmente en formulario booking EN/PL).
+- [ ] ¿A qué cuenta de Cloudinary (o carpeta local) se consolida todo? (modelo D3 listo; assets siguen mixtos Cloudinary/local con TODO en `src/data/gallery.ts`).
+
+## Notas de implementación (2026-11-14)
+
+- D1: `src/lib/links.ts` como fuente única; `site-config`/`const/links` migrados; URLs limpiadas (Vaivén sin `autoplay_ok`, Crowd sin params de playlist/radio).
+- D2: `src/data/releases.ts` + `shared.release.coverAlt`; consumidores (Home/Collaborations/EPK/tracks) actualizados.
+- D3: `src/data/gallery.ts` con campos requeridos y captions diferenciadas; `src/const/photoGallery.ts` como capa de compatibilidad; `PhotoGallery`/`PhotoModal` migrados.
+- D4: `Contact` con variantes `general`/`booking`, campos/`*`/`required`/`aria-required`, i18n en `home.contact.form`, API acepta `guests`.
+- D5/D6: `shared.cta.seeLiveShow|bookShow`, `shared.footer.copyright`; hero/nav/footer/proposal/epk ajustados a reglas de CTA y rutas localizadas.
+- Gates: `tsc`, `lint`, `build` OK. Playwright: falló por ausencia de servidor local en el entorno de ejecución y error conocido de WebKit (`PushAPIEnabled`); pendiente re-ejecución con servidor y recorrido manual T30.
 
 ## Definición de terminado
 

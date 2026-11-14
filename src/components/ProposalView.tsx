@@ -189,11 +189,8 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
                 },
               }}
             >
-              <Link
-                className={styles.primaryAction}
-                href={locale === 'pl' ? '/pl#contact' : '/#contact'}
-              >
-                {t.heroCta}
+              <Link className={styles.primaryAction} href='#contact'>
+                {shared.cta.bookShow}
                 <ArrowUpRight size={17} aria-hidden='true' />
               </Link>
               <a
@@ -537,7 +534,7 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
           </blockquote>
         </section>
 
-        <section className={styles.booking} aria-labelledby='booking-title'>
+        <section id='contact' className={styles.booking} aria-labelledby='booking-title'>
           <div>
             <p className={styles.sectionLabel} data-step='07'>
               {t.bookingLabel}
@@ -574,7 +571,7 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
             </div>
           </div>
           <div style={{ marginTop: 24 }}>
-            <Contact locale={locale} mode='booking' embedded />
+            <Contact locale={locale} variant='booking' embedded />
           </div>
         </section>
       </div>

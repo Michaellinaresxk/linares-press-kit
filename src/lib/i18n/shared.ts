@@ -6,6 +6,11 @@ export type SharedCopy = {
   };
   footer: {
     description: string;
+    copyright: string;
+  };
+  cta: {
+    seeLiveShow: string;
+    bookShow: string;
   };
   about: {
     short: {
@@ -32,6 +37,13 @@ export type SharedCopy = {
     renacer: { tagline: string };
     vaiven: { tagline: string };
   };
+  release: {
+    coverAlt: {
+      memories: string;
+      renacer: string;
+      vaiven: string;
+    };
+  };
 };
 
 export const sharedCopy: Record<SharedLocale, SharedCopy> = {
@@ -42,6 +54,11 @@ export const sharedCopy: Record<SharedLocale, SharedCopy> = {
     footer: {
       description:
         'Original music with Caribbean roots and a live show that gets the room moving.',
+      copyright: '© {year} {name} · All rights reserved',
+    },
+    cta: {
+      seeLiveShow: 'See the live show',
+      bookShow: 'Book the show',
     },
     about: {
       short: {
@@ -74,6 +91,13 @@ export const sharedCopy: Record<SharedLocale, SharedCopy> = {
           'The first Linarex single — Afro-Latin pop with a beach-sunset vibe.',
       },
     },
+    release: {
+      coverAlt: {
+        memories: 'Memories single cover art',
+        renacer: 'Renacer single cover art',
+        vaiven: 'Vaivén single cover art',
+      },
+    },
   },
   pl: {
     brand: {
@@ -82,6 +106,11 @@ export const sharedCopy: Record<SharedLocale, SharedCopy> = {
     footer: {
       description:
         'Autorska muzyka z karaibskimi korzeniami i koncerty, które porywają salę.',
+      copyright: '© {year} {name} · Wszelkie prawa zastrzeżone',
+    },
+    cta: {
+      seeLiveShow: 'Zobacz koncert na żywo',
+      bookShow: 'Zarezerwuj koncert',
     },
     about: {
       short: {
@@ -112,6 +141,13 @@ export const sharedCopy: Record<SharedLocale, SharedCopy> = {
       vaiven: {
         tagline:
           'Pierwszy singiel Linarex — afro-latin pop z klimatem plaży o zachodzie słońca.',
+      },
+    },
+    release: {
+      coverAlt: {
+        memories: 'Okładka singla Memories',
+        renacer: 'Okładka singla Renacer',
+        vaiven: 'Okładka singla Vaivén',
       },
     },
   },
