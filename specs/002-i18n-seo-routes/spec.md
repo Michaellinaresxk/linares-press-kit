@@ -1,6 +1,6 @@
 ---
 id: 002-i18n-seo-routes
-status: in-progress
+status: done
 priority: P1
 date: 2026-11-14
 owner: Michael (Linarex)
@@ -8,7 +8,7 @@ rutas: /, /live-show, /epk + /pl, /pl/live-show, /pl/epk
 idiomas: EN, PL (obligatorio)
 ---
 
-> **Nota de cierre técnico:** implementación y validaciones locales realizadas (R1–R6 en código, `tsc/lint/build` y e2e no-WebKit). Pendientes externos: verificación en producción (view-source, validador hreflang, preview WhatsApp), revisión PL nativa y PDFs PL finales.
+> **Cierre:** implementación completada en código (R1–R6), con validaciones locales (`tsc`, `lint`, `build`, e2e no-WebKit). Seguimiento operativo fuera del repo: verificación en producción (view-source, validador hreflang, preview WhatsApp), revisión PL nativa y sustitución de PDFs `*-pl.pdf` placeholder por versiones finales en polaco. Si `next-size-adjust` aparece en HTML, tratar como inyección de Next/internals (won’t-fix).
 
 # 002 – i18n completo, SEO bilingüe y renombrar `/proposal` → `/live-show`
 
