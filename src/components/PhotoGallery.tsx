@@ -26,6 +26,8 @@ export default function PhotoGallery({
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
   const photos = variant === 'live' ? liveGallery : artistGallery;
   const isLiveGallery = variant === 'live';
+  const getAlt = (photo: Photo) => photo.alt[locale];
+  const getVenue = (photo: Photo) => photo.venue[locale];
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -112,8 +114,8 @@ export default function PhotoGallery({
                 key={photo.id}
                 aria-label={
                   locale === 'pl'
-                    ? `Zobacz zdjęcie: ${photo.alt}`
-                    : `View photo: ${photo.alt}`
+                    ? `Zobacz zdjęcie: ${getAlt(photo)}`
+                    : `View photo: ${getAlt(photo)}`
                 }
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -125,7 +127,7 @@ export default function PhotoGallery({
               >
                 <Image
                   src={photo.src}
-                  alt={photo.alt}
+                  alt={getAlt(photo)}
                   width={600}
                   height={400}
                   sizes='(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
@@ -140,7 +142,7 @@ export default function PhotoGallery({
                       className='text-xs md:text-sm font-semibold truncate'
                       style={{ color: '#c8dcea' }}
                     >
-                      {photo.venue}
+                      {getVenue(photo)}
                     </p>
                     {photo.location && (
                       <p
@@ -172,6 +174,7 @@ export default function PhotoGallery({
       {selectedPhoto && (
         <PhotoModal
           photo={selectedPhoto}
+          locale={locale}
           onClose={() => setSelectedPhoto(null)}
         />
       )}

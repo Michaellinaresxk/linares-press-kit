@@ -32,7 +32,7 @@ export default function About({ locale = 'en' }: { locale?: HomeLocale }) {
                 <div className='w-full max-w-full'>
                   <Image
                     src='/img/portrait.jpg'
-                    alt='Portrait of Linarex'
+                    alt={locale === 'pl' ? 'Portret Linarex' : 'Portrait of Linarex'}
                     width={1000}
                     height={1464}
                     className='h-auto w-full max-w-full'

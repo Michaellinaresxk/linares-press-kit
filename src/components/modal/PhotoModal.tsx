@@ -1,22 +1,26 @@
-import { photoGallery } from '@/const/photoGallery';
+import { photoGallery, type GalleryLocale } from '@/const/photoGallery';
 import { motion } from 'framer-motion';
 import { Camera, MapPin, X } from 'lucide-react';
 import Image from 'next/image';
 
 interface PhotoModalProps {
   photo: (typeof photoGallery)[0] | null;
+  locale?: GalleryLocale;
   onClose: () => void;
 }
 
-function PhotoModal({ photo, onClose }: PhotoModalProps) {
+function PhotoModal({ photo, locale = 'en', onClose }: PhotoModalProps) {
   if (!photo) return null;
+
+  const alt = photo.alt[locale];
+  const venue = photo.venue[locale];
 
   return (
     <motion.div
       className='fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 backdrop-blur-sm'
       role='dialog'
       aria-modal='true'
-      aria-label={photo.alt}
+      aria-label={alt}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -48,7 +52,7 @@ function PhotoModal({ photo, onClose }: PhotoModalProps) {
               src={photo.src}
               width={600}
               height={400}
-              alt={photo.alt}
+              alt={alt}
               className='w-full h-full object-cover'
               priority
             />
@@ -64,7 +68,7 @@ function PhotoModal({ photo, onClose }: PhotoModalProps) {
             transition={{ delay: 0.2 }}
           >
             <h3 className='text-xl md:text-2xl font-bold text-white mb-3'>
-              {photo.venue}
+              {venue}
             </h3>
 
             <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>

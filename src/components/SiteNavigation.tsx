@@ -58,7 +58,7 @@ export default function SiteNavigation({
   }[locale];
 
   const homeHref = locale === 'pl' ? '/pl' : '/';
-  const proposalHref = locale === 'pl' ? '/pl/proposal' : '/proposal';
+  const proposalHref = locale === 'pl' ? '/pl/live-show' : '/live-show';
   const epkHref = locale === 'pl' ? '/pl/epk' : '/epk';
   const contactHref = locale === 'pl' ? '/pl#contact' : '/#contact';
 

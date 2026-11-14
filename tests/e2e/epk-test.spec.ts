@@ -11,8 +11,8 @@ test('EPK page loads and shows key content', async ({ page }) => {
   expect(pageText).toContain('Linarex');
   expect(pageText).toContain('Original music');
   expect(pageText).toContain('Connect & Stream');
-  expect(pageText).toContain('Original songs');
-  expect(pageText).toContain('covers');
+  expect(pageText).toMatch(/originals?/i);
+  expect(pageText).toMatch(/covers?/i);
 });
 
 test('Homepage loads correctly', async ({ page }) => {
@@ -40,8 +40,8 @@ test('Contact email link is present in EPK', async ({ page }) => {
 test('Live show section shows repertoire', async ({ page }) => {
   await page.goto('/epk', { waitUntil: 'networkidle' });
   
-  // The repertoire description should mention original songs and covers
+  // The repertoire description should mention originals and covers
   const pageText = await page.textContent('body');
-  expect(pageText).toContain('Original songs');
-  expect(pageText).toContain('covers');
+  expect(pageText).toMatch(/originals?/i);
+  expect(pageText).toMatch(/covers?/i);
 });

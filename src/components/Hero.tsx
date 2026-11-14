@@ -33,7 +33,11 @@ export default function Hero({ locale = 'en' }: { locale?: HomeLocale }) {
       >
         <Image
           src='/bg2.png'
-          alt='Linarex in a dramatic portrait for the artist homepage'
+          alt={
+            locale === 'pl'
+              ? 'Dramatyczny portret Linarex'
+              : 'Dramatic portrait of Linarex'
+          }
           fill
           priority
           sizes='100vw'
@@ -126,7 +130,7 @@ export default function Hero({ locale = 'en' }: { locale?: HomeLocale }) {
               {copy.hero.memoriesCta}
             </Link>
             <Link
-              href={locale === 'en' ? '/proposal' : '/pl/proposal'}
+              href={locale === 'en' ? '/live-show' : '/pl/live-show'}
               className='rounded-xl border border-[#5b8fa866] bg-[#0d1318]/35 px-6 py-3 text-sm font-semibold text-[#dce8f0] backdrop-blur-sm transition-colors hover:border-[#7ab0cc] hover:bg-[#5b8fa81c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#85b7eb]'
             >
               {copy.hero.eventCta}
