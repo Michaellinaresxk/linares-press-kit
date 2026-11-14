@@ -10,15 +10,17 @@ const copy = {
     pressKit: 'Press kit',
     booking: 'Booking',
     navAria: 'Footer navigation',
+    copyright: 'All rights reserved',
   },
   // Review by native speaker
   pl: {
     taglineLine1: 'Muzyka na żywo · Warszawa, Polska',
-    taglineLine2: 'Własne utwory, znane hity, jedna sala w ruchu.',
+    taglineLine2: 'Własne utwory, znane hity i cała sala we wspólnym rytmie.',
     liveShow: 'Koncert na żywo',
-    pressKit: 'Press kit',
+    pressKit: 'Materiały prasowe',
     booking: 'Rezerwacja',
     navAria: 'Nawigacja w stopce',
+    copyright: 'Wszelkie prawa zastrzeżone',
   },
 } as const;
 
@@ -69,7 +71,7 @@ export default function SiteFooter({
           <a href={bookingEmail}>{t.booking}</a>
         </nav>
         <p className={styles.copyright}>
-          © {siteConfig.name} · All rights reserved
+          © {siteConfig.name} · {t.copyright}
         </p>
       </div>
     </footer>

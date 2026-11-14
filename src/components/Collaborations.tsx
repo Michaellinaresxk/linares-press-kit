@@ -73,6 +73,7 @@ export default function Collaborations({
               isPlaying={isPlaying}
               onTogglePlay={togglePlay}
               onStop={stopAudio}
+              locale={locale}
             />
           ))}
         </div>

@@ -158,7 +158,7 @@ const FeaturedSinglePlayer = memo(function FeaturedSinglePlayer({
               {featuredSingle.title}
             </h3>
             <p className='text-lg mb-2' style={{ color: '#8faabf' }}>
-              {featuredSingle.description}
+              {copy.music.memoriesTagline}
             </p>
             <span className='font-semibold' style={{ color: '#85b7eb' }}>
               {featuredSingle.year} · {featuredSingle.artist}
@@ -234,10 +234,10 @@ const FeaturedSinglePlayer = memo(function FeaturedSinglePlayer({
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                aria-label={`Stream ${featuredSingle.title} on Spotify`}
+                aria-label={`${copy.music.streamOnSpotify}: ${featuredSingle.title}`}
               >
                 <ExternalLink size={18} aria-hidden='true' />
-                <span>Stream on Spotify</span>
+                <span>{copy.music.streamOnSpotify}</span>
               </motion.a>
             </div>
           </motion.div>

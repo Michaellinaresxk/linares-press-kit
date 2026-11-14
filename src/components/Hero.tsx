@@ -106,7 +106,7 @@ export default function Hero({ locale = 'en' }: { locale?: HomeLocale }) {
               className='text-xl sm:text-2xl lg:text-3xl font-light'
               style={{ color: '#8faabf' }}
             >
-              {siteConfig.role}
+              {copy.hero.subtitle}
             </h2>
           </motion.div>
 

@@ -1,4 +1,8 @@
-import { siteConfig, siteGenresOriginal, type SiteRelease } from '@/lib/site-config';
+import {
+  siteConfig,
+  siteGenresOriginal,
+  type SiteRelease,
+} from '@/lib/site-config';
 
 export interface Track {
   id: string;

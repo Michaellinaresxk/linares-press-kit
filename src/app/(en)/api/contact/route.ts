@@ -6,7 +6,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, subject, message, phone, date, city, eventType, budget } = body;
+    const { name, email, subject, message, phone, date, city, eventType, attendees, budget } = body;
 
     if (!name?.trim() || !email?.trim() || !subject || !message?.trim()) {
       return NextResponse.json(
@@ -34,6 +34,7 @@ export async function POST(request: Request) {
     if (date?.trim()) details['Event date'] = date;
     if (city?.trim()) details.City = city;
     if (eventType?.trim()) details['Event type'] = eventType;
+    if (attendees?.toString().trim()) details['Approx. attendees'] = String(attendees);
     if (budget?.trim()) details['Budget'] = budget;
 
     // Build detail rows HTML
