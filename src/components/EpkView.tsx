@@ -16,6 +16,7 @@ import PhotoGallery from '@/components/PhotoGallery';
 import SiteFooter from '@/components/SiteFooter';
 import { epkCopy, withEpkVars, type EpkLocale } from '@/lib/i18n/epk';
 import { homeCopy } from '@/lib/i18n/home';
+import { sharedCopy } from '@/lib/i18n/shared';
 import { easeOut } from '@/lib/motion';
 import { siteConfig, siteGenresOriginal } from '@/lib/site-config';
 import styles from './epk.module.css';
@@ -66,6 +67,7 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
   const reduceMotion = useReducedMotion();
   const t = epkCopy[locale];
   const home = homeCopy[locale];
+  const shared = sharedCopy[locale];
 
   const reveal = {
     initial: reduceMotion ? false : { opacity: 0, y: 18 },
@@ -76,24 +78,19 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
 
   const facts = [
     {
-      label: t.originLabel,
-      value: home.originName,
-      detail: home.hero.subtitle,
-    },
-    {
-      label: t.basedInLabel,
-      value: home.locationName,
+      label: t.experienceLabel,
+      value: t.facts.experience.value,
       detail: '',
     },
     {
-      label: t.experienceLabel,
-      value: `${siteConfig.yearsOnStage} ${locale === 'pl' ? 'lat' : 'years'}`,
-      detail: locale === 'pl' ? 'na scenie' : 'on stage',
+      label: t.facts.sound.label,
+      value: t.facts.sound.value,
+      detail: '',
     },
     {
-      label: locale === 'pl' ? 'Muzyka' : 'Music',
-      value: siteGenresOriginal,
-      detail: locale === 'pl' ? 'katalog i wydania' : 'catalog & releases',
+      label: t.facts.live.label,
+      value: t.facts.live.value,
+      detail: '',
     },
   ];
 
@@ -188,7 +185,7 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
                   },
                 }}
               >
-                {t.eyebrow}
+                {shared.brand.tagline}
               </motion.p>
               <motion.h1
                 className={styles.name}
@@ -244,7 +241,7 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
               },
             }}
           >
-            {t.pitch}
+            {t.hero.intro}
           </motion.p>
 
           <motion.div
@@ -329,9 +326,7 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
             <h2 className={styles.sectionTitle} id='live-title'>
               {t.liveTitle}
             </h2>
-            <p className={styles.bodyText}>
-              {withEpkVars(t.liveBody, { showName: siteConfig.liveShow.name })}
-            </p>
+            <p className={styles.bodyText}>{shared.live.intro}</p>
 
             <dl className={styles.bookerFacts}>
               <div className={styles.bookerFact}>
@@ -426,7 +421,8 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
                       </a>
                     </h3>
                     <p className={styles.releaseDescription}>
-                      {release.description}
+                      {shared.music[release.id as keyof typeof shared.music]
+                        ?.tagline ?? release.description}
                     </p>
                     <p className={styles.releaseMeta}>
                       {release.year} · feat. {release.collaborator}

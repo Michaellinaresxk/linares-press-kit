@@ -99,7 +99,7 @@ export const siteConfig = {
       'Dominican-born composer and drummer based in Warsaw. Listen to the new single "Memories" and book the Linarex Experience live show.',
     epkTitle: 'Linarex – Electronic Press Kit | Linarex Experience',
     epkDescription:
-      'Meet Linarex and the Linarex Experience live show: music, photos, performance clips and booking contact.',
+      'Linarex — Dominican-born, Warsaw-based artist bringing Caribbean roots into indie rock and funk. Trilingual live show, original music, press photos and booking.',
     proposalTitle: 'Linarex Experience – Live Band in Warsaw',
     proposalDescription:
       'Linarex Experience: a Warsaw-based live band with original songs, familiar covers, audience connection and booking details for venues and events.',
@@ -122,7 +122,7 @@ export const siteConfig = {
           'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1780170735/linarex/standing_wicdur.jpg',
         imageAlt: 'Linarex, Dominican-born composer and drummer',
         description:
-          'The composer behind every song, and the heartbeat of every show. From behind the kit, he turns poetic lyrics into energy you can feel.',
+          'Dominican-born composer and drummer who leads the band from behind the kit — bringing Caribbean groove, rock power and stories that pull the room in.',
       },
       {
         name: 'Jacke Matheus',
@@ -202,7 +202,7 @@ export const siteConfig = {
       coverImage:
         'https://res.cloudinary.com/dwgzffsgl/image/upload/v1786661039/bg_qvvlw9.jpg',
       audioUrl: '/audio/Memories.wav',
-      description: "When you can't turn off the dark, you turn on a memory.",
+      description: 'Some memories keep the light on.',
     },
     {
       id: 'renacer',
@@ -215,7 +215,8 @@ export const siteConfig = {
       coverImage:
         'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1771093920/linarex/2026_ssgfrp.jpg',
       audioUrl: '/audio/Renacer.wav',
-      description: 'A new beginning, featuring Skiwa.',
+      description:
+        'A new beginning — experimental funk pop with a hypnotic groove.',
     },
     {
       id: 'vaiven',
@@ -229,7 +230,8 @@ export const siteConfig = {
       coverImage:
         'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763300435/504381421_17858001459453136_3713166365445180538_n_wdmog2.jpg',
       audioUrl: '/audio/vaiven.mp3',
-      description: 'Featuring Dani Rivero.',
+      description:
+        'The first Linarex single — Afro-Latin pop with a beach-sunset vibe.',
     },
   ],
 };

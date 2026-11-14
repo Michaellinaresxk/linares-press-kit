@@ -6,9 +6,11 @@ import Link from 'next/link';
 import { useRef } from 'react';
 import { siteConfig } from '@/lib/site-config';
 import { homeCopy, type HomeLocale } from '@/lib/i18n/home';
+import { sharedCopy } from '@/lib/i18n/shared';
 
 export default function Hero({ locale = 'en' }: { locale?: HomeLocale }) {
   const copy = homeCopy[locale];
+  const shared = sharedCopy[locale];
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -77,7 +79,7 @@ export default function Hero({ locale = 'en' }: { locale?: HomeLocale }) {
                 color: '#85b7eb',
               }}
             >
-              {copy.hero.badge}
+              {shared.brand.tagline}
             </span>
           </motion.div>
 
