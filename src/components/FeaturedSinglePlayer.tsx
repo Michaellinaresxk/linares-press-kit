@@ -1,5 +1,6 @@
 import { featuredSingle } from '@/const/tracks';
 import { homeCopy, type HomeLocale } from '@/lib/i18n/home';
+import { sharedCopy } from '@/lib/i18n/shared';
 
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
@@ -49,6 +50,7 @@ const FeaturedSinglePlayer = memo(function FeaturedSinglePlayer({
   locale?: HomeLocale;
 }) {
   const copy = homeCopy[locale];
+  const shared = sharedCopy[locale];
   const {
     isPlaying,
     currentTime,
@@ -158,7 +160,7 @@ const FeaturedSinglePlayer = memo(function FeaturedSinglePlayer({
               {featuredSingle.title}
             </h3>
             <p className='text-lg mb-2' style={{ color: '#8faabf' }}>
-              {copy.music.memoriesTagline}
+              {shared.music.memories.tagline}
             </p>
             <span className='font-semibold' style={{ color: '#85b7eb' }}>
               {featuredSingle.year} · {featuredSingle.artist}

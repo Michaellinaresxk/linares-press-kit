@@ -6,7 +6,7 @@ import { siteConfig } from '@/lib/site-config';
 
 export const metadata: Metadata = {
   title: epkCopy.pl.metadata.title,
-  description: epkCopy.pl.metadata.description,
+  description: epkCopy.pl.meta.epk.description,
   alternates: {
     canonical: '/pl/epk',
     languages: {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     locale: 'pl_PL',
     url: `${siteConfig.url}/pl/epk`,
     title: epkCopy.pl.metadata.title,
-    description: epkCopy.pl.metadata.description,
+    description: epkCopy.pl.meta.epk.description,
     images: [
       {
         url: siteConfig.ogImage,
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: epkCopy.pl.metadata.title,
-    description: epkCopy.pl.metadata.description,
+    description: epkCopy.pl.meta.epk.description,
     images: [siteConfig.ogImage],
   },
 };

@@ -149,7 +149,7 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     experience: {
       label: 'The live show',
       title: '{liveShow}',
-      copy: 'A live band led from the drums. Original songs next to the hits everyone knows, a frontman who never lets the room sit still, and a night that ends with strangers singing the same chorus.',
+      copy: 'A live band led from the drums — original songs, real connection and a night that ends with the whole room moving as one.',
       explore: 'Explore the live show',
       subtitle: 'with Jacke Matheus',
     },
@@ -261,7 +261,7 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     experience: {
       label: 'Koncert na żywo',
       title: '{liveShow}',
-      copy: 'Zespół na żywo prowadzony zza perkusji. Autorskie utwory obok hitów, które znają wszyscy, frontman, który nie pozwala sali zwolnić tempa, i wieczór, który kończy się wspólnym śpiewem refrenu.',
+      copy: 'Zespół na żywo prowadzony zza perkusji — autorskie utwory, prawdziwy kontakt z publicznością i wieczór, który kończy się całą salą poruszającą się w jednym rytmie.',
       explore: 'Zobacz koncert na żywo',
       subtitle: 'z Jacke Matheusem',
     },

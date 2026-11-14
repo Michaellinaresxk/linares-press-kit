@@ -14,12 +14,14 @@ import {
   withVars,
   type ProposalLocale,
 } from '@/lib/i18n/proposal';
+import { sharedCopy } from '@/lib/i18n/shared';
 import { bookingEmail, siteConfig } from '@/lib/site-config';
 import styles from '../app/(en)/proposal/proposal.module.css';
 
 export default function ProposalView({ locale }: { locale: ProposalLocale }) {
   const reduceMotion = useReducedMotion();
   const t = proposalCopy[locale];
+  const shared = sharedCopy[locale];
   const show = siteConfig.liveShow;
   const whatsapp = siteConfig.contact.whatsapp;
   const [playMainVideo, setPlayMainVideo] = useState(false);
@@ -117,7 +119,7 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
                 },
               }}
             >
-              {t.eyebrow}
+              {shared.brand.tagline}
             </motion.p>
             <motion.h1
               id='proposal-title'
@@ -304,7 +306,7 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
           <h2 id='live-show-title' className={styles.sectionTitle}>
             {t.liveShowTitle}
           </h2>
-          <p className={styles.bodyText}>{t.liveShowBody}</p>
+          <p className={styles.bodyText}>{shared.live.intro}</p>
 
           <p className={styles.tagLabel} style={{ marginTop: 28 }}>
             {t.liveReferencesLabel}
@@ -355,34 +357,40 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
             {t.peopleTitle}
           </h2>
           <div className={styles.artistGrid}>
-            {siteConfig.live.artists.map((artist, index) => (
-              <motion.article
-                key={artist.name}
-                className={styles.artistCard}
-                initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <div className={styles.artistImage}>
-                  <Image
-                    src={artist.image}
-                    alt={artist.imageAlt}
-                    fill
-                    sizes='(max-width: 700px) 100vw, 50vw'
-                    className={styles.cardImage}
-                  />
-                </div>
-                <div className={styles.artistInfo}>
-                  <p className={styles.artistOrigin}>{artist.origin}</p>
-                  <h3>{artist.name}</h3>
-                  <p className={styles.artistRole}>{artist.role}</p>
-                  <p className={styles.artistDescription}>
-                    {artist.description}
-                  </p>
-                </div>
-              </motion.article>
-            ))}
+            {siteConfig.live.artists.map((artist, index) => {
+              const isLinarex = artist.name === siteConfig.name;
+              const role = isLinarex ? shared.people.linarex.role : artist.role;
+              const description = isLinarex
+                ? shared.people.linarex.bio
+                : artist.description;
+
+              return (
+                <motion.article
+                  key={artist.name}
+                  className={styles.artistCard}
+                  initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <div className={styles.artistImage}>
+                    <Image
+                      src={artist.image}
+                      alt={artist.imageAlt}
+                      fill
+                      sizes='(max-width: 700px) 100vw, 50vw'
+                      className={styles.cardImage}
+                    />
+                  </div>
+                  <div className={styles.artistInfo}>
+                    <p className={styles.artistOrigin}>{artist.origin}</p>
+                    <h3>{artist.name}</h3>
+                    <p className={styles.artistRole}>{role}</p>
+                    <p className={styles.artistDescription}>{description}</p>
+                  </div>
+                </motion.article>
+              );
+            })}
           </div>
         </section>
 

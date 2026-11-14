@@ -8,6 +8,17 @@ type EpkCopy = {
     description: string;
   };
   eyebrow: string;
+  hero: {
+    intro: string;
+  };
+  facts: {
+    experience: { value: string };
+    sound: { label: string; value: string };
+    live: { label: string; value: string };
+  };
+  meta: {
+    epk: { description: string };
+  };
   pitch: string;
   bookingButton: string;
   downloadPdf: string;
@@ -49,9 +60,27 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     metadata: {
       title: 'Linarex – Electronic Press Kit',
       description:
-        'Linarex press kit: bio, original music, live show, photos and booking contact. Dominican-born composer and drummer based in Warsaw.',
+        'Linarex — Dominican-born, Warsaw-based artist bringing Caribbean roots into indie rock and funk. Trilingual live show, original music, press photos and booking.',
     },
     eyebrow: 'Electronic Press Kit',
+    hero: {
+      intro:
+        'Born in the Dominican Republic, based in Warsaw. Linarex brings his Caribbean roots into indie rock and funk — songs with groove, heart and a story behind every beat. Songs that start with a feeling and end with a room moving together.',
+    },
+    facts: {
+      experience: { value: '20+ years on stage · rock, jazz, funk, reggae' },
+      sound: {
+        label: 'Sound',
+        value: 'Indie rock & funk with Caribbean roots',
+      },
+      live: { label: 'Live', value: 'Trilingual show · EN · ES · PL' },
+    },
+    meta: {
+      epk: {
+        description:
+          'Linarex — Dominican-born, Warsaw-based artist bringing Caribbean roots into indie rock and funk. Trilingual live show, original music, press photos and booking.',
+      },
+    },
     pitch:
       'Dominican-born, Warsaw-based composer, drummer and executive producer. Songs that start with a feeling and end with a room moving together.',
     bookingButton: 'Contact for bookings',
@@ -94,9 +123,27 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     metadata: {
       title: 'Linarex – Electronic Press Kit',
       description:
-        'Press kit Linarex: bio, muzyka autorska, koncert na żywo, zdjęcia i kontakt w sprawie rezerwacji. Kompozytor i perkusista z Dominikany, mieszkający w Warszawie.',
+        'Linarex — urodzony na Dominikanie artysta z Warszawy, który wnosi karaibskie korzenie do indie rocka i funku. Koncert w trzech językach, autorska muzyka, zdjęcia prasowe i booking.',
     },
     eyebrow: 'Electronic Press Kit',
+    hero: {
+      intro:
+        'Urodzony na Dominikanie, mieszka w Warszawie. Linarex wnosi swoje karaibskie korzenie do indie rocka i funku — piosenki z groovem, sercem i historią w każdym uderzeniu. Piosenki, które zaczynają się od uczucia, a kończą salą, która porusza się razem.',
+    },
+    facts: {
+      experience: { value: '20+ lat na scenie · rock, jazz, funk, reggae' },
+      sound: {
+        label: 'Brzmienie',
+        value: 'Indie rock i funk z karaibskimi korzeniami',
+      },
+      live: { label: 'Na żywo', value: 'Koncert w trzech językach · EN · ES · PL' },
+    },
+    meta: {
+      epk: {
+        description:
+          'Linarex — urodzony na Dominikanie artysta z Warszawy, który wnosi karaibskie korzenie do indie rocka i funku. Koncert w trzech językach, autorska muzyka, zdjęcia prasowe i booking.',
+      },
+    },
     pitch:
       'Kompozytor, perkusista i producent wykonawczy z Dominikany, mieszkający w Warszawie. Utwory, które zaczynają się od emocji, a kończą salą poruszaną wspólnym rytmem.',
     bookingButton: 'Kontakt w sprawie rezerwacji',

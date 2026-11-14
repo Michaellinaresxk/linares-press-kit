@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { bookingEmail, siteConfig } from '@/lib/site-config';
+import { sharedCopy } from '@/lib/i18n/shared';
 import styles from './site-footer.module.css';
 
 const copy = {
   en: {
     taglineLine1: 'Live music · Warsaw, Poland',
-    taglineLine2: 'Original songs, familiar hits, one room moving together.',
     liveShow: 'Live show',
     pressKit: 'Press kit',
     booking: 'Booking',
@@ -15,7 +15,6 @@ const copy = {
   // Review by native speaker
   pl: {
     taglineLine1: 'Muzyka na żywo · Warszawa, Polska',
-    taglineLine2: 'Własne utwory, znane hity i cała sala we wspólnym rytmie.',
     liveShow: 'Koncert na żywo',
     pressKit: 'Materiały prasowe',
     booking: 'Rezerwacja',
@@ -32,6 +31,7 @@ export default function SiteFooter({
   locale?: SiteFooterLocale;
 }) {
   const t = copy[locale];
+  const shared = sharedCopy[locale];
   const homeHref = locale === 'pl' ? '/pl' : '/';
   const proposalHref = locale === 'pl' ? '/pl/proposal' : '/proposal';
   const epkHref = locale === 'pl' ? '/pl/epk' : '/epk';
@@ -46,7 +46,7 @@ export default function SiteFooter({
           <p>
             {t.taglineLine1}
             <br />
-            {t.taglineLine2}
+            {shared.footer.description}
           </p>
         </div>
         <nav className={styles.links} aria-label={t.navAria}>
