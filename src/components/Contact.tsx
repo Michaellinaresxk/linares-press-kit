@@ -12,26 +12,20 @@ type FormState = {
   subject: string;
   message: string;
   phone: string;
-  date?: string;
-  city?: string;
-  eventType?: string;
-  attendees?: string;
-  budget?: string;
+  date: string;
+  city: string;
+  eventType: string;
+  guests: string;
 };
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
-const INITIAL_FORM: FormState = {
-  name: '',
-  email: '',
-  subject: '',
-  message: '',
-  phone: '',
-  date: '',
-  city: '',
-  eventType: '',
-  attendees: '',
-  budget: '',
+type ContactProps = {
+  locale?: HomeLocale;
+  variant?: 'general' | 'booking';
+  /** @deprecated use variant */
+  mode?: 'default' | 'booking';
+  embedded?: boolean;
 };
 
 const INPUT_CLASS =
@@ -43,21 +37,32 @@ const INPUT_STYLE = {
   color: '#c8dcea',
 };
 
-type ContactProps = {
-  locale?: HomeLocale;
-  mode?: 'default' | 'booking';
-  embedded?: boolean;
-};
-
-export default function Contact({ locale = 'en', mode = 'default', embedded = false }: ContactProps) {
+export default function Contact({
+  locale = 'en',
+  variant,
+  mode = 'default',
+  embedded = false,
+}: ContactProps) {
+  const resolvedVariant: 'general' | 'booking' =
+    variant ?? (mode === 'booking' ? 'booking' : 'general');
+  const bookingMode = resolvedVariant === 'booking';
   const copy = homeCopy[locale];
   const f = copy.contact.form;
+
+  const initialForm: FormState = {
+    name: '',
+    email: '',
+    subject: bookingMode ? f.subjects.booking : '',
+    message: '',
+    phone: '',
+    date: '',
+    city: '',
+    eventType: '',
+    guests: '',
+  };
+
   const containerRef = useRef<HTMLDivElement>(null);
-  const bookingMode = mode === 'booking';
-  const [form, setForm] = useState<FormState>({
-    ...INITIAL_FORM,
-    subject: bookingMode ? 'Booking Request' : '',
-  });
+  const [form, setForm] = useState<FormState>(initialForm);
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -82,9 +87,16 @@ export default function Contact({ locale = 'en', mode = 'default', embedded = fa
   };
 
   const handleSubmit = async () => {
-    const { name, email, subject, message } = form;
+    const { name, email, subject, message, eventType } = form;
 
-    if (!name.trim() || !email.trim() || !subject || !message.trim()) {
+    const missing =
+      !name.trim() ||
+      !email.trim() ||
+      !message.trim() ||
+      (!bookingMode && !subject) ||
+      (bookingMode && !eventType);
+
+    if (missing) {
       setStatus('error');
       setErrorMsg(f.requiredError);
       return;
@@ -94,17 +106,24 @@ export default function Contact({ locale = 'en', mode = 'default', embedded = fa
     setErrorMsg('');
 
     try {
+      const payload = {
+        ...form,
+        subject: bookingMode ? f.subjects.booking : subject,
+      };
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || 'Something went wrong.');
 
       setStatus('success');
-      setForm({ ...INITIAL_FORM, subject: bookingMode ? 'Booking Request' : '' });
+      setForm({
+        ...initialForm,
+        subject: bookingMode ? f.subjects.booking : '',
+      });
     } catch (err) {
       setStatus('error');
       setErrorMsg(
@@ -125,327 +144,356 @@ export default function Contact({ locale = 'en', mode = 'default', embedded = fa
       viewport={{ once: true }}
       className={embedded ? 'w-full' : 'max-w-4xl mx-auto'}
     >
-          <div
-            className='rounded-2xl p-8'
-            style={{
-              background: 'rgba(13,17,23,0.7)',
-              border: '1px solid rgba(55,138,221,0.15)',
-            }}
+      <div
+        className='rounded-2xl p-8'
+        style={{
+          background: 'rgba(13,17,23,0.7)',
+          border: '1px solid rgba(55,138,221,0.15)',
+        }}
+      >
+        <h3
+          className='text-2xl font-bold mb-2 text-center'
+          style={{ color: '#c8dcea' }}
+        >
+          {f.title}
+        </h3>
+        <p className='text-center mb-8' style={{ color: '#3d5a6e' }}>
+          {f.description}
+        </p>
+
+        {status === 'success' ? (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className='text-center py-12'
           >
-            <h3
-              className='text-2xl font-bold mb-2 text-center'
+            <div
+              className='w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4'
+              style={{ background: 'rgba(15,110,86,0.2)' }}
+            >
+              <svg
+                className='w-8 h-8'
+                style={{ color: '#5dcaa5' }}
+                fill='none'
+                viewBox='0 0 24 24'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M5 13l4 4L19 7'
+                />
+              </svg>
+            </div>
+            <h4
+              className='text-xl font-semibold mb-2'
               style={{ color: '#c8dcea' }}
             >
-              {f.title}
-            </h3>
-            <p className='text-center mb-8' style={{ color: '#3d5a6e' }}>
-              {f.description}
+              {f.successTitle}
+            </h4>
+            <p className='mb-6' style={{ color: '#3d5a6e' }}>
+              {f.successBody}
             </p>
+            <button
+              onClick={() => setStatus('idle')}
+              className='text-sm transition-colors'
+              style={{ color: '#85b7eb' }}
+            >
+              {f.sendAnother}
+            </button>
+          </motion.div>
+        ) : (
+          <form
+            className='space-y-6'
+            onSubmit={(e) => {
+              e.preventDefault();
+              void handleSubmit();
+            }}
+            noValidate
+          >
+            <div className='grid md:grid-cols-2 gap-6'>
+              <div>
+                <label
+                  htmlFor='contact-name'
+                  className='block mb-2 font-medium text-sm'
+                  style={{ color: '#8faabf' }}
+                >
+                  {f.name}
+                </label>
+                <input
+                  id='contact-name'
+                  type='text'
+                  name='name'
+                  value={form.name}
+                  onChange={handleChange}
+                  disabled={isLoading}
+                  className={INPUT_CLASS}
+                  style={INPUT_STYLE}
+                  placeholder={f.namePlaceholder}
+                  required
+                  aria-required='true'
+                  autoComplete='name'
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor='contact-email'
+                  className='block mb-2 font-medium text-sm'
+                  style={{ color: '#8faabf' }}
+                >
+                  {f.email}
+                </label>
+                <input
+                  id='contact-email'
+                  type='email'
+                  name='email'
+                  value={form.email}
+                  onChange={handleChange}
+                  disabled={isLoading}
+                  className={INPUT_CLASS}
+                  style={INPUT_STYLE}
+                  placeholder={f.emailPlaceholder}
+                  required
+                  aria-required='true'
+                  autoComplete='email'
+                />
+              </div>
+            </div>
 
-            {status === 'success' ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className='text-center py-12'
+            <div>
+              <label
+                htmlFor='contact-phone'
+                className='block mb-2 font-medium text-sm'
+                style={{ color: '#8faabf' }}
               >
-                <div
-                  className='w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4'
-                  style={{ background: 'rgba(15,110,86,0.2)' }}
-                >
-                  <svg
-                    className='w-8 h-8'
-                    style={{ color: '#5dcaa5' }}
-                    fill='none'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M5 13l4 4L19 7'
-                    />
-                  </svg>
-                </div>
-                <h4
-                  className='text-xl font-semibold mb-2'
-                  style={{ color: '#c8dcea' }}
-                >
-                  {f.successTitle}
-                </h4>
-                <p className='mb-6' style={{ color: '#3d5a6e' }}>
-                  {f.successBody}
-                </p>
-                <button
-                  onClick={() => setStatus('idle')}
-                  className='text-sm transition-colors'
-                  style={{ color: '#85b7eb' }}
-                >
-                  {f.sendAnother}
-                </button>
-              </motion.div>
-            ) : (
-              <div className='space-y-6'>
-                <div className='grid md:grid-cols-2 gap-6'>
-                  <div>
-                    <label
-                      className='block mb-2 font-medium text-sm'
-                      style={{ color: '#8faabf' }}
-                    >
-                      {f.name}
-                    </label>
-                    <input
-                      type='text'
-                      name='name'
-                      value={form.name}
-                      onChange={handleChange}
-                      disabled={isLoading}
-                      className={INPUT_CLASS}
-                      style={INPUT_STYLE}
-                      placeholder={f.namePlaceholder}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      className='block mb-2 font-medium text-sm'
-                      style={{ color: '#8faabf' }}
-                    >
-                      {f.email}
-                    </label>
-                    <input
-                      type='email'
-                      name='email'
-                      value={form.email}
-                      onChange={handleChange}
-                      disabled={isLoading}
-                      className={INPUT_CLASS}
-                      style={INPUT_STYLE}
-                      placeholder={f.emailPlaceholder}
-                      required
-                    />
-                  </div>
-                </div>
+                {f.phone}
+              </label>
+              <input
+                id='contact-phone'
+                type='tel'
+                name='phone'
+                value={form.phone}
+                onChange={handleChange}
+                disabled={isLoading}
+                className={INPUT_CLASS}
+                style={INPUT_STYLE}
+                placeholder={f.phonePlaceholder}
+                autoComplete='tel'
+              />
+            </div>
 
+            {!bookingMode && (
+              <div>
+                <label
+                  htmlFor='contact-subject'
+                  className='block mb-2 font-medium text-sm'
+                  style={{ color: '#8faabf' }}
+                >
+                  {f.subject}
+                </label>
+                <select
+                  id='contact-subject'
+                  name='subject'
+                  value={form.subject}
+                  onChange={handleChange}
+                  disabled={isLoading}
+                  className={INPUT_CLASS}
+                  style={INPUT_STYLE}
+                  required
+                  aria-required='true'
+                >
+                  <option value=''>{f.subjectPlaceholder}</option>
+                  <option value={f.subjects.booking}>{f.subjects.booking}</option>
+                  <option value={f.subjects.collaboration}>
+                    {f.subjects.collaboration}
+                  </option>
+                  <option value={f.subjects.press}>{f.subjects.press}</option>
+                  <option value={f.subjects.technical}>{f.subjects.technical}</option>
+                  <option value={f.subjects.other}>{f.subjects.other}</option>
+                </select>
+              </div>
+            )}
+
+            {bookingMode && (
+              <div className='grid md:grid-cols-2 gap-6'>
                 <div>
                   <label
+                    htmlFor='contact-date'
                     className='block mb-2 font-medium text-sm'
                     style={{ color: '#8faabf' }}
                   >
-                    {f.phone}
+                    {f.eventDate}
                   </label>
                   <input
-                    type='tel'
-                    name='phone'
-                    value={form.phone}
+                    id='contact-date'
+                    type='date'
+                    name='date'
+                    value={form.date}
                     onChange={handleChange}
                     disabled={isLoading}
                     className={INPUT_CLASS}
                     style={INPUT_STYLE}
-                    placeholder={f.phonePlaceholder}
                   />
                 </div>
-
-                {!bookingMode && (
-                  <div>
-                    <label
-                      className='block mb-2 font-medium text-sm'
-                      style={{ color: '#8faabf' }}
-                    >
-                      {f.subject}
-                    </label>
-                    <select
-                      name='subject'
-                      value={form.subject}
-                      onChange={handleChange}
-                      disabled={isLoading}
-                      className={INPUT_CLASS}
-                      style={INPUT_STYLE}
-                    >
-                      <option value=''>{f.subjectPlaceholder}</option>
-                      <option value='Booking Request'>{f.subjects.booking}</option>
-                      <option value='Collaboration'>{f.subjects.collaboration}</option>
-                      <option value='Press/Media'>{f.subjects.press}</option>
-                      <option value='Technical'>{f.subjects.technical}</option>
-                      <option value='Other'>{f.subjects.other}</option>
-                    </select>
-                  </div>
-                )}
-
-                {(bookingMode || form.subject === 'Booking Request') && (
-                  <div className='grid md:grid-cols-2 gap-6'>
-                    <div>
-                      <label
-                        className='block mb-2 font-medium text-sm'
-                        style={{ color: '#8faabf' }}
-                      >
-                        {f.eventDate}
-                      </label>
-                      <input
-                        type='date'
-                        name='date'
-                        value={form.date}
-                        onChange={handleChange}
-                        disabled={isLoading}
-                        className={INPUT_CLASS}
-                        style={INPUT_STYLE}
-                      />
-                    </div>
-                    <div>
-                      <label
-                        className='block mb-2 font-medium text-sm'
-                        style={{ color: '#8faabf' }}
-                      >
-                        {f.city}
-                      </label>
-                      <input
-                        type='text'
-                        name='city'
-                        value={form.city}
-                        onChange={handleChange}
-                        disabled={isLoading}
-                        className={INPUT_CLASS}
-                        style={INPUT_STYLE}
-                        placeholder={f.cityPlaceholder}
-                      />
-                    </div>
-                    <div>
-                      <label
-                        className='block mb-2 font-medium text-sm'
-                        style={{ color: '#8faabf' }}
-                      >
-                        {f.eventType}
-                      </label>
-                      <select
-                        name='eventType'
-                        value={form.eventType}
-                        onChange={handleChange}
-                        disabled={isLoading}
-                        className={INPUT_CLASS}
-                        style={INPUT_STYLE}
-                      >
-                        <option value=''>{f.eventTypePlaceholder}</option>
-                        <option value='Corporate'>{f.eventTypes.corporate}</option>
-                        <option value='Wedding'>{f.eventTypes.wedding}</option>
-                        <option value='Festival'>{f.eventTypes.festival}</option>
-                        <option value='Club'>{f.eventTypes.club}</option>
-                        <option value='Other'>{f.eventTypes.other}</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label
-                        className='block mb-2 font-medium text-sm'
-                        style={{ color: '#8faabf' }}
-                      >
-                        {f.attendees}
-                      </label>
-                      <input
-                        type='number'
-                        name='attendees'
-                        min={1}
-                        value={form.attendees}
-                        onChange={handleChange}
-                        disabled={isLoading}
-                        className={INPUT_CLASS}
-                        style={INPUT_STYLE}
-                        placeholder={f.attendeesPlaceholder}
-                      />
-                    </div>
-                    {!bookingMode && (
-                      <div className='md:col-span-2'>
-                        <label
-                          className='block mb-2 font-medium text-sm'
-                          style={{ color: '#8faabf' }}
-                        >
-                          {f.budget}
-                        </label>
-                        <input
-                          type='number'
-                          name='budget'
-                          value={form.budget}
-                          onChange={handleChange}
-                          disabled={isLoading}
-                          className={INPUT_CLASS}
-                          style={INPUT_STYLE}
-                          placeholder={f.budgetPlaceholder}
-                        />
-                      </div>
-                    )}
-                  </div>
-                )}
-
                 <div>
                   <label
+                    htmlFor='contact-city'
                     className='block mb-2 font-medium text-sm'
                     style={{ color: '#8faabf' }}
                   >
-                    {f.message}
+                    {f.city}
                   </label>
-                  <textarea
-                    name='message'
-                    value={form.message}
+                  <input
+                    id='contact-city'
+                    type='text'
+                    name='city'
+                    value={form.city}
                     onChange={handleChange}
                     disabled={isLoading}
-                    rows={6}
                     className={INPUT_CLASS}
-                    style={{ ...INPUT_STYLE, resize: 'vertical' }}
-                    placeholder={f.messagePlaceholder}
-                    required
+                    style={INPUT_STYLE}
+                    placeholder={f.cityPlaceholder}
+                    autoComplete='address-level2'
                   />
                 </div>
-
-                {status === 'error' && (
-                  <motion.p
-                    initial={{ opacity: 0, y: -4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className='text-sm text-center rounded-lg px-4 py-3'
-                    style={{
-                      color: '#f09595',
-                      background: 'rgba(162,45,45,0.1)',
-                      border: '1px solid rgba(162,45,45,0.25)',
-                    }}
+                <div>
+                  <label
+                    htmlFor='contact-eventType'
+                    className='block mb-2 font-medium text-sm'
+                    style={{ color: '#8faabf' }}
                   >
-                    {errorMsg}
-                  </motion.p>
-                )}
-
-                <motion.button
-                  onClick={handleSubmit}
-                  disabled={isLoading}
-                  className='w-full px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed'
-                  style={{
-                    background: '#1d4a72',
-                    border: '1px solid #378add',
-                    color: '#c8dcea',
-                  }}
-                  whileHover={{ scale: isLoading ? 1 : 1.02 }}
-                  whileTap={{ scale: isLoading ? 1 : 0.98 }}
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 size={20} className='animate-spin' />
-                      <span>{f.sending}</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send size={20} />
-                      <span>{f.send}</span>
-                    </>
-                  )}
-                </motion.button>
+                    {f.eventType}
+                  </label>
+                  <select
+                    id='contact-eventType'
+                    name='eventType'
+                    value={form.eventType}
+                    onChange={handleChange}
+                    disabled={isLoading}
+                    className={INPUT_CLASS}
+                    style={INPUT_STYLE}
+                    required
+                    aria-required='true'
+                  >
+                    <option value=''>{f.eventTypePlaceholder}</option>
+                    <option value={f.eventTypes.venue}>{f.eventTypes.venue}</option>
+                    <option value={f.eventTypes.festival}>
+                      {f.eventTypes.festival}
+                    </option>
+                    <option value={f.eventTypes.private}>
+                      {f.eventTypes.private}
+                    </option>
+                    <option value={f.eventTypes.corporate}>
+                      {f.eventTypes.corporate}
+                    </option>
+                    <option value={f.eventTypes.city}>{f.eventTypes.city}</option>
+                    <option value={f.eventTypes.wedding}>
+                      {f.eventTypes.wedding}
+                    </option>
+                    <option value={f.eventTypes.other}>{f.eventTypes.other}</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    htmlFor='contact-guests'
+                    className='block mb-2 font-medium text-sm'
+                    style={{ color: '#8faabf' }}
+                  >
+                    {f.guests}
+                  </label>
+                  <input
+                    id='contact-guests'
+                    type='text'
+                    name='guests'
+                    value={form.guests}
+                    onChange={handleChange}
+                    disabled={isLoading}
+                    className={INPUT_CLASS}
+                    style={INPUT_STYLE}
+                    placeholder={f.guestsPlaceholder}
+                    inputMode='numeric'
+                  />
+                </div>
               </div>
             )}
 
-            {status !== 'success' && (
-              <div
-                className='mt-8 pt-8 text-center'
-                style={{ borderTop: '1px solid rgba(55,138,221,0.1)' }}
+            <div>
+              <label
+                htmlFor='contact-message'
+                className='block mb-2 font-medium text-sm'
+                style={{ color: '#8faabf' }}
               >
-                <p className='text-sm' style={{ color: '#3d5a6e' }}>
-                  {f.hint}
-                </p>
-              </div>
+                {f.message}
+              </label>
+              <textarea
+                id='contact-message'
+                name='message'
+                value={form.message}
+                onChange={handleChange}
+                disabled={isLoading}
+                rows={6}
+                className={INPUT_CLASS}
+                style={{ ...INPUT_STYLE, resize: 'vertical' }}
+                placeholder={f.messagePlaceholder}
+                required
+                aria-required='true'
+              />
+            </div>
+
+            {status === 'error' && (
+              <motion.p
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                className='text-sm text-center rounded-lg px-4 py-3'
+                style={{
+                  color: '#f09595',
+                  background: 'rgba(162,45,45,0.1)',
+                  border: '1px solid rgba(162,45,45,0.25)',
+                }}
+              >
+                {errorMsg}
+              </motion.p>
             )}
+
+            <motion.button
+              type='submit'
+              disabled={isLoading}
+              className='w-full px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed'
+              style={{
+                background: '#1d4a72',
+                border: '1px solid #378add',
+                color: '#c8dcea',
+              }}
+              whileHover={{ scale: isLoading ? 1 : 1.02 }}
+              whileTap={{ scale: isLoading ? 1 : 0.98 }}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 size={20} className='animate-spin' />
+                  <span>{f.sending}</span>
+                </>
+              ) : (
+                <>
+                  <Send size={20} />
+                  <span>{f.send}</span>
+                </>
+              )}
+            </motion.button>
+          </form>
+        )}
+
+        {status !== 'success' && (
+          <div
+            className='mt-8 pt-8 text-center'
+            style={{ borderTop: '1px solid rgba(55,138,221,0.1)' }}
+          >
+            <p className='text-sm' style={{ color: '#3d5a6e' }}>
+              {f.hint}
+            </p>
           </div>
-        </motion.div>
+        )}
+      </div>
+    </motion.div>
   );
 
   if (embedded) {
@@ -461,7 +509,6 @@ export default function Contact({ locale = 'en', mode = 'default', embedded = fa
         background: 'linear-gradient(to bottom, #111820, #0d1117, #0a0f16)',
       }}
     >
-      {/* Background blobs */}
       <div className='absolute inset-0 opacity-15 pointer-events-none'>
         <motion.div
           style={{ y, background: '#185fa5' }}
@@ -474,7 +521,6 @@ export default function Contact({ locale = 'en', mode = 'default', embedded = fa
       </div>
 
       <div className='relative z-10 max-w-7xl mx-auto px-6 lg:px-8'>
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

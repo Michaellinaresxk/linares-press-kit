@@ -124,7 +124,7 @@ const FeaturedSinglePlayer = memo(function FeaturedSinglePlayer({
                 width={320}
                 height={320}
                 src={featuredSingle.coverImage}
-                alt={`${featuredSingle.title} cover art`}
+                alt={shared.release.coverAlt.memories}
                 className='w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 mx-auto rounded-2xl shadow-2xl object-cover'
                 priority
               />

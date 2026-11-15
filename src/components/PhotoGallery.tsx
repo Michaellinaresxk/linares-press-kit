@@ -10,7 +10,7 @@ import { siteConfig } from '@/lib/site-config';
 import { homeCopy, withHomeVars, type HomeLocale } from '@/lib/i18n/home';
 
 type Photo = (typeof artistGallery)[number];
-type GalleryVariant = 'artist' | 'live';
+type GalleryVariant = 'artist' | 'live' | 'press';
 
 export default function PhotoGallery({
   variant = 'artist',
@@ -24,10 +24,15 @@ export default function PhotoGallery({
   const copy = homeCopy[locale];
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
-  const photos = variant === 'live' ? liveGallery : artistGallery;
+  const photos =
+    variant === 'live'
+      ? liveGallery
+      : variant === 'press'
+        ? artistGallery.filter((photo) => photo.inPressKit)
+        : artistGallery;
   const isLiveGallery = variant === 'live';
   const getAlt = (photo: Photo) => photo.alt[locale];
-  const getVenue = (photo: Photo) => photo.venue[locale];
+  const getVenue = (photo: Photo) => (photo.caption ?? photo.venue)[locale];
 
   const { scrollYProgress } = useScroll({
     target: containerRef,

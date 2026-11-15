@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ArrowUpRight, Menu, Music2, X } from 'lucide-react';
 import { siteConfig } from '@/lib/site-config';
+import { sharedCopy } from '@/lib/i18n/shared';
 import styles from './site-navigation.module.css';
 import type { SiteLocale } from '@/lib/i18n/navigation';
 
@@ -34,12 +35,13 @@ export default function SiteNavigation({
     };
   }, [open]);
 
+  const shared = sharedCopy[locale];
   const t = {
     en: {
       home: 'Home',
       liveShow: 'Live show',
       epk: 'EPK',
-      booking: 'Book the show',
+      booking: shared.cta.bookShow,
       menu: 'Open menu',
       close: 'Close menu',
       language: 'Language',
@@ -49,7 +51,7 @@ export default function SiteNavigation({
       home: 'Start',
       liveShow: 'Koncert na żywo',
       epk: 'EPK',
-      booking: 'Zarezerwuj koncert',
+      booking: shared.cta.bookShow,
       menu: 'Otwórz menu',
       close: 'Zamknij menu',
       language: 'Język',
@@ -60,7 +62,7 @@ export default function SiteNavigation({
   const homeHref = locale === 'pl' ? '/pl' : '/';
   const proposalHref = locale === 'pl' ? '/pl/live-show' : '/live-show';
   const epkHref = locale === 'pl' ? '/pl/epk' : '/epk';
-  const contactHref = locale === 'pl' ? '/pl#contact' : '/#contact';
+  const contactHref = '#contact';
 
   // Simple language switch: map current path to other locale where possible
   const enHref = pathname.startsWith('/pl') ? pathname.replace(/^\/pl/, '') || '/' : pathname || '/';

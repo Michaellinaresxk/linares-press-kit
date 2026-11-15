@@ -1,5 +1,5 @@
-const spotifyArtistUrl =
-  'https://open.spotify.com/artist/4GIlGL9p0s5IgGFu212QUS';
+import { links } from '@/lib/links';
+import { releases as canonicalReleases } from '@/data/releases';
 
 export type VideoRef = {
   youtubeId: string;
@@ -82,7 +82,7 @@ export const siteConfig = {
   location: 'Warsaw, Poland',
   origin: 'Dominican Republic',
   yearsOnStage: '20+',
-  email: 'linarexinfo@gmail.com',
+  email: links.contact.email,
   contact: {
     // TODO Michael: add WhatsApp number in international format without +, e.g. '48123456789'
     whatsapp: undefined as string | undefined,
@@ -108,11 +108,11 @@ export const siteConfig = {
       'Linarex Experience: a Warsaw-based live band with original songs, familiar covers, audience connection and booking details for venues and events.',
   },
   profiles: {
-    spotify: spotifyArtistUrl,
-    youtube: 'https://www.youtube.com/@linarexmusic',
-    instagram: 'https://www.instagram.com/_linarex',
-    tiktok: 'https://www.tiktok.com/@linarex59',
-    appleMusic: null,
+    spotify: links.profiles.spotifyArtist,
+    youtube: links.profiles.youtube,
+    instagram: links.profiles.instagram,
+    tiktok: links.profiles.tiktok,
+    appleMusic: links.profiles.appleMusic,
   },
 
   live: {
@@ -168,9 +168,8 @@ export const siteConfig = {
     description:
       'Linarex leads the band from the drums, sings selected parts, shares stories and brings the crowd into the show. Together with Colombian vocalist and guitarist Jacke Matheus, the band moves between original songs and covers, creating energy, good vibes and real emotion.',
     technicalDetails: 'Full setlist and technical rider available on request.',
-    videoUrl: 'https://www.youtube.com/shorts/jqD3Qzr_MPY',
-    instagramVideoUrl:
-      'https://www.youtube.com/watch?v=UGQpFUqNYTU&list=RDUGQpFUqNYTU&start_radio=1',
+    videoUrl: links.videos.liveSet,
+    instagramVideoUrl: links.videos.crowdInMotion,
 
     videoThumbnails: {
       youtube:
@@ -193,56 +192,13 @@ export const siteConfig = {
     testimonials: [] as Testimonial[], // TODO Michael: add a real quote only (quote, name, venue)
   } satisfies LiveShowConfig,
   shows: [] as Show[], // TODO Michael: add upcoming dates { date (ISO), venue, city, url? }
-  releases: [
-    {
-      id: 'memories',
-      title: 'Memories',
-      year: '2026',
-      durationSeconds: 243,
-      durationLabel: '4:03',
-      collaborator: 'Jacke Matheus',
-      spotifyUrl: 'https://open.spotify.com/album/57gkaRLcx11qK4Ok1PYdyW',
-      coverImage:
-        'https://res.cloudinary.com/dwgzffsgl/image/upload/v1786661039/bg_qvvlw9.jpg',
-      audioUrl: '/audio/Memories.wav',
-      description: 'Some memories keep the light on.',
-    },
-    {
-      id: 'renacer',
-      title: 'Renacer',
-      year: '2026',
-      durationSeconds: 196,
-      durationLabel: '3:16',
-      collaborator: 'Skiwa',
-      spotifyUrl: 'https://open.spotify.com/album/5JVDDkvNP77b5yz235Qu0R',
-      coverImage:
-        'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1771093920/linarex/2026_ssgfrp.jpg',
-      audioUrl: '/audio/Renacer.wav',
-      description:
-        'A new beginning — experimental funk pop with a hypnotic groove.',
-    },
-    {
-      id: 'vaiven',
-      title: 'Vaivén',
-      year: '2025',
-      durationSeconds: 193,
-      durationLabel: '3:13',
-      collaborator: 'Dani Rivero',
-      spotifyUrl:
-        'https://open.spotify.com/intl-es/track/77R8ciAdBDoVzHsL3GAjDB?autoplay_ok=1',
-      coverImage:
-        'https://res.cloudinary.com/dwgzffsgl/image/upload/v1763300435/504381421_17858001459453136_3713166365445180538_n_wdmog2.jpg',
-      audioUrl: '/audio/vaiven.mp3',
-      description:
-        'The first Linarex single — Afro-Latin pop with a beach-sunset vibe.',
-    },
-  ],
+  releases: canonicalReleases,
 };
 
 export const siteGenresOriginal = siteConfig.genres.original.join(' · ');
 export const siteGenresLive = siteConfig.genres.live.join(' · ');
 /** @deprecated Prefer labeled "Original music:" / "Live repertoire:" display. Kept for compatibility. */
 export const siteGenres = siteGenresOriginal;
-export const bookingEmail = `mailto:${siteConfig.email}`;
+export const bookingEmail = links.contact.bookingEmail;
 
-export type SiteRelease = (typeof siteConfig.releases)[number];
+export type SiteRelease = (typeof canonicalReleases)[number];

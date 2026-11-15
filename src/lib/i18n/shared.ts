@@ -6,6 +6,11 @@ export type SharedCopy = {
   };
   footer: {
     description: string;
+    copyright: string;
+  };
+  cta: {
+    seeLiveShow: string;
+    bookShow: string;
   };
   about: {
     short: {
@@ -32,6 +37,13 @@ export type SharedCopy = {
     renacer: { tagline: string };
     vaiven: { tagline: string };
   };
+  release: {
+    coverAlt: {
+      memories: string;
+      renacer: string;
+      vaiven: string;
+    };
+  };
 };
 
 export const sharedCopy: Record<SharedLocale, SharedCopy> = {
@@ -42,6 +54,11 @@ export const sharedCopy: Record<SharedLocale, SharedCopy> = {
     footer: {
       description:
         'Original music with Caribbean roots and a live show that gets the room moving.',
+      copyright: '© {year} {name} · All rights reserved',
+    },
+    cta: {
+      seeLiveShow: 'See the live show',
+      bookShow: 'Book the show',
     },
     about: {
       short: {
@@ -56,22 +73,30 @@ export const sharedCopy: Record<SharedLocale, SharedCopy> = {
     },
     live: {
       intro:
-        'Linarex Experience is a night to dance, feel and connect. Linarex leads the band from behind the drum kit — counting in, singing parts, telling the stories behind the songs and pulling the crowd into every chorus. Originals meet hand-picked covers in English, Spanish and Polish. Caribbean energy, rock power — and a room that ends up moving as one.',
+        'Linarex Experience is a night to dance, feel and connect. Linarex leads the band from behind the drum kit. Originals meet hand-picked covers in English, Spanish and Polish. Caribbean energy, rock power — and a room that ends up moving as one.',
     },
     people: {
       linarex: {
         role: 'Composer & Drummer',
-        bio: 'Dominican-born composer and drummer who leads the band from behind the kit — bringing Caribbean groove, rock power and stories that pull the room in.',
+        bio: 'Dominican-born composer and drummer with a natural stage charisma. From behind the kit, he knows exactly how to read a crowd — keeping the energy high and everyone connected until the last beat.',
       },
     },
     music: {
       memories: { tagline: 'Some memories keep the light on.' },
       renacer: {
-        tagline: 'A new beginning — experimental funk pop with a hypnotic groove.',
+        tagline:
+          'A new beginning — experimental funk pop with a hypnotic groove.',
       },
       vaiven: {
         tagline:
           'The first Linarex single — Afro-Latin pop with a beach-sunset vibe.',
+      },
+    },
+    release: {
+      coverAlt: {
+        memories: 'Memories single cover art',
+        renacer: 'Renacer single cover art',
+        vaiven: 'Vaivén single cover art',
       },
     },
   },
@@ -82,6 +107,11 @@ export const sharedCopy: Record<SharedLocale, SharedCopy> = {
     footer: {
       description:
         'Autorska muzyka z karaibskimi korzeniami i koncerty, które porywają salę.',
+      copyright: '© {year} {name} · Wszelkie prawa zastrzeżone',
+    },
+    cta: {
+      seeLiveShow: 'Zobacz koncert na żywo',
+      bookShow: 'Zarezerwuj koncert',
     },
     about: {
       short: {
@@ -105,15 +135,24 @@ export const sharedCopy: Record<SharedLocale, SharedCopy> = {
       },
     },
     music: {
-      memories: { tagline: 'Niektóre wspomnienia nie pozwalają zgasnąć światłu.' },
+      memories: {
+        tagline: 'Niektóre wspomnienia nie pozwalają zgasnąć światłu.',
+      },
       renacer: {
-        tagline: 'Nowy początek — eksperymentalny funk pop z hipnotycznym groovem.',
+        tagline:
+          'Nowy początek — eksperymentalny funk pop z hipnotycznym groovem.',
       },
       vaiven: {
         tagline:
           'Pierwszy singiel Linarex — afro-latin pop z klimatem plaży o zachodzie słońca.',
       },
     },
+    release: {
+      coverAlt: {
+        memories: 'Okładka singla Memories',
+        renacer: 'Okładka singla Renacer',
+        vaiven: 'Okładka singla Vaivén',
+      },
+    },
   },
 };
-

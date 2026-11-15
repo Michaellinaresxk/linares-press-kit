@@ -26,22 +26,24 @@ export type ContactFormCopy = {
   eventType: string;
   eventTypePlaceholder: string;
   eventTypes: {
-    corporate: string;
-    wedding: string;
+    venue: string;
+    bar: string;
     festival: string;
-    club: string;
+    private: string;
+    corporate: string;
+    city: string;
+    wedding: string;
     other: string;
   };
-  attendees: string;
-  attendeesPlaceholder: string;
-  budget: string;
-  budgetPlaceholder: string;
+  guests: string;
+  guestsPlaceholder: string;
   sending: string;
   send: string;
   successTitle: string;
   successBody: string;
   sendAnother: string;
   hint: string;
+  required: string;
   requiredError: string;
 };
 
@@ -115,12 +117,13 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
       statLabel: 'Years on stage',
       memoriesCta: 'Listen to Memories',
       bookerCta: 'Press kit',
-      eventCta: 'Book the Linarex Experience',
+      eventCta: 'See the live show',
     },
     music: {
       badge: 'LISTEN',
       title: 'NEW SINGLE',
-      memoriesTagline: "When you can't turn off the dark, you turn on a memory.",
+      memoriesTagline:
+        "When you can't turn off the dark, you turn on a memory.",
       streamOnSpotify: 'Stream on Spotify',
     },
     about: {
@@ -138,10 +141,10 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     collaborations: {
       title: 'COLLABORATIONS',
       subtitle:
-        'Some songs need more than one voice. These were written in the space between two worlds, two languages and two ways of feeling the same thing.',
+        'I write the song; the right voice gives it a soul. Every collaboration here started with an emotion and a guitar, and ended with an artist who made it breathe.',
       openTo: 'Got a voice for the next one?',
       openToCopy:
-        'If you sing, play or write, and something here moved you, let’s find out what we sound like together.',
+        'Music expresses that which cannot be said and on which it is impossible to be silent.',
       getInTouch: 'Let’s talk',
       cardLabel: 'Collaboration',
       clickToExplore: 'Click to explore',
@@ -161,7 +164,7 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     },
     contact: {
       title: 'Let’s talk',
-      copy: 'A show, a collaboration, a press request, or a song idea that won’t leave you alone. Write. I read every message.',
+      copy: 'Booking a show, planning an event or writing a story? Get in touch. I read every message.',
       privacy: 'Your details are used only to reply to your message.',
       success:
         'Message sent! Thanks for reaching out. I’ll get back to you soon.',
@@ -169,45 +172,47 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
         title: 'Send a message',
         description:
           'Tell me what you have in mind: a show, a song, a project.',
-        name: 'Name',
+        name: 'Name *',
         namePlaceholder: 'Your name',
-        email: 'Email',
+        email: 'Email *',
         emailPlaceholder: 'your@email.com',
-        phone: 'Phone (optional)',
+        phone: 'Phone',
         phonePlaceholder: '+48 123 456 789',
-        subject: 'Subject',
-        subjectPlaceholder: 'What is it about?',
+        subject: 'Subject *',
+        subjectPlaceholder: 'Select a subject',
         subjects: {
           booking: 'Booking request',
           collaboration: 'Collaboration',
-          press: 'Press / Media',
+          press: 'Press · Media',
           technical: 'Technical',
           other: 'Other',
         },
-        message: 'Message',
+        message: 'Message *',
         messagePlaceholder: 'Tell me about your idea, event or project...',
         eventDate: 'Event date',
         city: 'City',
         cityPlaceholder: 'Where is it happening?',
-        eventType: 'Event type',
+        eventType: 'Event type *',
         eventTypePlaceholder: 'Select event type',
         eventTypes: {
-          corporate: 'Corporate',
-          wedding: 'Wedding',
+          venue: 'Venue / bar',
+          bar: 'Bar',
           festival: 'Festival',
-          club: 'Club / Bar',
+          private: 'Private event',
+          corporate: 'Corporate event',
+          city: 'City / park event',
+          wedding: 'Wedding',
           other: 'Other',
         },
-        attendees: 'Approximate number of guests',
-        attendeesPlaceholder: 'e.g. 120',
-        budget: 'Approximate budget',
-        budgetPlaceholder: 'Budget in EUR',
+        guests: 'Guests',
+        guestsPlaceholder: 'Approximate number of guests',
         sending: 'Sending...',
         send: 'Send message',
         successTitle: 'Message sent!',
         successBody: 'Thanks for reaching out. I’ll get back to you soon.',
         sendAnother: 'Send another message',
-        hint: 'The more details you share, the faster I can reply.',
+        hint: 'Fields marked with * are required.',
+        required: 'Required',
         requiredError: 'Please fill in all required fields before sending.',
       },
     },
@@ -227,7 +232,7 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
       statLabel: 'Lat na scenie',
       memoriesCta: 'Posłuchaj „Memories”',
       bookerCta: 'Materiały prasowe',
-      eventCta: 'Zarezerwuj Linarex Experience',
+      eventCta: 'Zobacz koncert na żywo',
     },
     music: {
       badge: 'POSŁUCHAJ',
@@ -274,52 +279,54 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     contact: {
       title: 'Porozmawiajmy',
       copy: 'Koncert, współpraca, zapytanie prasowe albo pomysł na utwór, który nie daje Ci spokoju. Napisz — czytam każdą wiadomość.',
-      privacy: 'Twoje dane są używane wyłącznie do udzielenia odpowiedzi na wiadomość.',
-      success:
-        'Wiadomość wysłana! Dzięki za kontakt. Odezwę się wkrótce.',
+      privacy:
+        'Twoje dane są używane wyłącznie do udzielenia odpowiedzi na wiadomość.',
+      success: 'Wiadomość wysłana! Dzięki za kontakt. Odezwę się wkrótce.',
       form: {
         title: 'Wyślij wiadomość',
-        description:
-          'Powiedz mi, co masz na myśli: koncert, utwór, projekt.',
-        name: 'Imię',
+        description: 'Powiedz mi, co masz na myśli: koncert, utwór, projekt.',
+        name: 'Imię *',
         namePlaceholder: 'Twoje imię',
-        email: 'E-mail',
+        email: 'E-mail *',
         emailPlaceholder: 'twoj@email.com',
-        phone: 'Telefon (opcjonalnie)',
+        phone: 'Telefon',
         phonePlaceholder: '+48 123 456 789',
-        subject: 'Temat',
-        subjectPlaceholder: 'Czego dotyczy wiadomość?',
+        subject: 'Temat *',
+        subjectPlaceholder: 'Wybierz temat',
         subjects: {
-          booking: 'Rezerwacja koncertu',
+          booking: 'Prośba o rezerwację',
           collaboration: 'Współpraca',
-          press: 'Prasa / media',
+          press: 'Prasa · media',
           technical: 'Sprawy techniczne',
           other: 'Inne',
         },
-        message: 'Wiadomość',
-        messagePlaceholder: 'Opowiedz o swoim pomyśle, wydarzeniu lub projekcie...',
+        message: 'Wiadomość *',
+        messagePlaceholder:
+          'Opowiedz o swoim pomyśle, wydarzeniu lub projekcie...',
         eventDate: 'Data wydarzenia',
         city: 'Miasto',
         cityPlaceholder: 'Gdzie odbędzie się wydarzenie?',
-        eventType: 'Rodzaj wydarzenia',
+        eventType: 'Rodzaj wydarzenia *',
         eventTypePlaceholder: 'Wybierz rodzaj wydarzenia',
         eventTypes: {
-          corporate: 'Wydarzenie firmowe',
-          wedding: 'Wesele',
+          venue: 'Klub / sala',
+          bar: 'Bar',
           festival: 'Festiwal',
-          club: 'Klub / bar',
+          private: 'Wydarzenie prywatne',
+          corporate: 'Wydarzenie firmowe',
+          city: 'Wydarzenie miejskie / plenerowe',
+          wedding: 'Wesele',
           other: 'Inne',
         },
-        attendees: 'Przybliżona liczba gości',
-        attendeesPlaceholder: 'np. 120',
-        budget: 'Orientacyjny budżet',
-        budgetPlaceholder: 'Budżet w EUR',
+        guests: 'Liczba gości',
+        guestsPlaceholder: 'Przybliżona liczba gości',
         sending: 'Wysyłanie...',
         send: 'Wyślij wiadomość',
         successTitle: 'Wiadomość wysłana!',
         successBody: 'Dzięki za kontakt. Odezwę się wkrótce.',
         sendAnother: 'Wyślij kolejną wiadomość',
-        hint: 'Im więcej szczegółów podasz, tym szybciej odpowiem.',
+        hint: 'Pola oznaczone * są wymagane.',
+        required: 'Wymagane',
         requiredError: 'Uzupełnij wszystkie wymagane pola przed wysłaniem.',
       },
     },

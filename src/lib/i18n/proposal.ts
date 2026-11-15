@@ -60,7 +60,7 @@ export const proposalCopy: Record<ProposalLocale, ProposalCopy> = {
     experienceLead:
       'Linarex Experience is a live band built to do one thing: turn your venue into the best night of the week.',
     experienceBody:
-      'Not a jukebox or background music. Two artists, one from Colombia and one from the Dominican Republic, backed by Warsaw-based professionals, bring familiar hits and originals that connect with the room. The floor fills up, the energy stays high, and your crowd gets a reason to stay.',
+      'Two artists, one from Colombia and one from the Dominican Republic, backed by Warsaw-based professionals, bring familiar hits and originals that connect with the room. The floor fills up, the energy stays high, and your crowd gets a reason to stay.',
     trajectory: '',
     liveShowLabel: 'Live show',
     liveShowTitle: 'The live show',
@@ -81,8 +81,7 @@ export const proposalCopy: Record<ProposalLocale, ProposalCopy> = {
     galleryPhrase: 'Nobody came to sit down.',
     bookingLabel: 'Booking',
     bookingTitle: 'Let’s make it happen.',
-    bookingBody:
-      'Share your date, city, and crowd — we’ll bring {showName}.',
+    bookingBody: 'Share your date, city, and crowd — we’ll bring {showName}.',
     openEpk: 'Open the EPK',
     whatsapp: 'WhatsApp',
   },
@@ -101,8 +100,7 @@ export const proposalCopy: Record<ProposalLocale, ProposalCopy> = {
     heroPdf: 'Pobierz ofertę PDF',
     videoLabel: 'Zobacz na żywo',
     videoTitle: 'Jedna noc. Świetna energia. Sala, która nie chciała zwalniać.',
-    embeddedVideoLabel:
-      'Linarex Experience: wieczór pełen energii na żywo',
+    embeddedVideoLabel: 'Linarex Experience: wieczór pełen energii na żywo',
     experienceLabel: 'Doświadczenie',
     experienceTitle: 'Prawdziwy show dopasowany do Twojego miejsca.',
     experienceLead:
