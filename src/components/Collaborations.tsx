@@ -86,40 +86,12 @@ export default function Collaborations({
           viewport={{ once: true }}
           className='text-center mt-12 md:mt-16 lg:mt-20'
         >
-          <motion.h3
-            className='text-xl md:text-2xl lg:text-3xl font-bold mb-4'
-            style={{ color: '#0d1117' }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            viewport={{ once: true }}
-          >
-            {copy.collaborations.openTo}
-          </motion.h3>
-
           <p
             className='mb-6 md:mb-8 max-w-2xl mx-auto text-sm md:text-base lg:text-lg'
             style={{ color: '#3d5a6e' }}
           >
             {copy.collaborations.openToCopy}
           </p>
-
-          <div className='flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto'>
-            <motion.a
-              href='#contact'
-              className='flex-1 px-6 md:px-8 py-3 md:py-4 font-bold rounded-2xl transition-all duration-500 shadow-lg text-sm md:text-base'
-              style={{
-                background: '#1d4a72',
-                border: '1px solid #378add',
-                color: '#c8dcea',
-              }}
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.3 }}
-            >
-              {copy.collaborations.getInTouch}
-            </motion.a>
-          </div>
         </motion.div>
       </div>
     </section>

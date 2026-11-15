@@ -73,18 +73,19 @@ export const sharedCopy: Record<SharedLocale, SharedCopy> = {
     },
     live: {
       intro:
-        'Linarex Experience is a night to dance, feel and connect. Linarex leads the band from behind the drum kit — counting in, singing parts, telling the stories behind the songs and pulling the crowd into every chorus. Originals meet hand-picked covers in English, Spanish and Polish. Caribbean energy, rock power — and a room that ends up moving as one.',
+        'Linarex Experience is a night to dance, feel and connect. Linarex leads the band from behind the drum kit. Originals meet hand-picked covers in English, Spanish and Polish. Caribbean energy, rock power — and a room that ends up moving as one.',
     },
     people: {
       linarex: {
         role: 'Composer & Drummer',
-        bio: 'Dominican-born composer and drummer who leads the band from behind the kit — bringing Caribbean groove, rock power and stories that pull the room in.',
+        bio: 'Dominican-born composer and drummer with a natural stage charisma. From behind the kit, he knows exactly how to read a crowd — keeping the energy high and everyone connected until the last beat.',
       },
     },
     music: {
       memories: { tagline: 'Some memories keep the light on.' },
       renacer: {
-        tagline: 'A new beginning — experimental funk pop with a hypnotic groove.',
+        tagline:
+          'A new beginning — experimental funk pop with a hypnotic groove.',
       },
       vaiven: {
         tagline:
@@ -134,9 +135,12 @@ export const sharedCopy: Record<SharedLocale, SharedCopy> = {
       },
     },
     music: {
-      memories: { tagline: 'Niektóre wspomnienia nie pozwalają zgasnąć światłu.' },
+      memories: {
+        tagline: 'Niektóre wspomnienia nie pozwalają zgasnąć światłu.',
+      },
       renacer: {
-        tagline: 'Nowy początek — eksperymentalny funk pop z hipnotycznym groovem.',
+        tagline:
+          'Nowy początek — eksperymentalny funk pop z hipnotycznym groovem.',
       },
       vaiven: {
         tagline:
@@ -152,4 +156,3 @@ export const sharedCopy: Record<SharedLocale, SharedCopy> = {
     },
   },
 };
-

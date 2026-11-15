@@ -13,13 +13,13 @@ se marcan `status: done`. Si una queda obsoleta → `status: superseded` + link 
 
 ## Roadmap
 
-| #   | Spec                                                                                        | Alcance         | Prioridad        | Depende de           |
-| --- | ------------------------------------------------------------------------------------------- | --------------- | ---------------- | -------------------- |
-| 001 | [Posicionamiento global – raíces caribeñas](001-global-positioning-caribbean-roots/spec.md) | Todas las rutas | **P1**           | —                    |
-| 002 | [i18n + SEO + renombrar ruta](002-i18n-seo-routes/spec.md)                                  | Todas las rutas | **P1**           | —                    |
+| #   | Spec                                                                                        | Alcance         | Prioridad                      | Depende de           |
+| --- | ------------------------------------------------------------------------------------------- | --------------- | ------------------------------ | -------------------- |
+| 001 | [Posicionamiento global – raíces caribeñas](001-global-positioning-caribbean-roots/spec.md) | Todas las rutas | **P1**                         | —                    |
+| 002 | [i18n + SEO + renombrar ruta](002-i18n-seo-routes/spec.md)                                  | Todas las rutas | **P1**                         | —                    |
 | 003 | [Componentes y datos compartidos (DRY)](003-shared-components-dry/spec.md)                  | Todas las rutas | **done** (follow-ups externos) | 002 (R1, nueva ruta) |
-| 004 | [EPK – fotos de prensa y PDF](004-epk-press-kit/spec.md)                                    | /epk            | P2               | 003 (D3, galería)    |
-| 005 | [Ajustes Live show + Home](005-live-show-and-home-adjustments/spec.md)                      | /live-show, /   | P3               | 001, 003             |
+| 004 | [EPK – fotos de prensa y PDF](004-epk-press-kit/spec.md)                                    | /epk            | P2                             | 003 (D3, galería)    |
+| 005 | [Ajustes Live show + Home](005-live-show-and-home-adjustments/spec.md)                      | /live-show, /   | P3                             | 001, 003             |
 
 **Orden recomendado:** 001 y 002 en paralelo (copy vs. técnico) → 003 → 004 → 005.
 

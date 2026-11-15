@@ -122,7 +122,8 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     music: {
       badge: 'LISTEN',
       title: 'NEW SINGLE',
-      memoriesTagline: "When you can't turn off the dark, you turn on a memory.",
+      memoriesTagline:
+        "When you can't turn off the dark, you turn on a memory.",
       streamOnSpotify: 'Stream on Spotify',
     },
     about: {
@@ -140,10 +141,10 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     collaborations: {
       title: 'COLLABORATIONS',
       subtitle:
-        'Some songs need more than one voice. These were written in the space between two worlds, two languages and two ways of feeling the same thing.',
+        'I write the song; the right voice gives it a soul. Every collaboration here started with an emotion and a guitar, and ended with an artist who made it breathe.',
       openTo: 'Got a voice for the next one?',
       openToCopy:
-        'If you sing, play or write, and something here moved you, let’s find out what we sound like together.',
+        'Music expresses that which cannot be said and on which it is impossible to be silent.',
       getInTouch: 'Let’s talk',
       cardLabel: 'Collaboration',
       clickToExplore: 'Click to explore',
@@ -163,7 +164,7 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     },
     contact: {
       title: 'Let’s talk',
-      copy: 'A show, a collaboration, a press request, or a song idea that won’t leave you alone. Write. I read every message.',
+      copy: 'Booking a show, planning an event or writing a story? Get in touch. I read every message.',
       privacy: 'Your details are used only to reply to your message.',
       success:
         'Message sent! Thanks for reaching out. I’ll get back to you soon.',
@@ -278,13 +279,12 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
     contact: {
       title: 'Porozmawiajmy',
       copy: 'Koncert, współpraca, zapytanie prasowe albo pomysł na utwór, który nie daje Ci spokoju. Napisz — czytam każdą wiadomość.',
-      privacy: 'Twoje dane są używane wyłącznie do udzielenia odpowiedzi na wiadomość.',
-      success:
-        'Wiadomość wysłana! Dzięki za kontakt. Odezwę się wkrótce.',
+      privacy:
+        'Twoje dane są używane wyłącznie do udzielenia odpowiedzi na wiadomość.',
+      success: 'Wiadomość wysłana! Dzięki za kontakt. Odezwę się wkrótce.',
       form: {
         title: 'Wyślij wiadomość',
-        description:
-          'Powiedz mi, co masz na myśli: koncert, utwór, projekt.',
+        description: 'Powiedz mi, co masz na myśli: koncert, utwór, projekt.',
         name: 'Imię *',
         namePlaceholder: 'Twoje imię',
         email: 'E-mail *',
@@ -301,7 +301,8 @@ export const homeCopy: Record<HomeLocale, HomeCopy> = {
           other: 'Inne',
         },
         message: 'Wiadomość *',
-        messagePlaceholder: 'Opowiedz o swoim pomyśle, wydarzeniu lub projekcie...',
+        messagePlaceholder:
+          'Opowiedz o swoim pomyśle, wydarzeniu lub projekcie...',
         eventDate: 'Data wydarzenia',
         city: 'Miasto',
         cityPlaceholder: 'Gdzie odbędzie się wydarzenie?',
