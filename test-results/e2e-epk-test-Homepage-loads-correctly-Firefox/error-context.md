@@ -12,65 +12,28 @@
 # Error details
 
 ```
-Error: expect(page).toHaveTitle(expected) failed
-
-Expected pattern: /Linarex/
-Received string:  ""
-Timeout: 5000ms
-
+Error: page.goto: NS_ERROR_CONNECTION_REFUSED
 Call log:
-  - Expect "toHaveTitle" with timeout 5000ms
-    4 × locator resolved to <html>…</html>
-      - unexpected value ""
-    - waiting for "http://localhost:3000/" navigation to finish...
-    - navigated to "http://localhost:3000/"
-    8 × locator resolved to <html>…</html>
-      - unexpected value ""
+  - navigating to "http://localhost:3000/", waiting until "networkidle"
 
 ```
 
+# Page snapshot
+
 ```yaml
-- navigation:
-  - button "previous" [disabled]:
-    - img "previous"
-  - text: 1/1
-  - button "next" [disabled]:
-    - img "next"
-- img
-- link "Next.js 15.5.9 (outdated) Webpack":
-  - /url: https://nextjs.org/docs/messages/version-staleness
-  - img
-  - text: Next.js 15.5.9 (outdated) Webpack
-- img
-- dialog "Runtime Error":
-  - text: Runtime Error
-  - button "Copy Error Info":
-    - img
-  - button "No related documentation found" [disabled]:
-    - img
-  - link "Learn more about enabling Node.js inspector for server code with Chrome DevTools":
-    - /url: https://nextjs.org/docs/app/building-your-application/configuring/debugging#server-side-code
-    - img
-  - paragraph: "Cannot find module './611.js' Require stack: - /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex/.next/server/webpack-runtime.js - /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex/.next/server/pages/_document.js - /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex/node_modules/next/dist/server/require.js - /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex/node_modules/next/dist/server/load-components.js - /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex/node_modules/next/dist/build/utils.js - /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex/node_modules/next/dist/build/swc/options.js - /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex/node_modules/next/dist/build/swc/index.js - /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex/node_modules/next/dist/build/next-config-ts/transpile-config.js - /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex/node_modules/next/dist/server/config.js - /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex/node_modules/next/dist/server/next.js - /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex/node_modules/next/dist/server/lib/start-server.js"
-  - button "Show More"
-  - paragraph: Call Stack 48
-  - button "Show 46 ignore-listed frame(s)":
-    - text: Show 46 ignore-listed frame(s)
-    - img
-  - text: <unknown> .next/server/pages/_document.js (1:325) Object.<anonymous> .next/server/pages/_document.js (1:371)
-- contentinfo:
-  - region "Error feedback":
-    - paragraph:
-      - link "Was this helpful?":
-        - /url: https://nextjs.org/telemetry#error-feedback
-    - button "Mark as helpful"
-    - button "Mark as not helpful"
-- button "Open Next.js Dev Tools":
-  - img
-- button "Open issues overlay": 1 Issue
-- button "Collapse issues badge":
-  - img
-- alert
+- article [ref=e3]:
+  - generic [ref=e6]:
+    - heading "Unable to connect" [level=1] [ref=e7]
+    - paragraph [ref=e8]:
+      - text: Nightly can’t connect to the server at
+      - strong [ref=e9]: localhost:3000
+    - generic [ref=e10]:
+      - heading "What can you do about it?" [level=3] [ref=e11]
+      - list [ref=e12]:
+        - listitem [ref=e13]: The site could be temporarily unavailable or too busy. Try again in a few moments.
+        - listitem [ref=e14]: If you are unable to load any pages, check your computer’s network connection.
+        - listitem [ref=e15]: If your computer or network is protected by a firewall or proxy, make sure that Nightly is permitted to access the web.
+    - button "Try Again" [ref=e18]
 ```
 
 # Test source
@@ -94,9 +57,9 @@ Call log:
   16 | });
   17 | 
   18 | test('Homepage loads correctly', async ({ page }) => {
-  19 |   await page.goto('/', { waitUntil: 'networkidle' });
-> 20 |   await expect(page).toHaveTitle(/Linarex/);
-     |                      ^ Error: expect(page).toHaveTitle(expected) failed
+> 19 |   await page.goto('/', { waitUntil: 'networkidle' });
+     |              ^ Error: page.goto: NS_ERROR_CONNECTION_REFUSED
+  20 |   await expect(page).toHaveTitle(/Linarex/);
   21 |   await expect(page.locator('header')).toBeVisible();
   22 | });
   23 | 

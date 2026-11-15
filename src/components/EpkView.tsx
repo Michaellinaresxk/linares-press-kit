@@ -396,7 +396,7 @@ export default function EpkView({ locale }: { locale: EpkLocale }) {
                 className={styles.secondaryButton}
                 href={locale === 'pl' ? '/pl/live-show' : '/live-show'}
               >
-                {withEpkVars(t.openProposal, {
+                {withEpkVars(t.openLiveShow, {
                   showName: siteConfig.liveShow.name,
                 })}
               </Link>

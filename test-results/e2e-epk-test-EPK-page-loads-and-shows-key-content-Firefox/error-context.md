@@ -12,31 +12,28 @@
 # Error details
 
 ```
-Error: expect(page).toHaveTitle(expected) failed
-
-Expected pattern: /Linarex/
-Received string:  ""
-Timeout: 5000ms
-
+Error: page.goto: NS_ERROR_CONNECTION_REFUSED
 Call log:
-  - Expect "toHaveTitle" with timeout 5000ms
-    4 × locator resolved to <html>…</html>
-      - unexpected value ""
-    - waiting for navigation to finish...
-    - navigated to "http://localhost:3000/epk"
-    7 × locator resolved to <html>…</html>
-      - unexpected value ""
-    - waiting for "http://localhost:3000/epk" navigation to finish...
+  - navigating to "http://localhost:3000/epk", waiting until "networkidle"
 
 ```
 
+# Page snapshot
+
 ```yaml
-- button "Open Next.js Dev Tools":
-  - img
-- button "Open issues overlay": 1 Issue
-- button "Collapse issues badge":
-  - img
-- alert
+- article [ref=e3]:
+  - generic [ref=e6]:
+    - heading "Unable to connect" [level=1] [ref=e7]
+    - paragraph [ref=e8]:
+      - text: Nightly can’t connect to the server at
+      - strong [ref=e9]: localhost:3000
+    - generic [ref=e10]:
+      - heading "What can you do about it?" [level=3] [ref=e11]
+      - list [ref=e12]:
+        - listitem [ref=e13]: The site could be temporarily unavailable or too busy. Try again in a few moments.
+        - listitem [ref=e14]: If you are unable to load any pages, check your computer’s network connection.
+        - listitem [ref=e15]: If your computer or network is protected by a firewall or proxy, make sure that Nightly is permitted to access the web.
+    - button "Try Again" [ref=e18]
 ```
 
 # Test source
@@ -45,11 +42,11 @@ Call log:
   1  | import { test, expect } from '@playwright/test';
   2  | 
   3  | test('EPK page loads and shows key content', async ({ page }) => {
-  4  |   await page.goto('/epk', { waitUntil: 'networkidle' });
+> 4  |   await page.goto('/epk', { waitUntil: 'networkidle' });
+     |              ^ Error: page.goto: NS_ERROR_CONNECTION_REFUSED
   5  |   
   6  |   // Check page title
-> 7  |   await expect(page).toHaveTitle(/Linarex/);
-     |                      ^ Error: expect(page).toHaveTitle(expected) failed
+  7  |   await expect(page).toHaveTitle(/Linarex/);
   8  |   
   9  |   // Check key content is present (using text-based detection for CSS module compatibility)
   10 |   const pageText = await page.textContent('body');

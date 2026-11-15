@@ -7,8 +7,8 @@ description: Verify key Linarex routes render without internal server errors (50
 Use when edits touch routing, layouts, page components, `siteConfig`, i18n, metadata, or shared UI used by multiple pages.
 
 ## Key routes
-- EN: `/`, `/proposal`, `/epk`, `/links`
-- PL: `/pl`, `/pl/proposal`, `/pl/epk`
+- EN: `/`, `/live-show`, `/epk`, `/links`
+- PL: `/pl`, `/pl/live-show`, `/pl/epk`
 
 ## Workflow
 1. **Primary gate**: run the `build-smoke` check (`npm run build`). A clean Next.js production build is the strongest static signal that routes compile and common SSR/data issues are absent.
@@ -18,7 +18,7 @@ Use when edits touch routing, layouts, page components, `siteConfig`, i18n, meta
      `cd /Users/mikemac/Mike-docs/DEV-EDUCATION/app/react/linarex/linarex/linarex && npm run start -- -p 3017`
    - Wait briefly for readiness, then fetch key routes and confirm HTTP 200 (and no error HTML/body indicators):
      `curl -sS -o /tmp/linarex-home.html -w "%{http_code}" http://127.0.0.1:3017/`
-     repeat for `/proposal`, `/epk`, `/pl/proposal`, `/pl/epk`.
+     repeat for `/live-show`, `/epk`, `/pl/live-show`, `/pl/epk`.
    - Pass criteria: 200 responses; no "Internal Server Error" / Next.js error overlay markers in critical pages.
    - **Always stop** the background server/process you started.
 

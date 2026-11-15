@@ -12,11 +12,7 @@
 # Error details
 
 ```
-Test timeout of 30000ms exceeded.
-```
-
-```
-Error: page.goto: Test timeout of 30000ms exceeded.
+Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/epk
 Call log:
   - navigating to "http://localhost:3000/epk", waiting until "networkidle"
 
@@ -29,7 +25,7 @@ Call log:
   2  | 
   3  | test('EPK page loads and shows key content', async ({ page }) => {
 > 4  |   await page.goto('/epk', { waitUntil: 'networkidle' });
-     |              ^ Error: page.goto: Test timeout of 30000ms exceeded.
+     |              ^ Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/epk
   5  |   
   6  |   // Check page title
   7  |   await expect(page).toHaveTitle(/Linarex/);

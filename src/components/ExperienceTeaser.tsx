@@ -14,7 +14,7 @@ export default function ExperienceTeaser({
 }) {
   const copy = homeCopy[locale];
   const reduceMotion = useReducedMotion();
-  const proposalHref = locale === 'pl' ? '/pl/live-show' : '/live-show';
+  const liveShowHref = locale === 'pl' ? '/pl/live-show' : '/live-show';
 
   return (
     <section
@@ -50,7 +50,7 @@ export default function ExperienceTeaser({
             })}
           </p>
           <Link
-            href={proposalHref}
+            href={liveShowHref}
             className='mt-7 inline-flex min-h-12 items-center gap-2 rounded-lg border border-[#5b8fa8] px-5 py-3 text-sm font-semibold text-[#dce8f0] transition-colors hover:bg-[#5b8fa81c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a9d8ec]'
           >
             {copy.experience.explore}
@@ -66,7 +66,7 @@ export default function ExperienceTeaser({
           className='relative overflow-hidden rounded-xl border border-[#5b8fa833]'
         >
           <Link
-            href={proposalHref}
+            href={liveShowHref}
             className='group relative block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a9d8ec]'
             aria-label={copy.experience.explore}
           >

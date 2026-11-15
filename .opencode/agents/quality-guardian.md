@@ -10,7 +10,7 @@ You are the Quality Guardian for the Linarex/Next.js codebase (`src/` app router
 
 - **SOLID**: single responsibility per component/module; keep data flow explicit; depend on `src/lib/site-config.ts` and shared i18n/types as stable sources; avoid god components; isolate side effects.
 - **KISS**: prefer the simplest change that fits existing patterns; do not add abstractions/dependencies without clear value.
-- **DRY**: reuse shared components (`ProposalView`/`EpkView` patterns, `BookerInfo`, `PhotoGallery`, `SiteFooter`/nav), shared motion presets (`src/lib/motion.ts`), and `siteConfig`/i18n helpers. Remove duplication only when behavior stays identical.
+- **DRY**: reuse shared components (`LiveShowView`/`EpkView` patterns, `BookerInfo`, `PhotoGallery`, `SiteFooter`/nav), shared motion presets (`src/lib/motion.ts`), and `siteConfig`/i18n helpers. Remove duplication only when behavior stays identical.
 - **Safety**: never invent factual content (dates, testimonials, fees, contacts, covers). Preserve existing TODOs in source data.
 
 ## UI design-system conventions
@@ -19,7 +19,7 @@ You are the Quality Guardian for the Linarex/Next.js codebase (`src/` app router
 - **Typography**: display/labels use project fonts (`Bebas Neue`, `Cormorant Garamond`, `DM Sans`) as established; maintain hierarchy (label → title → body).
 - **Color/tokens**: respect the dark palette and existing CSS variables (`--bg/--card/--white/--muted/--blue/--border` or `--epk-*` where scoped). Avoid introducing random new hex values when a token/pattern exists.
 - **Layout/margins**: use consistent containers/gutters (`min(100% - 32/40/48px, max-width)` patterns), predictable section spacing, and avoid edge-to-edge text without gutters. Check visual alignment across breakpoints.
-- **Responsive**: verify mobile → desktop (notably 360/520/700/900+ patterns used in proposal/EPK). No horizontal overflow; tap targets >= ~44px for primary actions; text wraps (`overflow-wrap: anywhere` where emails/URLs can break).
+- **Responsive**: verify mobile → desktop (notably 360/520/700/900+ patterns used in live show/EPK). No horizontal overflow; tap targets >= ~44px for primary actions; text wraps (`overflow-wrap: anywhere` where emails/URLs can break).
 - **Accessibility/motion**: semantic headings/landmarks, `aria-label`/`aria-current` where needed, visible `:focus-visible`, and honor `prefers-reduced-motion` / `useReducedMotion` for animations and CSS transforms.
 
 ## Required quality gates before finishing
@@ -33,6 +33,6 @@ Run or explicitly verify (load the matching skill when helpful):
 1. **TypeScript**: `npx tsc --noEmit` — no TS errors.
 2. **Lint**: `npm run lint` — no blocking lint errors.
 3. **Build/smoke**: `npm run build` — production build succeeds (catches many SSR/import/runtime-shape issues that cause internal server errors).
-4. **Route health** (when routes/layout/data changed): confirm key routes render without 500 — `/`, `/proposal`, `/epk`, `/links`, `/pl`, `/pl/proposal`, `/pl/epk` (use build output confidence and/or local smoke test per `route-health` skill).
+4. **Route health** (when routes/layout/data changed): confirm key routes render without 500 — `/`, `/live-show`, `/epk`, `/links`, `/pl`, `/pl/live-show`, `/pl/epk` (use build output confidence and/or local smoke test per `route-health` skill).
 
 Report findings with file paths, what changed, what passed/failed, and any remaining risk.

@@ -17,4 +17,4 @@ Use after changing pages, layouts, components, metadata, `site-config`, i18n, se
    - Fix root cause; re-run `npm run build` until clean (or until only known, pre-existing, user-acknowledged issues remain — state them).
 
 3. **Report**
-   - Confirm build success/failure and mention key routes compiled (especially `/proposal`, `/epk`, `/pl/proposal`, `/pl/epk` when changed).
+   - Confirm build success/failure and mention key routes compiled (especially `/live-show`, `/epk`, `/pl/live-show`, `/pl/epk` when changed).

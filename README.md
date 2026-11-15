@@ -27,9 +27,9 @@ La arquitectura separa **datos globales**, **textos por idioma (copy)**, **lista
 | Datos del artista/proyecto (nombre, rol, origen, años, ubicación, email, WhatsApp)                                               | `src/lib/site-config.ts`                                                                                | Fuente de verdad compartida entre páginas/componentes.                                               |
 | Redes/perfiles (Spotify, YouTube, Instagram, TikTok, Apple Music)                                                                | `src/lib/site-config.ts` → `profiles`                                                                   | Afecta secciones “Connect & Stream”, EPK, links, etc.                                                |
 | Lanzamientos/singles (título, año, portada, links, audio, descripción)                                                           | `src/lib/site-config.ts` → `releases`                                                                   | Usado en Home (música), EPK y textos que referencian releases.                                       |
-| Info del show en vivo (formatos, duración, repertorio, idiomas, tipos de evento, logística, trayectoria, vídeos, setlist, rider) | `src/lib/site-config.ts` → `liveShow` y `live.artists`                                                  | Usado en Proposal, EPK, etc.                                                                         |
+| Info del show en vivo (formatos, duración, repertorio, idiomas, tipos de evento, logística, trayectoria, vídeos, setlist, rider) | `src/lib/site-config.ts` → `liveShow` y `live.artists`                                                  | Usado en Live show, EPK, etc.                                                                        |
 | PDFs/documentos (EPK, propuesta)                                                                                                 | `public/` (archivos) + rutas en `src/lib/site-config.ts` → `documents`                                  | Coloca el PDF en `public/` y actualiza la ruta.                                                      |
-| Textos/párrafos por página e idioma (Home, EPK, Live show, navegación)                                                            | `src/lib/i18n/home.ts`, `src/lib/i18n/epk.ts`, `src/lib/i18n/proposal.ts`, `src/lib/i18n/navigation.ts` | **Debes actualizar EN y PL** dentro del mismo archivo (o donde aplique) para mantener ambos idiomas. |
+| Textos/párrafos por página e idioma (Home, EPK, Live show, navegación)                                                            | `src/lib/i18n/home.ts`, `src/lib/i18n/epk.ts`, `src/lib/i18n/live-show.ts`, `src/lib/i18n/navigation.ts` | **Debes actualizar EN y PL** dentro del mismo archivo (o donde aplique) para mantener ambos idiomas. |
 | Galerías de fotos (artista / live)                                                                                               | `src/const/photoGallery.ts`                                                                             | Arrays `artistGallery`, `liveGallery` (src, alt, venue, etc.).                                       |
 | Colaboraciones                                                                                                                   | `src/const/collaborations.ts`                                                                           | Datos mostrados en la sección de colaboraciones.                                                     |
 | Links (página /links y secciones de plataformas)                                                                                 | `src/const/links.ts`                                                                                    | Plataformas/URLs estructuradas.                                                                      |
@@ -42,7 +42,7 @@ La arquitectura separa **datos globales**, **textos por idioma (copy)**, **lista
 
 - **Inglés (EN):** `src/app/(en)/...` → URLs como `/`, `/epk`, `/live-show`, `/links`
 - **Polaco (PL):** `src/app/(pl)/pl/...` → URLs como `/pl`, `/pl/epk`, `/pl/live-show`
-- Las páginas suelen renderizar un componente de vista con `locale='en' | 'pl'` (ej. `ProposalView`, `EpkView`) y/o componentes de sección que reciben `locale`.
+- Las páginas suelen renderizar un componente de vista con `locale='en' | 'pl'` (ej. `LiveShowView`, `EpkView`) y/o componentes de sección que reciben `locale`.
 - **Importante:** si cambias un texto en `src/lib/i18n/*.ts`, normalmente debes cambiarlo en **ambos** objetos (`en` y `pl`) dentro del mismo archivo.
 
 ### Dónde vive el contenido (capas)
@@ -58,7 +58,7 @@ La arquitectura separa **datos globales**, **textos por idioma (copy)**, **lista
 2. **`src/lib/i18n/*.ts` — textos por idioma (UI/copy)**
    - `home.ts`: textos de secciones del home.
    - `epk.ts`: textos del EPK.
-   - `proposal.ts`: textos de la propuesta/live show.
+   - `live-show.ts`: textos del live show.
    - `navigation.ts`: etiquetas de navegación.
    - Úsalo para titulares, párrafos, labels y CTA que cambian según el idioma.
 
@@ -84,7 +84,7 @@ La arquitectura separa **datos globales**, **textos por idioma (copy)**, **lista
 
 ### 1) Cambiar un texto o párrafo
 
-1. Identifica la página/sección (Home, EPK, Proposal, Links, etc.).
+1. Identifica la página/sección (Home, EPK, Live show, Links, etc.).
 2. Busca si el texto viene de **i18n**: `src/lib/i18n/<area>.ts` (lo más común para copy por idioma).
 3. Si es un dato compartido (nombre, email, formato, trayectoria, etc.), revisa **`src/lib/site-config.ts`**.
 4. Edita el valor en **EN y PL** cuando aplique.
@@ -107,15 +107,15 @@ La arquitectura separa **datos globales**, **textos por idioma (copy)**, **lista
 ### 4) Cambiar información del show en vivo / propuesta
 
 1. Datos estructurados (formatos, duración, idiomas, repertorio, eventos, logística, trayectoria, artistas, vídeos): `src/lib/site-config.ts` → `live`, `liveShow`.
-2. Textos y etiquetas del live show: `src/lib/i18n/proposal.ts` (EN/PL).
-3. Si el cambio es de layout/orden de secciones: `src/components/ProposalView.tsx` y/o `src/app/(en)/live-show/live-show.module.css`.
-4. Revisa `/live-show` y `/pl/live-show` (`/proposal` y `/pl/proposal` redirigen con 301).
+2. Textos y etiquetas del live show: `src/lib/i18n/live-show.ts` (EN/PL).
+3. Si el cambio es de layout/orden de secciones: `src/components/LiveShowView.tsx` y/o `src/app/(en)/live-show/live-show.module.css`.
+4. Revisa `/live-show` y `/pl/live-show` (las rutas antiguas `/proposal` redirigen con 301).
 
 ### 5) Actualizar contacto, redes o documentos
 
 - **Email/WhatsApp:** `src/lib/site-config.ts` (`email`, `contact.whatsapp`). WhatsApp en formato internacional sin `+` (ej. `48123456789`).
 - **Redes:** `src/lib/site-config.ts` → `profiles`.
-- **EPK/Proposal PDF:** reemplaza el archivo en `public/` y confirma la ruta en `site-config.ts` → `documents`.
+- **EPK/Live show PDF:** reemplaza el archivo en `public/` y confirma la ruta en `site-config.ts` → `documents`.
 
 ### 6) Agregar una nueva sección o cambiar el orden en una página
 
@@ -146,5 +146,5 @@ src/
   const/                 # Listas/datos estructurados (galerías, links, etc.)
   lib/
     site-config.ts       # Datos globales compartidos
-    i18n/                # Copy por idioma (home, epk, proposal, navigation)
+    i18n/                # Copy por idioma (home, epk, live-show, navigation)
 ```
