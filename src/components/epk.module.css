@@ -81,7 +81,6 @@
 .quickFacts,
 .section,
 .connectStream,
-.liveProposal,
 .contactPanel {
   position: relative;
   z-index: 1;
@@ -252,7 +251,6 @@
 
 .section,
 .connectStream,
-.liveProposal,
 .contactPanel {
   border: 1px solid var(--epk-border);
   border-radius: 14px;

@@ -12,18 +12,10 @@
 # Error details
 
 ```
-Error: expect(received).toMatch(expected)
+Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/epk
+Call log:
+  - navigating to "http://localhost:3000/epk", waiting until "networkidle"
 
-Expected pattern: /originals?/i
-Received string:  "{\"props\":{\"pageProps\":{\"statusCode\":500,\"hostname\":\"localhost\"}},\"page\":\"/_error\",\"query\":{},\"buildId\":\"0iUa6XX2bmUvoCV2FLZ5Q\",\"isFallback\":false,\"isExperimentalCompile\":false,\"err\":{\"name\":\"Internal Server Error.\",\"message\":\"500 - Internal Server Error.\",\"statusCode\":500},\"gip\":true,\"scriptLoader\":[]}"
-```
-
-# Page snapshot
-
-```yaml
-- generic [active]:
-  - button "Open Next.js Dev Tools" [ref=e6] [cursor=pointer]
-  - alert [ref=e10]
 ```
 
 # Test source
@@ -69,12 +61,12 @@ Received string:  "{\"props\":{\"pageProps\":{\"statusCode\":500,\"hostname\":\"
   38 | });
   39 | 
   40 | test('Live show section shows repertoire', async ({ page }) => {
-  41 |   await page.goto('/epk', { waitUntil: 'networkidle' });
+> 41 |   await page.goto('/epk', { waitUntil: 'networkidle' });
+     |              ^ Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/epk
   42 |   
   43 |   // The repertoire description should mention originals and covers
   44 |   const pageText = await page.textContent('body');
-> 45 |   expect(pageText).toMatch(/originals?/i);
-     |                    ^ Error: expect(received).toMatch(expected)
+  45 |   expect(pageText).toMatch(/originals?/i);
   46 |   expect(pageText).toMatch(/covers?/i);
   47 | });
 ```

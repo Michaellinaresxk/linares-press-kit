@@ -92,7 +92,6 @@ export const siteConfig = {
   documents: {
     epkPdf: '/linarex-epk.pdf',
     epkPdfPl: '/linarex-epk-pl.pdf',
-    proposalPdf: '/Live-Music-Proposal.pdf',
     liveShowPdf: '/linarex-live-show.pdf',
     liveShowPdfPl: '/linarex-live-show-pl.pdf',
   },
@@ -103,8 +102,8 @@ export const siteConfig = {
     epkTitle: 'Linarex – Electronic Press Kit | Linarex Experience',
     epkDescription:
       'Linarex — Dominican-born, Warsaw-based artist bringing Caribbean roots into indie rock and funk. Trilingual live show, original music, press photos and booking.',
-    proposalTitle: 'Linarex Experience – Live Band in Warsaw',
-    proposalDescription:
+    liveShowTitle: 'Linarex Experience – Live Band in Warsaw',
+    liveShowDescription:
       'Linarex Experience: a Warsaw-based live band with original songs, familiar covers, audience connection and booking details for venues and events.',
   },
   profiles: {

@@ -34,7 +34,7 @@ export default function SiteFooter({
   const t = copy[locale];
   const shared = sharedCopy[locale];
   const homeHref = locale === 'pl' ? '/pl' : '/';
-  const proposalHref = locale === 'pl' ? '/pl/live-show' : '/live-show';
+  const liveShowHref = locale === 'pl' ? '/pl/live-show' : '/live-show';
   const epkHref = locale === 'pl' ? '/pl/epk' : '/epk';
   const year = String(new Date().getFullYear());
 
@@ -52,7 +52,7 @@ export default function SiteFooter({
           </p>
         </div>
         <nav className={styles.links} aria-label={t.navAria}>
-          <Link href={proposalHref}>{t.liveShow}</Link>
+          <Link href={liveShowHref}>{t.liveShow}</Link>
           <Link href={epkHref} target='_blank' rel='noopener noreferrer'>
             {t.pressKit}
           </Link>

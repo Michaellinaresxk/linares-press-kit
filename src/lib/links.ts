@@ -21,10 +21,8 @@ export const links = {
   },
   tracks: {
     // TODO(003): confirm Spotify track IDs for Memories and Renacer
-    memories:
-      'https://open.spotify.com/album/57gkaRLcx11qK4Ok1PYdyW',
-    renacer:
-      'https://open.spotify.com/album/5JVDDkvNP77b5yz235Qu0R',
+    memories: 'https://open.spotify.com/album/57gkaRLcx11qK4Ok1PYdyW',
+    renacer: 'https://open.spotify.com/album/5JVDDkvNP77b5yz235Qu0R',
     vaiven: cleanUrl(
       'https://open.spotify.com/intl-es/track/77R8ciAdBDoVzHsL3GAjDB?autoplay_ok=1',
     ),

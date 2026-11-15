@@ -60,7 +60,7 @@ export default function SiteNavigation({
   }[locale];
 
   const homeHref = locale === 'pl' ? '/pl' : '/';
-  const proposalHref = locale === 'pl' ? '/pl/live-show' : '/live-show';
+  const liveShowHref = locale === 'pl' ? '/pl/live-show' : '/live-show';
   const epkHref = locale === 'pl' ? '/pl/epk' : '/epk';
   const contactHref = '#contact';
 
@@ -71,9 +71,9 @@ export default function SiteNavigation({
   const navLinks = [
     { href: homeHref, label: t.home, isActive: pathname === homeHref },
     {
-      href: proposalHref,
+      href: liveShowHref,
       label: t.liveShow,
-      isActive: pathname === proposalHref,
+      isActive: pathname === liveShowHref,
     },
     {
       href: epkHref,

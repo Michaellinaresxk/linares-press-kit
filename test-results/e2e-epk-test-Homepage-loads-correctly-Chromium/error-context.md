@@ -12,20 +12,10 @@
 # Error details
 
 ```
-Test timeout of 30000ms exceeded.
-```
-
-```
-Error: page.goto: Test timeout of 30000ms exceeded.
+Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
 Call log:
   - navigating to "http://localhost:3000/", waiting until "networkidle"
 
-```
-
-# Page snapshot
-
-```yaml
-- alert [ref=f20e1]
 ```
 
 # Test source
@@ -50,7 +40,7 @@ Call log:
   17 | 
   18 | test('Homepage loads correctly', async ({ page }) => {
 > 19 |   await page.goto('/', { waitUntil: 'networkidle' });
-     |              ^ Error: page.goto: Test timeout of 30000ms exceeded.
+     |              ^ Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
   20 |   await expect(page).toHaveTitle(/Linarex/);
   21 |   await expect(page.locator('header')).toBeVisible();
   22 | });

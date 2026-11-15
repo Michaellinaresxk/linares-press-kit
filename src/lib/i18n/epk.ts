@@ -1,6 +1,6 @@
-import { withVars, type ProposalLocale } from './proposal';
+import { withVars, type LiveShowLocale } from './live-show';
 
-export type EpkLocale = ProposalLocale;
+export type EpkLocale = LiveShowLocale;
 
 type EpkCopy = {
   metadata: {
@@ -50,7 +50,7 @@ type EpkCopy = {
   crowdAlt: string;
   getInTouch: string;
   contactTitle: string;
-  openProposal: string;
+  openLiveShow: string;
   liveShowSubtitle: string;
   langSwitcherAria: string;
 };
@@ -114,7 +114,7 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     crowdAlt: 'Crowd dancing at a Linarex Experience show',
     getInTouch: 'Get in touch',
     contactTitle: 'Press & booking contact',
-    openProposal: 'Explore the {showName} proposal',
+    openLiveShow: 'Explore the {showName} live show',
     liveShowSubtitle: 'with Jacke Matheus',
     langSwitcherAria: 'Language selection',
   },
@@ -136,7 +136,10 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
         label: 'Brzmienie',
         value: 'Indie rock i funk z karaibskimi korzeniami',
       },
-      live: { label: 'Na żywo', value: 'Koncert w trzech językach · EN · ES · PL' },
+      live: {
+        label: 'Na żywo',
+        value: 'Koncert w trzech językach · EN · ES · PL',
+      },
     },
     meta: {
       epk: {
@@ -177,7 +180,7 @@ export const epkCopy: Record<EpkLocale, EpkCopy> = {
     crowdAlt: 'Tańcząca publiczność na koncercie Linarex Experience',
     getInTouch: 'Skontaktuj się',
     contactTitle: 'Kontakt prasowy i rezerwacje',
-    openProposal: 'Zobacz ofertę {showName}',
+    openLiveShow: 'Zobacz koncert {showName}',
     liveShowSubtitle: 'z Jacke Matheusem',
     langSwitcherAria: 'Wybór języka',
   },

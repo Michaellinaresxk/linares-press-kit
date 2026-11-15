@@ -12,27 +12,10 @@
 # Error details
 
 ```
-Error: expect(page).toHaveTitle(expected) failed
-
-Expected pattern: /Linarex/
-Received string:  ""
-Timeout: 5000ms
-
+Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/epk
 Call log:
-  - Expect "toHaveTitle" with timeout 5000ms
-    3 × locator resolved to <html>…</html>
-      - unexpected value ""
-    - waiting for "http://localhost:3000/epk" navigation to finish...
-    - navigated to "http://localhost:3000/epk"
-    9 × locator resolved to <html>…</html>
-      - unexpected value ""
+  - navigating to "http://localhost:3000/epk", waiting until "networkidle"
 
-```
-
-# Page snapshot
-
-```yaml
-- alert [ref=f10e1]
 ```
 
 # Test source
@@ -41,11 +24,11 @@ Call log:
   1  | import { test, expect } from '@playwright/test';
   2  | 
   3  | test('EPK page loads and shows key content', async ({ page }) => {
-  4  |   await page.goto('/epk', { waitUntil: 'networkidle' });
+> 4  |   await page.goto('/epk', { waitUntil: 'networkidle' });
+     |              ^ Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/epk
   5  |   
   6  |   // Check page title
-> 7  |   await expect(page).toHaveTitle(/Linarex/);
-     |                      ^ Error: expect(page).toHaveTitle(expected) failed
+  7  |   await expect(page).toHaveTitle(/Linarex/);
   8  |   
   9  |   // Check key content is present (using text-based detection for CSS module compatibility)
   10 |   const pageText = await page.textContent('body');

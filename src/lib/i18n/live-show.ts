@@ -1,7 +1,6 @@
-// Review by native speaker — Polish copy below should be checked by a native Polish speaker.
-export type ProposalLocale = 'en' | 'pl';
+export type LiveShowLocale = 'en' | 'pl';
 
-type ProposalCopy = {
+type LiveShowCopy = {
   metaTitle: string;
   metaDescription: string;
   ogAlt: string;
@@ -41,7 +40,7 @@ type ProposalCopy = {
   whatsapp: string;
 };
 
-export const proposalCopy: Record<ProposalLocale, ProposalCopy> = {
+export const liveShowCopy: Record<LiveShowLocale, LiveShowCopy> = {
   en: {
     metaTitle: 'Linarex Experience – Live Band in Warsaw | with Jacke Matheus',
     metaDescription:
@@ -51,7 +50,7 @@ export const proposalCopy: Record<ProposalLocale, ProposalCopy> = {
     eyebrow: 'Live music · Warsaw, Poland',
     heroPitch: 'The band that turns any night into the one people talk about.',
     heroCta: 'Ask about booking',
-    heroPdf: 'Download proposal PDF',
+    heroPdf: 'Download live show PDF',
     videoLabel: 'See it live',
     videoTitle: 'One night. Great energy. A room that refused to sit down.',
     embeddedVideoLabel: 'Linarex Experience: a night of great energy, live',

@@ -10,24 +10,27 @@ import Contact from '@/components/Contact';
 import PhotoGallery from '@/components/PhotoGallery';
 import SiteFooter from '@/components/SiteFooter';
 import {
-  proposalCopy,
+  liveShowCopy,
   withVars,
-  type ProposalLocale,
-} from '@/lib/i18n/proposal';
+  type LiveShowLocale,
+} from '@/lib/i18n/live-show';
 import { sharedCopy } from '@/lib/i18n/shared';
 import { bookingEmail, siteConfig } from '@/lib/site-config';
 import styles from '../app/(en)/live-show/live-show.module.css';
 
-export default function ProposalView({ locale }: { locale: ProposalLocale }) {
+export default function LiveShowView({ locale }: { locale: LiveShowLocale }) {
   const reduceMotion = useReducedMotion();
-  const t = proposalCopy[locale];
+  const t = liveShowCopy[locale];
   const shared = sharedCopy[locale];
   const show = siteConfig.liveShow;
   const whatsapp = siteConfig.contact.whatsapp;
   const [playMainVideo, setPlayMainVideo] = useState(false);
 
   const localizedShow = {
-    formats: locale === 'pl' ? '4-osobowy zespół · duet lub trio akustyczne (na życzenie)' : show.formats,
+    formats:
+      locale === 'pl'
+        ? '4-osobowy zespół · duet lub trio akustyczne (na życzenie)'
+        : show.formats,
     instrumentsLine:
       locale === 'pl'
         ? 'Perkusja · Gitara · Bas · Klawisze · możliwość rozszerzenia o sekcję dętą i instrumenty perkusyjne'
@@ -41,7 +44,10 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
       locale === 'pl'
         ? 'Autorskie utwory oraz wybrane covery z różnych epok.'
         : show.repertoireDescription,
-    languages: locale === 'pl' ? 'angielski · hiszpański · polski' : show.repertoireLanguages.join(' · '),
+    languages:
+      locale === 'pl'
+        ? 'angielski · hiszpański · polski'
+        : show.repertoireLanguages.join(' · '),
     eventTypes:
       locale === 'pl'
         ? 'kluby i bary, festiwale, wydarzenia prywatne i firmowe oraz imprezy miejskie i plenerowe'
@@ -80,7 +86,7 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
 
   return (
     <main className={styles.page}>
-      <section className={styles.hero} aria-labelledby='proposal-title'>
+      <section className={styles.hero} aria-labelledby='live-show-title-hero'>
         <Image
           src='/img/risas.jpg'
           alt={
@@ -152,7 +158,7 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
               {shared.brand.tagline}
             </motion.p>
             <motion.h1
-              id='proposal-title'
+              id='live-show-title-hero'
               className={styles.heroTitle}
               variants={{
                 hidden: { opacity: 0, y: 22 },
@@ -320,7 +326,9 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
           </h2>
           <p className={styles.lead}>{t.experienceLead}</p>
           <p className={styles.bodyText}>{t.experienceBody}</p>
-          {t.trajectory ? <p className={styles.bodyText}>{t.trajectory}</p> : null}
+          {t.trajectory ? (
+            <p className={styles.bodyText}>{t.trajectory}</p>
+          ) : null}
         </motion.section>
 
         <motion.section
@@ -534,7 +542,11 @@ export default function ProposalView({ locale }: { locale: ProposalLocale }) {
           </blockquote>
         </section>
 
-        <section id='contact' className={styles.booking} aria-labelledby='booking-title'>
+        <section
+          id='contact'
+          className={styles.booking}
+          aria-labelledby='booking-title'
+        >
           <div>
             <p className={styles.sectionLabel} data-step='07'>
               {t.bookingLabel}

@@ -1,10 +1,9 @@
-// Review by native speaker — Polish metadata/copy rendered by ProposalView.
 import type { Metadata } from 'next';
-import ProposalView from '@/components/ProposalView';
-import { proposalCopy } from '@/lib/i18n/proposal';
+import LiveShowView from '@/components/LiveShowView';
+import { liveShowCopy } from '@/lib/i18n/live-show';
 import { buildMetadata } from '@/lib/seo/metadata';
 
-const t = proposalCopy.pl;
+const t = liveShowCopy.pl;
 
 export const metadata: Metadata = buildMetadata({
   route: 'live-show',
@@ -14,6 +13,6 @@ export const metadata: Metadata = buildMetadata({
   imageAlt: t.ogAlt,
 });
 
-export default function PolishProposalPage() {
-  return <ProposalView locale='pl' />;
+export default function PolishLiveShowPage() {
+  return <LiveShowView locale='pl' />;
 }

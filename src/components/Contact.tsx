@@ -15,7 +15,7 @@ type FormState = {
   date: string;
   city: string;
   eventType: string;
-  guests: string;
+  attendees: string;
 };
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
@@ -58,7 +58,7 @@ export default function Contact({
     date: '',
     city: '',
     eventType: '',
-    guests: '',
+    attendees: '',
   };
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -376,17 +376,13 @@ export default function Contact({
                     aria-required='true'
                   >
                     <option value=''>{f.eventTypePlaceholder}</option>
-                    <option value={f.eventTypes.venue}>{f.eventTypes.venue}</option>
                     <option value={f.eventTypes.festival}>
                       {f.eventTypes.festival}
-                    </option>
-                    <option value={f.eventTypes.private}>
-                      {f.eventTypes.private}
                     </option>
                     <option value={f.eventTypes.corporate}>
                       {f.eventTypes.corporate}
                     </option>
-                    <option value={f.eventTypes.city}>{f.eventTypes.city}</option>
+                    <option value={f.eventTypes.club}>{f.eventTypes.club}</option>
                     <option value={f.eventTypes.wedding}>
                       {f.eventTypes.wedding}
                     </option>
@@ -399,18 +395,18 @@ export default function Contact({
                     className='block mb-2 font-medium text-sm'
                     style={{ color: '#8faabf' }}
                   >
-                    {f.guests}
+                    {f.attendees}
                   </label>
                   <input
                     id='contact-guests'
                     type='text'
-                    name='guests'
-                    value={form.guests}
+                    name='attendees'
+                    value={form.attendees}
                     onChange={handleChange}
                     disabled={isLoading}
                     className={INPUT_CLASS}
                     style={INPUT_STYLE}
-                    placeholder={f.guestsPlaceholder}
+                    placeholder={f.attendeesPlaceholder}
                     inputMode='numeric'
                   />
                 </div>
@@ -538,7 +534,7 @@ export default function Contact({
             {copy.contact.copy}
           </p>
           <p className='mt-5 text-base' style={{ color: '#c8dcea' }}>
-            Email{' '}
+            {locale === 'pl' ? 'E-mail' : 'Email'}{' '}
             <a
               href={`mailto:${siteConfig.email}`}
               className='underline decoration-[#5b8fa8] underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#85b7eb]'
